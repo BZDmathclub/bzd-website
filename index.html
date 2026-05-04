@@ -138,7 +138,7 @@ a { color:inherit; }
 
 /* ---------- SECTION COMMON ---------- */
 .section { max-width:1200px; margin:0 auto; padding:80px 24px; }
-.section-bg-wrap { background:var(--blue-bg); }
+.section-bg-wrap { background:#fff; border-top:1px solid var(--border); }
 .section-bg-wrap > .section { background:transparent; }
 .section-head { text-align:center; margin-bottom:48px; }
 .section-tag {
@@ -196,7 +196,11 @@ a { color:inherit; }
 }
 .comp-status.active   { background:#1a8a50; color:white; }
 .comp-status.upcoming { background:linear-gradient(90deg,var(--gold),var(--gold-light)); color:var(--blue-deep); }
-.comp-card-body { padding:22px 24px; }
+.comp-card-body { padding:22px 24px; display:none; border-top:1px solid var(--border); }
+.comp-card.open .comp-card-body { display:block; }
+.comp-card-head { cursor:pointer; user-select:none; }
+.comp-card-head::after { content:"▾"; float:right; font-size:18px; color:var(--blue-light); transition:transform .25s; }
+.comp-card.open .comp-card-head::after { transform:rotate(180deg); }
 .comp-meta {
   color:var(--text-sub); font-size:13.5px;
   margin-bottom:14px; line-height:1.8;
@@ -1065,11 +1069,8 @@ a { color:inherit; }
     <div class="nav-logo">BZD<span>·数模社</span></div>
     <ul class="nav-links">
       <li><a href="#competitions">竞赛助攻</a></li>
-      <li><a href="#schedule">赛事日历</a></li>
-      <li><a href="#passes">套餐预定</a></li>
       <li><a href="#guide">使用指南</a></li>
-      <li><a href="#faq">常见问题</a></li>
-      <li><a href="#about">关于我们</a></li>
+      <li><a href="#archive">往期资料</a></li>
       <li><a href="#agent">代理合作</a></li>
       <li><a href="#contact">联系我们</a></li>
     </ul>
@@ -1086,33 +1087,23 @@ a { color:inherit; }
     <div class="hero-badge">国内头部数学建模社群 · 自 2021</div>
     <h1>BZD 数模社</h1>
     <div class="hero-slogan">一 次 建 模 · 终 生 受 益</div>
-    <p class="hero-desc">
-      专注主流数模赛事的赛前培训、赛中高质量思路 / 论文 / 代码助攻与赛后答疑，
-      助攻资料 更新快、质量高、获奖率高、累计服务队伍数万，助力数千人获奖保研。
-    </p>
-    <div class="hero-highlight">
-      往届竞赛使用资料客户综合获奖率 <strong>74%+</strong>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:24px 0 32px;">
+      <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:18px 28px;min-width:120px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;">74%<span style="font-size:16px;">+</span></div>
+        <div style="font-size:12px;color:#b0c8ed;margin-top:4px;letter-spacing:1px;">综合获奖率</div>
+      </div>
+      <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:18px 28px;min-width:120px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;">数万<span style="font-size:16px;"></span></div>
+        <div style="font-size:12px;color:#b0c8ed;margin-top:4px;letter-spacing:1px;">服务队伍</div>
+      </div>
+      <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:18px 28px;min-width:120px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;">20<span style="font-size:16px;">+</span></div>
+        <div style="font-size:12px;color:#b0c8ed;margin-top:4px;letter-spacing:1px;">覆盖赛事</div>
+      </div>
     </div>
-    <div style="margin-bottom:38px;">
-      <a class="hero-cta" href="#competitions">查看当前竞赛助攻</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">10<span>万+</span></div>
-        <div class="stat-lbl">全网粉丝</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">20<span>+</span></div>
-        <div class="stat-lbl">覆盖赛事</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">5000<span>+</span></div>
-        <div class="stat-lbl">QQ 社群成员</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">5<span>年</span></div>
-        <div class="stat-lbl">深耕数模</div>
-      </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
+      <a class="hero-cta" href="#competitions">查看竞赛助攻</a>
+      <a href="#guide" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;letter-spacing:2px;transition:all .25s;">使用指南</a>
     </div>
   </div>
 </section>
@@ -2156,32 +2147,36 @@ a { color:inherit; }
     <p class="section-sub">无需囤货 · 无需押金 · 无需售后 · 轻松获得稳定收益</p>
   </div>
   <div class="agent-wrap">
-    <p class="agent-intro">
-      BZD 数模社面向各位数模人招募线上代理，全程由官方提供资料、答疑、论文指导与 AI 工具支持，你仅需负责宣传推广、自主引流，即可轻松获得稳定收益。
-    </p>
-    <div class="agent-grid">
-      <div class="agent-box">
-        <div class="agent-box-title">🎯 代理专属权益</div>
-        <ul class="agent-list">
-          <li>拥有官方授权推广资格</li>
-          <li>无需制作资料、无需答疑、无需售后</li>
-          <li>官方全程提供：全套竞赛资料、赛中答疑、一对一思路与论文定制、AI 智能体账号支持</li>
-          <li>享受推广收益，线上即可操作</li>
-        </ul>
+    <p class="agent-intro">无需囤货 · 无需押金 · 无需售后，官方全程资料支持，你只需引流推广即可获得稳定收益。</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px;">
+      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">🏅</div>
+        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">官方授权</div>
+        <div style="font-size:12px;color:var(--text-light);">正规推广资格</div>
       </div>
-      <div class="agent-box">
-        <div class="agent-box-title">👑 终身卡尊享权益</div>
-        <ul class="agent-list">
-          <li>全平台资料终身免费使用</li>
-          <li>免费获赠论文检查服务</li>
-          <li>免费获赠软著定做服务</li>
-          <li>各大赛事免费版资料终身领取</li>
-          <li>后续新增内容与工具持续更新</li>
-        </ul>
+      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">📦</div>
+        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">零成本启动</div>
+        <div style="font-size:12px;color:var(--text-light);">无需囤货押金</div>
+      </div>
+      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">🤖</div>
+        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">官方全程支持</div>
+        <div style="font-size:12px;color:var(--text-light);">资料·答疑·AI工具</div>
+      </div>
+      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">💰</div>
+        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">稳定收益</div>
+        <div style="font-size:12px;color:var(--text-light);">线上引流即可</div>
+      </div>
+      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">♾️</div>
+        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">终身卡权益</div>
+        <div style="font-size:12px;color:var(--text-light);">资料·论文·软著</div>
       </div>
     </div>
     <div class="agent-how">
-      <strong>代理加入方式：</strong>代理费为 BZD 数模社终身卡，自费购买后可与客服联系后续代理相关事项，同步享有终身卡全部权益。
+      <strong>加入方式：</strong>购买终身卡后联系客服，即可开通代理资格并同步享有终身卡全部权益。
     </div>
   </div>
 </section>
@@ -2248,6 +2243,12 @@ function closeLightbox(e){
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+document.querySelectorAll('.comp-card-head').forEach(head => {
+  head.addEventListener('click', () => {
+    head.closest('.comp-card').classList.toggle('open');
+  });
+});
 </script>
 
 <script>
