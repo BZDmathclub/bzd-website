@@ -9,11 +9,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
 
 :root {
-  --blue-deep:   #0b1f4a;
-  --blue-mid:    #1757c2;
-  --blue-light:  #3b82f6;
-  --blue-pale:   #dbeafe;
-  --blue-bg:     #f0f6ff;
+  --blue-deep:   #0c1d3e;
+  --blue-mid:    #1c4e96;
+  --blue-light:  #3a6ec8;
+  --blue-pale:   #d8e8f8;
+  --blue-bg:     #eef4fc;
   --accent:      #e03e1a;
   --gold:        #d4920a;
   --gold-light:  #fbbf24;
@@ -169,8 +169,8 @@ a { color:inherit; }
   box-shadow:0 14px 32px rgba(10,45,110,.12);
 }
 .comp-card-head {
-  background:#0f2347;
-  border-left:3px solid #5b9cf6;
+  background:linear-gradient(118deg,var(--blue-deep) 0%,var(--blue-mid) 60%,var(--blue-light) 100%);
+  border-left:4px solid var(--gold);
   color:white; padding:16px 24px;
   display:flex; justify-content:space-between; align-items:center;
   flex-wrap:wrap; gap:12px;
@@ -209,7 +209,7 @@ a { color:inherit; }
   border-top-color:var(--border);
 }
 .comp-card-head { cursor:pointer; user-select:none; }
-.comp-card-head::after { content:"▾"; float:right; font-size:18px; color:var(--blue-light); transition:transform .25s; }
+.comp-card-head::after { content:"▾"; float:right; font-size:18px; color:rgba(255,255,255,.55); transition:transform .25s; }
 .comp-card.open .comp-card-head::after { transform:rotate(180deg); }
 .comp-meta {
   color:var(--text-sub); font-size:13.5px;
@@ -477,7 +477,7 @@ a { color:inherit; }
 }
 .schedule-wrap-inner { overflow-x:auto; }
 .schedule-head-bar {
-  background:linear-gradient(90deg,var(--blue-deep),var(--blue-mid));
+  background:linear-gradient(118deg,var(--blue-deep) 0%,var(--blue-mid) 60%,var(--blue-light) 100%);
   color:white;
   padding:14px 22px;
   display:flex; justify-content:space-between; align-items:center;
@@ -996,7 +996,7 @@ a { color:inherit; }
 /* ---------- COMP-CARD ARROW ---------- */
 .comp-card-head::after {
   content:"▾"; margin-left:auto; flex-shrink:0;
-  font-size:18px; color:rgba(255,255,255,.75);
+  font-size:18px; color:rgba(255,255,255,.55);
   transition:transform .28s; line-height:1;
 }
 .comp-card.open .comp-card-head::after { transform:rotate(180deg); }
@@ -1174,6 +1174,14 @@ a { color:inherit; }
       style="position:absolute;width:200px;opacity:.22;border-radius:10px;
              box-shadow:0 16px 40px rgba(0,0,0,.4);
              top:30%;right:6%;transform:rotate(-5deg);">
+    <img src="images/研赛培训.png" loading="lazy" decoding="async" alt=""
+      style="position:absolute;width:195px;opacity:.20;border-radius:10px;
+             box-shadow:0 16px 40px rgba(0,0,0,.4);
+             bottom:6%;left:4%;transform:rotate(6deg);">
+    <img src="images/电工杯.png" loading="lazy" decoding="async" alt=""
+      style="position:absolute;width:195px;opacity:.20;border-radius:10px;
+             box-shadow:0 16px 40px rgba(0,0,0,.4);
+             bottom:6%;right:4%;transform:rotate(-6deg);">
   </div>
   <div class="hero-inner" style="position:relative;z-index:1;">
     <img class="hero-logo" src="images/logo.jpg" alt="BZD 数模社 Logo">
