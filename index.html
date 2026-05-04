@@ -169,7 +169,8 @@ a { color:inherit; }
   box-shadow:0 14px 32px rgba(10,45,110,.12);
 }
 .comp-card-head {
-  background:linear-gradient(90deg,var(--blue-deep),var(--blue-mid));
+  background:#0f2347;
+  border-left:3px solid #5b9cf6;
   color:white; padding:16px 24px;
   display:flex; justify-content:space-between; align-items:center;
   flex-wrap:wrap; gap:12px;
@@ -196,8 +197,17 @@ a { color:inherit; }
 }
 .comp-status.active   { background:#1a8a50; color:white; }
 .comp-status.upcoming { background:linear-gradient(90deg,var(--gold),var(--gold-light)); color:var(--blue-deep); }
-.comp-card-body { padding:22px 24px; display:none; border-top:1px solid var(--border); }
-.comp-card.open .comp-card-body { display:block; }
+.comp-card-body {
+  display:block; overflow:hidden;
+  max-height:0; padding:0 24px;
+  border-top:1px solid transparent;
+  transition:max-height .38s cubic-bezier(.4,0,.2,1),
+             padding .3s ease, border-color .28s;
+}
+.comp-card.open .comp-card-body {
+  max-height:1400px; padding:22px 24px;
+  border-top-color:var(--border);
+}
 .comp-card-head { cursor:pointer; user-select:none; }
 .comp-card-head::after { content:"▾"; float:right; font-size:18px; color:var(--blue-light); transition:transform .25s; }
 .comp-card.open .comp-card-head::after { transform:rotate(180deg); }
@@ -212,13 +222,13 @@ a { color:inherit; }
   gap:12px; margin-top:16px;
 }
 .ver-card {
-  border:1.5px solid var(--border);
+  border:1px solid #dde6f5;
   border-radius:8px; padding:14px;
-  background:var(--blue-bg);
+  background:#fff;
   display:flex; flex-direction:column;
 }
 .ver-name {
-  color:var(--blue-deep); font-weight:900;
+  color:#0f2347; font-weight:900;
   font-size:14px; margin-bottom:4px;
 }
 .ver-desc {
@@ -227,12 +237,12 @@ a { color:inherit; }
 }
 .ver-link {
   display:inline-block; align-self:flex-start;
-  background:var(--blue-mid); color:white;
+  background:#1e3a6e; color:white;
   text-decoration:none; padding:6px 14px;
   border-radius:4px; font-size:12px; font-weight:700;
   transition:all .2s;
 }
-.ver-link:hover { background:var(--blue-deep); }
+.ver-link:hover { background:#0f2347; }
 .ver-link.gift  { background:var(--green); }
 .ver-link.gift:hover { background:#13693d; }
 
@@ -936,6 +946,69 @@ a { color:inherit; }
   margin-bottom:10px;
 }
 
+/* ---------- SCROLL PROGRESS BAR ---------- */
+#scroll-progress {
+  position:fixed; top:0; left:0; z-index:200;
+  height:3px; width:0%;
+  background:linear-gradient(90deg,var(--blue-mid),var(--blue-light));
+  transition:width .1s linear;
+  pointer-events:none;
+}
+
+/* ---------- NAV ACTIVE LINK ---------- */
+.nav-links a.active {
+  color:var(--blue-mid); font-weight:700;
+}
+.nav-links a.active::after {
+  content:''; display:block;
+  height:2px; border-radius:1px;
+  background:var(--blue-light);
+  margin-top:2px;
+}
+
+/* ---------- HERO SECONDARY CTA ---------- */
+.hero-cta-sec {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.35);
+  color:#fff; text-decoration:none;
+  padding:14px 32px; border-radius:8px;
+  font-size:15px; font-weight:700; letter-spacing:2px;
+  transition:all .25s;
+}
+.hero-cta-sec:hover {
+  background:rgba(255,255,255,.22);
+  border-color:rgba(255,255,255,.6);
+  transform:translateY(-2px);
+}
+
+/* ---------- VER-CARD HOVER ---------- */
+.ver-card {
+  transition:all .22s;
+  cursor:pointer;
+}
+.ver-card:hover {
+  border-color:var(--blue-light);
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(10,45,110,.10);
+}
+
+/* ---------- COMP-CARD ARROW ---------- */
+.comp-card-head::after {
+  content:"▾"; margin-left:auto; flex-shrink:0;
+  font-size:18px; color:rgba(255,255,255,.75);
+  transition:transform .28s; line-height:1;
+}
+.comp-card.open .comp-card-head::after { transform:rotate(180deg); }
+
+/* ---------- SCHEDULE ROW HOVER ---------- */
+.sch-table tbody tr:hover td { background:rgba(59,130,246,.06); }
+
+/* ---------- HIDE CERT IMAGES ON MOBILE ---------- */
+@media (max-width: 860px) {
+  .hero-cert-bg { display:none; }
+}
+
 /* ---------- NAV SCROLLED ---------- */
 .nav { transition:box-shadow .25s; }
 .nav.scrolled { box-shadow:0 2px 24px rgba(10,45,110,.13); }
@@ -1049,7 +1122,7 @@ a { color:inherit; }
   .about-grid { grid-template-columns:1fr; }
   .comp-card-head { padding:14px 18px; }
   .comp-title { font-size:16px; }
-  .comp-card-body { padding:18px; }
+  .comp-card.open .comp-card-body { padding:18px; }
   .passes-features { grid-template-columns:1fr; }
   .paper-grid { grid-template-columns:1fr; }
   .pass-row { padding:14px 16px; }
@@ -1062,6 +1135,7 @@ a { color:inherit; }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav class="nav">
@@ -1083,20 +1157,20 @@ a { color:inherit; }
 <!-- HERO -->
 <section class="hero" style="position:relative;overflow:hidden;min-height:600px;">
   <!-- 证书背景装饰 -->
-  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;">
-    <img src="images/培训证书.png"
+  <div class="hero-cert-bg" style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+    <img src="images/培训证书.png" loading="lazy" decoding="async" alt=""
       style="position:absolute;width:220px;opacity:.22;border-radius:10px;
              box-shadow:0 16px 40px rgba(0,0,0,.4);
              top:8%;left:3%;transform:rotate(-8deg);">
-    <img src="images/国赛.png"
+    <img src="images/国赛.png" loading="lazy" decoding="async" alt=""
       style="position:absolute;width:200px;opacity:.22;border-radius:10px;
              box-shadow:0 16px 40px rgba(0,0,0,.4);
              top:30%;left:6%;transform:rotate(5deg);">
-    <img src="images/美赛.png"
+    <img src="images/美赛.png" loading="lazy" decoding="async" alt=""
       style="position:absolute;width:210px;opacity:.22;border-radius:10px;
              box-shadow:0 16px 40px rgba(0,0,0,.4);
              top:8%;right:3%;transform:rotate(7deg);">
-    <img src="images/研赛.png"
+    <img src="images/研赛.png" loading="lazy" decoding="async" alt=""
       style="position:absolute;width:200px;opacity:.22;border-radius:10px;
              box-shadow:0 16px 40px rgba(0,0,0,.4);
              top:30%;right:6%;transform:rotate(-5deg);">
@@ -1122,7 +1196,7 @@ a { color:inherit; }
     </div>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
       <a class="hero-cta" href="#competitions">查看竞赛助攻</a>
-      <a href="#guide" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;letter-spacing:2px;transition:all .25s;">使用指南</a>
+      <a href="#guide" class="hero-cta-sec">使用指南</a>
     </div>
   </div>
 </section>
@@ -2329,11 +2403,36 @@ async function submitRedeem() {
 </script>
 
 <script>
-/* ---- Nav scroll shadow ---- */
+/* ---- Scroll progress bar ---- */
+const progressBar = document.getElementById('scroll-progress');
+
+/* ---- Nav scroll shadow + scrollspy + progress ---- */
 const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 24);
-}, { passive: true });
+const navAs = document.querySelectorAll('.nav-links a');
+const allSections = document.querySelectorAll('section[id], div[id].section-bg-wrap');
+
+function onScroll() {
+  const sy = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+  /* progress bar */
+  if (progressBar && maxScroll > 0)
+    progressBar.style.width = (sy / maxScroll * 100) + '%';
+
+  /* nav shadow */
+  nav.classList.toggle('scrolled', sy > 24);
+
+  /* scrollspy */
+  let current = '';
+  document.querySelectorAll('section[id]').forEach(s => {
+    if (sy >= s.offsetTop - 90) current = s.id;
+  });
+  navAs.forEach(a => {
+    const match = a.getAttribute('href') === '#' + current;
+    a.classList.toggle('active', match);
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
 
 /* ---- Hamburger menu ---- */
 const hamburger = document.querySelector('.nav-hamburger');
@@ -2363,26 +2462,19 @@ const revealObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
 
-/* Auto-tag reveal targets with stagger per group */
+/* Stagger per parent section to avoid cumulative delay across sections */
 const groups = [
-  '.section-head',
-  '.comp-card',
-  '.pass-row',
-  '.pb-item',
-  '.pf-card',
-  '.svc-card',
-  '.about-card',
-  '.tl-item',
-  '.faq-item',
-  '.contact-card',
-  '.agent-box',
-  '.guide-step',
-  '.cov-tag',
+  '.section-head', '.comp-card', '.pass-row', '.pb-item',
+  '.pf-card', '.svc-card', '.about-card', '.tl-item',
+  '.faq-item', '.contact-card', '.agent-box', '.guide-step', '.cov-tag',
 ];
 groups.forEach(sel => {
-  document.querySelectorAll(sel).forEach((el, i) => {
+  document.querySelectorAll(sel).forEach(el => {
+    const scope = el.closest('section, .section-bg-wrap') || document.body;
+    const peers = Array.from(scope.querySelectorAll(sel));
+    const i = peers.indexOf(el);
     el.classList.add('reveal');
-    el.style.transitionDelay = Math.min(i * 0.06, 0.36) + 's';
+    el.style.transitionDelay = Math.min(i * 0.07, 0.28) + 's';
   });
 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
