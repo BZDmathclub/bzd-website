@@ -9,19 +9,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
 
 :root {
-  --blue-deep:   #0a2d6e;
-  --blue-mid:    #1a4fa8;
-  --blue-light:  #3b7dd8;
-  --blue-pale:   #ddeeff;
+  --blue-deep:   #0b1f4a;
+  --blue-mid:    #1757c2;
+  --blue-light:  #3b82f6;
+  --blue-pale:   #dbeafe;
   --blue-bg:     #f0f6ff;
-  --accent:      #d43a1a;
-  --gold:        #c49010;
-  --gold-light:  #f0c040;
-  --green:       #1a8a50;
-  --text-main:   #0d1f3c;
-  --text-sub:    #3a5080;
-  --text-light:  #6080a8;
-  --border:      #c0d4ef;
+  --accent:      #e03e1a;
+  --gold:        #d4920a;
+  --gold-light:  #fbbf24;
+  --green:       #16a34a;
+  --text-main:   #0f172a;
+  --text-sub:    #334d80;
+  --text-light:  #64748b;
+  --border:      #e2eaf6;
   --white:       #ffffff;
 }
 
@@ -1108,6 +1108,24 @@ a { color:inherit; }
   </div>
 </section>
 
+<!-- SHOWCASE -->
+<div style="background:linear-gradient(180deg,#0b1f4a 0%,#f8faff 100%);padding:0 24px 60px;overflow:hidden;">
+  <div style="max-width:900px;margin:0 auto;position:relative;height:340px;">
+    <img src="images/B题定制论文示例展示.png" alt="定制论文示例"
+      style="position:absolute;width:320px;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.35);
+             left:50%;top:20px;transform:translateX(-50%) rotate(-5deg);z-index:1;cursor:pointer;"
+      onclick="openLightbox('images/B题定制论文示例展示.png')">
+    <img src="images/B题完整版论文.png" alt="完整版论文"
+      style="position:absolute;width:300px;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.28);
+             left:58%;top:40px;transform:rotate(4deg);z-index:2;cursor:pointer;"
+      onclick="openLightbox('images/B题完整版论文.png')">
+    <img src="images/C题完整版论文.png" alt="C题完整版论文"
+      style="position:absolute;width:300px;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.28);
+             right:58%;top:40px;transform:rotate(-4deg);z-index:2;cursor:pointer;"
+      onclick="openLightbox('images/C题完整版论文.png')">
+  </div>
+</div>
+
 <!-- COMPETITIONS -->
 <div class="section-bg-wrap">
 <section class="section" id="competitions">
@@ -2182,6 +2200,41 @@ a { color:inherit; }
 </section>
 </div>
 
+<!-- CERTS -->
+<section class="section" id="certs">
+  <div class="section-head">
+    <div class="section-tag">CREDENTIALS</div>
+    <h2 class="section-title">荣誉资质</h2>
+    <p class="section-sub">指导老师培训认证 · 国赛 · 美赛 · 研赛获奖证书</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:900px;margin:0 auto;">
+    <div style="text-align:center;">
+      <img src="images/培训证书.png" alt="指导老师培训证书"
+        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
+        onclick="openLightbox('images/培训证书.png')">
+      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">指导老师培训证书</div>
+    </div>
+    <div style="text-align:center;">
+      <img src="images/国赛.png" alt="国赛获奖证书"
+        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
+        onclick="openLightbox('images/国赛.png')">
+      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">全国数模竞赛获奖</div>
+    </div>
+    <div style="text-align:center;">
+      <img src="images/美赛.png" alt="美赛获奖证书"
+        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
+        onclick="openLightbox('images/美赛.png')">
+      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">美赛获奖证书</div>
+    </div>
+    <div style="text-align:center;">
+      <img src="images/研赛.png" alt="研赛获奖证书"
+        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
+        onclick="openLightbox('images/研赛.png')">
+      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">研究生数模竞赛获奖</div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="section contact-section" id="contact">
   <div class="section-head">
@@ -2244,10 +2297,15 @@ function closeLightbox(e){
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
 
-document.querySelectorAll('.comp-card-head').forEach(head => {
+// 往期助攻卡片可折叠，当前竞赛卡片默认展开不折叠
+document.querySelectorAll('#archive .comp-card-head').forEach(head => {
   head.addEventListener('click', () => {
     head.closest('.comp-card').classList.toggle('open');
   });
+});
+// 当前竞赛卡片默认全部展开
+document.querySelectorAll('#competitions .comp-card, #competitions + div .comp-card').forEach(card => {
+  card.classList.add('open');
 });
 </script>
 
