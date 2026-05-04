@@ -157,7 +157,7 @@ a { color:inherit; }
 }
 
 /* ---------- COMPETITION ---------- */
-.comp-grid { display:grid; grid-template-columns:1fr; gap:24px; }
+.comp-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
 .comp-card {
   background:white;
   border:1.5px solid var(--border);
@@ -932,6 +932,103 @@ a { color:inherit; }
   margin-bottom:10px;
 }
 
+/* ---------- NAV SCROLLED ---------- */
+.nav { transition:box-shadow .25s; }
+.nav.scrolled { box-shadow:0 2px 24px rgba(10,45,110,.13); }
+
+/* ---------- HAMBURGER ---------- */
+.nav-hamburger {
+  display:none;
+  flex-direction:column; justify-content:center;
+  gap:5px; width:40px; height:40px;
+  cursor:pointer; border:none; background:transparent;
+  padding:4px; border-radius:8px; flex-shrink:0;
+  transition:background .2s;
+}
+.nav-hamburger:hover { background:var(--blue-bg); }
+.nav-hamburger span {
+  display:block; width:22px; height:2px;
+  background:var(--blue-deep); border-radius:2px;
+  transition:all .28s;
+}
+.nav-hamburger.active span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.nav-hamburger.active span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.nav-hamburger.active span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* ---------- SCROLL REVEAL ---------- */
+.reveal {
+  opacity:0; transform:translateY(24px);
+  transition:opacity .52s cubic-bezier(.4,0,.2,1), transform .52s cubic-bezier(.4,0,.2,1);
+  will-change:opacity,transform;
+}
+.reveal.visible { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity:1; transform:none; transition:none; }
+}
+
+/* ---------- HERO CTA ---------- */
+.hero-cta {
+  display:inline-flex; align-items:center; gap:8px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  color:var(--blue-deep); text-decoration:none;
+  padding:14px 36px; border-radius:8px;
+  font-size:15px; font-weight:900; letter-spacing:2px;
+  margin-top:10px; transition:all .25s;
+  box-shadow:0 4px 20px rgba(196,144,16,.35);
+}
+.hero-cta:hover {
+  transform:translateY(-3px);
+  box-shadow:0 10px 32px rgba(196,144,16,.52);
+  filter:brightness(1.04);
+}
+
+/* ---------- HERO STAT CARDS ---------- */
+.hero-stats .stat-item {
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:12px; padding:16px 24px; min-width:110px;
+  transition:background .22s;
+}
+.hero-stats .stat-item:hover { background:rgba(255,255,255,.16); }
+
+/* ---------- IMPROVED SHADOWS ---------- */
+.comp-card {
+  box-shadow:0 1px 4px rgba(0,0,0,.04), 0 6px 18px rgba(10,45,110,.06);
+}
+.comp-card:hover {
+  box-shadow:0 4px 12px rgba(0,0,0,.07), 0 18px 44px rgba(10,45,110,.15) !important;
+}
+.svc-card {
+  box-shadow:0 1px 4px rgba(0,0,0,.03), 0 4px 14px rgba(10,45,110,.05);
+}
+.svc-card:hover {
+  box-shadow:0 6px 20px rgba(0,0,0,.07), 0 18px 42px rgba(10,45,110,.12) !important;
+}
+.about-card {
+  box-shadow:0 1px 4px rgba(0,0,0,.03), 0 4px 12px rgba(10,45,110,.04);
+}
+.about-card:hover { box-shadow:0 6px 24px rgba(10,45,110,.12) !important; }
+.faq-item { box-shadow:0 1px 3px rgba(0,0,0,.03); }
+.faq-item[open] { box-shadow:0 2px 14px rgba(10,45,110,.09); }
+.redeem-wrap { transition:box-shadow .25s; }
+
+/* ---------- MOBILE NAV DROPDOWN ---------- */
+@media (max-width: 860px) {
+  .nav-hamburger { display:flex; }
+  .nav-inner { position:relative; }
+  .nav-links {
+    display:none !important;
+    position:absolute; top:calc(100% + 1px); left:0; right:0;
+    background:rgba(255,255,255,.98); backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:12px 16px 18px; flex-direction:column; gap:2px;
+    box-shadow:0 8px 28px rgba(10,45,110,.10); z-index:200;
+  }
+  .nav-links.open { display:flex !important; }
+  .nav-links a { padding:10px 14px; border-radius:6px; display:block; width:100%; }
+  .nav-links a:hover { background:var(--blue-bg); color:var(--blue-mid); }
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
   .nav-links { gap:16px; font-size:13px; }
@@ -954,6 +1051,7 @@ a { color:inherit; }
   .pass-row { padding:14px 16px; }
   .pass-price-block { width:100%; text-align:left; display:flex; align-items:center; gap:12px; }
   .pass-price { font-size:22px; }
+  .comp-grid { grid-template-columns:1fr; }
   .schedule-head-bar .sh-title { font-size:15px; letter-spacing:1px; }
   .sch-foot { padding:12px 16px; }
 }
@@ -975,6 +1073,9 @@ a { color:inherit; }
       <li><a href="#agent">代理合作</a></li>
       <li><a href="#contact">联系我们</a></li>
     </ul>
+    <button class="nav-hamburger" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -991,6 +1092,9 @@ a { color:inherit; }
     </p>
     <div class="hero-highlight">
       往届竞赛使用资料客户综合获奖率 <strong>74%+</strong>
+    </div>
+    <div style="margin-bottom:38px;">
+      <a class="hero-cta" href="#competitions">查看当前竞赛助攻</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item">
@@ -2196,6 +2300,66 @@ async function submitRedeem() {
   btn.disabled = false;
   btn.textContent = '提交申请 · 等待审核';
 }
+</script>
+
+<script>
+/* ---- Nav scroll shadow ---- */
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 24);
+}, { passive: true });
+
+/* ---- Hamburger menu ---- */
+const hamburger = document.querySelector('.nav-hamburger');
+const navLinks  = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+/* ---- Scroll reveal ---- */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+
+/* Auto-tag reveal targets with stagger per group */
+const groups = [
+  '.section-head',
+  '.comp-card',
+  '.pass-row',
+  '.pb-item',
+  '.pf-card',
+  '.svc-card',
+  '.about-card',
+  '.tl-item',
+  '.faq-item',
+  '.contact-card',
+  '.agent-box',
+  '.guide-step',
+  '.cov-tag',
+];
+groups.forEach(sel => {
+  document.querySelectorAll(sel).forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = Math.min(i * 0.06, 0.36) + 's';
+  });
+});
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 </script>
 
 </body>
