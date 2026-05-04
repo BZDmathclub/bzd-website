@@ -1,0 +1,10 @@
+# Netlify 站点配置
+
+# 强制 www → 主域名 重定向（保留路径）
+[[redirects]]
+  from = "https://www.bzdshumo.com/*"
+  to = "https://bzdshumo.com/:splat"
+  status = 301
+  force = true
+
+# HTTP → HTTPS 由 Netlify 自动处理（"Force HTTPS" 默认开启）

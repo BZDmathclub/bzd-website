@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BZD 数模社 · 国内头部数学建模社群</title>
+<meta name="description" content="BZD 数模社 — 专注主流数模赛事的赛前培训、赛中思路/论文/代码助攻与赛后答疑。往届使用资料客户综合获奖率 74%+，覆盖美赛、国赛、华数杯、五一赛等 20+ 主流赛事。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --blue-deep:   #0a2d6e;
+  --blue-mid:    #1a4fa8;
+  --blue-light:  #3b7dd8;
+  --blue-pale:   #ddeeff;
+  --blue-bg:     #f0f6ff;
+  --accent:      #d43a1a;
+  --gold:        #c49010;
+  --gold-light:  #f0c040;
+  --green:       #1a8a50;
+  --text-main:   #0d1f3c;
+  --text-sub:    #3a5080;
+  --text-light:  #6080a8;
+  --border:      #c0d4ef;
+  --white:       #ffffff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif;
+  background:var(--white);
+  color:var(--text-main);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a { color:inherit; }
+
+/* ---------- NAV ---------- */
+.nav {
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner {
+  max-width:1200px; margin:0 auto;
+  padding:14px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo {
+  font-size:18px; font-weight:900;
+  color:var(--blue-deep); letter-spacing:2px;
+}
+.nav-logo span { color:var(--blue-light); margin-left:4px; }
+.nav-links { display:flex; gap:24px; list-style:none; flex-wrap:wrap; }
+.nav-links a {
+  color:var(--text-sub); text-decoration:none;
+  font-size:14px; font-weight:500;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--blue-mid); }
+
+/* ---------- HERO ---------- */
+.hero {
+  background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue-mid) 60%,var(--blue-light) 100%);
+  color:white;
+  padding:90px 24px 100px;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 18% 28%,rgba(255,255,255,.12) 0,transparent 40%),
+    radial-gradient(circle at 82% 72%,rgba(255,255,255,.08) 0,transparent 40%);
+}
+.hero-inner { max-width:1200px; margin:0 auto; position:relative; text-align:center; }
+.hero-logo {
+  width:128px; height:128px;
+  margin:0 auto 22px;
+  border-radius:24px;
+  background:white;
+  padding:8px;
+  box-shadow:0 12px 36px rgba(0,0,0,.28),
+             0 0 0 4px rgba(255,255,255,.08),
+             0 0 0 1px rgba(240,192,64,.4);
+  display:block;
+  object-fit:contain;
+  transition:transform .4s ease;
+}
+.hero-logo:hover { transform:rotate(-3deg) scale(1.04); }
+.hero-badge {
+  display:inline-block;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  color:var(--blue-deep);
+  font-size:13px; font-weight:700;
+  padding:6px 18px; border-radius:20px;
+  margin-bottom:22px;
+}
+.hero h1 {
+  font-size:58px; font-weight:900;
+  letter-spacing:8px; margin-bottom:14px;
+  text-shadow:0 4px 24px rgba(0,0,0,.18);
+}
+.hero-slogan {
+  font-size:22px; font-weight:500;
+  letter-spacing:6px; color:#cfe0ff;
+  margin-bottom:14px;
+}
+.hero-desc {
+  font-size:15px; color:#b0c8ed;
+  max-width:760px; margin:0 auto 18px;
+  line-height:1.85;
+}
+.hero-highlight {
+  display:inline-block;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(240,192,64,.5);
+  color:var(--gold-light);
+  font-weight:700;
+  padding:8px 22px; border-radius:30px;
+  margin-bottom:38px; font-size:14px;
+  letter-spacing:1px;
+}
+.hero-highlight strong { color:white; font-size:18px; margin:0 4px; }
+.hero-stats {
+  display:flex; justify-content:center;
+  gap:56px; flex-wrap:wrap;
+}
+.stat-item .stat-num {
+  font-size:34px; font-weight:900; color:white;
+}
+.stat-item .stat-num span { color:var(--gold-light); font-size:22px; margin-left:2px; }
+.stat-item .stat-lbl {
+  font-size:13px; color:#90b8f0;
+  letter-spacing:2px; margin-top:2px;
+}
+
+/* ---------- SECTION COMMON ---------- */
+.section { max-width:1200px; margin:0 auto; padding:80px 24px; }
+.section-bg-wrap { background:var(--blue-bg); }
+.section-bg-wrap > .section { background:transparent; }
+.section-head { text-align:center; margin-bottom:48px; }
+.section-tag {
+  display:inline-block;
+  font-size:12px; font-weight:700;
+  color:var(--blue-light); letter-spacing:5px;
+  margin-bottom:10px;
+}
+.section-title {
+  font-size:32px; font-weight:900;
+  color:var(--blue-deep); letter-spacing:3px;
+}
+.section-sub {
+  margin-top:10px; color:var(--text-sub);
+  font-size:14px;
+}
+
+/* ---------- COMPETITION ---------- */
+.comp-grid { display:grid; grid-template-columns:1fr; gap:24px; }
+.comp-card {
+  background:white;
+  border:1.5px solid var(--border);
+  border-radius:10px; overflow:hidden;
+  transition:all .3s;
+}
+.comp-card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(10,45,110,.12);
+}
+.comp-card-head {
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue-mid));
+  color:white; padding:16px 24px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+}
+.comp-title { font-size:18px; font-weight:900; letter-spacing:1px; }
+.comp-title-row {
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.comp-official {
+  background:rgba(255,255,255,.18);
+  color:white; text-decoration:none;
+  font-size:11.5px; font-weight:500;
+  padding:3px 10px; border-radius:12px;
+  letter-spacing:.5px;
+  border:1px solid rgba(255,255,255,.25);
+  transition:all .2s;
+}
+.comp-official:hover { background:rgba(255,255,255,.28); }
+.comp-status {
+  display:inline-block;
+  padding:4px 14px; border-radius:20px;
+  font-size:12px; font-weight:700;
+  white-space:nowrap;
+}
+.comp-status.active   { background:#1a8a50; color:white; }
+.comp-status.upcoming { background:linear-gradient(90deg,var(--gold),var(--gold-light)); color:var(--blue-deep); }
+.comp-card-body { padding:22px 24px; }
+.comp-meta {
+  color:var(--text-sub); font-size:13.5px;
+  margin-bottom:14px; line-height:1.8;
+}
+.comp-meta strong { color:var(--blue-mid); font-weight:700; }
+.version-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px; margin-top:16px;
+}
+.ver-card {
+  border:1.5px solid var(--border);
+  border-radius:8px; padding:14px;
+  background:var(--blue-bg);
+  display:flex; flex-direction:column;
+}
+.ver-name {
+  color:var(--blue-deep); font-weight:900;
+  font-size:14px; margin-bottom:4px;
+}
+.ver-desc {
+  color:var(--text-sub); font-size:12px;
+  margin-bottom:10px; line-height:1.65; flex:1;
+}
+.ver-link {
+  display:inline-block; align-self:flex-start;
+  background:var(--blue-mid); color:white;
+  text-decoration:none; padding:6px 14px;
+  border-radius:4px; font-size:12px; font-weight:700;
+  transition:all .2s;
+}
+.ver-link:hover { background:var(--blue-deep); }
+.ver-link.gift  { background:var(--green); }
+.ver-link.gift:hover { background:#13693d; }
+
+/* ---------- PAPER PREVIEW (论文示例图) ---------- */
+.paper-preview {
+  margin-top:20px;
+  border-top:1.5px dashed var(--border);
+  padding-top:18px;
+}
+.paper-preview-title {
+  font-size:14px; font-weight:900;
+  color:var(--blue-deep);
+  margin-bottom:6px;
+  letter-spacing:1px;
+}
+.paper-preview-title::before {
+  content:'📄'; margin-right:6px;
+}
+.paper-preview-desc {
+  color:var(--text-sub);
+  font-size:12.5px;
+  line-height:1.7;
+  margin-bottom:14px;
+}
+.paper-preview-desc strong { color:var(--accent); }
+.paper-preview-desc em {
+  font-style:normal; color:var(--blue-mid); font-weight:700;
+}
+.paper-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.paper-item {
+  background:var(--blue-bg);
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  transition:all .25s;
+  cursor:zoom-in;
+}
+.paper-item:hover {
+  border-color:var(--blue-light);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(10,45,110,.14);
+}
+.paper-item img {
+  width:100%; height:auto;
+  display:block;
+  border-bottom:1px solid var(--border);
+}
+.paper-item-cap {
+  padding:10px 14px;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--blue-deep);
+  background:white;
+  text-align:center;
+  letter-spacing:1px;
+}
+
+/* 点击放大遮罩 */
+.lightbox {
+  display:none;
+  position:fixed; inset:0; z-index:200;
+  background:rgba(8,18,40,.92);
+  align-items:center; justify-content:center;
+  padding:30px; cursor:zoom-out;
+  backdrop-filter:blur(4px);
+}
+.lightbox.active { display:flex; }
+.lightbox img {
+  max-width:100%; max-height:100%;
+  border-radius:6px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox-close {
+  position:absolute; top:20px; right:30px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  color:white;
+  width:42px; height:42px;
+  border-radius:50%;
+  font-size:20px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.lightbox-close:hover { background:rgba(255,255,255,.2); }
+
+/* ---------- SCHEDULE TABLE ---------- */
+.schedule-section { background:var(--blue-bg); }
+.schedule-wrap {
+  background:white;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(10,45,110,.08);
+}
+.schedule-wrap-inner { overflow-x:auto; }
+.schedule-head-bar {
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue-mid));
+  color:white;
+  padding:14px 22px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:8px;
+}
+.schedule-head-bar .sh-title { font-size:18px; font-weight:900; letter-spacing:2px; }
+.schedule-head-bar .sh-title em {
+  font-style:normal; color:var(--accent); margin-left:6px;
+  background:white; padding:2px 8px; border-radius:4px;
+  font-size:14px;
+}
+.schedule-head-bar .sh-date { color:#cfe0ff; font-size:13px; }
+
+.sch-table {
+  width:100%; min-width:1100px;
+  border-collapse:collapse;
+  font-size:12px;
+}
+.sch-table thead tr { background:var(--blue-deep); color:white; }
+.sch-table thead th {
+  padding:10px 8px; text-align:center;
+  font-weight:700; font-size:13px;
+  border-right:1px solid rgba(255,255,255,.15);
+}
+.sch-table thead th:last-child { border-right:none; }
+.sch-table tbody td {
+  padding:10px 8px; vertical-align:middle;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  color:var(--text-main); line-height:1.55;
+  text-align:center;
+}
+.sch-table tbody td:last-child { border-right:none; }
+.sch-table tbody tr:nth-child(even) td { background:var(--blue-bg); }
+.sch-name {
+  background:var(--blue-deep) !important;
+  color:white !important;
+  font-weight:900; font-size:13px;
+}
+.sch-full { text-align:left !important; max-width:160px; }
+.sch-time { color:var(--blue-mid); font-weight:600; white-space:nowrap; }
+.sch-fee { color:var(--accent); font-weight:700; font-size:13px; white-space:nowrap; }
+.sch-fee.free { color:var(--green); }
+.sch-note {
+  text-align:left !important; max-width:200px;
+  font-size:11.5px; color:var(--text-sub);
+}
+.sch-highlight { color:var(--accent); font-weight:600; }
+.sch-province td {
+  background:linear-gradient(90deg,#fff8e8,#fffaf0) !important;
+  color:var(--text-main); font-size:12px;
+  text-align:left;
+  padding:14px 18px !important;
+}
+.sch-province td strong { color:var(--blue-deep); }
+.sch-foot {
+  background:var(--blue-bg);
+  padding:14px 22px;
+  border-top:1.5px solid var(--border);
+  font-size:11.5px; color:var(--text-sub);
+  line-height:1.85;
+}
+.sch-foot p { padding-left:48px; position:relative; margin-bottom:4px; }
+.sch-foot p .lbl {
+  position:absolute; left:0; top:0;
+  background:var(--blue-mid); color:white;
+  font-size:10px; font-weight:700;
+  padding:1px 8px; border-radius:8px;
+  letter-spacing:1px;
+}
+
+/* ---------- PASSES (universal cards) ---------- */
+.passes-section {
+  background:linear-gradient(135deg,#08234d 0%,#0a2d6e 100%);
+  color:white;
+  position:relative; overflow:hidden;
+}
+.passes-section::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(240,192,64,.06) 0,transparent 30%),
+    radial-gradient(circle at 88% 82%,rgba(59,125,216,.1) 0,transparent 35%);
+  pointer-events:none;
+}
+.passes-section .section-title { color:white; }
+.passes-section .section-tag { color:var(--gold-light); }
+.passes-section .section-sub { color:#b0c8ed; }
+.passes-inner { position:relative; }
+.passes-banner {
+  display:flex; gap:16px; flex-wrap:wrap;
+  justify-content:center; margin-bottom:36px;
+}
+.pb-item {
+  background:rgba(255,255,255,.04);
+  border:1.5px solid rgba(240,192,64,.4);
+  border-radius:8px;
+  padding:14px 36px; text-align:center;
+  min-width:160px;
+}
+.pb-num {
+  font-size:28px; font-weight:900;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:2px;
+}
+.pb-lbl { color:#cfe0ff; font-size:12px; margin-top:2px; letter-spacing:2px; }
+
+.passes-list {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+.passes-list-head {
+  background:rgba(255,255,255,.06);
+  padding:14px 22px;
+  font-weight:900; letter-spacing:6px;
+  color:var(--gold-light);
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.pass-row {
+  display:flex; align-items:center; gap:18px;
+  padding:18px 24px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  flex-wrap:wrap;
+}
+.pass-row:last-child { border-bottom:none; }
+.pass-row:hover { background:rgba(255,255,255,.04); }
+.pass-bar {
+  width:5px; align-self:stretch;
+  border-radius:3px;
+  flex-shrink:0;
+}
+.pass-row.b1 .pass-bar { background:var(--blue-light); }
+.pass-row.b2 .pass-bar { background:var(--accent); }
+.pass-row.b3 .pass-bar { background:var(--gold-light); }
+.pass-row.b4 .pass-bar { background:#33c87a; }
+.pass-row.b5 .pass-bar { background:linear-gradient(180deg,var(--gold),var(--accent)); }
+.pass-info { flex:1; min-width:240px; }
+.pass-name {
+  font-size:16px; font-weight:900;
+  color:white; letter-spacing:1px;
+  display:flex; align-items:center; gap:10px;
+  flex-wrap:wrap;
+}
+.pass-name .star { color:var(--gold-light); }
+.pass-desc {
+  color:#b0c8ed; font-size:12.5px;
+  margin-top:4px; line-height:1.65;
+}
+.pass-price-block {
+  text-align:right; min-width:120px;
+}
+.pass-price {
+  font-size:28px; font-weight:900;
+  color:var(--accent);
+  font-family:'Noto Sans SC',sans-serif;
+}
+.pass-price-sub {
+  font-size:11px; color:var(--gold-light);
+  font-weight:700; letter-spacing:1px;
+}
+.pass-cta {
+  display:inline-block;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  color:var(--blue-deep);
+  text-decoration:none;
+  padding:8px 18px; border-radius:6px;
+  font-size:12px; font-weight:900;
+  letter-spacing:1px;
+  transition:transform .2s;
+}
+.pass-cta:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(240,192,64,.3); }
+
+.passes-features {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.pf-card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  padding:20px 24px;
+}
+.pf-card h4 {
+  color:var(--gold-light);
+  font-size:15px; font-weight:900;
+  letter-spacing:2px; margin-bottom:12px;
+  border-bottom:1.5px solid rgba(240,192,64,.3);
+  padding-bottom:8px;
+}
+.pf-card ul { list-style:none; padding:0; }
+.pf-card ul li {
+  color:#d8eeff; font-size:13px;
+  padding-left:16px; position:relative;
+  margin-bottom:7px; line-height:1.7;
+}
+.pf-card ul li::before {
+  content:'◆'; position:absolute; left:0; top:0;
+  color:var(--gold-light); font-size:10px;
+}
+
+.passes-tip {
+  margin-top:22px;
+  background:rgba(0,0,0,.18);
+  border-left:3px solid var(--gold-light);
+  padding:14px 20px;
+  font-size:13px; color:#cfe0ff;
+  line-height:1.85;
+}
+.passes-tip strong { color:var(--gold-light); }
+
+/* ---------- ABOUT ---------- */
+.about-grid {
+  display:grid; grid-template-columns:1.1fr .9fr;
+  gap:40px; align-items:center;
+}
+.about-text h3 {
+  color:var(--blue-deep);
+  font-size:22px; font-weight:900;
+  margin-bottom:14px; letter-spacing:1px;
+}
+.about-text p { color:var(--text-sub); font-size:14px; margin-bottom:12px; }
+.about-name {
+  background:var(--blue-bg);
+  border-left:4px solid var(--blue-light);
+  padding:16px 20px;
+  border-radius:0 6px 6px 0;
+  margin-top:18px; font-size:13.5px;
+  color:var(--text-sub); line-height:1.8;
+}
+.about-name strong { color:var(--blue-deep); font-weight:700; }
+.about-feedback {
+  margin-top:18px;
+  display:inline-flex; align-items:center;
+  gap:8px;
+  background:linear-gradient(90deg,var(--blue-mid),var(--blue-light));
+  color:white; text-decoration:none;
+  padding:10px 18px; border-radius:6px;
+  font-size:13px; font-weight:700;
+  transition:transform .2s;
+}
+.about-feedback:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(26,79,168,.3); }
+.about-cards {
+  display:grid; grid-template-columns:1fr 1fr; gap:14px;
+}
+.about-card {
+  background:linear-gradient(135deg,var(--blue-bg),white);
+  border:1.5px solid var(--border);
+  border-radius:8px; padding:20px;
+  transition:all .25s;
+}
+.about-card:hover {
+  border-color:var(--blue-light);
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(10,45,110,.08);
+}
+.about-card .ac-icon { font-size:24px; }
+.about-card .ac-title {
+  color:var(--blue-deep); font-weight:900;
+  margin-top:8px; font-size:15px;
+}
+.about-card .ac-desc {
+  color:var(--text-sub); font-size:12.5px;
+  margin-top:4px; line-height:1.7;
+}
+
+/* ---------- SERVICES ---------- */
+.svc-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+.svc-card {
+  border:1.5px solid var(--border);
+  border-radius:10px; overflow:hidden;
+  background:white; transition:all .3s;
+  display:flex; flex-direction:column;
+}
+.svc-card:hover {
+  border-color:var(--blue-light);
+  transform:translateY(-4px);
+  box-shadow:0 14px 32px rgba(10,45,110,.1);
+}
+.svc-card.featured { border-color:var(--blue-mid); border-width:2px; position:relative; }
+.svc-card.featured::after {
+  content:'招牌'; position:absolute;
+  top:12px; right:-30px;
+  background:var(--accent); color:white;
+  font-size:11px; font-weight:700;
+  padding:3px 32px; transform:rotate(45deg);
+  letter-spacing:2px;
+}
+.svc-head { padding:24px 20px 18px; text-align:center; border-bottom:1px solid var(--border); }
+.svc-card.featured .svc-head {
+  background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
+  color:white; border-bottom-color:var(--blue-mid);
+}
+.svc-name { font-size:20px; font-weight:900; letter-spacing:2px; }
+.svc-price { margin-top:8px; font-size:14px; color:var(--accent); font-weight:700; }
+.svc-card.featured .svc-price { color:var(--gold-light); }
+.svc-body { padding:20px; flex:1; }
+.svc-list { list-style:none; }
+.svc-list li {
+  padding-left:22px; position:relative;
+  margin-bottom:9px; font-size:13px;
+  color:var(--text-sub); line-height:1.6;
+}
+.svc-list li::before {
+  content:'✓'; position:absolute; left:0; top:0;
+  color:var(--green); font-weight:900;
+}
+.svc-list li strong { color:var(--blue-mid); }
+
+/* ---------- COVERAGE ---------- */
+.cov-tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.cov-tag {
+  background:white;
+  border:1.5px solid var(--border);
+  color:var(--blue-deep);
+  font-weight:700; font-size:13px;
+  padding:8px 18px; border-radius:30px;
+  transition:all .2s;
+}
+.cov-tag:hover {
+  background:var(--blue-mid); color:white;
+  border-color:var(--blue-mid);
+  transform:translateY(-2px);
+}
+.cov-tag.hot {
+  background:linear-gradient(90deg,var(--blue-mid),var(--blue-light));
+  color:white; border-color:var(--blue-light);
+}
+
+/* ---------- TIMELINE ---------- */
+.timeline { position:relative; max-width:880px; margin:0 auto; padding-left:30px; }
+.timeline::before {
+  content:''; position:absolute;
+  left:8px; top:6px; bottom:6px;
+  width:2px;
+  background:linear-gradient(to bottom,var(--blue-light),var(--blue-pale));
+}
+.tl-item { position:relative; margin-bottom:28px; padding-left:30px; }
+.tl-item:last-child { margin-bottom:0; }
+.tl-item::before {
+  content:''; position:absolute;
+  left:-28px; top:8px;
+  width:14px; height:14px;
+  background:var(--blue-mid);
+  border:3px solid white;
+  border-radius:50%;
+  box-shadow:0 0 0 1.5px var(--blue-light);
+}
+.tl-year { color:var(--blue-deep); font-size:18px; font-weight:900; margin-bottom:4px; }
+.tl-stage {
+  display:inline-block;
+  background:var(--blue-mid); color:white;
+  font-size:11px; font-weight:700;
+  padding:2px 10px; border-radius:10px;
+  margin-left:10px; letter-spacing:1px;
+}
+.tl-stage.now { background:var(--accent); }
+.tl-body {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:14px 18px; margin-top:8px;
+  font-size:13px; color:var(--text-sub);
+  line-height:1.85;
+}
+
+/* ---------- FAQ ---------- */
+.faq-list { max-width:920px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+.faq-item {
+  border:1.5px solid var(--border);
+  border-radius:8px; overflow:hidden;
+  background:white;
+  transition:border-color .2s;
+}
+.faq-item[open] { border-color:var(--blue-light); }
+.faq-item summary {
+  list-style:none;
+  padding:18px 24px;
+  cursor:pointer;
+  display:flex; align-items:flex-start; gap:14px;
+  font-weight:700; color:var(--blue-deep);
+  font-size:15px;
+  transition:background .2s;
+}
+.faq-item summary::-webkit-details-marker { display:none; }
+.faq-item summary:hover { background:var(--blue-bg); }
+.faq-item summary::before {
+  content:'Q'; flex-shrink:0;
+  background:var(--blue-mid); color:white;
+  font-weight:900; font-size:13px;
+  width:26px; height:26px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.faq-item summary::after {
+  content:'+'; margin-left:auto;
+  color:var(--blue-light);
+  font-size:22px; font-weight:300;
+  transition:transform .25s;
+}
+.faq-item[open] summary::after { transform:rotate(45deg); }
+.faq-body {
+  padding:0 24px 22px 64px;
+  color:var(--text-sub);
+  font-size:13.5px;
+  line-height:1.85;
+  border-top:1px solid var(--blue-pale);
+  padding-top:16px;
+}
+.faq-body p { margin-bottom:10px; }
+.faq-body p:last-child { margin-bottom:0; }
+.faq-body strong { color:var(--blue-mid); }
+.faq-body em { font-style:normal; color:var(--accent); font-weight:700; }
+
+/* ---------- CONTACT ---------- */
+.contact-section {
+  background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
+  color:white;
+}
+.contact-section .section-title { color:white; }
+.contact-section .section-tag   { color:#90c0f0; }
+.contact-section .section-sub   { color:#b0c8ed; }
+.contact-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.contact-card {
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:10px; padding:24px 18px;
+  text-align:center; backdrop-filter:blur(8px);
+  transition:all .25s;
+}
+.contact-card:hover { background:rgba(255,255,255,.14); transform:translateY(-3px); }
+.contact-icon { font-size:28px; }
+.contact-name { font-weight:700; font-size:13px; margin-top:10px; color:#d8eeff; letter-spacing:1px; }
+.contact-value { margin-top:6px; font-size:20px; font-weight:900; letter-spacing:1.5px; color:white; }
+.contact-sub { font-size:11px; color:#90c0f0; margin-top:4px; }
+.contact-tip {
+  margin-top:22px; text-align:center;
+  color:#b0c8ed; font-size:13px;
+  background:rgba(0,0,0,.15);
+  padding:12px 16px; border-radius:6px;
+}
+.contact-tip strong { color:var(--gold-light); }
+
+/* ---------- FOOTER ---------- */
+.footer {
+  background:#061838; color:#6080a8;
+  padding:36px 24px; text-align:center;
+  font-size:13px;
+}
+.footer-slogan {
+  font-size:15px; font-weight:900;
+  color:white; letter-spacing:6px;
+  margin-bottom:10px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .nav-links { gap:16px; font-size:13px; }
+  .nav-links a { font-size:13px; }
+  .hero { padding:60px 20px 70px; }
+  .hero-logo { width:96px; height:96px; border-radius:18px; margin-bottom:18px; }
+  .hero h1 { font-size:38px; letter-spacing:5px; }
+  .hero-slogan { font-size:16px; letter-spacing:4px; }
+  .hero-desc { font-size:13.5px; }
+  .hero-stats { gap:30px; }
+  .stat-item .stat-num { font-size:26px; }
+  .section { padding:54px 20px; }
+  .section-title { font-size:24px; letter-spacing:2px; }
+  .about-grid { grid-template-columns:1fr; }
+  .comp-card-head { padding:14px 18px; }
+  .comp-title { font-size:16px; }
+  .comp-card-body { padding:18px; }
+  .passes-features { grid-template-columns:1fr; }
+  .paper-grid { grid-template-columns:1fr; }
+  .pass-row { padding:14px 16px; }
+  .pass-price-block { width:100%; text-align:left; display:flex; align-items:center; gap:12px; }
+  .pass-price { font-size:22px; }
+  .schedule-head-bar .sh-title { font-size:15px; letter-spacing:1px; }
+  .sch-foot { padding:12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">BZD<span>·数模社</span></div>
+    <ul class="nav-links">
+      <li><a href="#competitions">在赛助攻</a></li>
+      <li><a href="#schedule">赛事日历</a></li>
+      <li><a href="#passes">套餐预定</a></li>
+      <li><a href="#about">关于我们</a></li>
+      <li><a href="#faq">常见问题</a></li>
+      <li><a href="#contact">联系我们</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <img class="hero-logo" src="images/logo.jpg" alt="BZD 数模社 Logo">
+    <div class="hero-badge">国内头部数学建模社群 · 自 2021</div>
+    <h1>BZD 数模社</h1>
+    <div class="hero-slogan">一 次 建 模 · 终 生 受 益</div>
+    <p class="hero-desc">
+      专注主流数模赛事的赛前培训、赛中高质量思路 / 论文 / 代码助攻与赛后答疑，
+      以更新快、质量稳、性价比高著称，累计服务队伍数万，助力数千人获奖保研。
+    </p>
+    <div class="hero-highlight">
+      往届竞赛使用资料客户综合获奖率 <strong>74%+</strong>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">10<span>万+</span></div>
+        <div class="stat-lbl">全网粉丝</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-lbl">覆盖赛事</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5000<span>+</span></div>
+        <div class="stat-lbl">QQ 社群成员</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5<span>年</span></div>
+        <div class="stat-lbl">深耕数模</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIONS -->
+<div class="section-bg-wrap">
+<section class="section" id="competitions">
+  <div class="section-head">
+    <div class="section-tag">ONGOING COMPETITIONS</div>
+    <h2 class="section-title">正在 / 即将进行的赛事</h2>
+    <p class="section-sub">实时更新 · 持续助攻</p>
+  </div>
+  <div class="comp-grid">
+
+    <!-- 五一赛 -->
+    <div class="comp-card">
+      <div class="comp-card-head">
+        <div class="comp-title-row">
+          <div class="comp-title">🏅 2026 年五一数学建模竞赛</div>
+          <a class="comp-official" href="https://51mcm.cumt.edu.cn/" target="_blank" rel="noopener">官网 ↗</a>
+          <a class="comp-official" href="#faq-data-intro">📖 资料具体内容介绍 ↗</a>
+        </div>
+        <span class="comp-status upcoming">5月1日 周五 10:00 - 5月4日 周一 12:00</span>
+      </div>
+      <div class="comp-card-body">
+        <div class="comp-meta">
+          本届五一杯提供 <strong>B、C 两题</strong>助攻，<strong>一份资料两道题目助攻</strong>，赛中将会提供：
+          <strong>完整计算结果 + 多种模型求解代码 + 一对一思路、论文定制 + AI 账号使用权限</strong>。<br>
+          <span style="color:var(--green);font-weight:700;">目前已更新：</span>
+          B、C 题 Python 代码 · C 题 Matlab 代码<br>
+          <span style="margin-top:4px;display:inline-block;color:var(--text-sub);font-size:13px;">
+            ▸ <strong>B 题</strong>：问题一/二/三/四 各 4 种算法 → 共计 <strong>4×4×4×4 = 256 种算法方案</strong><br>
+            ▸ <strong>C 题</strong>：问题一六种 / 问题二六种 / 问题三五种 / 问题四五种 / 问题五六种 → 共计 <strong>5400 种算法组合方案</strong> + 一套完整高精度计算方案
+          </span>
+        </div>
+        <div class="version-grid">
+          <div class="ver-card">
+            <div class="ver-name">🎁 分享版（免费）</div>
+            <div class="ver-desc">5.2 早六点分享一套完整代码 + 论文（百度网盘，提取码 24wb）</div>
+            <a class="ver-link gift" href="https://pan.baidu.com/s/1AIYfWfOcBGphQnKCk8os3A" target="_blank" rel="noopener">前往百度网盘</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">📦 基础版</div>
+            <div class="ver-desc">完整数据 + 计算结果 + 实现代码（Matlab、Python 两套）+ 无论文 · 资料放于<strong>百度网盘</strong></div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWcmphqaQ==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">📈 进阶版</div>
+            <div class="ver-desc">基础版 + 1 篇 PDF 论文 + 售后群答疑 · 资料放于<strong>售后群群文件</strong></div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWcmphqZg==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">⭐ 完整版</div>
+            <div class="ver-desc">进阶版 + 1 篇专属论文 + 对应版本答疑群（20 人小群）+ 一对一思路 / 论文定制【无额外收费】+ 一天 AI 账号使用 · 资料放于<strong>售后群群文件</strong></div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWcmphqZw==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">🎯 一对一思路定制</div>
+            <div class="ver-desc">AI 智能体 · 30min 输出完整度 80% 的定制论文 · 包含可运行代码 + 可视化</div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWYmJ9rZA==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+        </div>
+
+        <div class="paper-preview">
+          <div class="paper-preview-title">B 题 / C 题 资料示例展示</div>
+          <div class="paper-preview-desc">
+            下方展示本届五一杯 B、C 两题各类资料示例。<em>完整版「一对一论文定制」</em>服务中，每支队伍可获得与示例<strong>质量相同</strong>、且<strong>其他队伍不可见</strong>的专属定制论文。点击图片可放大查看。
+          </div>
+
+          <div style="font-size:13px;font-weight:900;color:var(--blue-mid);margin:10px 0 8px;letter-spacing:1px;">一对一定制论文示例</div>
+          <div class="paper-grid">
+            <div class="paper-item" onclick="openLightbox('images/B题定制论文示例展示.png')">
+              <img src="images/B题定制论文示例展示.png" alt="B 题定制论文示例" loading="lazy">
+              <div class="paper-item-cap">B 题 · 一对一定制论文示例</div>
+            </div>
+            <div class="paper-item" onclick="openLightbox('images/A题定制论文示例展示.png')">
+              <img src="images/A题定制论文示例展示.png" alt="C 题定制论文示例" loading="lazy">
+              <div class="paper-item-cap">C 题 · 一对一定制论文示例</div>
+            </div>
+          </div>
+
+          <div style="font-size:13px;font-weight:900;color:var(--blue-mid);margin:18px 0 8px;letter-spacing:1px;">免费参考论文示例</div>
+          <div class="paper-grid">
+            <div class="paper-item" onclick="openLightbox('images/B题参考论文.png')">
+              <img src="images/B题参考论文.png" alt="B 题参考论文" loading="lazy">
+              <div class="paper-item-cap">B 题 · 免费参考论文</div>
+            </div>
+            <div class="paper-item" onclick="openLightbox('images/C题参考论文.png')">
+              <img src="images/C题参考论文.png" alt="C 题参考论文" loading="lazy">
+              <div class="paper-item-cap">C 题 · 免费参考论文</div>
+            </div>
+          </div>
+
+          <div style="font-size:13px;font-weight:900;color:var(--blue-mid);margin:18px 0 8px;letter-spacing:1px;">完整版论文示例</div>
+          <div class="paper-grid">
+            <div class="paper-item" onclick="openLightbox('images/B题完整版论文.png')">
+              <img src="images/B题完整版论文.png" alt="B 题完整版论文" loading="lazy">
+              <div class="paper-item-cap">B 题 · 完整版论文</div>
+            </div>
+            <div class="paper-item" onclick="openLightbox('images/C题完整版论文.png')">
+              <img src="images/C题完整版论文.png" alt="C 题完整版论文" loading="lazy">
+              <div class="paper-item-cap">C 题 · 完整版论文</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 统计建模 -->
+    <div class="comp-card">
+      <div class="comp-card-head">
+        <div class="comp-title-row">
+          <div class="comp-title">📊 2026 年统计建模竞赛</div>
+          <a class="comp-official" href="http://tjjmds.ai-learning.net/" target="_blank" rel="noopener">官网 ↗</a>
+        </div>
+        <span class="comp-status active">正在开赛</span>
+      </div>
+      <div class="comp-card-body">
+        <div class="comp-meta">
+          基于组委会推荐的 <strong>100 个选题方向</strong>，本社选择 <strong>15 个方向</strong>提供对应参考数据、完整论文、复现代码等资料。
+        </div>
+        <div class="version-grid">
+          <div class="ver-card">
+            <div class="ver-name">📈 进阶版</div>
+            <div class="ver-desc">5 + 1 篇论文（5 篇随机方向 + 1 篇指定方向）</div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWck5ltaw==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">⭐ 完整版</div>
+            <div class="ver-desc">15 篇论文（涵盖全部 15 个方向）+ 一对一思路、论文定制 + 20 人小群答疑</div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWck5ltbA==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 东三省 -->
+    <div class="comp-card">
+      <div class="comp-card-head">
+        <div class="comp-title-row">
+          <div class="comp-title">🏔️ 2026 年东北三省数模联赛</div>
+          <a class="comp-official" href="#faq-data-intro">📖 资料具体内容介绍 ↗</a>
+        </div>
+        <span class="comp-status active">正在开赛</span>
+      </div>
+      <div class="comp-card-body">
+        <div class="comp-meta">
+          助攻 A、B 两题，<strong>三个版本持续迭代</strong>，根据反馈实时修正。
+        </div>
+        <div class="version-grid">
+          <div class="ver-card">
+            <div class="ver-name">📦 基础版</div>
+            <div class="ver-desc">A、B 题完整数据 + 计算结果 + 双代码（Matlab、Python 两套）· 资料放于百度网盘</div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWcmJxwZA==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">📈 进阶版</div>
+            <div class="ver-desc">基础版 + A、B 题 PDF 论文 + 售后群答疑 · 资料放于售后群群文件</div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWcmJxwZg==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+          <div class="ver-card">
+            <div class="ver-name">⭐ 完整版</div>
+            <div class="ver-desc">进阶版 + 专属论文 + 20 人小群答疑 + 一对一思路 / 论文定制 + AI 账号使用 · 资料放于售后群群文件</div>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWcmJxwaQ==" target="_blank" rel="noopener">前往购买</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- SCHEDULE -->
+<section class="section schedule-section" id="schedule">
+  <div class="section-head">
+    <div class="section-tag">2026 H1 SCHEDULE</div>
+    <h2 class="section-title">2026 年上半年 15 场数模竞赛一览</h2>
+    <p class="section-sub">官方时间 · 难度评估 · 参赛建议 · BZD 数模社制作</p>
+  </div>
+  <div class="schedule-wrap">
+    <div class="schedule-head-bar">
+      <div class="sh-title">2026 年上半年 15 场数模竞赛信息一览表 <em>BZD 数模社</em></div>
+      <div class="sh-date">2026.4.6 发布</div>
+    </div>
+    <div class="schedule-wrap-inner">
+    <table class="sch-table">
+      <thead>
+        <tr>
+          <th style="width:6%">简称</th>
+          <th style="width:14%">全称</th>
+          <th style="width:11%">竞赛时间</th>
+          <th style="width:6%">时长</th>
+          <th style="width:5%">跨校</th>
+          <th style="width:14%">题目设置</th>
+          <th style="width:11%">奖项设置</th>
+          <th style="width:8%">成绩发布</th>
+          <th style="width:6%">报名费</th>
+          <th style="width:19%">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sch-name">认证杯</td>
+          <td class="sch-full">第十九届"认证杯"数学中国数学建模网络挑战赛</td>
+          <td class="sch-time">4/9 周四 20:00<br>4/12 周日 20:00</td>
+          <td>3 天 0 小时</td>
+          <td>√</td>
+          <td>四道题目；任选一</td>
+          <td>一、二、三等奖<br>10%、20%、30%</td>
+          <td>5.14 之前</td>
+          <td class="sch-fee">100 元</td>
+          <td class="sch-note">2000 队，难度 0.4。所有参赛论文全网公开，适合练手</td>
+        </tr>
+        <tr>
+          <td class="sch-name">泰迪杯</td>
+          <td class="sch-full">2026 年（第 14 届）"泰迪杯"数据挖掘挑战赛</td>
+          <td class="sch-time">4/11 周六 09:00<br>4/24 周五 16:00</td>
+          <td>13.4 天</td>
+          <td>×</td>
+          <td>三道，大数据题目</td>
+          <td>一、二、三等奖<br>2%、5%、10%</td>
+          <td>6 月 8-10 日</td>
+          <td class="sch-fee">200 元</td>
+          <td class="sch-note">3000 队，难度 0.8。竞赛时间长、数据量特别大、难度较难<br><span class="sch-highlight">—— BZD 数模社制作</span></td>
+        </tr>
+        <tr>
+          <td class="sch-name">妈杯</td>
+          <td class="sch-full">2026 年第十六届 MathorCup 数学应用挑战赛</td>
+          <td class="sch-time">4/17 周五 08:00<br>4/21 周二 09:00</td>
+          <td>4 天 1 小时</td>
+          <td>×</td>
+          <td>研究生 A、B 题<br>本科 A、B、C、D<br>高职高专五道任选</td>
+          <td>全国一、二等奖 25%、75%<br>赛区一、二等奖 15%、25%</td>
+          <td>6 月</td>
+          <td class="sch-fee">200 元</td>
+          <td class="sch-note">10000 队，难度 1.2。上半年最难的竞赛 + 含金量最大的比赛</td>
+        </tr>
+        <tr>
+          <td class="sch-name">深圳杯</td>
+          <td class="sch-full">2026 年深圳杯数学建模竞赛</td>
+          <td class="sch-time">4 月底 - 6 月中旬</td>
+          <td>50 天</td>
+          <td>√</td>
+          <td>四道题目</td>
+          <td>一、二、三等奖<br>共计 20 队</td>
+          <td>8 月</td>
+          <td class="sch-fee free">0 元</td>
+          <td class="sch-note">3000 队，难度 1.5。获奖率超低，奖项可看作数模天花板</td>
+        </tr>
+        <tr>
+          <td class="sch-name">华中杯</td>
+          <td class="sch-full">第十八届"华中杯"大学生数学建模挑战赛</td>
+          <td class="sch-time">4/23 周四 18:00<br>4/26 周日 18:00</td>
+          <td>3 天 0 小时</td>
+          <td>√</td>
+          <td>三道题目；任选一</td>
+          <td>一、二、三等奖<br>3%、10%、20%</td>
+          <td>5 月 25 日</td>
+          <td class="sch-fee">150 元</td>
+          <td class="sch-note">3000 队，难度 0.8。中等难度，具有较高的地域性</td>
+        </tr>
+        <tr>
+          <td class="sch-name">五一杯</td>
+          <td class="sch-full">第二十三届五一数学建模竞赛参赛邀请函</td>
+          <td class="sch-time">5/1 周五 10:00<br>5/4 周一 12:00</td>
+          <td>3 天 2 小时</td>
+          <td>×</td>
+          <td>三道题目；任选一</td>
+          <td>一、二、三等奖<br>5%、15%、20%</td>
+          <td>7 月前</td>
+          <td class="sch-fee">100 元</td>
+          <td class="sch-note"><span class="sch-highlight">5000 队</span>，难度 0.5。题目简单，获奖率高且含金量高</td>
+        </tr>
+        <tr>
+          <td class="sch-name">华东杯</td>
+          <td class="sch-full">第二十八届华东杯大学生数学建模邀请赛</td>
+          <td class="sch-time">4/30 周四<br>5/4 周一 20:00</td>
+          <td>4 天 0 小时</td>
+          <td>×</td>
+          <td>三道题目；任选一</td>
+          <td>一、二、三等奖<br>共计 20 队</td>
+          <td>7 月前</td>
+          <td class="sch-fee free">0 元</td>
+          <td class="sch-note">1000 队，难度 1.2。获奖率超低，奖项可看作数模天花板</td>
+        </tr>
+        <tr>
+          <td class="sch-name">数维杯</td>
+          <td class="sch-full">2026 年第十一届数维杯大学生数学建模</td>
+          <td class="sch-time">5/8 周五 09:00<br>5/11 周一 09:00</td>
+          <td>3 天 0 小时</td>
+          <td>√</td>
+          <td>研究生本科 A、B 题<br>高职高专 A、B、C 题</td>
+          <td>一、二、三等奖<br>5%、15%、25%</td>
+          <td>2026 年 8 月</td>
+          <td class="sch-fee">200 元</td>
+          <td class="sch-note">3000 队，难度 0.8。含金量、难度尚可</td>
+        </tr>
+        <tr>
+          <td class="sch-name">认证杯</td>
+          <td class="sch-full">第十九届"认证杯"数学中国数学建模网络挑战赛</td>
+          <td class="sch-time">5/14 周四<br>5/17 周日 20:00</td>
+          <td>3 天 0 小时</td>
+          <td>√</td>
+          <td>四道题目；任选一</td>
+          <td>一、二、三等奖<br>10%、20%、30%</td>
+          <td>7、8 月</td>
+          <td class="sch-fee">100 元</td>
+          <td class="sch-note">2000 队，难度 0.6。所有参赛论文全网公开，适合练手</td>
+        </tr>
+        <tr>
+          <td class="sch-name">长三角</td>
+          <td class="sch-full">2026 年第六届长三角高校数学建模竞赛</td>
+          <td class="sch-time">5/14 周四 08:00<br>5/18 周一 08:00</td>
+          <td>3 天</td>
+          <td>√</td>
+          <td>研究生本科 A、B 题<br>高职高专 A、B、C 题</td>
+          <td>一、二、三等奖<br>5%、15%、25%</td>
+          <td>6 月中下旬</td>
+          <td class="sch-fee">100 元</td>
+          <td class="sch-note">1000 队，难度 0.5。题目简单，具有较高的地域性</td>
+        </tr>
+        <tr>
+          <td class="sch-name">电工杯</td>
+          <td class="sch-full">第十八届"中国电机工程学会杯"全国大学生电工数学建模竞赛</td>
+          <td class="sch-time">5/22 周五 08:00<br>5/25 周一 08:00</td>
+          <td>3 天 0 小时</td>
+          <td>√</td>
+          <td>2 道题目，选择其中一道<br><span class="sch-highlight">—— BZD 数模社制作</span></td>
+          <td>一、二、三等奖<br>5%、15%、25%</td>
+          <td>7 月下旬</td>
+          <td class="sch-fee free">0 元</td>
+          <td class="sch-note">10000 队，难度 0.9。题目简单，免报名费、含金量超高</td>
+        </tr>
+        <tr>
+          <td class="sch-name">中青杯</td>
+          <td class="sch-full">2026 年第八届中青杯全国大学生数学建模竞赛</td>
+          <td class="sch-time">6/4 周四 17:00<br>6/7 周日 17:00</td>
+          <td>3 天</td>
+          <td>√</td>
+          <td>研究生本科 A、B 题<br>高职高专 A、B、C 题</td>
+          <td>一、二、三等奖<br>8%、16%、25%</td>
+          <td>2026 年 8 月</td>
+          <td class="sch-fee">100 元</td>
+          <td class="sch-note">1000 队，难度 0.5。题目简单，名字挺大可唬外行</td>
+        </tr>
+        <tr>
+          <td class="sch-name">亚太杯</td>
+          <td class="sch-full">2026 年第十六届 APMCM 亚太地区大学生数学建模竞赛</td>
+          <td class="sch-time">7/10 周五 18:00<br>7/14 周二 18:00</td>
+          <td>4 天 2 小时</td>
+          <td>√</td>
+          <td>三道题目；任选一<br><span class="sch-highlight">—— BZD 数模社制作</span></td>
+          <td>一、二、三等奖<br>5%、15%、25%</td>
+          <td>8 月下旬</td>
+          <td class="sch-fee">100 元</td>
+          <td class="sch-note">3000 队，难度 0.5。题目简单，获奖率高、含金量高</td>
+        </tr>
+        <tr>
+          <td class="sch-name">华数杯</td>
+          <td class="sch-full">2026 年第七届"华数杯"全国大学生数学建模竞赛</td>
+          <td class="sch-time">8/5 周四 18:00<br>8/8 周日 20:00</td>
+          <td>3 天 2 小时</td>
+          <td>√</td>
+          <td>三道题目；任选一</td>
+          <td>一、二、三等奖<br>10%、20%、30%</td>
+          <td>7 月下旬</td>
+          <td class="sch-fee">200 元</td>
+          <td class="sch-note">3000 队，难度 0.8。国赛前最后一场练手赛，时间合适</td>
+        </tr>
+        <tr class="sch-province">
+          <td colspan="10">
+            <strong>省赛 ·</strong> 各赛区省赛各自举办，时间多为 4-7 月中的三天，例如山西的金地杯（4.21）、东三省联赛（4 月下旬，通常题目为深圳杯题目）、山东、广西等省赛。用于选拔省内数模较强的队伍参加九月份的国赛；部分没有省赛的赛区的各高校会选择举办校赛用以选拔强队。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="sch-foot">
+      <p><span class="lbl">注释 1</span>备注列的内容为上一届参赛人数 + 赛题难度 + 简短评语。赛题难度选择 2025 年国赛 C 题的难度系数为 1.0，含金量与参赛人数基本等价。 —— BZD 数模</p>
+      <p><span class="lbl">注释 2</span>上述表格中亚太、华数、深圳杯具体时间未发布，开赛时间根据往届信息推算得出，存在 1~2 天的误差。</p>
+      <p><span class="lbl">注释 3</span>上述表格中所有竞赛，BZD 数模社均将提供竞赛助攻，具体包含每个题目至少 100 种求解方案 + 配套实现代码，一对一解题思路、论文定制。</p>
+      <p><span class="lbl">注释 4</span>上述表格中所有竞赛均提供赛中指导、dai 做等其他个性化服务，可加微信 bzdsxjm521 或 bzdsxjm520（定制服务价格 4 位数起步，可指定保价）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PASSES -->
+<section class="section passes-section" id="passes">
+  <div class="passes-inner">
+    <div class="section-head">
+      <div class="section-tag">SEASON PASSES</div>
+      <h2 class="section-title">通用卡 · 抢预定锁折扣</h2>
+      <p class="section-sub">数学建模竞赛 · 专业助攻 · 一卡通用上半年所有赛事</p>
+    </div>
+
+    <div class="passes-banner">
+      <div class="pb-item">
+        <div class="pb-num">一 折</div>
+        <div class="pb-lbl">终身卡最低</div>
+      </div>
+      <div class="pb-item">
+        <div class="pb-num">五 五 折</div>
+        <div class="pb-lbl">半年卡专享</div>
+      </div>
+      <div class="pb-item">
+        <div class="pb-num">七 折</div>
+        <div class="pb-lbl">单场次卡</div>
+      </div>
+    </div>
+
+    <div class="passes-list">
+      <div class="passes-list-head">预 定 套 餐</div>
+
+      <div class="pass-row b1">
+        <div class="pass-bar"></div>
+        <div class="pass-info">
+          <div class="pass-name">进阶版资料次卡</div>
+          <div class="pass-desc">兑任意 1 场进阶版 · 100+ 方案 · 代码 · 论文 · 答疑</div>
+        </div>
+        <div class="pass-price-block">
+          <div class="pass-price">¥35</div>
+          <div class="pass-price-sub">七折优惠</div>
+        </div>
+        <a class="pass-cta" href="https://mbd.pub/o/bread/mbd-YZWclZ1wZg==" target="_blank" rel="noopener">立即预定</a>
+      </div>
+
+      <div class="pass-row b2">
+        <div class="pass-bar"></div>
+        <div class="pass-info">
+          <div class="pass-name">完整版资料次卡</div>
+          <div class="pass-desc">兑任意 1 场完整版 · 一对一 · 论文定制 · AI 服务</div>
+        </div>
+        <div class="pass-price-block">
+          <div class="pass-price">¥69.99</div>
+          <div class="pass-price-sub">七折优惠</div>
+        </div>
+        <a class="pass-cta" href="https://mbd.pub/o/bread/mbd-YZWclZ1wZw==" target="_blank" rel="noopener">立即预定</a>
+      </div>
+
+      <div class="pass-row b3">
+        <div class="pass-bar"></div>
+        <div class="pass-info">
+          <div class="pass-name">进阶版资料半年卡</div>
+          <div class="pass-desc">兑任意 4 场进阶版 · 写手老师全程售后答疑</div>
+        </div>
+        <div class="pass-price-block">
+          <div class="pass-price">¥111.11</div>
+          <div class="pass-price-sub">五五折优惠</div>
+        </div>
+        <a class="pass-cta" href="https://mbd.pub/o/bread/mbd-YZWclZ1waA==" target="_blank" rel="noopener">立即预定</a>
+      </div>
+
+      <div class="pass-row b4">
+        <div class="pass-bar"></div>
+        <div class="pass-info">
+          <div class="pass-name">完整版资料半年卡</div>
+          <div class="pass-desc">兑任意 4 场完整版 · 含全套一对一增值服务</div>
+        </div>
+        <div class="pass-price-block">
+          <div class="pass-price">¥219.99</div>
+          <div class="pass-price-sub">五五折优惠</div>
+        </div>
+        <a class="pass-cta" href="https://mbd.pub/o/bread/mbd-YZWclZ1waQ==" target="_blank" rel="noopener">立即预定</a>
+      </div>
+
+      <div class="pass-row b5">
+        <div class="pass-bar"></div>
+        <div class="pass-info">
+          <div class="pass-name"><span class="star">★</span> 终身卡</div>
+          <div class="pass-desc">每年兑 5 场完整版 · 赠限量论文 + 论文检查 + 软著定做</div>
+        </div>
+        <div class="pass-price-block">
+          <div class="pass-price">¥499.99</div>
+          <div class="pass-price-sub">一折优惠</div>
+        </div>
+        <a class="pass-cta" href="https://mbd.pub/o/bread/mbd-YZWclZ1wag==" target="_blank" rel="noopener">立即预定</a>
+      </div>
+    </div>
+
+    <div class="passes-features">
+      <div class="pf-card">
+        <h4>完整版包含</h4>
+        <ul>
+          <li>100+ 种竞赛求解方案</li>
+          <li>配套代码可直接运行</li>
+          <li>对应赛题求解参考论文</li>
+          <li>一对一解题思路定制</li>
+          <li>一对一赛中论文定制</li>
+          <li>赛中免费 AI 辅助</li>
+          <li>20 人小群答疑</li>
+        </ul>
+      </div>
+      <div class="pf-card">
+        <h4>进阶版包含</h4>
+        <ul>
+          <li>100+ 种竞赛求解方案</li>
+          <li>配套代码可直接运行</li>
+          <li>对应赛题求解参考论文</li>
+          <li>写手老师专属售后群</li>
+          <li>全程答疑保障服务</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="passes-tip">
+      本数模社将提供日历表中<strong>除华东杯外所有竞赛</strong>的助攻资料，呈现形式与本次竞赛一致。此外还会提供<strong>金地杯（山西省数模省赛）</strong>、<strong>山东省数模省赛</strong>的助攻。<br>
+      购买<strong>次卡</strong>提前预定享 <strong>七折</strong>优惠；购买<strong>半年卡</strong>享 <strong>五五折</strong>，半年卡上次本次妈杯的价格按五折计算，可<strong>找客服退差价</strong>。
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-head">
+    <div class="section-tag">ABOUT US</div>
+    <h2 class="section-title">关于 BZD 数模社</h2>
+    <p class="section-sub">头部民间数模工作室 · 5000+ 社群 · 5 年深耕</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h3>什么是 BZD？</h3>
+      <p>
+        BZD 数模社是国内一个专注数学建模竞赛、主打赛中助攻 / 资料分享 / 培训辅导的线上数模社群。
+        在<strong>高教社杯数学建模国赛</strong>、华数杯、五一赛、MathorCup、数维杯、美赛等赛事圈里有较高知名度。
+      </p>
+      <p>
+        核心业务覆盖：赛前培训、赛中思路 / 论文 / 代码助攻、赛后答疑、AI 数模工具教学。
+        通过公众号、CSDN、抖音、B 站、QQ 群等多平台运营。
+      </p>
+      <div class="about-name">
+        <strong>BZD 名字的由来：</strong>
+        圈内默认 "<strong>不垫底</strong>" 为初心 —— 帮参赛队伍不垫底、拿奖；同时也有 "<strong>必夺冠</strong>" 等谐音梗，无官方全称。
+      </div>
+      <a class="about-feedback" href="https://docs.qq.com/doc/p/9d1a172fee336af91e6ac7a0793dd296895c3619?nlc=1" target="_blank" rel="noopener">
+        📝 BZD 数模社往期资料助攻反馈 ↗
+      </a>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="ac-icon">📚</div>
+        <div class="ac-title">资料分享</div>
+        <div class="ac-desc">完整数据、论文、Python+Matlab 双代码</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">🎯</div>
+        <div class="ac-title">赛中助攻</div>
+        <div class="ac-desc">思路定制、模型创新、论文修改指导</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">🤖</div>
+        <div class="ac-title">AI + 数模</div>
+        <div class="ac-desc">合理用 AI 写论文、跑代码、降重</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">👥</div>
+        <div class="ac-title">小群答疑</div>
+        <div class="ac-desc">20 人专属小群，写手亲自实时答疑</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div class="section-bg-wrap">
+<section class="section" id="services">
+  <div class="section-head">
+    <div class="section-tag">SERVICES</div>
+    <h2 class="section-title">三档标准化服务体系</h2>
+    <p class="section-sub">从基础资料到一对一定制 · 按需选择</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-head">
+        <div class="svc-name">基础版</div>
+        <div class="svc-price">9.99 - 16.66 元</div>
+      </div>
+      <div class="svc-body">
+        <ul class="svc-list">
+          <li>完整数据、解题思路（支持解题）</li>
+          <li>计算结果，可直接绘图</li>
+          <li>实现代码：Matlab + Python 两套</li>
+          <li>B 站讲解视频 + 网盘资料</li>
+          <li>无答疑、无售后群</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-head">
+        <div class="svc-name">进阶版</div>
+        <div class="svc-price">30 - 66 元</div>
+      </div>
+      <div class="svc-body">
+        <ul class="svc-list">
+          <li>含基础版全部内容</li>
+          <li>1 篇中文 PDF 完整论文</li>
+          <li>论文修改 + 降重指南</li>
+          <li>售后群（禁言），每日 2h 集中答疑</li>
+          <li>直播讲解关键步骤</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-card featured">
+      <div class="svc-head">
+        <div class="svc-name">完整版</div>
+        <div class="svc-price">70 - 166 元</div>
+      </div>
+      <div class="svc-body">
+        <ul class="svc-list">
+          <li>含进阶版全部内容</li>
+          <li>多版本论文（每版本限 20 队）</li>
+          <li><strong>1 次 1 对 1 思路定制</strong>（写手直接沟通）</li>
+          <li>20 人专属小群，<strong>不限时答疑</strong></li>
+          <li>论文改写 + 模型创新点指导</li>
+          <li>赠送 AI 账号使用权</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-head">
+        <div class="svc-name">附加增值</div>
+        <div class="svc-price">面议</div>
+      </div>
+      <div class="svc-body">
+        <ul class="svc-list">
+          <li>赛前：竞赛日历、选题建议、模型储备</li>
+          <li>赛前：论文模板、AI 写作培训</li>
+          <li>赛后：优秀论文合集、复盘解析</li>
+          <li>保研竞赛规划指导</li>
+          <li>整队全程辅导、论文润色、代码调试</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- COVERAGE -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-tag">COMPETITIONS COVERED</div>
+    <h2 class="section-title">全年覆盖 20+ 主流赛事</h2>
+    <p class="section-sub">主流数模竞赛全覆盖 · 每场提供思路 + 论文 + 双代码 + 数据 + 讲解视频</p>
+  </div>
+  <div class="cov-tags">
+    <span class="cov-tag hot">美赛 MCM/ICM</span>
+    <span class="cov-tag hot">高教社杯国赛</span>
+    <span class="cov-tag hot">华数杯</span>
+    <span class="cov-tag hot">五一数学建模竞赛</span>
+    <span class="cov-tag">MathorCup</span>
+    <span class="cov-tag">数维杯</span>
+    <span class="cov-tag">认证杯</span>
+    <span class="cov-tag">泰迪杯</span>
+    <span class="cov-tag">中青杯</span>
+    <span class="cov-tag">亚太杯</span>
+    <span class="cov-tag">大湾区杯</span>
+    <span class="cov-tag">未来杯</span>
+    <span class="cov-tag">小美赛</span>
+    <span class="cov-tag">东北三省数模联赛</span>
+    <span class="cov-tag">统计建模竞赛</span>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="section-bg-wrap">
+<section class="section" id="timeline">
+  <div class="section-head">
+    <div class="section-tag">OUR JOURNEY</div>
+    <h2 class="section-title">五年发展历程</h2>
+    <p class="section-sub">从学生互助到国内头部数模社群</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">2021<span class="tl-stage">创立期</span></div>
+      <div class="tl-body">
+        几名国一 / 美 O 获奖学生创立，最初为小群共享数模资料、赛后解析。
+        下半年首次在华数杯、五一赛做赛中思路分享，小范围口碑扩散。
+        定位：学生互助、低价资料、快速解析。
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2022<span class="tl-stage">扩张期</span></div>
+      <div class="tl-body">
+        年初美赛首次完整思路 + 代码 + 论文助攻，发布速度快、价格低，粉丝暴涨。
+        年中覆盖 MathorCup、数维杯、认证杯、泰迪杯等主流赛事，形成稳定 "赛前资料 + 赛中助攻" 模式。
+        年底公众号粉丝破万，QQ 群两个主群（总人数 3000+）。
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2023<span class="tl-stage">成熟期</span></div>
+      <div class="tl-body">
+        成为国内民间数模工作室第一梯队，与云顶、DS、芊芊等形成头部阵营。
+        建立写手审核机制：仅限国一 / 美 O + 培训考核通过者制作资料，质量明显提升。
+        服务分层定型：基础版 / 进阶版 / 完整版。全网粉丝破 2 万 +。
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2024<span class="tl-stage">品牌稳定期</span></div>
+      <div class="tl-body">
+        发布全年竞赛日历 + 赛前集训 + AI 数模课程（GPT 辅助写作、代码生成、降重）。
+        完善售后体系：限时答疑、群内直播讲解、论文改写指导。
+        口碑关键词：更新最快、性价比最高、售后最稳、论文可直接改写。
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2025<span class="tl-stage">全面升级</span></div>
+      <div class="tl-body">
+        美赛首推 "多版本论文 + 20 人小群 + 1 对 1 思路定制" 高阶服务。
+        全年覆盖 20+ 主流赛事，每场均提供：思路 + 论文 + 双代码 + 数据 + 讲解视频。
+        团队全职化：专职写手 2 名 + 助理团队，人均年制作赛题 50+。
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2026<span class="tl-stage now">现状</span></div>
+      <div class="tl-body">
+        美赛助攻形式升级为 "数模焚决"，分基础 / 进阶 / 高阶三档。
+        高阶版不限时答疑 + 专属小群 + 1 对 1 定制。
+        平台：公众号、CSDN、抖音、B 站、QQ 群（5000+）、面包多等全平台运营。
+        定位：国内头部数模社群，专注赛中高质量助攻 + 赛前 AI 培训 + 保研竞赛规划。
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-head">
+    <div class="section-tag">FAQ · 资料定位 + 八问八答</div>
+    <h2 class="section-title">BZD 数模社 资料常见问题</h2>
+    <p class="section-sub">买之前看这一份，疑问基本就解决了</p>
+  </div>
+  <div class="faq-list" id="faq-data-intro">
+
+    <details class="faq-item" open>
+      <summary>资料定位介绍 · 我们的资料应该如何使用？</summary>
+      <div class="faq-body">
+        <p>数学建模竞赛题目，可以看作<strong>初高中数学应用题的 pro max 版</strong>。但数模竞赛的解题逻辑，和传统数学考试完全不同：</p>
+        <p>传统数学题答案唯一、步骤固定，标准写法对了就得分，错一步就失分；而数学建模<em>没有标准答案</em>，每支队伍的<strong>模型、思路、论文都应独具特色</strong>，作品相似度要求需控制在 <strong>30% 以内</strong>。</p>
+        <p>我们提供多套参考思路与范文，<strong>供大家借鉴框架、学习建模逻辑</strong>，再结合自身理解独立创作专属论文，轻松规避重复率问题。</p>
+        <p>同时为进一步提升效率，我们专属配备<strong>数模智能体</strong>：可一键生成<em>仅个人可见、完成度达 80%</em> 的完整论文，自带可运行代码与可视化图表。大家可先依托智能体初稿打底，再参考配套范文微调优化，极大节省建模、编程、写稿时间，真正做到<strong>事半功倍</strong>。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>多人参考，思路、模型是否会重复？</summary>
+      <div class="faq-body">
+        <p>对于一道数学建模题目，一万只队伍基于同样的背景、同样的问题进行解题，模型重复、论文相似在所难免。通常竞赛规定<em>相似度超过 80% 通报、超过 60% 不予评奖</em>。相对于数模社提供的人为模型思路，<strong>AI 思路更会具有同质化</strong>。数模社提供作品最多也就是几十支队伍可以看到，现在 95% 的队伍都使用 AI，意味着有两万支队伍都在参考 AI 给出的模型。两者参考数量相对而言，本数模社老师亲自建立模型 + AI 辅助实现的思路相对更小众、更容易获奖。</p>
+        <p><strong>注释：</strong>AI 目前给出的思路是可行的，但是当下 AI 的最大问题在于同质化。</p>
+        <p><strong>2024 年国赛：</strong>对于双目标优化模型求解算法，在无 AI 时代智能算法、NSGA-II（非显性排序遗传算法 II）、MOPSO（多目标粒子群优化）等看起来高大上的模型。但在实际评阅中 60% 以上的队伍都无脑使用了 AI 推荐的算法，导致原本小众、较好的算法在竞赛中其实并不出众。国奖中大部分使用算法也并非 AI 推荐。（2024 年九月还没到中文 AI 迸发的时代）</p>
+        <p><strong>2025 年国赛：</strong>各种中文 AI 层出不穷，赛中也给出了各种五花八门的求解方案，基本第一点就与评审要点不同（AI 普遍建议使用聚类模型进行分组分类，评阅要点强调不推荐聚类模型直接分组）。</p>
+        <p>因此，<strong>当下 AI 时代下人为建立模型进行求解才更显得小众、更容易获奖。</strong></p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>不限量版资料主要包含什么，具体服务有什么？</summary>
+      <div class="faq-body">
+        <p>不限量版主要包含：完整论文（二等奖层次、竞赛第二天早六点发布）+ 1-2 套实现代码 + 代码、论文视频讲解、降重视频 + 写手亲自答疑 + 售后群不禁言 + 一对一专属思路、论文制作。</p>
+        <p><strong>1）完整论文</strong>：开赛第二天早六点发布完整论文，本数模社为<em>全网最早发布论文</em>的平台。后续写手老师会根据反馈实时修正模型。</p>
+        <p><strong>2）实现代码</strong>：所有求解过程均可使用 python、matlab 两个版本，每种模型给出不低于 100 的模型组合方案。</p>
+        <p><strong>3）讲解视频</strong>：包括论文思路讲解、代码运行讲解、降重视频、漏洞解释、模型创新点。</p>
+        <ul style="padding-left:18px;list-style:disc">
+          <li>思路讲解（B 站 - BZD 数模社）：尽量使用大白话让大家能够理解</li>
+          <li>代码运行讲解（B 站 - BZD 数模社）：从头到尾运行论文的两套代码，避免不知运行顺序</li>
+          <li>降重视频（B 站 + 售后群）：B 站发布降重思路、降重方式，售后群单独发布每个问题具体可替换的模型</li>
+          <li>模型创新点（售后群随时发布）：根据竞赛时间提出可改进的点</li>
+          <li>漏洞解释（售后群最后一天发布）：为防止倒卖，论文设置了多处致命漏洞，新手直接参考很大概率会被 PASS</li>
+        </ul>
+        <p><strong>4）写手老师亲自答疑</strong>：赛中保证一天 20 小时售后群答疑时间，群内不禁言、任何竞赛相关问题均可直接询问。订单号审核进群，防止倒卖。</p>
+        <p><strong>5）一对一专属论文定制</strong>：赠送中文智能体（60min 直接输出数模论文工具）一次论文输出机会。生成论文模型、解题思路可以与其他人完全不同，可直接在论文基础上结合不限量资料使用。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>限量版资料主要包含什么，具体服务有什么？</summary>
+      <div class="faq-body">
+        <p>限量版主要包含<strong>全网销售 15 份完整论文</strong>（二等奖层次）+ 1 套实现代码 + 代码、论文视频讲解 + 降重视频 + 一对一专属论文制作。</p>
+        <p>与不限量版本相比，限量版本使用的思路、模型一个赛题一个版本仅有 15 份，<em>相对而言更容易获奖</em>。</p>
+        <p>质量比不限量版稍低（限量版由往届国一美 O 选手制作，不限量版本由 BZD 数模社专职写手制作 —— 一年可写 30+ 篇数模论文）。讲解视频与不限量版本一致，在网盘更新。</p>
+        <p><strong>一对一专属论文定制</strong>：赠送英文智能体（60min 直接输出数模论文工具），不同于中文智能体，英文智能体搭载外文 AI，输出论文质量更高。赛前预定可免费赠送同赛题不限量论文结合参考。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>纯新手、无任何数模参赛经验，能够正常使用资料？</summary>
+      <div class="faq-body">
+        <p>思路、论文讲解中，我们尽量使用大白话引入模型，并使用各种基础模型进行类比以便大家能够理解问题所需的模型。</p>
+        <p>同时，在模型求解中我们也会准备多种模型，会使用基础的回归分析（y=kx+b）进行求解，也会使用高阶进阶模型进行求解。<strong>可以根据自己的模型理解自行选择模型组合方案。</strong></p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>应该如何使用资料呢？是否可以直接提交，如需修改应该怎么进行修改？</summary>
+      <div class="faq-body">
+        <p>限量版、不限量版的资料论文水平均是<strong>二等奖冲刺一等奖</strong>。但是资料毕竟是公开展示，即使是限量版也并非一对一展示，<em>绝对不能直接提交</em>（相似度超过 80% 通报、超过 60% 不予评奖），具体降重可见资料的降重视频进行修改即可。</p>
+        <p>具体怎么使用还得看上帝：<strong>求上而得其中，求中而得其下。</strong>如果一味的去复现这篇论文，那么最多就是二等奖了，大概率要比二等奖低一些。但如果你看到我们的论文之后有一些好的想法、或者有感觉我们做的不好的地方进行修改，那么你一定会比我们的质量更高一些。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>基础版、进阶版、高阶版、不限量版与限量版的区别是什么？</summary>
+      <div class="faq-body">
+        <p><strong>不限量版</strong>有三个版本（基础版、进阶版、高阶版），由 BZD 数模社<strong>专职写手老师</strong>制作。</p>
+        <p><strong>限量版</strong>资料每个赛题有 2-3 个版本（每份全网销售 15 份），由 BZD 数模社合作平台（云顶数模、DS 数模、芊芊数模等）制作。</p>
+        <p>不限量的三个版本区别：</p>
+        <ul style="padding-left:18px;list-style:disc">
+          <li><strong>基础版</strong> 仅包含不限量版本的实现代码 + 输出结果，无论文</li>
+          <li><strong>进阶版</strong> 包含不限量版本 PDF 论文、代码、一对一定制等，限制为<em>论文不可复制、售后群禁言（无答疑）</em></li>
+          <li><strong>完整版</strong> 包含上方介绍的全部服务</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>写手老师是学生吗？还是全职写手，水平如何？</summary>
+      <div class="faq-body">
+        <p>BZD 数模社不限量版本老师为<strong>全职写手</strong>，目前写作数模题目均超 50+。</p>
+        <p>写手老师培养方案：往届国一美 O 进行一年一对一服务，指导队伍综合获奖率超 90%；数模社出资全程参加国委会、赛区组委会举办的各种教师培训课程后，才可进行不限量版本制作。</p>
+        <p>目前数模社仅有两位写手老师，<em>可联系助理查看老师培训证书等资料</em>。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>倒卖须知</summary>
+      <div class="faq-body">
+        <p>因数模社作品质量高、更新速度快，赛中会出现倒卖。</p>
+        <p><em>本数模社对倒卖后导致的不获奖、通报概不负责。</em>如因倒卖导致无法修正论文错误、无法正常售后解决问题，<strong>后果自负！</strong></p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-head">
+    <div class="section-tag">CONTACT US</div>
+    <h2 class="section-title">联系我们</h2>
+    <p class="section-sub">购买、定制、答疑请加 QQ 群或微信</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <div class="contact-name">QQ 数模交流群</div>
+      <div class="contact-value">689964173</div>
+      <div class="contact-sub">主群 1</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <div class="contact-name">QQ 数模交流 2 群</div>
+      <div class="contact-value">275032074</div>
+      <div class="contact-sub">主群 2</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">🔔</div>
+      <div class="contact-name">资料通知群</div>
+      <div class="contact-value">928949323</div>
+      <div class="contact-sub">仅推送资料 / 无聊天</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">💚</div>
+      <div class="contact-name">微信（个性化定制）</div>
+      <div class="contact-value">bzdsxjm521</div>
+      <div class="contact-sub">备用：bzdsxjm520 / BZD661188</div>
+    </div>
+  </div>
+  <div class="contact-tip">
+    赛中指导、个性化定制请加微信 <strong>bzdsxjm521</strong> / <strong>bzdsxjm520</strong>（定制服务价格 4 位数起步，可指定保价）<br>
+    20 人小群每个群的资料不同 · 通过订单号审核进群，不单独售卖
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-slogan">一 次 建 模 · 终 生 受 益</div>
+  <div>© 2021 - 2026 BZD 数模社 · 国内头部数学建模社群</div>
+  <div style="margin-top:6px;font-size:11px;">公众号 · CSDN · 抖音 · B 站 · QQ 群 · 面包多 全平台运营</div>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e){
+  if(e) e.stopPropagation();
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
