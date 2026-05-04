@@ -1081,8 +1081,27 @@ a { color:inherit; }
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
+<section class="hero" style="position:relative;overflow:hidden;min-height:600px;">
+  <!-- 证书背景装饰 -->
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+    <img src="images/培训证书.png"
+      style="position:absolute;width:220px;opacity:.22;border-radius:10px;
+             box-shadow:0 16px 40px rgba(0,0,0,.4);
+             top:8%;left:3%;transform:rotate(-8deg);">
+    <img src="images/国赛.png"
+      style="position:absolute;width:200px;opacity:.22;border-radius:10px;
+             box-shadow:0 16px 40px rgba(0,0,0,.4);
+             top:30%;left:6%;transform:rotate(5deg);">
+    <img src="images/美赛.png"
+      style="position:absolute;width:210px;opacity:.22;border-radius:10px;
+             box-shadow:0 16px 40px rgba(0,0,0,.4);
+             top:8%;right:3%;transform:rotate(7deg);">
+    <img src="images/研赛.png"
+      style="position:absolute;width:200px;opacity:.22;border-radius:10px;
+             box-shadow:0 16px 40px rgba(0,0,0,.4);
+             top:30%;right:6%;transform:rotate(-5deg);">
+  </div>
+  <div class="hero-inner" style="position:relative;z-index:1;">
     <img class="hero-logo" src="images/logo.jpg" alt="BZD 数模社 Logo">
     <div class="hero-badge">国内头部数学建模社群 · 自 2021</div>
     <h1>BZD 数模社</h1>
@@ -1093,7 +1112,7 @@ a { color:inherit; }
         <div style="font-size:12px;color:#b0c8ed;margin-top:4px;letter-spacing:1px;">综合获奖率</div>
       </div>
       <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:18px 28px;min-width:120px;text-align:center;">
-        <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;">数万<span style="font-size:16px;"></span></div>
+        <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;">数万</div>
         <div style="font-size:12px;color:#b0c8ed;margin-top:4px;letter-spacing:1px;">服务队伍</div>
       </div>
       <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:18px 28px;min-width:120px;text-align:center;">
@@ -1107,24 +1126,6 @@ a { color:inherit; }
     </div>
   </div>
 </section>
-
-<!-- SHOWCASE -->
-<div style="background:linear-gradient(180deg,#0b1f4a 0%,#f8faff 100%);padding:0 24px 60px;overflow:hidden;">
-  <div style="max-width:900px;margin:0 auto;position:relative;height:340px;">
-    <img src="images/B题定制论文示例展示.png" alt="定制论文示例"
-      style="position:absolute;width:320px;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.35);
-             left:50%;top:20px;transform:translateX(-50%) rotate(-5deg);z-index:1;cursor:pointer;"
-      onclick="openLightbox('images/B题定制论文示例展示.png')">
-    <img src="images/B题完整版论文.png" alt="完整版论文"
-      style="position:absolute;width:300px;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.28);
-             left:58%;top:40px;transform:rotate(4deg);z-index:2;cursor:pointer;"
-      onclick="openLightbox('images/B题完整版论文.png')">
-    <img src="images/C题完整版论文.png" alt="C题完整版论文"
-      style="position:absolute;width:300px;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.28);
-             right:58%;top:40px;transform:rotate(-4deg);z-index:2;cursor:pointer;"
-      onclick="openLightbox('images/C题完整版论文.png')">
-  </div>
-</div>
 
 <!-- COMPETITIONS -->
 <div class="section-bg-wrap">
@@ -2200,40 +2201,6 @@ a { color:inherit; }
 </section>
 </div>
 
-<!-- CERTS -->
-<section class="section" id="certs">
-  <div class="section-head">
-    <div class="section-tag">CREDENTIALS</div>
-    <h2 class="section-title">荣誉资质</h2>
-    <p class="section-sub">指导老师培训认证 · 国赛 · 美赛 · 研赛获奖证书</p>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:900px;margin:0 auto;">
-    <div style="text-align:center;">
-      <img src="images/培训证书.png" alt="指导老师培训证书"
-        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
-        onclick="openLightbox('images/培训证书.png')">
-      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">指导老师培训证书</div>
-    </div>
-    <div style="text-align:center;">
-      <img src="images/国赛.png" alt="国赛获奖证书"
-        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
-        onclick="openLightbox('images/国赛.png')">
-      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">全国数模竞赛获奖</div>
-    </div>
-    <div style="text-align:center;">
-      <img src="images/美赛.png" alt="美赛获奖证书"
-        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
-        onclick="openLightbox('images/美赛.png')">
-      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">美赛获奖证书</div>
-    </div>
-    <div style="text-align:center;">
-      <img src="images/研赛.png" alt="研赛获奖证书"
-        style="width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;"
-        onclick="openLightbox('images/研赛.png')">
-      <div style="margin-top:10px;font-size:13px;color:var(--text-sub);font-weight:700;">研究生数模竞赛获奖</div>
-    </div>
-  </div>
-</section>
 
 <!-- CONTACT -->
 <section class="section contact-section" id="contact">
