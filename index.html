@@ -359,6 +359,19 @@ a { color:inherit; }
   border-top:1.5px dashed var(--border);
   padding-top:18px;
 }
+/* ---------- AGENT (代理合作) ---------- */
+.agent-section { background:var(--blue-bg); }
+.agent-wrap { max-width:860px; margin:0 auto; }
+.agent-intro { font-size:15px; color:var(--text-main); line-height:1.9; margin-bottom:28px; }
+.agent-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
+@media(max-width:640px){ .agent-grid{ grid-template-columns:1fr; } }
+.agent-box { background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:20px 22px; }
+.agent-box-title { font-size:15px; font-weight:900; color:var(--blue-deep); margin-bottom:12px; letter-spacing:1px; }
+.agent-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px; }
+.agent-list li { font-size:13.5px; color:var(--text-main); padding-left:18px; position:relative; line-height:1.6; }
+.agent-list li::before { content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
+.agent-how { background:#fff; border:1.5px solid var(--gold); border-radius:12px; padding:18px 22px; font-size:14px; color:var(--text-main); line-height:1.8; }
+.agent-how strong { color:var(--blue-deep); }
 .paper-preview-title {
   font-size:14px; font-weight:900;
   color:var(--blue-deep);
@@ -953,13 +966,13 @@ a { color:inherit; }
   <div class="nav-inner">
     <div class="nav-logo">BZD<span>·数模社</span></div>
     <ul class="nav-links">
-      <li><a href="#competitions">在赛助攻</a></li>
+      <li><a href="#competitions">竞赛助攻</a></li>
       <li><a href="#schedule">赛事日历</a></li>
       <li><a href="#passes">套餐预定</a></li>
-      <li><a href="#about">关于我们</a></li>
       <li><a href="#guide">使用指南</a></li>
-      <li><a href="#redeem">领取权益</a></li>
       <li><a href="#faq">常见问题</a></li>
+      <li><a href="#about">关于我们</a></li>
+      <li><a href="#agent">代理合作</a></li>
       <li><a href="#contact">联系我们</a></li>
     </ul>
   </div>
@@ -1005,7 +1018,7 @@ a { color:inherit; }
 <section class="section" id="competitions">
   <div class="section-head">
     <div class="section-tag">ONGOING COMPETITIONS</div>
-    <h2 class="section-title">正在 / 即将进行的赛事</h2>
+    <h2 class="section-title">竞赛助攻</h2>
     <p class="section-sub">实时更新 · 持续助攻</p>
   </div>
   <div class="comp-grid">
@@ -1046,7 +1059,7 @@ a { color:inherit; }
           <div class="ver-card">
             <div class="ver-name">🎯 一对一思路定制</div>
             <div class="ver-desc">AI 智能体 · 30min 输出完整度 80% 的定制论文 · 包含可运行代码 + 可视化</div>
-            <a class="ver-link" href="#" style="opacity:.5;pointer-events:none;">链接即将上线</a>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWYmJ9rZA==" target="_blank" rel="noopener">前往购买</a>
           </div>
         </div>
       </div>
@@ -1088,7 +1101,7 @@ a { color:inherit; }
           <div class="ver-card">
             <div class="ver-name">🎯 一对一思路定制</div>
             <div class="ver-desc">AI 智能体 · 30min 输出完整度 80% 的定制论文 · 包含可运行代码 + 可视化</div>
-            <a class="ver-link" href="#" style="opacity:.5;pointer-events:none;">链接即将上线</a>
+            <a class="ver-link" href="https://mbd.pub/o/bread/mbd-YZWYmJ9rZA==" target="_blank" rel="noopener">前往购买</a>
           </div>
         </div>
       </div>
@@ -1549,64 +1562,6 @@ a { color:inherit; }
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-head">
-    <div class="section-tag">ABOUT US</div>
-    <h2 class="section-title">关于 BZD 数模社</h2>
-    <p class="section-sub">头部民间数模工作室 · 5000+ 社群 · 5 年深耕</p>
-  </div>
-  <div class="about-grid">
-    <div class="about-text">
-      <h3>什么是 BZD？</h3>
-      <p>
-        BZD 数模社是国内一个专注数学建模竞赛、主打赛中助攻 / 资料分享 / 培训辅导的线上数模社群。
-        在<strong>高教社杯数学建模国赛</strong>、华数杯、五一赛、MathorCup、数维杯、美赛等赛事圈里有较高知名度。
-      </p>
-      <p>
-        核心业务覆盖：赛前培训、赛中思路 / 论文 / 代码助攻、赛后答疑、AI 数模工具教学。
-        通过公众号、CSDN、抖音、B 站、QQ 群等多平台运营。
-      </p>
-      <div class="about-name">
-        <strong>BZD 名字的由来：</strong>
-        圈内默认 "<strong>不垫底</strong>" 为初心 —— 帮参赛队伍不垫底、拿奖；同时也有 "<strong>必夺冠</strong>" 等谐音梗，无官方全称。
-      </div>
-      <a class="about-feedback" href="https://docs.qq.com/doc/p/9d1a172fee336af91e6ac7a0793dd296895c3619?nlc=1" target="_blank" rel="noopener">
-        📝 BZD 数模社往期资料助攻反馈 ↗
-      </a>
-      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-        <img src="images/B题定制论文示例展示.png" alt="定制论文示例" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/B题定制论文示例展示.png')" title="B题一对一定制论文示例">
-        <img src="images/A题定制论文示例展示.png" alt="定制论文示例" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/A题定制论文示例展示.png')" title="C题一对一定制论文示例">
-        <img src="images/B题完整版论文.png" alt="完整版论文" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/B题完整版论文.png')" title="B题完整版论文">
-        <img src="images/C题完整版论文.png" alt="完整版论文" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/C题完整版论文.png')" title="C题完整版论文">
-        <img src="images/B题参考论文.png" alt="参考论文" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/B题参考论文.png')" title="B题免费参考论文">
-      </div>
-    </div>
-    <div class="about-cards">
-      <div class="about-card">
-        <div class="ac-icon">📚</div>
-        <div class="ac-title">资料分享</div>
-        <div class="ac-desc">完整数据、论文、Python+Matlab 双代码</div>
-      </div>
-      <div class="about-card">
-        <div class="ac-icon">🎯</div>
-        <div class="ac-title">赛中助攻</div>
-        <div class="ac-desc">思路定制、模型创新、论文修改指导</div>
-      </div>
-      <div class="about-card">
-        <div class="ac-icon">🤖</div>
-        <div class="ac-title">AI + 数模</div>
-        <div class="ac-desc">合理用 AI 写论文、跑代码、降重</div>
-      </div>
-      <div class="about-card">
-        <div class="ac-icon">👥</div>
-        <div class="ac-title">小群答疑</div>
-        <div class="ac-desc">20 人专属小群，写手亲自实时答疑</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- SERVICES -->
 <div class="section-bg-wrap">
 <section class="section" id="services">
@@ -1866,19 +1821,15 @@ a { color:inherit; }
         <div class="guide-content">
           <p>购买完整版资料的用户赠送 <strong>24h AI 账号</strong>（Claude / Grok / Gemini 等无需翻墙）。</p>
           <p>同时赠送 <strong>数模智能体 8 次卡密</strong>，可凭订单号直接领取。</p>
-          <a class="guide-link" href="#redeem" style="margin-top:8px;">🎁 前往领取完整版权益 ↓</a>
           <p style="margin-top:10px;font-size:12.5px;color:var(--text-light);">无需翻墙 AI 账号也可在此购买：<a href="https://aiforman.vip/register.php?ref=sxjm12" target="_blank" style="color:var(--blue-mid);">aiforman.vip</a></p>
         </div>
       </div>
     </div>
 
   </div>
-</section>
 
-<!-- REDEEM 领取权益 -->
-<div class="section-bg-wrap redeem-section" id="redeem">
-<section class="section">
-  <div class="section-head">
+  <div id="redeem" style="margin-top:48px;">
+  <div class="section-head" style="margin-bottom:24px;">
     <div class="section-tag">EXCLUSIVE BENEFITS</div>
     <h2 class="section-title">完整版用户 · 领取专属权益</h2>
     <p class="section-sub">上传支付截图 → 我们审核 → 自动发放 AI 账号 + 智能体卡密到你的邮箱</p>
@@ -1921,8 +1872,8 @@ a { color:inherit; }
       <div class="redeem-result" id="redeem-result"></div>
     </div>
   </div>
+  </div>
 </section>
-</div>
 
 <!-- FAQ -->
 
@@ -2033,6 +1984,104 @@ a { color:inherit; }
 
   </div>
 </section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-head">
+    <div class="section-tag">ABOUT US</div>
+    <h2 class="section-title">关于 BZD 数模社</h2>
+    <p class="section-sub">头部民间数模工作室 · 5000+ 社群 · 5 年深耕</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h3>什么是 BZD？</h3>
+      <p>
+        BZD 数模社是国内一个专注数学建模竞赛、主打赛中助攻 / 资料分享 / 培训辅导的线上数模社群。
+        在<strong>高教社杯数学建模国赛</strong>、华数杯、五一赛、MathorCup、数维杯、美赛等赛事圈里有较高知名度。
+      </p>
+      <p>
+        核心业务覆盖：赛前培训、赛中思路 / 论文 / 代码助攻、赛后答疑、AI 数模工具教学。
+        通过公众号、CSDN、抖音、B 站、QQ 群等多平台运营。
+      </p>
+      <div class="about-name">
+        <strong>BZD 名字的由来：</strong>
+        圈内默认 "<strong>不垫底</strong>" 为初心 —— 帮参赛队伍不垫底、拿奖；同时也有 "<strong>必夺冠</strong>" 等谐音梗，无官方全称。
+      </div>
+      <a class="about-feedback" href="https://docs.qq.com/doc/p/9d1a172fee336af91e6ac7a0793dd296895c3619?nlc=1" target="_blank" rel="noopener">
+        📝 BZD 数模社往期资料助攻反馈 ↗
+      </a>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+        <img src="images/B题定制论文示例展示.png" alt="定制论文示例" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/B题定制论文示例展示.png')" title="B题一对一定制论文示例">
+        <img src="images/A题定制论文示例展示.png" alt="定制论文示例" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/A题定制论文示例展示.png')" title="C题一对一定制论文示例">
+        <img src="images/B题完整版论文.png" alt="完整版论文" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/B题完整版论文.png')" title="B题完整版论文">
+        <img src="images/C题完整版论文.png" alt="完整版论文" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/C题完整版论文.png')" title="C题完整版论文">
+        <img src="images/B题参考论文.png" alt="参考论文" style="height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer;object-fit:cover;" onclick="openLightbox('images/B题参考论文.png')" title="B题免费参考论文">
+      </div>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="ac-icon">📚</div>
+        <div class="ac-title">资料分享</div>
+        <div class="ac-desc">完整数据、论文、Python+Matlab 双代码</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">🎯</div>
+        <div class="ac-title">赛中助攻</div>
+        <div class="ac-desc">思路定制、模型创新、论文修改指导</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">🤖</div>
+        <div class="ac-title">AI + 数模</div>
+        <div class="ac-desc">合理用 AI 写论文、跑代码、降重</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">👥</div>
+        <div class="ac-title">小群答疑</div>
+        <div class="ac-desc">20 人专属小群，写手亲自实时答疑</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT 代理合作 -->
+<div class="section-bg-wrap agent-section">
+<section class="section" id="agent">
+  <div class="section-head">
+    <div class="section-tag">JOIN US</div>
+    <h2 class="section-title">加入我们｜BZD 数模社 代理合作计划</h2>
+    <p class="section-sub">无需囤货 · 无需押金 · 无需售后 · 轻松获得稳定收益</p>
+  </div>
+  <div class="agent-wrap">
+    <p class="agent-intro">
+      BZD 数模社面向各位数模人招募线上代理，全程由官方提供资料、答疑、论文指导与 AI 工具支持，你仅需负责宣传推广、自主引流，即可轻松获得稳定收益。
+    </p>
+    <div class="agent-grid">
+      <div class="agent-box">
+        <div class="agent-box-title">🎯 代理专属权益</div>
+        <ul class="agent-list">
+          <li>拥有官方授权推广资格</li>
+          <li>无需制作资料、无需答疑、无需售后</li>
+          <li>官方全程提供：全套竞赛资料、赛中答疑、一对一思路与论文定制、AI 智能体账号支持</li>
+          <li>享受推广收益，线上即可操作</li>
+        </ul>
+      </div>
+      <div class="agent-box">
+        <div class="agent-box-title">👑 终身卡尊享权益</div>
+        <ul class="agent-list">
+          <li>全平台资料终身免费使用</li>
+          <li>免费获赠论文检查服务</li>
+          <li>免费获赠软著定做服务</li>
+          <li>各大赛事免费版资料终身领取</li>
+          <li>后续新增内容与工具持续更新</li>
+        </ul>
+      </div>
+    </div>
+    <div class="agent-how">
+      <strong>代理加入方式：</strong>代理费为 BZD 数模社终身卡，自费购买后可与客服联系后续代理相关事项，同步享有终身卡全部权益。
+    </div>
+  </div>
+</section>
+</div>
 
 <!-- CONTACT -->
 <section class="section contact-section" id="contact">
