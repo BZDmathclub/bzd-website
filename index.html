@@ -2064,6 +2064,20 @@ a { color:inherit; }
           </div>
         </div>
       </div>
+      <div class="form-group" style="margin-top:8px;">
+        <label class="form-label">选择领取权益</label>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
+            <input type="checkbox" id="want-tianka" style="width:16px;height:16px;accent-color:var(--blue-mid);cursor:pointer;">
+            <span>🤖 领取 AI 账号（24h 天卡，Claude / Grok / Gemini 无需翻墙）</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
+            <input type="checkbox" id="want-coze" style="width:16px;height:16px;accent-color:var(--blue-mid);cursor:pointer;">
+            <span>📝 领取智能体卡密（数模智能体 8 次使用）</span>
+          </label>
+        </div>
+        <div style="margin-top:6px;font-size:12px;color:var(--text-light);">未勾选的权益默认不发放</div>
+      </div>
       <button class="submit-btn" id="submit-btn" onclick="submitRedeem()">提交申请 · 等待审核</button>
       <div class="redeem-result" id="redeem-result"></div>
     </div>
@@ -2382,10 +2396,15 @@ async function submitRedeem() {
   btn.textContent = '提交中，请稍候...';
   result.style.display = 'none';
 
+  const wantTianka = document.getElementById('want-tianka').checked;
+  const wantCoze   = document.getElementById('want-coze').checked;
+
   const fd = new FormData();
   fd.append('email', email);
   fd.append('order_note', note);
   fd.append('screenshot', file);
+  fd.append('want_tianka', wantTianka ? '1' : '0');
+  fd.append('want_coze',   wantCoze   ? '1' : '0');
 
   try {
     const res = await fetch('https://bzd-worker.2440455056.workers.dev/api/apply', {
