@@ -232,7 +232,128 @@ a { color:inherit; }
 .ver-link.gift  { background:var(--green); }
 .ver-link.gift:hover { background:#13693d; }
 
-/* ---------- PAPER PREVIEW (论文示例图) ---------- */
+/* ---------- GUIDE (资料使用指南) ---------- */
+.guide-steps { display:flex; flex-direction:column; gap:0; max-width:900px; margin:0 auto; }
+.guide-step {
+  display:flex; gap:0; position:relative;
+}
+.guide-step-left {
+  display:flex; flex-direction:column; align-items:center;
+  width:56px; flex-shrink:0;
+}
+.guide-num {
+  width:44px; height:44px; border-radius:50%;
+  background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
+  color:white; font-size:18px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; z-index:1; box-shadow:0 4px 12px rgba(10,45,110,.2);
+}
+.guide-line {
+  width:2px; flex:1; min-height:24px;
+  background:linear-gradient(to bottom,var(--blue-light),var(--blue-pale));
+  margin:4px 0;
+}
+.guide-step:last-child .guide-line { display:none; }
+.guide-body {
+  flex:1; padding:0 0 32px 20px;
+}
+.guide-title {
+  font-size:17px; font-weight:900; color:var(--blue-deep);
+  margin-bottom:10px; padding-top:10px;
+}
+.guide-content {
+  font-size:14px; color:var(--text-sub); line-height:1.85;
+}
+.guide-content p { margin-bottom:8px; }
+.guide-content p:last-child { margin-bottom:0; }
+.guide-content strong { color:var(--blue-mid); }
+.guide-content em { font-style:normal; color:var(--accent); font-weight:700; }
+.guide-tag {
+  display:inline-block;
+  background:var(--blue-bg); border:1px solid var(--border);
+  color:var(--blue-mid); font-size:12px; font-weight:700;
+  padding:3px 10px; border-radius:12px; margin:4px 4px 4px 0;
+}
+.guide-link {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--blue-mid); color:white;
+  text-decoration:none; padding:7px 14px; border-radius:6px;
+  font-size:13px; font-weight:700; margin-top:10px;
+  transition:all .2s;
+}
+.guide-link:hover { background:var(--blue-deep); transform:translateY(-1px); }
+.guide-link.green { background:var(--green); }
+.guide-link.green:hover { background:#13693d; }
+.guide-highlight {
+  background:linear-gradient(135deg,#fff8e8,#fffaf2);
+  border-left:4px solid var(--gold); border-radius:0 8px 8px 0;
+  padding:14px 18px; margin-top:12px; font-size:13.5px;
+  color:var(--text-main); line-height:1.85;
+}
+.guide-highlight strong { color:var(--gold); }
+
+/* ---------- REDEEM (领取权益) ---------- */
+.redeem-section { background:var(--blue-bg); }
+.redeem-wrap {
+  max-width:680px; margin:0 auto;
+  background:white; border-radius:12px;
+  border:1.5px solid var(--border);
+  overflow:hidden; box-shadow:0 8px 28px rgba(10,45,110,.1);
+}
+.redeem-head {
+  background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
+  color:white; padding:24px 28px;
+}
+.redeem-head h3 { margin:0 0 6px; font-size:20px; letter-spacing:2px; }
+.redeem-head p { margin:0; color:#cfe0ff; font-size:13px; }
+.redeem-body { padding:28px; }
+.form-group { margin-bottom:20px; }
+.form-label {
+  display:block; font-size:14px; font-weight:700;
+  color:var(--blue-deep); margin-bottom:8px;
+}
+.form-label span { color:var(--accent); }
+.form-input {
+  width:100%; padding:12px 16px; border-radius:6px;
+  border:1.5px solid var(--border); font-size:14px;
+  font-family:inherit; color:var(--text-main);
+  transition:border-color .2s;
+  box-sizing:border-box;
+}
+.form-input:focus { outline:none; border-color:var(--blue-light); }
+.form-upload {
+  width:100%; padding:20px;
+  border:2px dashed var(--border); border-radius:8px;
+  text-align:center; cursor:pointer; background:var(--blue-bg);
+  transition:all .2s; box-sizing:border-box;
+}
+.form-upload:hover { border-color:var(--blue-light); background:#e8f0ff; }
+.form-upload input[type=file] { display:none; }
+.form-upload-icon { font-size:32px; }
+.form-upload-text { font-size:13px; color:var(--text-sub); margin-top:6px; }
+.form-upload-name { font-size:12px; color:var(--green); font-weight:700; margin-top:6px; }
+.form-tip {
+  font-size:12px; color:var(--text-light);
+  margin-top:8px; line-height:1.7;
+}
+.submit-btn {
+  width:100%; padding:14px;
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue-mid));
+  color:white; border:none; border-radius:8px;
+  font-size:16px; font-weight:900; letter-spacing:2px;
+  cursor:pointer; transition:all .25s; font-family:inherit;
+}
+.submit-btn:hover { opacity:.9; transform:translateY(-1px); box-shadow:0 8px 20px rgba(10,45,110,.25); }
+.submit-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+.redeem-result {
+  display:none; margin-top:20px;
+  padding:18px; border-radius:8px;
+  font-size:14px; line-height:1.8;
+}
+.redeem-result.success { background:#e8f8ee; border:1.5px solid var(--green); color:#0d4a25; }
+.redeem-result.error   { background:#fef0ec; border:1.5px solid var(--accent); color:#6b1a08; }
+
+
 .paper-preview {
   margin-top:20px;
   border-top:1.5px dashed var(--border);
@@ -836,6 +957,8 @@ a { color:inherit; }
       <li><a href="#schedule">赛事日历</a></li>
       <li><a href="#passes">套餐预定</a></li>
       <li><a href="#about">关于我们</a></li>
+      <li><a href="#guide">使用指南</a></li>
+      <li><a href="#redeem">领取权益</a></li>
       <li><a href="#faq">常见问题</a></li>
       <li><a href="#contact">联系我们</a></li>
     </ul>
@@ -1601,7 +1724,151 @@ a { color:inherit; }
 </section>
 </div>
 
+<!-- GUIDE 资料使用指南 -->
+<section class="section" id="guide">
+  <div class="section-head">
+    <div class="section-tag">USAGE GUIDE</div>
+    <h2 class="section-title">资料使用指南</h2>
+    <p class="section-sub">从拿到赛题到完成论文，手把手带你走完全流程</p>
+  </div>
+  <div class="guide-steps">
+
+    <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num">1</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">📺 观看赛题浅析视频 · 完成初步选题</div>
+        <div class="guide-content">
+          <p>拿到赛题后，第一时间去 <strong>B 站 BZD 数模社</strong> 查看本次竞赛的赛题浅析视频。</p>
+          <p>视频在 <em>竞赛开赛后约 1~2 小时</em> 发布，主要为大家介绍每一道题目的设计模型、难点与选题建议，帮助你完成初步选题。</p>
+          <a class="guide-link" href="https://space.bilibili.com/436554327" target="_blank" rel="noopener">📺 前往 B 站 BZD 数模社</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num">2</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">📄 结合思路文档深入理解题目</div>
+        <div class="guide-content">
+          <p><em>开赛后约 4~6 小时</em>，群文件将发布 <strong>赛题解题思路文档（PDF）</strong>，同步 B 站发布思路详细介绍视频。</p>
+          <p>建议将以下内容综合参考，理解题目的命题原理与各问之间的关联关系：</p>
+          <span class="guide-tag">📄 思路文档 PDF</span>
+          <span class="guide-tag">📺 B 站思路讲解视频</span>
+          <span class="guide-tag">💻 初步代码与计算结果</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num">3</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">📦 领取完整资料包 · 加入售后群</div>
+        <div class="guide-content">
+          <p><em>竞赛开赛后第二天早上 6:00</em>，完整资料正式发布在 <strong>售后群群文件</strong> 中。</p>
+          <div class="guide-highlight">
+            <strong>💡 为什么第二天才发布？</strong><br>
+            数学建模题目各问之间具有很强的连贯性，后续问题的解法会影响前面问题的结论。仅发布一两问的代码是不完善的，第一天发布的初步版本大概率会被后续版本覆盖，因此我们在完整求解后统一发布，保证资料质量。
+          </div>
+          <p style="margin-top:12px;">购买完成后，在付费界面可见 <strong>售后群群号</strong>，凭购买订单号申请加 QQ 群即可获取群文件。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num">4</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">🔢 选择算法组合 · 确定解题方案</div>
+        <div class="guide-content">
+          <p>群文件中提供了 <strong>完整代码 + 配套示例论文</strong>。每道题的每一问均提供 <em>至少 3 种以上算法</em>。</p>
+          <p>根据第一天对题目和模型的理解，结合群文件中的 <strong>代码大纲文档</strong>，选择你们队伍针对每一问的使用算法，作为本次竞赛的解题方案。</p>
+          <span class="guide-tag">B题：256 种算法组合</span>
+          <span class="guide-tag">C题：5400+ 种算法组合</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num">5</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">🤖 用 AI 智能体生成初稿论文</div>
+        <div class="guide-content">
+          <p>完成代码选择后，利用 AI 工具可直接输出一篇 <strong>完成度 80% 的论文</strong>，相当于百米赛跑直接站在 80 米处起跑！</p>
+          <p>提供两种输出方式：</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+            <div style="background:var(--blue-bg);border:1.5px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-weight:900;color:var(--blue-deep);margin-bottom:6px;">📄 PDF 论文 · 沐光Paper</div>
+              <div style="font-size:12.5px;color:var(--text-sub);line-height:1.7;">首次注册免费送一次生成机会</div>
+              <a class="guide-link" href="https://muguang.online/auth?step=register&ch=bzd" target="_blank" rel="noopener" style="margin-top:10px;font-size:12px;padding:6px 12px;">前往注册</a>
+            </div>
+            <div style="background:var(--blue-bg);border:1.5px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-weight:900;color:var(--blue-deep);margin-bottom:6px;">📝 Word 论文 · 数模智能体</div>
+              <div style="font-size:12.5px;color:var(--text-sub);line-height:1.7;">购买后凭订单号领取 8 次卡密<br>卡密不足可联系客服（3元/次）</div>
+              <a class="guide-link" href="https://www.coze.cn/s/5bybFsAocZo/" target="_blank" rel="noopener" style="margin-top:10px;font-size:12px;padding:6px 12px;">打开智能体</a>
+            </div>
+          </div>
+          <a class="guide-link green" href="https://www.kdocs.cn/l/crMxja9CnmTw" target="_blank" rel="noopener" style="margin-top:12px;">📖 查看智能体使用教程</a>
+          <p style="margin-top:10px;font-size:12.5px;color:var(--text-light);">使用前请先阅读教程，导入题目后运行模型需在网页左下角购买资源点。答疑 QQ 群：<strong>1059114495</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num">6</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">✨ 获取 AI 账号（完整版用户专享）</div>
+        <div class="guide-content">
+          <p>购买完整版资料的用户赠送 <strong>24h AI 账号</strong>（Claude / Grok / Gemini 等无需翻墙）。</p>
+          <p>同时赠送 <strong>数模智能体 8 次卡密</strong>，可凭订单号直接领取。</p>
+          <a class="guide-link" href="#redeem" style="margin-top:8px;">🎁 前往领取完整版权益 ↓</a>
+          <p style="margin-top:10px;font-size:12.5px;color:var(--text-light);">无需翻墙 AI 账号也可在此购买：<a href="https://aiforman.vip/register.php?ref=sxjm12" target="_blank" style="color:var(--blue-mid);">aiforman.vip</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REDEEM 领取权益 -->
+<div class="section-bg-wrap redeem-section" id="redeem">
+<section class="section">
+  <div class="section-head">
+    <div class="section-tag">EXCLUSIVE BENEFITS</div>
+    <h2 class="section-title">完整版用户 · 领取专属权益</h2>
+    <p class="section-sub">上传支付截图 → 我们审核 → 自动发放 AI 账号 + 智能体卡密到你的邮箱</p>
+  </div>
+  <div class="redeem-wrap">
+    <div class="redeem-head">
+      <h3>🎁 权益领取申请</h3>
+      <p>完整版资料用户专享 · 赠送 24h AI账号 + 8次智能体卡密 · 审核通常在 30 分钟内完成</p>
+    </div>
+    <div class="redeem-body">
+      <div class="form-group">
+        <label class="form-label">你的邮箱 <span>*</span></label>
+        <input class="form-input" type="email" id="redeem-email" placeholder="用于接收账号和卡密，请填写常用邮箱">
+      </div>
+      <div class="form-group">
+        <label class="form-label">订单备注（选填）</label>
+        <input class="form-input" type="text" id="redeem-note" placeholder="例如：五一杯完整版，订单号 xxxxx">
+      </div>
+      <div class="form-group">
+        <label class="form-label">上传支付截图 <span>*</span></label>
+        <div class="form-upload" id="upload-area" onclick="document.getElementById('file-input').click()">
+          <input type="file" id="file-input" accept="image/*" onchange="handleFileChange(this)">
+          <div class="form-upload-icon">📸</div>
+          <div class="form-upload-text">点击上传支付截图（支持 JPG / PNG）<br>请确保截图清晰可见订单金额</div>
+          <div class="form-upload-name" id="file-name"></div>
+        </div>
+        <div class="form-tip">⚠️ 请上传面包多/微信/支付宝的支付成功截图，订单金额需大于 60 元（完整版）</div>
+      </div>
+      <button class="submit-btn" id="submit-btn" onclick="submitRedeem()">提交申请 · 等待审核</button>
+      <div class="redeem-result" id="redeem-result"></div>
+    </div>
+  </div>
+</section>
+</div>
+
 <!-- FAQ -->
+
 <section class="section" id="faq">
   <div class="section-head">
     <div class="section-tag">FAQ · 资料定位 + 八问八答</div>
@@ -1771,6 +2038,58 @@ function closeLightbox(e){
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+</script>
+
+<script>
+function handleFileChange(input) {
+  const name = input.files[0]?.name || '';
+  document.getElementById('file-name').textContent = name ? '✓ 已选择：' + name : '';
+}
+
+async function submitRedeem() {
+  const email = document.getElementById('redeem-email').value.trim();
+  const note = document.getElementById('redeem-note').value.trim();
+  const file = document.getElementById('file-input').files[0];
+  const btn = document.getElementById('submit-btn');
+  const result = document.getElementById('redeem-result');
+
+  if (!email || !file) {
+    result.className = 'redeem-result error';
+    result.style.display = 'block';
+    result.textContent = '请填写邮箱并上传支付截图';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '提交中，请稍候...';
+  result.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('email', email);
+  fd.append('order_note', note);
+  fd.append('screenshot', file);
+
+  try {
+    const res = await fetch('https://bzd-worker.2440455056.workers.dev/api/apply', {
+      method: 'POST', body: fd
+    });
+    const data = await res.json();
+    if (data.success) {
+      result.className = 'redeem-result success';
+      result.textContent = '✅ ' + data.message;
+    } else {
+      result.className = 'redeem-result error';
+      result.textContent = '❌ ' + (data.error || '提交失败，请重试');
+    }
+  } catch(e) {
+    result.className = 'redeem-result error';
+    result.textContent = '❌ 网络错误，请稍后重试';
+  }
+
+  result.style.display = 'block';
+  btn.disabled = false;
+  btn.textContent = '提交申请 · 等待审核';
+}
 </script>
 
 </body>
