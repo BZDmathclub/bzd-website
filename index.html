@@ -1132,6 +1132,15 @@ a { color:inherit; }
   .schedule-head-bar .sh-title { font-size:15px; letter-spacing:1px; }
   .sch-foot { padding:12px 16px; }
 }
+
+/* AI提示词库样式 */
+.prompts-cat-body.active {
+  display: block !important;
+}
+
+.toggle-icon.active {
+  transform: rotate(180deg);
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
@@ -3140,9 +3149,18 @@ document.getElementById('ai-prompts-modal').addEventListener('click', e => {
 });
 
 function togglePromptsCategory(header){
-  header.classList.toggle('active');
-  header.querySelector('.toggle-icon').classList.toggle('active');
-  header.nextElementSibling.classList.toggle('active');
+  const body = header.nextElementSibling;
+  const icon = header.querySelector('.toggle-icon');
+
+  if(body.style.display === 'block' || body.classList.contains('active')){
+    body.style.display = 'none';
+    body.classList.remove('active');
+    icon.classList.remove('active');
+  } else {
+    body.style.display = 'block';
+    body.classList.add('active');
+    icon.classList.add('active');
+  }
 }
 
 function copyPromptText(btn){
