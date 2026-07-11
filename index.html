@@ -2215,6 +2215,81 @@ a { color:inherit; }
   </div>
 </section>
 
+<!-- 国赛资料 -->
+<section class="section" id="national-resources">
+  <div class="section-head">
+    <div class="section-tag">NATIONAL EXAM RESOURCES</div>
+    <h2 class="section-title">国赛资料</h2>
+    <p class="section-sub">完整的国赛备赛资料库，持续更新至赛前</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:20px;">
+
+    <!-- 近年题目速览 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openNationalExamQuestions()">
+      <div style="font-size:32px;margin-bottom:8px;">📋</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">近年题目速览</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">往届赛题汇总</div>
+    </div>
+
+    <!-- AI提示词库 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">✨</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">AI提示词库</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">竞赛专用</div>
+    </div>
+
+    <!-- 论文模板 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">📄</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">论文模板</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">标准化框架</div>
+    </div>
+
+    <!-- 优秀论文 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">🏆</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">优秀论文</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">获奖范文</div>
+    </div>
+
+    <!-- 高分得分技巧 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">⚡</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">高分得分技巧</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">评审要点</div>
+    </div>
+
+    <!-- 必备工具 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">🛠️</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">必备工具</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">教程合集</div>
+    </div>
+
+    <!-- AI模型排行榜 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">🤖</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">AI模型排行榜</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">工具推荐</div>
+    </div>
+
+    <!-- skills分享 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">💡</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">skills分享</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">实用技巧</div>
+    </div>
+
+    <!-- 国赛赛题复盘 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+      <div style="font-size:32px;margin-bottom:8px;">🔍</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">国赛赛题复盘</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">4年深度解析</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- GUIDE 资料使用指南 -->
 <section class="section" id="guide">
   <div class="section-head">
@@ -2713,6 +2788,15 @@ function closeLightbox(e){
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+function showPreparingAlert(){
+  alert('正在筹备资料中，\n七月下旬起持续更新至赛前，全程无收费');
+}
+
+function openNationalExamQuestions(){
+  // 打开题目汇总页面
+  window.open('https://res.bzdshumo.com/高教社杯题目汇总.html', '_blank');
+}
 
 // 往期助攻卡片可折叠，当前竞赛卡片默认展开不折叠
 document.querySelectorAll('#archive .comp-card-head').forEach(head => {
