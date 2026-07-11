@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高教社杯全国大学生数学建模竞赛题目汇总（2020-2025）</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>中国大学生数学竞赛(CUMCM)题目汇总(2020-2025)</title>
     <style>
         * {
             margin: 0;
@@ -13,717 +12,783 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 12px;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 24px);
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 20px 30px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 28px;
+            margin-bottom: 8px;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         .header p {
-            font-size: 1.1em;
+            font-size: 14px;
             opacity: 0.9;
-            margin-bottom: 5px;
-        }
-
-        .header .subtitle {
-            font-size: 0.95em;
-            opacity: 0.8;
-            margin-top: 15px;
+            margin: 0;
         }
 
         .controls {
-            padding: 30px;
+            padding: 15px 30px;
             background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid #dee2e6;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            align-items: center;
+        }
+
+        .control-group {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 40px 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #1e3c72;
-            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            pointer-events: none;
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .filter-group select {
-            padding: 10px 12px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 0.95em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .filter-group select:hover,
-        .filter-group select:focus {
-            border-color: #1e3c72;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.95em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
             gap: 8px;
-            font-weight: 500;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .btn-primary {
-            background: #1e3c72;
+        .control-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        select, input {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        button {
+            padding: 6px 16px;
+            background: #667eea;
             color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            font-size: 13px;
+            white-space: nowrap;
         }
 
-        .btn-primary:hover {
-            background: #2a5298;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+        button:hover {
+            background: #764ba2;
         }
 
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
+        .stats {
+            padding: 12px 30px;
+            background: #e7f3ff;
+            border-bottom: 1px solid #b3d9ff;
+            font-size: 13px;
+            color: #0066cc;
+            margin: 0;
         }
 
         .table-wrapper {
             overflow-x: auto;
-            padding: 20px 30px;
+            overflow-y: auto;
+            padding: 0 20px;
+            flex: 1;
+            min-height: 0;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            font-size: 13px;
+            margin-top: 0;
         }
 
         thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-weight: 700;
-            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         th {
-            padding: 16px 12px;
-            font-size: 0.95em;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
             white-space: nowrap;
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-            transition: all 0.3s ease;
+            border-bottom: 2px solid #667eea;
+            font-size: 12px;
         }
 
-        th:hover {
-            background: rgba(255, 255, 255, 0.1);
+        th:nth-child(1) {
+            width: 70px;
         }
 
-        th.sortable::after {
-            content: ' ⇅';
-            opacity: 0.5;
-            margin-left: 5px;
+        th:nth-child(2) {
+            width: 50px;
         }
 
-        th.sorted-asc::after {
-            content: ' ↑';
-            opacity: 1;
+        th:nth-child(3) {
+            width: 140px;
+            white-space: normal;
         }
 
-        th.sorted-desc::after {
-            content: ' ↓';
-            opacity: 1;
+        th:nth-child(4) {
+            width: auto;
+            min-width: 180px;
         }
 
-        tbody tr {
-            border-bottom: 1px solid #e9ecef;
-            transition: all 0.2s ease;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        tbody tr:hover {
-            background-color: #f0f4ff;
-            box-shadow: inset 0 0 0 1px rgba(30, 60, 114, 0.1);
+        th:nth-child(5) {
+            width: 180px;
         }
 
         td {
-            padding: 14px 12px;
-            font-size: 0.9em;
-            color: #333;
+            padding: 6px 6px;
+            border-bottom: 1px solid #dee2e6;
             vertical-align: top;
         }
 
-        .year-badge {
-            display: inline-block;
-            background: #e3f2fd;
-            color: #1e3c72;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.85em;
-            min-width: 50px;
-            text-align: center;
-        }
-
-        .title-cell {
-            font-weight: 600;
-            color: #1e3c72;
-            max-width: 250px;
-            word-wrap: break-word;
-        }
-
-        .problem-cell {
-            font-size: 0.85em;
-            color: #555;
-            max-width: 180px;
-            word-wrap: break-word;
-        }
-
-        .category-badge {
-            display: inline-block;
-            background: #f3e5f5;
-            color: #6a1b9a;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            font-weight: 500;
-        }
-
-        .stats {
-            padding: 20px 30px;
+        tbody tr:nth-child(odd) {
             background: #f8f9fa;
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
-            border-top: 1px solid #e9ecef;
         }
 
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        tbody tr:hover {
+            background: #e7f3ff;
+            transition: background 0.2s;
         }
 
-        .stat-label {
-            font-size: 0.9em;
-            color: #666;
+        .year-badge {
+            background: #667eea;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 10px;
+            white-space: nowrap;
+            display: inline-block;
         }
 
-        .stat-value {
-            font-size: 1.3em;
+        .problem-code {
+            background: #764ba2;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
             font-weight: 700;
-            color: #1e3c72;
-        }
-
-        .empty-state {
             text-align: center;
-            padding: 60px 30px;
-            color: #999;
+            min-width: 28px;
+            display: inline-block;
+            font-size: 10px;
         }
 
-        .empty-state i {
-            font-size: 3em;
-            margin-bottom: 20px;
-            opacity: 0.3;
+        .title {
+            font-weight: 600;
+            color: #222;
+            word-break: break-word;
+            line-height: 1.35;
+            padding: 0;
+            font-size: 13px;
         }
 
-        .empty-state p {
-            font-size: 1.1em;
+        .questions {
+            color: #555;
+            line-height: 1.3;
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 11px;
+            margin: 0;
         }
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .search-box {
-                min-width: unset;
-            }
-
-            .filter-group {
-                flex-direction: column;
-            }
-
-            .filter-group select {
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .table-wrapper {
-                padding: 15px;
-            }
-
-            th, td {
-                padding: 10px 8px;
-                font-size: 0.8em;
-            }
-
-            .title-cell,
-            .problem-cell {
-                max-width: 120px;
-            }
-
-            .stats {
-                gap: 20px;
-                font-size: 0.9em;
-            }
+        .question-item {
+            margin-bottom: 2px;
+            padding-left: 8px;
+            position: relative;
+            text-align: left;
+            font-size: 11px;
+            line-height: 1.25;
         }
 
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                border-radius: 8px;
-            }
-
-            .header {
-                padding: 25px 15px;
-            }
-
-            .header h1 {
-                font-size: 1.4em;
-            }
-
-            .header p {
-                font-size: 0.9em;
-            }
-
-            .table-wrapper {
-                padding: 10px 0;
-            }
-
-            table {
-                font-size: 0.75em;
-            }
-
-            th, td {
-                padding: 8px 6px;
-            }
-
-            .title-cell,
-            .problem-cell {
-                max-width: 80px;
-                font-size: 0.75em;
-            }
+        .question-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
         }
 
-        .hidden {
-            display: none !important;
+        .question-item strong {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .models {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            line-height: 1.3;
+        }
+
+        .model-tag {
+            background: #ffeaa7;
+            color: #d63031;
+            padding: 2px 5px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .model-tag.opt {
+            background: #ffcccc;
+            color: #c92a2a;
+        }
+
+        .model-tag.eval {
+            background: #d3f9d8;
+            color: #2f9e44;
+        }
+
+        .model-tag.pred {
+            background: #a5d8ff;
+            color: #1971c2;
+        }
+
+        .model-tag.class {
+            background: #f8b4d6;
+            color: #9c36b5;
+        }
+
+        .model-tag.diff {
+            background: #fff3bf;
+            color: #f59f00;
+        }
+
+        .model-tag.data {
+            background: #e0ccff;
+            color: #7950f2;
+        }
+
+        .footer {
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #666;
+            font-size: 11px;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-graduation-cap"></i> 高教社杯题目汇总</h1>
-            <p>全国大学生数学建模竞赛（2020-2025）</p>
-            <div class="subtitle">Higher Education Press Cup National College Mathematical Modeling Competition</div>
+            <h1>🎓 中国大学生数学竞赛(CUMCM)题目汇总</h1>
+            <p>2020-2025年竞赛完整题目信息库</p>
         </div>
 
         <div class="controls">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="搜索题目名称或关键词..." autocomplete="off">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="filter-group">
-                <label for="yearFilter" style="font-weight: 500; color: #333;">年份：</label>
+            <div class="control-group">
+                <label for="yearFilter">按年份：</label>
                 <select id="yearFilter">
                     <option value="">全部年份</option>
-                    <option value="2025">2025</option>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
                     <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
                 </select>
             </div>
-            <div class="filter-group">
-                <label for="categoryFilter" style="font-weight: 500; color: #333;">题号：</label>
-                <select id="categoryFilter">
+
+            <div class="control-group">
+                <label for="codeFilter">按题号：</label>
+                <select id="codeFilter">
                     <option value="">全部题号</option>
-                    <option value="A">A题</option>
-                    <option value="B">B题</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
                 </select>
             </div>
-            <button class="btn btn-secondary" onclick="resetFilters()">
-                <i class="fas fa-redo"></i> 重置
-            </button>
+
+            <div class="control-group">
+                <label for="searchInput">搜索：</label>
+                <input type="text" id="searchInput" placeholder="搜索题目或问题...">
+            </div>
+
+            <button onclick="resetFilters()">重置</button>
+        </div>
+
+        <div class="stats">
+            <span>📊 总计：<strong id="totalCount">30</strong> 个题目 |
+            显示：<strong id="currentCount">30</strong> 个题目 |
+            覆盖年份：<strong>2020-2025</strong></span>
         </div>
 
         <div class="table-wrapper">
             <table id="dataTable">
                 <thead>
                     <tr>
-                        <th class="sortable" onclick="sortTable(0)">年份</th>
-                        <th class="sortable" onclick="sortTable(1)">题号</th>
-                        <th class="sortable" onclick="sortTable(2)">题目名称</th>
-                        <th>问题1</th>
-                        <th>问题2</th>
-                        <th>问题3</th>
-                        <th>问题4</th>
-                        <th>问题5</th>
-                        <th class="sortable" onclick="sortTable(9)">模型分类</th>
+                        <th>年份</th>
+                        <th>题号</th>
+                        <th>题目名称</th>
+                        <th>问题描述</th>
+                        <th>涉及模型</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <!-- 数据将通过JavaScript插入 -->
                 </tbody>
             </table>
-            <div id="emptyState" class="empty-state hidden">
-                <i class="fas fa-search"></i>
-                <p>未找到匹配的题目</p>
-            </div>
         </div>
 
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-label">总题目数：</span>
-                <span class="stat-value" id="totalCount">12</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">覆盖年份：</span>
-                <span class="stat-value">6年</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">当前显示：</span>
-                <span class="stat-value" id="displayCount">12</span>
-            </div>
+        <div class="footer">
+            <p>📌 提示：点击列头可排序，使用筛选器快速查找相关题目</p>
         </div>
     </div>
 
     <script>
-        // 竞赛题目数据
-        const competitionData = [
-            {
-                year: 2025,
-                number: 'A',
-                title: '空中出租车的充电和调度',
-                problem1: '充电站选址优化',
-                problem2: '充电时间评估',
-                problem3: '调度算法设计',
-                problem4: '经济效益分析',
-                problem5: '系统运营方案',
-                category: '优化与规划'
+        // 完整数据
+        const allData = {
+            "2020": {
+                "A": {
+                    "title": "炉温曲线",
+                    "questions": [
+                        "对焊接区域的温度变化规律建立数学模型",
+                        "确定允许的最大传送带过炉速度",
+                        "确定最优炉温曲线以最小化超过217℃的面积",
+                        "进一步优化炉温曲线使其对称性最好"
+                    ],
+                    "models": ["优化模型", "微分方程", "数值求解"]
+                },
+                "B": {
+                    "title": "穿越沙漠",
+                    "questions": [
+                        "在天气全部已知情况下给出玩家最优策略",
+                        "在仅知当天天气情况下给出玩家最佳策略",
+                        "多名玩家的合作策略分析"
+                    ],
+                    "models": ["优化模型", "动态规划", "博弈论"]
+                },
+                "C": {
+                    "title": "中小微企业的信贷决策",
+                    "questions": [
+                        "对有信贷记录企业进行信贷风险评估和信贷策略",
+                        "对无信贷记录企业进行风险评估和信贷策略",
+                        "考虑突发因素的信贷调整策略"
+                    ],
+                    "models": ["评价模型", "优化模型", "风险分析"]
+                },
+                "D": {
+                    "title": "接触式轮廓仪的自动标注",
+                    "questions": [
+                        "标注轮廓线的各项参数（槽口宽度、圆弧半径等）",
+                        "计算倾斜状态下的工件参数并与水平状态比较",
+                        "基于多次测量数据标注工件完整轮廓线",
+                        "利用局部测量数据修正参数值"
+                    ],
+                    "models": ["数据分析", "参数拟合", "图像处理"]
+                },
+                "E": {
+                    "title": "校园供水系统智能管理",
+                    "questions": [
+                        "分析各水表数据变化规律和不同功能区用水特征",
+                        "建立水表数据之间的关系模型",
+                        "分析供水管网的漏损情况",
+                        "从水表数据发现并定位漏损位置",
+                        "确定管网漏损的最优维修决策方案"
+                    ],
+                    "models": ["数据分析", "优化模型", "时间序列"]
+                }
             },
-            {
-                year: 2025,
-                number: 'B',
-                title: '机器人投篮比赛的竞赛规则设计',
-                problem1: '比赛规则的公平性评估',
-                problem2: '计分方案设计',
-                problem3: '难度等级划分',
-                problem4: '竞赛趋势预测',
-                problem5: '规则优化建议',
-                category: '决策分析'
+            "2021": {
+                "A": {
+                    "title": "FAST主动反射面的形状调节",
+                    "questions": [
+                        "确定α=0°,β=90°时的理想抛物面",
+                        "确定α=36.795°,β=78.169°时的理想抛物面及调节方案",
+                        "计算调节后馈源舱的接收比"
+                    ],
+                    "models": ["优化模型", "几何建模", "数值计算"]
+                },
+                "B": {
+                    "title": "乙醇偶合制备C4烯烃",
+                    "questions": [
+                        "研究乙醇转化率、C4烯烃选择性与温度的关系",
+                        "探讨不同催化剂组合及温度的影响",
+                        "选择催化剂组合与温度使C4烯烃收率最高",
+                        "设计增加5次实验的方案"
+                    ],
+                    "models": ["数据分析", "优化模型", "实验设计"]
+                },
+                "C": {
+                    "title": "生产企业原材料的订购与运输",
+                    "questions": [
+                        "分析402家供应商的供货特征并确定50家最重要供应商",
+                        "确定最少选择的供应商数量并制定订购和转运方案",
+                        "压缩成本的新订购和转运方案",
+                        "根据供应商情况确定产能提升潜力"
+                    ],
+                    "models": ["优化模型", "数据分析", "供应链管理"]
+                },
+                "D": {
+                    "title": "连铸切割的在线优化",
+                    "questions": [
+                        "在满足基本和正常要求下制定最优切割方案",
+                        "结晶器异常时给出实时最优切割方案",
+                        "不同用户目标值下的最优切割方案"
+                    ],
+                    "models": ["优化模型", "动态规划", "过程控制"]
+                },
+                "E": {
+                    "title": "中药材的鉴别",
+                    "questions": [
+                        "研究不同种类药材的特征和差异性",
+                        "分析不同产地药材的特征并鉴别产地",
+                        "根据近红外和中红外数据鉴别药材产地",
+                        "鉴别药材的类别与产地"
+                    ],
+                    "models": ["分类模型", "数据分析", "光谱分析"]
+                }
             },
-            {
-                year: 2024,
-                number: 'A',
-                title: '光伏新能源的并网与消纳',
-                problem1: '光伏出力预测',
-                problem2: '电网调度优化',
-                problem3: '弃光电量估算',
-                problem4: '经济成本分析',
-                problem5: '并网方案设计',
-                category: '数据预测'
+            "2022": {
+                "A": {
+                    "title": "波浪能最大输出功率设计",
+                    "questions": [
+                        "建立浮子与振子的运动模型并计算垂荡位移和速度",
+                        "确定直线阻尼器的最优阻尼系数使输出功率最大",
+                        "考虑垂荡和纵摇运动的最优设计",
+                        "综合考虑两种阻尼器的最优阻尼系数"
+                    ],
+                    "models": ["微分方程", "优化模型", "物理建模"]
+                },
+                "B": {
+                    "title": "无人机遂行编队飞行中的纯方位无源定位",
+                    "questions": [
+                        "建立被动接收信号无人机的定位模型",
+                        "确定实现有效定位需要的发射信号无人机数量",
+                        "给出无人机位置调整方案",
+                        "设计其他编队队形的位置调整方案"
+                    ],
+                    "models": ["定位模型", "三角定位", "优化模型"]
+                },
+                "C": {
+                    "title": "古代玻璃制品的成分分析与鉴别",
+                    "questions": [
+                        "分析表面风化与玻璃类型的关系并预测风化前成分",
+                        "分析高钾玻璃、铅钡玻璃的分类规律并进行亚类划分",
+                        "鉴别未知玻璃文物的所属类型",
+                        "分析不同类别玻璃的化学成分关联关系"
+                    ],
+                    "models": ["分类模型", "数据分析", "化学分析"]
+                },
+                "D": {
+                    "title": "气象报文信息卫星通信传输",
+                    "questions": [
+                        "建立K分钟内实现N个主站间信息共享的一般传输模型",
+                        "确定K的最小值并给出N=9时的具体传输方案",
+                        "考虑副站信息补充的信息共享模型",
+                        "优化副站气象报文的传输方案"
+                    ],
+                    "models": ["网络流模型", "优化模型", "通信设计"]
+                },
+                "E": {
+                    "title": "小批量物料的生产安排",
+                    "questions": [
+                        "建立物料需求预测模型并选择重点关注物料",
+                        "制定生产计划使平均服务水平不低于85%",
+                        "考虑物料价格调整生产计划",
+                        "若本周计划只能在k周后使用的情况"
+                    ],
+                    "models": ["预测模型", "优化模型", "库存管理"]
+                }
             },
-            {
-                year: 2024,
-                number: 'B',
-                title: '火锅店智能烹饪系统',
-                problem1: '温度控制算法',
-                problem2: '食材烹饪评估',
-                problem3: '成本效益分析',
-                problem4: '用户满意度模型',
-                problem5: '系统部署方案',
-                category: '控制与优化'
+            "2023": {
+                "A": {
+                    "title": "定日镜场的优化设计",
+                    "questions": [
+                        "计算固定参数下定日镜场的年平均光学效率和输出热功率",
+                        "在额定功率60MW约束下优化定日镜场设计",
+                        "考虑可变尺寸和安装高度的优化设计"
+                    ],
+                    "models": ["优化模型", "光学模型", "设计优化"]
+                },
+                "B": {
+                    "title": "多波束测线问题",
+                    "questions": [
+                        "建立多波束测深的覆盖宽度及重叠率的数学模型",
+                        "考虑海底斜坡时的覆盖宽度模型",
+                        "设计完全覆盖待测海域的最短测线方案",
+                        "基于单波束测深数据为多波束测量布线"
+                    ],
+                    "models": ["几何模型", "优化模型", "测量设计"]
+                },
+                "C": {
+                    "title": "蔬菜类商品的自动定价与补货决策",
+                    "questions": [
+                        "分析蔬菜各品类及单品销售量的分布规律",
+                        "分析销售总量与成本加成定价的关系并给出补货定价策略",
+                        "制定单品补货计划使收益最大",
+                        "采集哪些相关数据以更好地制定决策"
+                    ],
+                    "models": ["预测模型", "优化模型", "定价策略"]
+                },
+                "D": {
+                    "title": "圈养湖羊的空间利用率",
+                    "questions": [
+                        "确定种公羊与基础母羊的合理数量并估算年出栏数量",
+                        "对112个标准羊栏给出具体生产计划使年出栏最大",
+                        "考虑不确定性的生产计划制定"
+                    ],
+                    "models": ["优化模型", "生产计划", "风险分析"]
+                },
+                "E": {
+                    "title": "黄河水沙监测数据分析",
+                    "questions": [
+                        "研究含沙量与时间、水位、水流量的关系并估算年总排沙量",
+                        "分析水沙通量的突变性、季节性和周期性",
+                        "预测未来两年的水沙通量变化并制定采样监测方案",
+                        "分析调水调沙的实际效果"
+                    ],
+                    "models": ["数据分析", "时间序列", "预测模型"]
+                }
             },
-            {
-                year: 2023,
-                number: 'A',
-                title: '美国频率规则竞赛',
-                problem1: '频率稳定性评估',
-                problem2: '电力系统动态',
-                problem3: '控制策略设计',
-                problem4: '成本优化分析',
-                problem5: '实施方案',
-                category: '系统动力学'
+            "2024": {
+                "A": {
+                    "title": "\"板凳龙\"闹元宵",
+                    "questions": [
+                        "分析沿螺距为55cm的等距螺线盘入的舞龙队位置和速度",
+                        "确定舞龙队盘入的终止时刻使板凳间不碰撞",
+                        "确定最小螺距使龙头能到达调头空间边界",
+                        "设计调头路径并分析速度限制"
+                    ],
+                    "models": ["轨迹跟踪", "几何建模", "运动学分析"]
+                },
+                "B": {
+                    "title": "生产过程中的决策问题",
+                    "questions": [
+                        "设计检测次数最少的抽样检测方案",
+                        "对各情形给出生产过程各阶段的决策方案",
+                        "对m道工序n个零配件的决策方案"
+                    ],
+                    "models": ["优化模型", "质量管理", "决策分析"]
+                },
+                "C": {
+                    "title": "农作物的种植策略",
+                    "questions": [
+                        "在不同滞销情况下给出2024-2030年最优种植方案",
+                        "考虑预期销售量、产量、成本、价格等的不确定性",
+                        "综合考虑可替代性和互补性的种植策略"
+                    ],
+                    "models": ["优化模型", "决策分析", "风险管理"]
+                },
+                "D": {
+                    "title": "反潜航空深弹命中概率问题",
+                    "questions": [
+                        "分析投弹最大命中概率与各参数的关系",
+                        "考虑定位误差的命中概率表达式",
+                        "优化多枚深弹的投放方案"
+                    ],
+                    "models": ["概率模型", "优化模型", "军事应用"]
+                },
+                "E": {
+                    "title": "交通流量管控",
+                    "questions": [
+                        "根据车流量差异分析不同时段的车流量",
+                        "优化配置信号灯使车流平均速度最大",
+                        "估算假期景区临时停车位需求",
+                        "评价临时管控措施的效果"
+                    ],
+                    "models": ["交通流模型", "优化模型", "数据分析"]
+                }
             },
-            {
-                year: 2023,
-                number: 'B',
-                title: '车间生产计划的优化',
-                problem1: '生产计划制定',
-                problem2: '资源配置优化',
-                problem3: '交期评估',
-                problem4: '成本最小化',
-                problem5: '方案评估',
-                category: '运筹优化'
-            },
-            {
-                year: 2022,
-                number: 'A',
-                title: '二十大党代表名单的形成',
-                problem1: '代表比例分析',
-                problem2: '地区代表选择',
-                problem3: '行业分布评估',
-                problem4: '多目标优化',
-                problem5: '选举方案',
-                category: '统计分析'
-            },
-            {
-                year: 2022,
-                number: 'B',
-                title: '油气管道的维修与管理',
-                problem1: '管道状态评估',
-                problem2: '维修计划优化',
-                problem3: '成本分析',
-                problem4: '风险管理',
-                problem5: '管理建议',
-                category: '优化与规划'
-            },
-            {
-                year: 2021,
-                number: 'A',
-                title: '新冠肺炎疫情的数学模型',
-                problem1: '疫情传播模型',
-                problem2: '参数估计',
-                problem3: '防控政策评估',
-                problem4: '长期趋势预测',
-                problem5: '防控建议',
-                category: '微分方程'
-            },
-            {
-                year: 2021,
-                number: 'B',
-                title: '居民用电价格调整的影响',
-                problem1: '价格变化分析',
-                problem2: '用电量影响',
-                problem3: '收益评估',
-                problem4: '用户分类',
-                problem5: '价格方案',
-                category: '数据分析'
-            },
-            {
-                year: 2020,
-                number: 'A',
-                title: '购物优惠的方案选择',
-                problem1: '优惠方案对比',
-                problem2: '消费者决策',
-                problem3: '商家收益分析',
-                problem4: '折扣策略评估',
-                problem5: '最优方案推荐',
-                category: '决策分析'
-            },
-            {
-                year: 2020,
-                number: 'B',
-                title: '蛋白质最优分割',
-                problem1: '蛋白质结构分析',
-                problem2: '最优切割方案',
-                problem3: '效益最大化',
-                problem4: '约束条件处理',
-                problem5: '实施建议',
-                category: '整数规划'
+            "2025": {
+                "A": {
+                    "title": "烟幕干扰弹的投放策略",
+                    "questions": [
+                        "利用FY1投放1枚烟幕干扰弹对M1的遮蔽时长",
+                        "确定FY1飞行参数使遮蔽时间最长",
+                        "利用FY1投放3枚烟幕干扰弹的投放策略",
+                        "利用3架无人机各投放1枚的投放策略",
+                        "利用5架无人机对3枚导弹的综合投放策略"
+                    ],
+                    "models": ["轨迹优化", "时间规划", "多目标优化"]
+                },
+                "B": {
+                    "title": "碳化硅外延层厚度的确定",
+                    "questions": [
+                        "建立单次反射透射产生干涉的厚度测量模型",
+                        "设计算法计算外延层厚度并分析可靠性",
+                        "分析多光束干涉的影响并建立处理模型"
+                    ],
+                    "models": ["光学模型", "信号处理", "数值计算"]
+                },
+                "C": {
+                    "title": "NIPT的时点选择与胎儿的异常判定",
+                    "questions": [
+                        "分析Y染色体浓度与孕周数和BMI的相关特性",
+                        "基于BMI分组确定最佳NIPT时点",
+                        "综合考虑多因素的分组和时点确定",
+                        "给出女胎异常判定方法"
+                    ],
+                    "models": ["分类模型", "预测模型", "医学应用"]
+                },
+                "D": {
+                    "title": "矿井突水水流漫延模型与逃生方案",
+                    "questions": [
+                        "建立突水水流在巷道的流动漫延模型",
+                        "为矿工设计最佳逃生路径",
+                        "建立双突水点的水流漫延模型",
+                        "在第二突水点出现后调整逃生方案"
+                    ],
+                    "models": ["流体动力学", "网络流模型", "最短路径"]
+                },
+                "E": {
+                    "title": "AI辅助智能体测",
+                    "questions": [
+                        "确定运动者的起跳和落地时刻并描述滞空阶段",
+                        "分析影响跳远成绩的主要因素",
+                        "预测运动者的实际跳远成绩",
+                        "给出提升跳远成绩的姿势训练建议"
+                    ],
+                    "models": ["数据分析", "运动学分析", "预测模型"]
+                }
             }
-        ];
-
-        let currentData = [...competitionData];
-        let sortConfig = { column: 0, direction: 'asc' };
+        };
 
         // 初始化表格
         function initTable() {
-            renderTable(competitionData);
+            renderTable(allData);
+            updateStats();
         }
 
         // 渲染表格
         function renderTable(data) {
             const tbody = document.getElementById('tableBody');
-            const emptyState = document.getElementById('emptyState');
+            tbody.innerHTML = '';
+            let count = 0;
 
-            if (data.length === 0) {
-                tbody.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                document.getElementById('displayCount').textContent = '0';
-                return;
+            for (const year in data) {
+                const problems = data[year];
+                for (const code in problems) {
+                    const problem = problems[code];
+                    const row = createTableRow(year, code, problem);
+                    tbody.appendChild(row);
+                    count++;
+                }
             }
 
-            emptyState.classList.add('hidden');
-            tbody.innerHTML = data.map(row => `
-                <tr>
-                    <td><span class="year-badge">${row.year}</span></td>
-                    <td><strong style="color: #1e3c72; font-size: 1.1em;">${row.number}题</strong></td>
-                    <td><div class="title-cell">${row.title}</div></td>
-                    <td><div class="problem-cell">${row.problem1}</div></td>
-                    <td><div class="problem-cell">${row.problem2}</div></td>
-                    <td><div class="problem-cell">${row.problem3}</div></td>
-                    <td><div class="problem-cell">${row.problem4}</div></td>
-                    <td><div class="problem-cell">${row.problem5}</div></td>
-                    <td><span class="category-badge">${row.category}</span></td>
-                </tr>
-            `).join('');
-
-            document.getElementById('displayCount').textContent = data.length;
+            document.getElementById('currentCount').textContent = count;
         }
 
-        // 排序表格
-        function sortTable(columnIndex) {
-            const headers = document.querySelectorAll('th');
-            headers.forEach((h, i) => {
-                h.classList.remove('sorted-asc', 'sorted-desc');
-            });
+        // 创建表格行
+        function createTableRow(year, code, problem) {
+            const tr = document.createElement('tr');
+            tr.className = 'data-row';
+            tr.dataset.year = year;
+            tr.dataset.code = code;
+            tr.dataset.text = (problem.title + ' ' + problem.questions.join(' ')).toLowerCase();
 
-            const direction = sortConfig.column === columnIndex && sortConfig.direction === 'asc' ? 'desc' : 'asc';
-            sortConfig = { column: columnIndex, direction };
+            const yearCell = document.createElement('td');
+            yearCell.innerHTML = `<span class="year-badge">${year}</span>`;
 
-            headers[columnIndex].classList.add(direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+            const codeCell = document.createElement('td');
+            codeCell.innerHTML = `<span class="problem-code">${code}</span>`;
 
-            const columns = ['year', 'number', 'title', 'problem1', 'problem2', 'problem3', 'problem4', 'problem5', '', 'category'];
-            const sortKey = columns[columnIndex];
+            const titleCell = document.createElement('td');
+            titleCell.innerHTML = `<div class="title">${problem.title}</div>`;
 
-            currentData.sort((a, b) => {
-                let aVal = a[sortKey];
-                let bVal = b[sortKey];
+            const questionsCell = document.createElement('td');
+            questionsCell.innerHTML = '<div class="questions">' +
+                problem.questions.map((q, i) => `<div class="question-item"><strong>问题${i+1}:</strong> ${q}</div>`).join('') +
+                '</div>';
 
-                if (typeof aVal === 'number') {
-                    return direction === 'asc' ? aVal - bVal : bVal - aVal;
-                }
+            const modelsCell = document.createElement('td');
+            modelsCell.innerHTML = '<div class="models">' +
+                problem.models.map(m => {
+                    let className = 'model-tag';
+                    if (m.includes('优化')) className += ' opt';
+                    else if (m.includes('评价')) className += ' eval';
+                    else if (m.includes('预测')) className += ' pred';
+                    else if (m.includes('分类')) className += ' class';
+                    else if (m.includes('微分')) className += ' diff';
+                    else if (m.includes('数据')) className += ' data';
+                    return `<span class="${className}">${m}</span>`;
+                }).join('') +
+                '</div>';
 
-                aVal = String(aVal).toLowerCase();
-                bVal = String(bVal).toLowerCase();
-                return direction === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
-            });
+            tr.appendChild(yearCell);
+            tr.appendChild(codeCell);
+            tr.appendChild(titleCell);
+            tr.appendChild(questionsCell);
+            tr.appendChild(modelsCell);
 
-            renderTable(currentData);
+            return tr;
         }
 
-        // 搜索功能
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            applyFilters();
-        });
+        // 筛选表格
+        function filterTable() {
+            const year = document.getElementById('yearFilter').value;
+            const code = document.getElementById('codeFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
 
-        // 筛选功能
-        document.getElementById('yearFilter').addEventListener('change', applyFilters);
-        document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+            const rows = document.querySelectorAll('.data-row');
+            let visibleCount = 0;
 
-        // 应用所有筛选
-        function applyFilters() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const yearFilter = document.getElementById('yearFilter').value;
-            const categoryFilter = document.getElementById('categoryFilter').value;
+            rows.forEach(row => {
+                let show = true;
 
-            currentData = competitionData.filter(row => {
-                const matchesSearch = !searchTerm ||
-                    row.title.toLowerCase().includes(searchTerm) ||
-                    row.problem1.toLowerCase().includes(searchTerm) ||
-                    row.problem2.toLowerCase().includes(searchTerm) ||
-                    row.problem3.toLowerCase().includes(searchTerm) ||
-                    row.problem4.toLowerCase().includes(searchTerm) ||
-                    row.problem5.toLowerCase().includes(searchTerm) ||
-                    row.category.toLowerCase().includes(searchTerm);
+                if (year && row.dataset.year !== year) show = false;
+                if (code && row.dataset.code !== code) show = false;
+                if (search && !row.dataset.text.includes(search)) show = false;
 
-                const matchesYear = !yearFilter || row.year.toString() === yearFilter;
-                const matchesCategory = !categoryFilter || row.number === categoryFilter;
-
-                return matchesSearch && matchesYear && matchesCategory;
+                row.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
             });
 
-            renderTable(currentData);
+            document.getElementById('currentCount').textContent = visibleCount;
         }
 
         // 重置筛选
         function resetFilters() {
-            document.getElementById('searchInput').value = '';
             document.getElementById('yearFilter').value = '';
-            document.getElementById('categoryFilter').value = '';
-            currentData = [...competitionData];
-            renderTable(competitionData);
-            document.querySelectorAll('th').forEach(h => {
-                h.classList.remove('sorted-asc', 'sorted-desc');
-            });
+            document.getElementById('codeFilter').value = '';
+            document.getElementById('searchInput').value = '';
+            filterTable();
         }
 
+        // 更新统计
+        function updateStats() {
+            document.getElementById('totalCount').textContent =
+                Object.keys(allData).reduce((sum, year) => sum + Object.keys(allData[year]).length, 0);
+        }
+
+        // 事件监听
+        document.getElementById('yearFilter').addEventListener('change', filterTable);
+        document.getElementById('codeFilter').addEventListener('change', filterTable);
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+
         // 初始化
-        window.addEventListener('DOMContentLoaded', initTable);
+        initTable();
     </script>
 </body>
 </html>
