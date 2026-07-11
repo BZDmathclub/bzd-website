@@ -1133,6 +1133,7 @@ a { color:inherit; }
   .sch-foot { padding:12px 16px; }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
 <div id="scroll-progress"></div>
@@ -1392,6 +1393,13 @@ a { color:inherit; }
       <div style="font-size:11px;color:var(--text-sub);text-align:center;">4年深度解析</div>
     </div>
 
+    <!-- 选题分析 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openChoiceAnalysis()">
+      <div style="font-size:32px;margin-bottom:8px;">📈</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">选题分析</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">选题趋势分析</div>
+    </div>
+
   </div>
 
   <!-- 题目展示区域 -->
@@ -1399,6 +1407,39 @@ a { color:inherit; }
     <iframe id="exam-questions-iframe" src="" style="width:100%;height:800px;border:none;border-radius:8px;"></iframe>
   </div>
 </section>
+
+<!-- 选题分析模态框 -->
+<div id="choice-analysis-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">📈 选题趋势分析（2021-2025）</h2>
+      <button onclick="closeChoiceAnalysis()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <div style="margin-bottom:25px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+      <button onclick="switchChoiceYear('2025')" class="choice-year-btn active" data-year="2025" style="padding:8px 16px;background:#1e3c72;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.3s;">2025年</button>
+      <button onclick="switchChoiceYear('2024')" class="choice-year-btn" data-year="2024" style="padding:8px 16px;background:#e8f0fe;color:#1e3c72;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.3s;">2024年</button>
+      <button onclick="switchChoiceYear('2023')" class="choice-year-btn" data-year="2023" style="padding:8px 16px;background:#e8f0fe;color:#1e3c72;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.3s;">2023年</button>
+      <button onclick="switchChoiceYear('2022')" class="choice-year-btn" data-year="2022" style="padding:8px 16px;background:#e8f0fe;color:#1e3c72;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.3s;">2022年</button>
+      <button onclick="switchChoiceYear('2021')" class="choice-year-btn" data-year="2021" style="padding:8px 16px;background:#e8f0fe;color:#1e3c72;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.3s;">2021年</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:20px;">
+      <div style="text-align:center;">
+        <p style="font-size:13px;color:#666;margin-bottom:15px;font-weight:600;">本科组选题分布（A/B/C题）</p>
+        <div style="position:relative;height:300px;">
+          <canvas id="choice-undergrad-chart"></canvas>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <p style="font-size:13px;color:#666;margin-bottom:15px;font-weight:600;">高职组选题分布（D/E题）</p>
+        <div style="position:relative;height:300px;">
+          <canvas id="choice-vocational-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- 往期资料助攻 -->
 <section class="section" id="archive">
@@ -2817,6 +2858,98 @@ function toggleExamQuestions(){
     container.style.display = 'none';
   }
 }
+
+const choiceData = {
+  2025: { undergrad: {A: 15605, B: 12919, C: 26992}, vocational: {D: 2240, E: 3616} },
+  2024: { undergrad: {A: 10284, B: 20832, C: 21560}, vocational: {D: 2238, E: 3467} },
+  2023: { undergrad: {A: 8198, B: 13613, C: 26827}, vocational: {D: 1818, E: 3132} },
+  2022: { undergrad: {A: 3636, B: 10439, C: 31427}, vocational: {D: 1046, E: 3155} },
+  2021: { undergrad: {A: 8344, B: 8398, C: 18500}, vocational: {D: 1047, E: 2307} }
+};
+
+let choiceCharts = {};
+
+function openChoiceAnalysis(){
+  document.getElementById('choice-analysis-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => initChoiceCharts('2025'), 100);
+}
+
+function closeChoiceAnalysis(){
+  document.getElementById('choice-analysis-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function switchChoiceYear(year){
+  document.querySelectorAll('.choice-year-btn').forEach(btn => {
+    btn.style.background = btn.dataset.year === year ? '#1e3c72' : '#e8f0fe';
+    btn.style.color = btn.dataset.year === year ? 'white' : '#1e3c72';
+  });
+
+  if(choiceCharts.undergrad) choiceCharts.undergrad.destroy();
+  if(choiceCharts.vocational) choiceCharts.vocational.destroy();
+
+  initChoiceCharts(year);
+}
+
+function initChoiceCharts(year){
+  const data = choiceData[year];
+  const undergradData = data.undergrad;
+  const vocationalData = data.vocational;
+
+  const ctxUndergrad = document.getElementById('choice-undergrad-chart');
+  const ctxVocational = document.getElementById('choice-vocational-chart');
+
+  choiceCharts.undergrad = new Chart(ctxUndergrad, {
+    type: 'doughnut',
+    data: {
+      labels: ['A题', 'B题', 'C题'],
+      datasets: [{
+        data: [undergradData.A, undergradData.B, undergradData.C],
+        backgroundColor: ['#1e3c72', '#2a5298', '#5b8dd4'],
+        borderColor: 'white',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {font: {size: 12}, padding: 15}
+        }
+      }
+    }
+  });
+
+  choiceCharts.vocational = new Chart(ctxVocational, {
+    type: 'doughnut',
+    data: {
+      labels: ['D题', 'E题'],
+      datasets: [{
+        data: [vocationalData.D, vocationalData.E],
+        backgroundColor: ['#1e3c72', '#5b8dd4'],
+        borderColor: 'white',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {font: {size: 12}, padding: 15}
+        }
+      }
+    }
+  });
+}
+
+document.getElementById('choice-analysis-modal').addEventListener('click', e => {
+  if(e.target.id === 'choice-analysis-modal') closeChoiceAnalysis();
+});
 
 // 往期助攻卡片可折叠，当前竞赛卡片默认展开不折叠
 document.querySelectorAll('#archive .comp-card-head').forEach(head => {
