@@ -1338,7 +1338,7 @@ a { color:inherit; }
     </div>
 
     <!-- AI提示词库 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openAIPromptsModal()">
       <div style="font-size:32px;margin-bottom:8px;">✨</div>
       <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">AI提示词库</div>
       <div style="font-size:11px;color:var(--text-sub);text-align:center;">数模竞赛专用</div>
@@ -1486,6 +1486,104 @@ a { color:inherit; }
       </div>
       <a href="https://pan.baidu.com/s/1PXYWMfJxlmwq5xcRkurI8A" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;border:none;">打开网盘链接</a>
     </div>
+  </div>
+</div>
+
+<!-- AI提示词库模态框 -->
+<div id="ai-prompts-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">✨ AI提示词库</h2>
+      <button onclick="closeAIPromptsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <!-- 搜索框 -->
+    <div style="margin-bottom:25px;display:flex;gap:10px;">
+      <input type="text" id="promptSearch" placeholder="搜索提示词..." style="flex:1;padding:12px;border:1px solid #d4e1f4;border-radius:6px;font-size:13px;">
+      <button onclick="searchPromptsFunc()" style="padding:12px 20px;background:#1e3c72;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;">搜索</button>
+      <button onclick="clearPromptsSearch()" style="padding:12px 20px;background:#e8f0fe;color:#1e3c72;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;">清除</button>
+    </div>
+
+    <!-- 提示词分类 -->
+    <div id="prompts-container" style="margin-bottom:20px;">
+      <!-- 论文撰写 -->
+      <div style="border:1px solid #d4e1f4;border-radius:8px;margin-bottom:12px;overflow:hidden;">
+        <div class="prompts-cat-header" onclick="togglePromptsCategory(this)" style="background:#f8faff;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#1e3c72;transition:all 0.3s;user-select:none;">
+          <span>论文撰写与优化</span>
+          <span class="toggle-icon" style="font-size:16px;">▼</span>
+        </div>
+        <div class="prompts-cat-body" style="display:none;padding:15px 20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">请帮我优化以下段落的学术表达，使用被动语态和学术词汇，避免口语化表达</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">请为我新编此段引言，突出"研究背景"和"研究意义"</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">请帮我整理以下研究结论，含概论文的主要发现与学术贡献</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 数据分析 -->
+      <div style="border:1px solid #d4e1f4;border-radius:8px;margin-bottom:12px;overflow:hidden;">
+        <div class="prompts-cat-header" onclick="togglePromptsCategory(this)" style="background:#f8faff;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#1e3c72;transition:all 0.3s;user-select:none;">
+          <span>数据分析与解读</span>
+          <span class="toggle-icon" style="font-size:16px;">▼</span>
+        </div>
+        <div class="prompts-cat-body" style="display:none;padding:15px 20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">我有以下数据，请帮我用表格形式进行可视化分析，并给出简要的表格解读</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">根据以下研究数据，请解释其结果的含义和可能的原因。结合相关的理论进行分析，避免主观臆断</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模型建立 -->
+      <div style="border:1px solid #d4e1f4;border-radius:8px;margin-bottom:12px;overflow:hidden;">
+        <div class="prompts-cat-header" onclick="togglePromptsCategory(this)" style="background:#f8faff;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#1e3c72;transition:all 0.3s;user-select:none;">
+          <span>模型与方法</span>
+          <span class="toggle-icon" style="font-size:16px;">▼</span>
+        </div>
+        <div class="prompts-cat-body" style="display:none;padding:15px 20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">根据已建立的理论框架，请帮我推导出研究假设。每个假设需要有理论支持和逻辑推导过程</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">请详细描述以下代码的逻辑过程，包括详细的步骤描述以及公式表述，无需代码段，保持学术语言</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 结论讨论 -->
+      <div style="border:1px solid #d4e1f4;border-radius:8px;margin-bottom:12px;overflow:hidden;">
+        <div class="prompts-cat-header" onclick="togglePromptsCategory(this)" style="background:#f8faff;padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#1e3c72;transition:all 0.3s;user-select:none;">
+          <span>结论与讨论</span>
+          <span class="toggle-icon" style="font-size:16px;">▼</span>
+        </div>
+        <div class="prompts-cat-body" style="display:none;padding:15px 20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">请为我重新编辑以下研究结论，使其更加严谨和缜密。要求保持学术写作风格并强调所有论据都经过了验证</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-radius:6px;border-left:3px solid #1e3c72;margin-bottom:8px;">
+            <div style="flex:1;font-size:13px;color:#333;line-height:1.5;">请概括本论文对"实践/产业/社会"的潜在影响，并提出可能的实施方案</div>
+            <button class="copy-btn" onclick="copyPromptText(this)" style="flex-shrink:0;margin-left:12px;padding:8px 15px;background:#1e3c72;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:all 0.3s;white-space:nowrap;">复制</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:#999;margin:0;text-align:center;">💡 点击"复制"按钮一键复制提示词到剪贴板</p>
   </div>
 </div>
 
@@ -3026,6 +3124,39 @@ document.getElementById('paper-template-modal').addEventListener('click', e => {
 document.getElementById('excellent-paper-modal').addEventListener('click', e => {
   if(e.target.id === 'excellent-paper-modal') closeExcellentPaperModal();
 });
+
+function openAIPromptsModal(){
+  document.getElementById('ai-prompts-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAIPromptsModal(){
+  document.getElementById('ai-prompts-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('ai-prompts-modal').addEventListener('click', e => {
+  if(e.target.id === 'ai-prompts-modal') closeAIPromptsModal();
+});
+
+function togglePromptsCategory(header){
+  header.classList.toggle('active');
+  header.querySelector('.toggle-icon').classList.toggle('active');
+  header.nextElementSibling.classList.toggle('active');
+}
+
+function copyPromptText(btn){
+  const promptText = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(promptText).then(() => {
+    const originalText = btn.innerText;
+    btn.innerText = '✓ 已复制';
+    btn.style.background = '#4caf50';
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.style.background = '#1e3c72';
+    }, 2000);
+  });
+}
 
 // 往期助攻卡片可折叠，当前竞赛卡片默认展开不折叠
 document.querySelectorAll('#archive .comp-card-head').forEach(head => {
