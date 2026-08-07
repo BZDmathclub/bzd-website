@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数模竞赛求解全流程</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",sans-serif;
+  background:#f5f5f0;
+  color:#222;
+  display:flex;
+  flex-direction:column;
+}
+/* ===== header ===== */
+header{
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:10px 16px 8px;
+  border-bottom:2px solid #222;
+}
+header .badge{
+  background:#222;
+  color:#f5f5f0;
+  font-size:9px;
+  font-weight:700;
+  padding:2px 6px;
+  letter-spacing:1px;
+}
+header h1{
+  font-size:17px;
+  font-weight:700;
+  color:#222;
+  letter-spacing:2px;
+}
+/* ===== main ===== */
+main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:0;
+  min-height:0;
+}
+/* ===== era ===== */
+.era{
+  flex:1;
+  display:flex;
+  min-height:0;
+  border-bottom:1px solid #d8d8d0;
+}
+.era:last-child{border-bottom:none}
+/* left tag */
+.era-tag{
+  flex-shrink:0;
+  width:36px;
+  background:#eae8e0;
+  border-right:1px solid #d8d8d0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+}
+.era-tag .lbl{
+  font-size:9px;
+  font-weight:700;
+  color:#999;
+  letter-spacing:3px;
+  writing-mode:vertical-lr;
+}
+.era-tag .num{
+  font-size:13px;
+  font-weight:700;
+  color:#bbb;
+  font-family:"Courier New",monospace;
+}
+/* content row */
+.era-content{
+  flex:1;
+  display:flex;
+  align-items:center;
+  padding:4px 8px;
+  gap:0;
+  overflow-x:auto;
+  min-width:0;
+}
+/* ===== step ===== */
+.step{
+  flex-shrink:0;
+  text-align:center;
+  padding:4px 6px;
+  min-width:0;
+  max-width:110px;
+}
+.step .num{
+  display:block;
+  font-size:8px;
+  color:#bbb;
+  font-family:"Courier New",monospace;
+  letter-spacing:1px;
+}
+.step .title{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  color:#222;
+  line-height:1.3;
+}
+.step .sub{
+  display:block;
+  font-size:10px;
+  color:#999;
+  line-height:1.2;
+}
+.step .tag{
+  display:inline-block;
+  font-size:8px;
+  color:#222;
+  border:1px solid #222;
+  padding:1px 5px;
+  margin-top:2px;
+  font-family:"Courier New",monospace;
+  letter-spacing:0.5px;
+}
+.step .tag.cyan{color:#00897b;border-color:#00897b}
+/* ===== sep ===== */
+.sep{
+  flex-shrink:0;
+  color:#ccc;
+  font-size:10px;
+  margin:0 0;
+  font-family:"Courier New",monospace;
+}
+/* ===== ai group ===== */
+.ai-group{
+  display:flex;
+  flex-shrink:0;
+  border:1px solid #d8d8d0;
+  background:#fcfcfa;
+  margin:0 1px;
+}
+.ai-card{
+  cursor:pointer;
+  user-select:none;
+  text-align:center;
+  padding:4px 10px;
+  position:relative;
+  min-width:0;
+}
+.ai-card + .ai-card{
+  border-left:1px solid #d8d8d0;
+}
+.ai-card .cat{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  color:#333;
+}
+.ai-card .items{
+  display:block;
+  font-size:9px;
+  color:#999;
+  line-height:1.3;
+}
+.ai-card .hint{
+  display:block;
+  font-size:7px;
+  color:#ccc;
+  margin-top:1px;
+}
+/* detail: position fixed to avoid overflow issues */
+.ai-card .detail{
+  display:none;
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:380px;
+  max-width:90vw;
+  padding:14px 16px;
+  background:#fff;
+  border:2px solid #222;
+  font-size:13px;
+  line-height:1.6;
+  color:#333;
+  text-align:left;
+  z-index:100;
+  box-shadow:6px 6px 0 rgba(0,0,0,0.08);
+}
+.ai-card .detail .row{
+  padding:4px 0;
+}
+.ai-card .detail .row + .row{
+  border-top:1px solid #e8e8e0;
+  margin-top:4px;
+  padding-top:8px;
+}
+.ai-card .detail .strong{
+  font-weight:700;
+  color:#222;
+  margin-right:4px;
+  display:inline-block;
+  min-width:28px;
+}
+.ai-card .detail .close-hint{
+  text-align:center;
+  font-size:9px;
+  color:#ccc;
+  margin-top:6px;
+  letter-spacing:1px;
+}
+.ai-card.open .detail{display:block}
+.ai-card .bar{
+  display:block;
+  height:2px;
+  background:transparent;
+  margin-top:1px;
+  transition:background 0.1s;
+}
+.ai-card.open .bar{background:#222}
+/* overlay */
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.15);
+  z-index:99;
+}
+.overlay.show{display:block}
+/* ===== responsive ===== */
+@media(max-width:1100px){
+  header{padding:8px 12px 6px}
+  header h1{font-size:15px}
+  .step{max-width:95px}
+  .step .title{font-size:11px}
+}
+@media(max-width:800px){
+  .era-tag{width:30px}
+  .step{max-width:82px}
+  .step .title{font-size:10px}
+  .step .sub{font-size:9px}
+  .ai-card .cat{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="badge">BZD</span>
+  <h1>数模竞赛求解全流程</h1>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<main>
+
+  <!-- 上古 -->
+  <section class="era">
+    <div class="era-tag">
+      <span class="lbl">上古</span>
+      <span class="num">I</span>
+    </div>
+    <div class="era-content">
+      <div class="step"><span class="num">01</span><span class="title">拿到题目</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">02</span><span class="title">阅读题目</span><span class="sub">理解背景与需求</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">03</span><span class="title">判定涉及模型</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">04</span><span class="title">学习模型知识</span><span class="sub">书籍/CSDN/代码包</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">05</span><span class="title">建立模型</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">06</span><span class="title">修改代码求解</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">07</span><span class="title">Word撰写论文</span></div>
+    </div>
+  </section>
+
+  <!-- 近代 -->
+  <section class="era">
+    <div class="era-tag">
+      <span class="lbl">近代</span>
+      <span class="num">II</span>
+    </div>
+    <div class="era-content">
+      <div class="step"><span class="num">01</span><span class="title">拿到题目</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">02</span><span class="title">拆解题目</span><span class="tag">去AI同质化</span></div>
+      <span class="sep">→</span>
+      <div class="ai-group">
+        <div class="ai-card" onclick="toggleCard(this)">
+          <span class="cat">中文AI</span>
+          <span class="items">豆包 · Deepseek</span>
+          <span class="bar"></span>
+          <span class="hint">▼</span>
+          <div class="detail">
+            <div class="row"><span class="strong">优势</span>不用魔法，免费使用</div>
+            <div class="row"><span class="strong">劣势</span>AI性能不强，代码报错多需大量修改。求解思路同质化，难脱颖而出。数模获奖率40-50%，使用中文AI队伍约50%</div>
+            <div class="close-hint">点击任意处关闭</div>
+          </div>
+        </div>
+        <div class="ai-card" onclick="toggleCard(this)">
+          <span class="cat">外文AI</span>
+          <span class="items">Claude/GPT/Gemini/Grok</span>
+          <span class="bar"></span>
+          <span class="hint">▼</span>
+          <div class="detail">
+            <div class="row"><span class="strong">优势</span>性能强、代码能力强，基本无报错，可直出结果</div>
+            <div class="row"><span class="strong">劣势</span>账号有额度限制，换号失去记忆。使用有门槛</div>
+            <div class="close-hint">点击任意处关闭</div>
+          </div>
+        </div>
+        <div class="ai-card" onclick="toggleCard(this)">
+          <span class="cat">编程Agent</span>
+          <span class="items">Codex · Claude Code</span>
+          <span class="bar"></span>
+          <span class="hint">▼</span>
+          <div class="detail">
+            <div class="row"><span class="strong">优势</span>性能强、代码能力强、无额度限制，本地自动运行代码、修改论文</div>
+            <div class="row"><span class="strong">劣势</span>每次消耗token，经济需求较大。需时间安装熟悉</div>
+            <div class="close-hint">点击任意处关闭</div>
+          </div>
+        </div>
+      </div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">04</span><span class="title">选择求解方案</span><span class="sub">依据背景与实际数据</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">05</span><span class="title">AI完整求解</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">06</span><span class="title">输出论文</span><span class="sub">Word/LaTeX</span></div>
+    </div>
+  </section>
+
+  <!-- 现代 -->
+  <section class="era">
+    <div class="era-tag">
+      <span class="lbl">现代</span>
+      <span class="num">III</span>
+    </div>
+    <div class="era-content">
+      <div class="step"><span class="num">01</span><span class="title">拿到题目</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">02</span><span class="title">输入AI智能体</span><span class="tag cyan">Agent</span></div>
+      <span class="sep">→</span>
+      <div class="step"><span class="num">03</span><span class="title">输出完整论文</span></div>
+      <span class="sep">→</span>
+      <div class="ai-group">
+        <div class="ai-card" onclick="toggleCard(this)">
+          <span class="cat">精简型</span>
+          <span class="items">人为扩写·写厚</span>
+          <span class="bar"></span>
+          <span class="hint">▼</span>
+          <div class="detail">
+            <div class="row">部分AI智能体输出内容过简，需要根据思路进行扩充，将文章写厚</div>
+            <div class="close-hint">点击任意处关闭</div>
+          </div>
+        </div>
+        <div class="ai-card" onclick="toggleCard(this)">
+          <span class="cat">冗余型</span>
+          <span class="items">人为简写·去冗</span>
+          <span class="bar"></span>
+          <span class="hint">▼</span>
+          <div class="detail">
+            <div class="row">部分AI智能体无字数限制，输出繁杂，需要人为精简</div>
+            <div class="close-hint">点击任意处关闭</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+function toggleCard(el){
+  const isOpen = el.classList.contains('open');
+  closeAll();
+  if(!isOpen){
+    el.classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+}
+function closeAll(){
+  document.querySelectorAll('.ai-card.open').forEach(c => c.classList.remove('open'));
+  document.getElementById('overlay').classList.remove('show');
+}
+</script>
+</body>
+</html>

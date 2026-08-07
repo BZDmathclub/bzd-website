@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太空电梯与月球基地</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .slide {
+            width: 1200px;
+            height: 600px;
+            border: 1px solid #ddd;
+            background: white;
+            display: flex;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .left {
+            width: 360px;
+            padding: 30px;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .right {
+            width: 840px;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .left h2 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .image-box {
+            background: #f5f5f5;
+            border: 2px dashed #999;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.85em;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .concept {
+            font-size: 0.85em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .concept strong {
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .right h1 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .topic {
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .topic:last-child {
+            border-bottom: none;
+        }
+
+        .topic h3 {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .topic p {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <!-- 左侧：概念图 -->
+        <div class="left">
+            <h2>太空电梯概念</h2>
+
+            <div class="image-box">
+                📸 流浪地球<br>太空电梯概念图
+            </div>
+
+            <div class="concept">
+                <strong>背景</strong>
+                通过100,000公里的石墨烯缆绳连接地面和太空锚点，形成可循环运输系统。
+            </div>
+
+            <div class="concept">
+                <strong>目标</strong>
+                建造100,000人的月球基地。需运送1亿公吨材料。
+            </div>
+        </div>
+
+        <!-- 右侧：课题 -->
+        <div class="right">
+            <h1>可研究的课题</h1>
+            <p class="subtitle">需比较三种运输方案：A仅用太空电梯 | B仅用火箭 | C混合方案</p>
+
+            <div class="topic">
+                <h3>课题1：成本与时间优化</h3>
+                <p>计算每种方案的总成本和运输年数。太空电梯年运力179,000吨，火箭单次100-150吨。建立成本函数，找出最优方案。</p>
+            </div>
+
+            <div class="topic">
+                <h3>课题2：风险与可靠性</h3>
+                <p>分析非理想情况：系缆摆动(效率↓20-40%)、火箭失败(5%失败率)、故障维修。评估各方案的抗风险能力。</p>
+            </div>
+
+            <div class="topic">
+                <h3>课题3：水源补给成本</h3>
+                <p>基地建成后需持续供水。人均日用水量150升/天，年需求100,000×150×365升。计算额外运输和存储成本。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

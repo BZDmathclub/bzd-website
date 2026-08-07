@@ -1,0 +1,7 @@
+name = "bzd-worker"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "BZD_KV"
+id = "175ab937c0fc4d8fb60a207aa49b831b"

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飘浮城市的能源自给自足</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .slide {
+            width: 1200px;
+            height: 600px;
+            border: 1px solid #ddd;
+            background: white;
+            display: flex;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .left {
+            width: 360px;
+            padding: 30px;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-box {
+            background: #f5f5f5;
+            border: 2px dashed #999;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9em;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .right {
+            width: 840px;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .right h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: normal;
+        }
+
+        .topic {
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .topic:last-child {
+            border-bottom: none;
+        }
+
+        .topic h3 {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .topic p {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <!-- 左侧：空白区域 -->
+        <div class="left">
+            <div class="image-box">
+                📸 飘浮城市<br>能源系统图
+            </div>
+        </div>
+
+        <!-- 右侧：课题 -->
+        <div class="right">
+            <h1>飘浮城市的能源自给自足</h1>
+            <p class="subtitle">空中/海洋城市，如何实现能源自给自足</p>
+
+            <div class="topic">
+                <h3>课题1：城市能源需求的估算</h3>
+                <p>基于人口规模、生活标准估算总能源需求。计算：人均日用电量×人口数，考虑工业、交通、生活用电的占比。对比不同发展水平城市的能耗数据，建立能耗函数模型。</p>
+            </div>
+
+            <div class="topic">
+                <h3>课题2：多元能源供应方案的建立</h3>
+                <p>设计太阳能、风能、地热等可再生能源的贡献模型。计算各能源在不同季节、气候条件下的发电能力。分析每种能源的优劣，确定最优能源组合方案。</p>
+            </div>
+
+            <div class="topic">
+                <h3>课题3：能源存储与自给率优化</h3>
+                <p>建立能源存储模型（电池容量计算）。分析城市规模与能源自给率的关系。优化目标：在保证能源充足的前提下，最小化存储成本，评估城市可容纳的最大人口数。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
