@@ -1408,6 +1408,13 @@ a { color:inherit; }
       <div style="font-size:11px;color:var(--text-sub);text-align:center;">选题趋势分析</div>
     </div>
 
+    <!-- 国奖名额查询 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openAwardQueryModal()">
+      <div style="font-size:32px;margin-bottom:8px;">🏅</div>
+      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">国奖名额查询</div>
+      <div style="font-size:11px;color:var(--text-sub);text-align:center;">高校历年国奖</div>
+    </div>
+
   </div>
 
   <!-- 题目展示区域 -->
@@ -1457,6 +1464,34 @@ a { color:inherit; }
       <p style="font-size:12px;color:#666;margin:0;line-height:1.8;">
         <strong>后续计划：</strong>还会加入其他 skills 分享，敬请期待！
       </p>
+    </div>
+  </div>
+</div>
+
+<!-- 国奖名额查询模态框 -->
+<div id="award-query-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:760px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">🏅 国奖名额查询</h2>
+      <button onclick="closeAwardQueryModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <div style="background:#f8faff;padding:16px 18px;border-radius:10px;border:1.5px solid #d4e1f4;margin-bottom:20px;font-size:12.5px;color:#3a5080;line-height:1.9;">
+      数学建模国赛的国奖与学校密不可分：<strong>60%+ 的名额在开赛之前已被不到 10% 的高校"预定"</strong>，每年有将近 80% 的高校一个国奖也没有。我们统计了过去五年各高校的国奖数量，并构建小型预测模型预测各高校 2026 年度的国奖数量，仅供大家参考。<br><br>
+      每年 <strong style="color:#c55a11;">60% 的国奖名额分配给固定的学校（仅占 8.79%）</strong>，大家所争取的，仅仅是剩余的不足 40% 的国奖名额。
+    </div>
+
+    <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <input id="award-query-input" type="text" placeholder="输入您的学校名称，如：南京邮电大学" onkeydown="if(event.key==='Enter')queryAward()" style="flex:1;padding:12px 16px;border:1.5px solid #c0d4ef;border-radius:8px;font-size:14px;outline:none;color:#333;background:#fff;" />
+      <button onclick="queryAward()" style="background:#1e3c72;color:white;padding:12px 24px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">查询</button>
+    </div>
+
+    <!-- 结果区域 -->
+    <div id="award-query-result" style="display:none;margin-bottom:20px;"></div>
+
+    <div style="background:#fff8e8;border-left:4px solid #f5a623;padding:12px 16px;border-radius:0 6px 6px 0;font-size:12px;color:#5a4000;line-height:1.8;">
+      <strong>注1：</strong>对于大部分高校，国奖名额其实掌握在几位老师手里，如果该学校过去的国奖数量大部分是某一位指导老师带出来的，那么本年度依旧会维持这样的趋势。<br>
+      <strong>注2：</strong>每年固定拿走 65% 国奖名额的那 8% 的高校，暑期会进行高强度集训（早八晚十单休、一周两次模拟赛），这种培训体系下参赛队伍获奖率可维持在 90%+。他们拿到的国奖，是整个学校老师、学生牺牲暑假休息时间换取的。
     </div>
   </div>
 </div>
@@ -3139,6 +3174,104 @@ function closePaperReviewSkillsModal(){
   document.body.style.overflow = '';
 }
 
+function openAwardQueryModal(){
+  document.getElementById('award-query-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('award-query-input').focus(), 100);
+}
+
+function closeAwardQueryModal(){
+  document.getElementById('award-query-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function queryAward(){
+  const input = document.getElementById('award-query-input').value.trim();
+  const resultBox = document.getElementById('award-query-result');
+  if (!input) {
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = '<div style="background:#fff8e8;border-left:4px solid #f5a623;padding:14px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#5a4000;">请输入学校名称后查询。</div>';
+    return;
+  }
+
+  const data = window.NATIONAL_AWARDS_DATA || [];
+  // 匹配：先精确匹配，再模糊包含匹配
+  const exact = data.find(x => x.n === input);
+  const fuzzy = !exact ? data.find(x => x.n.includes(input) || input.includes(x.n)) : null;
+  const item = exact || fuzzy;
+
+  resultBox.style.display = 'block';
+
+  if (!item) {
+    resultBox.innerHTML = `
+      <div style="background:#fff8e8;border-left:4px solid #f5a623;padding:18px;border-radius:0 8px 8px 0;font-size:13px;color:#5a4000;line-height:1.9;">
+        <div style="font-size:14px;font-weight:700;margin-bottom:8px;">😔 非常遗憾</div>
+        您所在的高校 <strong>过去 5 年没有获得过国奖成绩</strong>。<br>
+        对于这样的学校，在本年度可能获得国奖的概率为 <strong style="color:#c55a11;font-size:16px;">6.81%</strong>。<br>
+        <div style="margin-top:8px;color:#8a6d1a;">请继续加油，成为那 6.81%！💪</div>
+      </div>`;
+    return;
+  }
+
+  const years = [2021, 2022, 2023, 2024, 2025];
+  let yearRows = '';
+  item.y.forEach((v, i) => {
+    const sum = v[0] + v[1];
+    yearRows += `
+      <tr style="border-bottom:1px solid #e8ecf1;">
+        <td style="padding:8px 12px;text-align:center;font-weight:600;color:#1e3c72;">${years[i]}</td>
+        <td style="padding:8px 12px;text-align:center;">${v[0]}</td>
+        <td style="padding:8px 12px;text-align:center;">${v[1]}</td>
+        <td style="padding:8px 12px;text-align:center;font-weight:600;color:#1a8a50;">${sum}</td>
+      </tr>`;
+  });
+
+  resultBox.innerHTML = `
+    <div style="background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;padding:18px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding-bottom:12px;border-bottom:2px solid #d4e1f4;">
+        <div style="font-size:16px;font-weight:700;color:#1e3c72;">🎓 ${item.n}</div>
+        <span style="background:#e8f0fe;color:#1a4fa8;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">赛区：${item.rg}</span>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="background:#1e3c72;color:white;">
+              <th style="padding:8px 12px;text-align:center;">年份</th>
+              <th style="padding:8px 12px;text-align:center;">一等奖</th>
+              <th style="padding:8px 12px;text-align:center;">二等奖</th>
+              <th style="padding:8px 12px;text-align:center;">合计</th>
+            </tr>
+          </thead>
+          <tbody>${yearRows}</tbody>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:15px;">
+        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:11px;color:#666;margin-bottom:4px;">五年获奖合计</div>
+          <div style="font-size:20px;font-weight:700;color:#1e3c72;">${item.t}</div>
+        </div>
+        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:11px;color:#666;margin-bottom:4px;">2026 国奖预测</div>
+          <div style="font-size:20px;font-weight:700;color:#c55a11;">${item.p} 个</div>
+        </div>
+        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:11px;color:#666;margin-bottom:4px;">最常指导老师</div>
+          <div style="font-size:13px;font-weight:700;color:#1a4fa8;">${item.tc || '—'}</div>
+        </div>
+        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:11px;color:#666;margin-bottom:4px;">出现次数</div>
+          <div style="font-size:20px;font-weight:700;color:#1a4fa8;">${item.c} 次</div>
+        </div>
+      </div>
+
+      <div style="margin-top:15px;font-size:12px;color:#888;line-height:1.7;background:#fff;border-left:3px solid #c0d4ef;padding:10px 14px;border-radius:0 6px 6px 0;">
+        💡 数据基于 2021-2025 年高教社杯国赛获奖统计，2026 为小型模型预测结果，仅供参考。若该高校国奖大部分由 ${item.tc ? '「' + item.tc + '」' : '某位'}老师带队，本年度趋势大概率延续。
+      </div>
+    </div>`;
+}
+
 function openChoiceAnalysis(){
   document.getElementById('choice-analysis-modal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
@@ -3482,5 +3615,6 @@ groups.forEach(sel => {
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 </script>
 
+<script src="data/national-awards.js"></script>
 </body>
 </html>
