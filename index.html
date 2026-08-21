@@ -533,6 +533,37 @@ a { color:inherit; }
   padding:14px 18px !important;
 }
 .sch-province td strong { color:var(--blue-deep); }
+
+/* ===== 国赛服务一览表 ===== */
+.svc-tabs{display:flex;gap:10px;justify-content:center;margin:16px 0 14px;}
+.svc-tab{font-size:13px;font-weight:700;padding:8px 22px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text-sub);cursor:pointer;transition:all .25s;}
+.svc-tab:hover{border-color:var(--blue-mid);color:var(--blue-mid);}
+.svc-tab.active{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;box-shadow:0 4px 12px rgba(30,60,114,.25);}
+.svc-panel{display:none;}
+.svc-panel.active{display:block;}
+.svc-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.svc-table thead tr{background:var(--blue-deep);color:#fff;}
+.svc-table thead th{padding:9px 10px;text-align:center;font-size:12.5px;font-weight:700;border-right:1px solid rgba(255,255,255,.15);}
+.svc-table thead th:last-child{border-right:none;}
+.svc-table tbody td{padding:10px;vertical-align:middle;border-bottom:1px solid var(--border);line-height:1.5;}
+.svc-table tbody tr:hover td{background:var(--blue-bg);}
+.svc-name-cell{font-weight:700;color:var(--blue-deep);font-size:13px;text-align:center;white-space:nowrap;}
+.svc-name-cell small{display:block;font-size:10px;color:var(--text-sub);font-weight:600;margin-top:2px;}
+.svc-desc{color:var(--text-sub);font-size:12px;line-height:1.6;}
+.svc-desc b{color:var(--text-main);}
+.svc-desc .hl{color:var(--accent);font-weight:700;}
+.rate-tag{display:inline-block;font-size:10px;font-weight:700;color:#1a8a50;background:#e6f7ef;border:1px solid #b8e6cf;padding:1px 8px;border-radius:10px;margin-top:5px;}
+.rate-tag.orange{color:#b96a00;background:#fdf0dd;border-color:#f0d6a8;}
+.rate-tag.gray{color:#888;background:#f3f5f8;border-color:#e2e6ec;}
+.svc-price{text-align:center;font-weight:800;color:var(--accent);font-size:14px;white-space:nowrap;}
+.svc-price .sub{display:block;font-size:10.5px;font-weight:400;color:var(--text-sub);}
+.svc-buy{text-align:center;}
+.svc-buy-btn{display:inline-block;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;color:#fff;background:var(--blue-mid);transition:all .2s;white-space:nowrap;}
+.svc-buy-btn:hover{opacity:.85;}
+.svc-buy-btn.gold{background:var(--accent);}
+.svc-buy-btn.line{background:#fff;color:var(--blue-mid);border:1.5px solid var(--blue-mid);}
+.svc-note{margin-top:14px;padding:12px 16px;background:#f8faff;border:1px dashed var(--border);border-radius:8px;font-size:12px;color:var(--text-sub);line-height:1.8;}
+.svc-note b{color:var(--blue-deep);}
 .sch-foot {
   background:var(--blue-bg);
   padding:14px 22px;
@@ -1270,42 +1301,120 @@ a { color:inherit; }
           </div>
         </div>
 
-        <div style="margin:12px 0;">
-          <div style="display:grid;gap:8px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border:1px solid #e8ecf1;border-radius:6px;">
-              <strong style="font-size:13px;">赛中资料·基础版</strong>
-              <span style="font-size:12px;color:var(--text-sub);">赛中发布购买链接</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#f8faff;border:1px solid #d4e1f4;border-radius:6px;">
-              <strong style="font-size:13px;">赛中资料·进阶版</strong>
-              <a href="https://mbd.pub/o/bread/mbd-YZaUk5prag==" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;text-decoration:none;font-size:13px;">前往购买 ↗</a>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border:1px solid #e8ecf1;border-radius:6px;">
-              <strong style="font-size:13px;">赛中资料·完整版</strong>
-              <a href="https://mbd.pub/o/bread/mbd-YZaUk5praw==" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;text-decoration:none;font-size:13px;">前往购买 ↗</a>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#f8faff;border:1px solid #d4e1f4;border-radius:6px;">
-              <strong style="font-size:13px;">AI 定制思路</strong>
-              <a href="https://mbd.pub/o/bread/mbd-YZWYmJ9rZA==" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;text-decoration:none;font-size:13px;">前往购买 ↗</a>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border:1px solid #e8ecf1;border-radius:6px;">
-              <strong style="font-size:13px;">保奖班 / 限量版资料<br>论文检查 / 论文润色 / 全包</strong>
-              <a href="javascript:openLightbox('images/national-exam-resources.png')" style="color:var(--blue-mid);font-weight:700;cursor:pointer;text-decoration:none;font-size:13px;white-space:nowrap;margin-left:12px;">查看详情 ↗</a>
-            </div>
+        <!-- 国赛服务一览表 -->
+        <div class="svc-tabs">
+          <button class="svc-tab active" onclick="showSvcTab('group')">一对多服务</button>
+          <button class="svc-tab" onclick="showSvcTab('one')">一对一服务</button>
+        </div>
+
+        <!-- ═══════ 一对多服务 ═══════ -->
+        <div class="svc-panel active" id="svc-group">
+          <div style="overflow-x:auto;">
+          <table class="svc-table">
+            <thead>
+              <tr>
+                <th style="width:16%;">服务</th>
+                <th style="width:44%;">具体内容</th>
+                <th style="width:15%;">价格区间</th>
+                <th style="width:25%;">购买</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="svc-name-cell">保奖班</td>
+                <td class="svc-desc"><b>100% 稳定获奖</b>，不获奖全额退款【<span class="hl">需赛前上课备课</span>，赠赛中资料】<br><span class="rate-tag">获奖率 85%</span></td>
+                <td class="svc-price">250–400<span style="font-size:10px;">元</span><span class="sub">不获奖<b style="color:#1a8a50;">全额退</b></span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('保奖班')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">赛中资料<small>≈参考答案</small></td>
+                <td class="svc-desc"><b>3+ 篇论文</b> + <span class="hl">100+</span> 多种求解代码 + MATLAB/Python 两套代码 + AI 账号（GPT）+ 一对一解题思路定制<br><span class="rate-tag">获奖率 74%</span></td>
+                <td class="svc-price">9.99–125<span style="font-size:10px;">元</span><span class="sub">基础版 · 进阶版 · 完整版</span></td>
+                <td class="svc-buy">
+                  <a class="svc-buy-btn line" href="https://mbd.pub/o/bread/mbd-YZaUk5prag==" target="_blank" rel="noopener" style="margin-bottom:4px;">进阶版 ↗</a>
+                  <a class="svc-buy-btn" href="https://mbd.pub/o/bread/mbd-YZaUk5praw==" target="_blank" rel="noopener">完整版 ↗</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">AI 定制思路</td>
+                <td class="svc-desc">AI 智能体给出<b>专属定制解题思路</b> + 代码 + 完整可编辑 Word 文档【<span class="hl">可编辑可提交</span>】<br><span class="rate-tag gray">无法评估</span></td>
+                <td class="svc-price">10–99<span style="font-size:10px;">元</span><span class="sub">完整可编辑文档</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('AI定制思路')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">限量版赛中资料</td>
+                <td class="svc-desc">每赛题解题答案<b>仅售 <span class="hl">15 份</span></b> 限量版参考答案<br>先到先得 · 售罄即止<span class="rate-tag orange">获奖率 70%+</span></td>
+                <td class="svc-price">300–450<span style="font-size:10px;">元</span><span class="sub">每赛题仅 15 份</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn" href="https://mbd.pub/o/bread/YZaUm5ZtaQ==" target="_blank" rel="noopener">立即购买 ↗</a></td>
+              </tr>
+            </tbody>
+          </table>
           </div>
-          <div style="margin-top:12px;font-size:12px;color:var(--text-sub);text-align:center;">
-            ⏰ 赛前预定：7 月六折、8 月七折，赛中恢复原价
+          <div class="svc-note">
+            <b>💡 一对多服务说明：</b>具有较强的可复现性和标准化特征，价格较低但针对性较弱，适合自主性强、有一定基础的队伍。赛前预定可享 <b>8 折 ~ 7 折</b> 优惠，赛中恢复原价。基础版链接赛中发布。
           </div>
         </div>
 
-        <div class="paper-preview">
-          <div class="paper-preview-title">国赛资料一览</div>
-          <div class="paper-preview-desc">点击图片可放大查看完整服务清单</div>
-          <div class="paper-grid" style="grid-template-columns:1fr;">
-            <div class="paper-item" onclick="openLightbox('images/national-exam-resources.png')">
-              <img src="images/national-exam-resources.png" alt="国赛资料一览表" loading="lazy">
-              <div class="paper-item-cap">资料一览表</div>
-            </div>
+        <!-- ═══════ 一对一服务 ═══════ -->
+        <div class="svc-panel" id="svc-one">
+          <div style="overflow-x:auto;">
+          <table class="svc-table">
+            <thead>
+              <tr>
+                <th style="width:16%;">服务</th>
+                <th style="width:44%;">具体内容</th>
+                <th style="width:15%;">价格区间</th>
+                <th style="width:25%;">购买</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="svc-name-cell">AI 账号</td>
+                <td class="svc-desc">各种 AI —— 数模竞赛好用的<b>AI 大模型</b><br>性能 ≈ <span class="hl">DeepSeek 的 1.5–3 倍</span>【仅限数模竞赛】<br><span class="rate-tag gray">无法评估</span></td>
+                <td class="svc-price">5–140<span style="font-size:10px;">元</span><span class="sub">多档位可选</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('AI账号')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">论文检查</td>
+                <td class="svc-desc">录制 <b>15min</b> 论文问题讲解：摘要、可视化、排版、行文结构、模型框架等【<span class="hl">仅提出问题，不进行修改</span>】<br><span class="rate-tag">获奖率提升 +10%</span></td>
+                <td class="svc-price">199.99<span style="font-size:10px;">元</span><span class="sub">专家把脉</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('论文检查')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">论文润色</td>
+                <td class="svc-desc">基于论文检查结果，<b>写手老师亲自修改</b>【<span class="hl">不保奖</span>，尽力提高整体质量】<br><span class="rate-tag">获奖率提升 +20%</span></td>
+                <td class="svc-price">499.99<span style="font-size:10px;">元</span><span class="sub">写手亲改</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('论文润色')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">赛中指导<small>≈队伍第4人</small></td>
+                <td class="svc-desc">保证求解思路、使用模型；可进行<b>部分论文写作、代码编程</b>【<span class="hl">保奖</span>，根据队伍需求指定奖项 · 不获奖退 60%】<br><span class="rate-tag">获奖率 90%</span></td>
+                <td class="svc-price">1000–3000<span style="font-size:10px;">元</span><span style="font-size:10px;">+</span><span class="sub"><b>省奖</b>1000起 · <b>国奖</b>3000起</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('赛中指导')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">Skills 直出论文</td>
+                <td class="svc-desc">一对一定制<b>完整论文</b> —— 包含完整可直接提交的材料<br>按模型、思路、排版等全面定制<span class="rate-tag">获奖率 80%</span></td>
+                <td class="svc-price">666<span style="font-size:10px;">元</span><span class="sub">完整可提交</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('Skills直出论文')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">直出论文<span style="color:#C9A24B;font-size:10px;">【对赌】</span></td>
+                <td class="svc-desc">签订<b>对赌协议</b><br>不获奖退款，留 <span class="hl">150 元</span> 成本费，其余全退<span class="rate-tag">获奖率 80%</span></td>
+                <td class="svc-price">1111<span style="font-size:10px;">元</span><span class="sub">对赌 · 失败退</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('直出论文·对赌')">咨询购买</a></td>
+              </tr>
+              <tr>
+                <td class="svc-name-cell">全包服务</td>
+                <td class="svc-desc">如名 —— <b>啥也不干 躺着拿奖</b><br>包含论文 + 代码 + 思路 + AI账号 + 赛中指导 + 赛后答疑<span class="rate-tag">获奖率 90%</span></td>
+                <td class="svc-price">2000–9000<span style="font-size:10px;">元</span><span style="font-size:10px;">+</span><span class="sub"><b>省奖</b>2000起 · <b>国奖</b>9000起</span></td>
+                <td class="svc-buy"><a class="svc-buy-btn gold" href="javascript:openContactService('全包服务')">咨询购买</a></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="svc-note">
+            <b>💎 一对一服务说明：</b>具有高度个性化和针对性，根据队伍具体情况、水平、需求定制，价格较高但保证质量和效果，适合追求高奖项、时间紧张或基础薄弱的队伍。所有一对一服务<b>不享受赛前优惠</b>，需单独咨询客服。
           </div>
         </div>
       </div>
@@ -1422,6 +1531,31 @@ a { color:inherit; }
     <iframe id="exam-questions-iframe" src="" style="width:100%;height:800px;border:none;border-radius:8px;"></iframe>
   </div>
 </section>
+
+<!-- 联系客服模态框 -->
+<div id="contact-service-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;">
+    <div style="font-size:42px;margin-bottom:12px;">🤝</div>
+    <h2 style="font-size:22px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;"><span id="contact-service-name">该服务</span></h2>
+    <p style="font-size:13px;color:#666;margin:0 0 20px 0;">联系客服 · 一对一咨询</p>
+
+    <div style="background:#f8faff;padding:20px 18px;border-radius:10px;border:1.5px solid #d4e1f4;margin-bottom:16px;">
+      <p style="font-size:14px;color:#1e3c72;line-height:1.8;margin:0 0 12px 0;">
+        由于一对一服务为定制服务，<br>请添加客服微信：<br><br>
+        <span style="font-size:24px;font-weight:900;color:var(--accent);">bzdsxjm521</span>
+      </p>
+      <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:12px;font-size:12px;color:#666;line-height:1.9;">
+        备用客服：<strong style="color:#1a4fa8;">bzdsxjm520</strong> / <strong style="color:#1a4fa8;">BZD661188</strong><br>添加时请备注您咨询的服务
+      </div>
+    </div>
+
+    <div style="background:#fff8e8;border-left:4px solid #f5a623;padding:10px 14px;border-radius:0 6px 6px 0;font-size:12px;color:#5a4000;line-height:1.7;margin-bottom:20px;">
+      一对一服务不享受赛前优惠，具体报价请与客服沟通确认。
+    </div>
+
+    <button onclick="closeContactService()" style="background:#1e3c72;color:white;padding:10px 36px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">知道了</button>
+  </div>
+</div>
 
 <!-- 论文点评skills模态框 -->
 <div id="paper-review-skills-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
@@ -3171,6 +3305,29 @@ function openPaperReviewSkillsModal(){
 
 function closePaperReviewSkillsModal(){
   document.getElementById('paper-review-skills-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function showSvcTab(type){
+  document.querySelectorAll('.svc-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.svc-panel').forEach(p => p.classList.remove('active'));
+  if (type === 'group') {
+    document.getElementById('svc-group').classList.add('active');
+    document.querySelectorAll('.svc-tab')[0].classList.add('active');
+  } else {
+    document.getElementById('svc-one').classList.add('active');
+    document.querySelectorAll('.svc-tab')[1].classList.add('active');
+  }
+}
+
+function openContactService(name){
+  document.getElementById('contact-service-name').textContent = name;
+  document.getElementById('contact-service-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeContactService(){
+  document.getElementById('contact-service-modal').style.display = 'none';
   document.body.style.overflow = '';
 }
 
