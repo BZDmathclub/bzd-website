@@ -3887,19 +3887,25 @@ function renderAIModelsRanking(){
   const agentsContainer = document.getElementById('agents-container');
 
   // 大语言模型
-  llmContainer.innerHTML = data.largeLanguageModels.categories.map(cat => `
-    <div style="margin-bottom:20px;background:#f8faff;padding:15px;border-radius:8px;">
-      <h4 style="font-size:13px;color:#1e3c72;margin:0 0 10px 0;font-weight:700;">${cat.name}</h4>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-        ${cat.models.map(m => `
-          <span style="display:inline-block;background:white;border:1px solid #d4e1f4;border-radius:20px;padding:6px 14px;font-size:12px;color:#333;font-weight:600;">${m}</span>
-        `).join('')}
-      </div>
+  llmContainer.innerHTML = `
+    <div style="background:#e8f0fe;border:1px solid #c9d9f0;border-radius:8px;padding:10px 12px;margin-bottom:15px;font-size:11px;color:#1e3c72;">
+      ${data.largeLanguageModels.note}
+    </div>
+  ` + data.largeLanguageModels.categories.map(cat => `
+    <div style="margin-bottom:20px;background:#f8faff;padding:15px;border-radius:8px;border:1px solid #d4e1f4;">
+      <h4 style="font-size:13px;color:#1e3c72;margin:0 0 12px 0;font-weight:700;">${cat.name}</h4>
       ${cat.warning ? `
-        <div style="background:#fef3cd;border-left:3px solid #ff6b6b;padding:10px;border-radius:4px;font-size:11px;color:#666;line-height:1.6;">
+        <div style="background:#fef3cd;border-left:3px solid #ff6b6b;padding:10px;border-radius:4px;font-size:11px;color:#666;line-height:1.6;margin-bottom:12px;">
           ${cat.warning}
         </div>
       ` : ''}
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${cat.models.map((m, i) => `
+          <span style="display:inline-flex;align-items:center;background:white;border:1px solid #d4e1f4;border-radius:20px;padding:6px 12px;font-size:12px;color:#333;font-weight:600;">
+            <span style="display:inline-block;width:18px;height:18px;background:#1e3c72;color:white;border-radius:50%;text-align:center;line-height:18px;font-size:10px;margin-right:6px;font-weight:900;">${i+1}</span>${m}
+          </span>
+        `).join('')}
+      </div>
     </div>
   `).join('');
 

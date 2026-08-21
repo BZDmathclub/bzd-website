@@ -1,6 +1,7 @@
 window.AI_MODELS_RANKING = {
   largeLanguageModels: {
     title: '大语言模型',
+    note: '注：该排名参考AI测评网站+BZD数模社部分学生、写手老师匿名打分 综合评分结果',
     categories: [
       {
         name: '论文写作',
