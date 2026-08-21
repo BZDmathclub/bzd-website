@@ -22,9 +22,9 @@ window.AI_MODELS_RANKING = {
     title: '智能体排行',
     agents: [
       { name: '扣子数模智能体', votes: [145, 152, 24, 32] },
-      { name: 'ModelX', votes: [32, 112, 65, 98] },
-      { name: 'MRite', votes: [54, 34, 32, 12] },
-      { name: 'MMA', votes: [94, 157, 32, 24] }
+      { name: 'MathModelAgent', votes: [32, 112, 65, 98] },
+      { name: 'Modex', votes: [54, 34, 32, 12] },
+      { name: 'Mrite', votes: [94, 157, 32, 24] }
     ],
     levels: ['夯', '顶级', 'NPC', '拉']
   }
