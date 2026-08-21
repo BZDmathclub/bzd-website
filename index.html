@@ -1556,7 +1556,7 @@ a { color:inherit; }
     </div>
 
     <!-- AI模型排行榜 -->
-    <div class="nr-card" onclick="showPreparingAlert()">
+    <div class="nr-card" onclick="openAIModelsRankingModal()">
       <div class="badge-icon">
         <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
       </div>
@@ -1680,6 +1680,31 @@ a { color:inherit; }
       <p style="font-size:12px;color:#666;margin:0;line-height:1.8;">
         <strong>后续计划：</strong>还会加入其他 skills 分享，敬请期待！
       </p>
+    </div>
+  </div>
+</div>
+
+<!-- AI模型排行榜模态框 -->
+<div id="ai-models-ranking-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:90%;margin:20px auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        AI模型排行榜</h2>
+      <button onclick="closeAIModelsRankingModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <!-- 大语言模型部分 -->
+    <div style="margin-bottom:30px;">
+      <h3 style="font-size:16px;color:#1e3c72;margin:0 0 18px 0;font-weight:700;border-bottom:2px solid #e8f0fe;padding-bottom:10px;">大语言模型</h3>
+      <div id="llm-container"></div>
+    </div>
+
+    <!-- 智能体排行部分 -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-size:16px;color:#1e3c72;margin:0 0 18px 0;font-weight:700;border-bottom:2px solid #e8f0fe;padding-bottom:10px;">智能体排行（用户点评）</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 15px 0;">点击按钮给您认可的智能体投票，数字越高说明用户认可度越高</p>
+      <div id="agents-container"></div>
     </div>
   </div>
 </div>
@@ -3839,9 +3864,80 @@ groups.forEach(sel => {
   });
 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// AI 模型排行榜
+function openAIModelsRankingModal(){
+  document.getElementById('ai-models-ranking-modal').style.display = 'flex';
+  renderAIModelsRanking();
+}
+
+function closeAIModelsRankingModal(){
+  document.getElementById('ai-models-ranking-modal').style.display = 'none';
+}
+
+document.getElementById('ai-models-ranking-modal')?.addEventListener('click', e => {
+  if(e.target.id === 'ai-models-ranking-modal') closeAIModelsRankingModal();
+});
+
+function renderAIModelsRanking(){
+  if(!window.AI_MODELS_RANKING) return;
+
+  const data = window.AI_MODELS_RANKING;
+  const llmContainer = document.getElementById('llm-container');
+  const agentsContainer = document.getElementById('agents-container');
+
+  // 大语言模型
+  llmContainer.innerHTML = data.largeLanguageModels.categories.map(cat => `
+    <div style="margin-bottom:20px;background:#f8faff;padding:15px;border-radius:8px;">
+      <h4 style="font-size:13px;color:#1e3c72;margin:0 0 10px 0;font-weight:700;">${cat.name}</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        ${cat.models.map(m => `
+          <span style="display:inline-block;background:white;border:1px solid #d4e1f4;border-radius:20px;padding:6px 14px;font-size:12px;color:#333;font-weight:600;">${m}</span>
+        `).join('')}
+      </div>
+      ${cat.warning ? `
+        <div style="background:#fef3cd;border-left:3px solid #ff6b6b;padding:10px;border-radius:4px;font-size:11px;color:#666;line-height:1.6;">
+          ${cat.warning}
+        </div>
+      ` : ''}
+    </div>
+  `).join('');
+
+  // 智能体排行
+  agentsContainer.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;">
+      ${data.aiAgents.agents.map((agent, idx) => `
+        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:15px;text-align:center;">
+          <div style="font-size:13px;color:#1e3c72;font-weight:700;margin-bottom:12px;">${agent.name}</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;">
+            ${agent.votes.map((v, vi) => `
+              <div style="background:#f8faff;padding:8px;border-radius:6px;">
+                <div style="font-size:18px;font-weight:900;color:#1e3c72;">${v}</div>
+                <div style="font-size:10px;color:#666;margin-top:4px;font-weight:600;">${data.aiAgents.levels[vi]}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+            ${data.aiAgents.levels.map((level, li) => `
+              <button onclick="voteAgent(${idx},${li})" style="padding:6px 10px;background:#1e3c72;color:white;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;">投${level}</button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function voteAgent(agentIdx, levelIdx){
+  if(!window.AI_MODELS_RANKING) return;
+  const agent = window.AI_MODELS_RANKING.aiAgents.agents[agentIdx];
+  agent.votes[levelIdx]++;
+  renderAIModelsRanking();
+}
 </script>
 
 <script src="data/national-awards.js"></script>
 <script src="data/prompts.js"></script>
+<script src="data/ai-models-ranking.js"></script>
 </body>
 </html>
