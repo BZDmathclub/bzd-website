@@ -393,7 +393,12 @@ a { color:inherit; }
   letter-spacing:1px;
 }
 .paper-preview-title::before {
-  content:'📄'; margin-right:6px;
+  content:''; display:inline-block;
+  width:4px; height:14px;
+  background:var(--blue-mid);
+  border-radius:2px;
+  margin-right:8px;
+  vertical-align:-2px;
 }
 .paper-preview-desc {
   color:var(--text-sub);
@@ -564,6 +569,55 @@ a { color:inherit; }
 .svc-buy-btn.line{background:#fff;color:var(--blue-mid);border:1.5px solid var(--blue-mid);}
 .svc-note{margin-top:14px;padding:12px 16px;background:#f8faff;border:1px dashed var(--border);border-radius:8px;font-size:12px;color:var(--text-sub);line-height:1.8;}
 .svc-note b{color:var(--blue-deep);}
+
+/* ===== 国赛资料图标徽章 ===== */
+.nr-card{
+  display:flex; flex-direction:column; align-items:center;
+  padding:20px 14px;
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  cursor:pointer;
+  transition:transform .28s cubic-bezier(.4,0,.2,1), box-shadow .28s ease, border-color .28s ease;
+}
+.nr-card:nth-child(odd){ background:#f8faff; border-color:#d4e1f4; }
+.nr-card:hover{
+  transform:translateY(-4px);
+  border-color:#a9c6ec;
+  box-shadow:0 10px 28px rgba(28,78,150,.14);
+}
+.badge-icon{
+  width:54px; height:54px;
+  margin-bottom:11px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:15px;
+  background:linear-gradient(145deg, #f7fbff 0%, #e7f1fc 100%);
+  border:1.5px solid #d2e2f6;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 3px 10px rgba(28,78,150,.08);
+  transition:background .28s ease, border-color .28s ease, box-shadow .28s ease, transform .28s ease;
+}
+.badge-icon svg{
+  width:27px; height:27px;
+  fill:none;
+  stroke:var(--blue-mid);
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:stroke .28s ease, transform .28s ease;
+}
+.nr-card:hover .badge-icon{
+  background:linear-gradient(145deg, var(--blue-deep) 0%, var(--blue-mid) 100%);
+  border-color:var(--blue-mid);
+  box-shadow:0 8px 18px rgba(12,29,62,.32);
+  transform:translateY(-2px);
+}
+.nr-card:hover .badge-icon svg{ stroke:#fff; transform:scale(1.06); }
+.nr-card-title{
+  font-weight:700; font-size:13px;
+  text-align:center; color:var(--text-main);
+  margin-bottom:4px;
+}
+.nr-card-sub{ font-size:11px; color:var(--text-sub); text-align:center; }
 .sch-foot {
   background:var(--blue-bg);
   padding:14px 22px;
@@ -1448,80 +1502,102 @@ a { color:inherit; }
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:20px;">
 
     <!-- 近年题目速览 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="toggleExamQuestions()">
-      <div style="font-size:32px;margin-bottom:8px;">📋</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">近年题目速览</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">往届赛题汇总</div>
+    <div class="nr-card" onclick="toggleExamQuestions()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>
+      </div>
+      <div class="nr-card-title">近年题目速览</div>
+      <div class="nr-card-sub">往届赛题汇总</div>
     </div>
 
     <!-- AI提示词库 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openAIPromptsModal()">
-      <div style="font-size:32px;margin-bottom:8px;">✨</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">AI提示词库</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">数模竞赛专用</div>
+    <div class="nr-card" onclick="openAIPromptsModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
+      </div>
+      <div class="nr-card-title">AI提示词库</div>
+      <div class="nr-card-sub">数模竞赛专用</div>
     </div>
 
     <!-- 论文模板 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openPaperTemplateModal()">
-      <div style="font-size:32px;margin-bottom:8px;">📄</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">论文模板</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;"></div>
+    <div class="nr-card" onclick="openPaperTemplateModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>
+      </div>
+      <div class="nr-card-title">论文模板</div>
+      <div class="nr-card-sub">标准格式</div>
     </div>
 
     <!-- 优秀论文 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openExcellentPaperModal()">
-      <div style="font-size:32px;margin-bottom:8px;">🏆</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">优秀论文</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">往届获奖论文</div>
+    <div class="nr-card" onclick="openExcellentPaperModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+      </div>
+      <div class="nr-card-title">优秀论文</div>
+      <div class="nr-card-sub">往届获奖论文</div>
     </div>
 
     <!-- 高分得分技巧 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
-      <div style="font-size:32px;margin-bottom:8px;">⚡</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">高分得分技巧</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">评审要点</div>
+    <div class="nr-card" onclick="showPreparingAlert()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="nr-card-title">高分得分技巧</div>
+      <div class="nr-card-sub">评审要点</div>
     </div>
 
     <!-- 必备工具 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
-      <div style="font-size:32px;margin-bottom:8px;">🛠️</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">必备工具</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">好用数模工具集合</div>
+    <div class="nr-card" onclick="showPreparingAlert()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="nr-card-title">必备工具</div>
+      <div class="nr-card-sub">好用数模工具集合</div>
     </div>
 
     <!-- AI模型排行榜 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
-      <div style="font-size:32px;margin-bottom:8px;">🤖</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">AI模型排行榜</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">仅限数模领域</div>
+    <div class="nr-card" onclick="showPreparingAlert()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+      </div>
+      <div class="nr-card-title">AI模型排行榜</div>
+      <div class="nr-card-sub">仅限数模领域</div>
     </div>
 
     <!-- skills分享 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openPaperReviewSkillsModal()">
-      <div style="font-size:32px;margin-bottom:8px;">💡</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">skills分享</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">实用技巧</div>
+    <div class="nr-card" onclick="openPaperReviewSkillsModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="nr-card-title">skills分享</div>
+      <div class="nr-card-sub">实用技巧</div>
     </div>
 
     <!-- 国赛赛题复盘 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="showPreparingAlert()">
-      <div style="font-size:32px;margin-bottom:8px;">🔍</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">国赛赛题复盘</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">4年深度解析</div>
+    <div class="nr-card" onclick="showPreparingAlert()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </div>
+      <div class="nr-card-title">国赛赛题复盘</div>
+      <div class="nr-card-sub">4年深度解析</div>
     </div>
 
     <!-- 选题分析 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#fff;border:1.5px solid #e8ecf1;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openChoiceAnalysis()">
-      <div style="font-size:32px;margin-bottom:8px;">📈</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">选题分析</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">选题趋势分析</div>
+    <div class="nr-card" onclick="openChoiceAnalysis()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <div class="nr-card-title">选题分析</div>
+      <div class="nr-card-sub">选题趋势分析</div>
     </div>
 
     <!-- 国奖名额查询 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:18px 14px;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;cursor:pointer;transition:all 0.3s ease;" onclick="openAwardQueryModal()">
-      <div style="font-size:32px;margin-bottom:8px;">🏅</div>
-      <div style="font-weight:700;font-size:13px;text-align:center;color:var(--text-main);margin-bottom:4px;">国奖名额查询</div>
-      <div style="font-size:11px;color:var(--text-sub);text-align:center;">高校历年国奖</div>
+    <div class="nr-card" onclick="openAwardQueryModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      </div>
+      <div class="nr-card-title">国奖名额查询</div>
+      <div class="nr-card-sub">高校历年国奖</div>
     </div>
 
   </div>
@@ -1535,7 +1611,9 @@ a { color:inherit; }
 <!-- 联系客服模态框 -->
 <div id="contact-service-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;">
-    <div style="font-size:42px;margin-bottom:12px;">🤝</div>
+    <div style="width:58px;height:58px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:linear-gradient(145deg,#f7fbff 0%,#e7f1fc 100%);border:1.5px solid #d2e2f6;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 3px 10px rgba(28,78,150,.08);">
+      <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </div>
     <h2 style="font-size:22px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;"><span id="contact-service-name">该服务</span></h2>
     <p style="font-size:13px;color:#666;margin:0 0 20px 0;">联系客服 · 一对一咨询</p>
 
@@ -1561,7 +1639,9 @@ a { color:inherit; }
 <div id="paper-review-skills-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:700px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">📝 论文点评 Skill 分享</h2>
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        论文点评 Skill 分享</h2>
       <button onclick="closePaperReviewSkillsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
 
@@ -1588,7 +1668,9 @@ a { color:inherit; }
       </div>
 
       <div style="background:#e8f0fe;padding:15px;border-radius:8px;margin-bottom:15px;">
-        <p style="font-size:12px;color:#1e3c72;margin:0 0 10px 0;font-weight:600;">🚀 体验和反馈：</p>
+        <p style="font-size:12px;color:#1e3c72;margin:0 0 10px 0;font-weight:600;display:flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" style="width:15px;height:15px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          体验和反馈：</p>
         <p style="font-size:12px;color:#333;margin:0 0 10px 0;">感兴趣的同学可以自行体验，也欢迎反馈测试结果与改进建议。</p>
         <a href="https://github.com/BZDmathclub/BZD-review-paper.git" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:10px 16px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;cursor:pointer;border:none;">访问 GitHub 项目 ↗</a>
       </div>
@@ -1606,7 +1688,9 @@ a { color:inherit; }
 <div id="award-query-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:760px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">🏅 国奖名额查询</h2>
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        国奖名额查询</h2>
       <button onclick="closeAwardQueryModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
 
@@ -1634,7 +1718,9 @@ a { color:inherit; }
 <div id="choice-analysis-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">📈 选题趋势分析（2021-2025）</h2>
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        选题趋势分析（2021-2025）</h2>
       <button onclick="closeChoiceAnalysis()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
 
@@ -1667,7 +1753,9 @@ a { color:inherit; }
 <div id="paper-template-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;">📄 论文模板</h2>
+      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:21px;height:21px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        论文模板</h2>
       <button onclick="closePaperTemplateModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
     <div style="background:#f8faff;padding:20px;border-radius:10px;border:1px solid #d4e1f4;">
@@ -1689,7 +1777,9 @@ a { color:inherit; }
 <div id="excellent-paper-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;">🏆 优秀论文</h2>
+      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:21px;height:21px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        优秀论文</h2>
       <button onclick="closeExcellentPaperModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
     <div style="background:#f8faff;padding:20px;border-radius:10px;border:1px solid #d4e1f4;">
@@ -1704,7 +1794,9 @@ a { color:inherit; }
         <p style="font-size:12px;color:#1e3c72;margin:0 0 15px 0;font-family:monospace;font-weight:600;">sxjm</p>
       </div>
       <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px;margin-bottom:15px;">
-        <p style="font-size:12px;color:#856404;margin:0;font-weight:600;">📝 今年优秀论文 正在补充中</p>
+        <p style="font-size:12px;color:#856404;margin:0;font-weight:600;display:flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" style="width:15px;height:15px;flex-shrink:0;fill:none;stroke:#856404;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          今年优秀论文 正在补充中</p>
       </div>
       <a href="https://pan.baidu.com/s/1PXYWMfJxlmwq5xcRkurI8A" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;border:none;">打开网盘链接</a>
     </div>
@@ -1715,7 +1807,9 @@ a { color:inherit; }
 <div id="ai-prompts-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">✨ AI提示词库</h2>
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
+        AI提示词库</h2>
       <button onclick="closeAIPromptsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
 
@@ -1805,7 +1899,9 @@ a { color:inherit; }
       </div>
     </div>
 
-    <p style="font-size:12px;color:#999;margin:0;text-align:center;">💡 点击"复制"按钮一键复制提示词到剪贴板</p>
+    <p style="font-size:12px;color:#999;margin:0;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;flex-shrink:0;fill:none;stroke:#999;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+      点击"复制"按钮一键复制提示词到剪贴板</p>
   </div>
 </div>
 
@@ -3171,30 +3267,40 @@ a { color:inherit; }
   <div class="agent-wrap">
     <p class="agent-intro">无需囤货 · 无需押金 · 无需售后，官方全程资料支持，你只需引流推广即可获得稳定收益。</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px;">
-      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">🏅</div>
-        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">官方授权</div>
-        <div style="font-size:12px;color:var(--text-light);">正规推广资格</div>
+      <div class="nr-card">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="nr-card-title">官方授权</div>
+        <div class="nr-card-sub">正规推广资格</div>
       </div>
-      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">📦</div>
-        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">零成本启动</div>
-        <div style="font-size:12px;color:var(--text-light);">无需囤货押金</div>
+      <div class="nr-card">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="nr-card-title">零成本启动</div>
+        <div class="nr-card-sub">无需囤货押金</div>
       </div>
-      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">🤖</div>
-        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">官方全程支持</div>
-        <div style="font-size:12px;color:var(--text-light);">资料·答疑·AI工具</div>
+      <div class="nr-card">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <div class="nr-card-title">官方全程支持</div>
+        <div class="nr-card-sub">资料·答疑·AI工具</div>
       </div>
-      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">💰</div>
-        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">稳定收益</div>
-        <div style="font-size:12px;color:var(--text-light);">线上引流即可</div>
+      <div class="nr-card">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="nr-card-title">稳定收益</div>
+        <div class="nr-card-sub">线上引流即可</div>
       </div>
-      <div style="background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">♾️</div>
-        <div style="font-weight:900;color:var(--blue-deep);font-size:13.5px;margin-bottom:4px;">终身卡权益</div>
-        <div style="font-size:12px;color:var(--text-light);">资料·论文·软著</div>
+      <div class="nr-card">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8C.305 8 .305 16 5.44 16c5.605 0 7.643-8 12.739-8z"/></svg>
+        </div>
+        <div class="nr-card-title">终身卡权益</div>
+        <div class="nr-card-sub">资料·论文·软著</div>
       </div>
     </div>
     <div class="agent-how">
