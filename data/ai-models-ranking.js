@@ -6,7 +6,7 @@ window.AI_MODELS_RANKING = {
       {
         name: '论文写作',
         models: ['GPT-4', 'Gemini', 'Claude', 'Grok', '豆包', 'DeepSeek'],
-        warning: '⚠️ 警告：国内AI模型很难通过知网AIGC检测，非常建议使用国内AI进行论文写作'
+        warning: '⚠️ 警告：国内AI模型很难通过知网AIGC检测，非常建议使用非国产AI进行论文写作'
       },
       {
         name: '模型求解',
