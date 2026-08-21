@@ -1703,7 +1703,16 @@ a { color:inherit; }
     <!-- 智能体排行部分 -->
     <div style="margin-bottom:20px;">
       <h3 style="font-size:16px;color:#1e3c72;margin:0 0 18px 0;font-weight:700;border-bottom:2px solid #e8f0fe;padding-bottom:10px;">智能体排行（用户点评）</h3>
-      <p style="font-size:12px;color:#666;margin:0 0 15px 0;">点击按钮给您认可的智能体投票，数字越高说明用户认可度越高</p>
+      <p style="font-size:12px;color:#666;margin:0 0 15px 0;">选择评级分类查看排行，点击按钮投票给认可的智能体</p>
+
+      <!-- 评级 Tab -->
+      <div style="display:flex;gap:8px;margin-bottom:15px;border-bottom:1px solid #e0e8f0;padding-bottom:0;">
+        <button onclick="switchAgentTab(0)" class="agent-tab-btn active" style="padding:10px 16px;background:none;border:none;border-bottom:3px solid #1e3c72;color:#1e3c72;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.3s;">夯</button>
+        <button onclick="switchAgentTab(1)" class="agent-tab-btn" style="padding:10px 16px;background:none;border:none;border-bottom:2px solid transparent;color:#999;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.3s;">顶级</button>
+        <button onclick="switchAgentTab(2)" class="agent-tab-btn" style="padding:10px 16px;background:none;border:none;border-bottom:2px solid transparent;color:#999;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.3s;">NPC</button>
+        <button onclick="switchAgentTab(3)" class="agent-tab-btn" style="padding:10px 16px;background:none;border:none;border-bottom:2px solid transparent;color:#999;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.3s;">拉</button>
+      </div>
+
       <div id="agents-container"></div>
     </div>
   </div>
@@ -3867,6 +3876,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 // AI 模型排行榜
 function openAIModelsRankingModal(){
+  window.currentAgentTab = 0;
   document.getElementById('ai-models-ranking-modal').style.display = 'flex';
   renderAIModelsRanking();
 }
@@ -3885,6 +3895,7 @@ function renderAIModelsRanking(){
   const data = window.AI_MODELS_RANKING;
   const llmContainer = document.getElementById('llm-container');
   const agentsContainer = document.getElementById('agents-container');
+  const currentTab = window.currentAgentTab || 0;
 
   // 大语言模型
   llmContainer.innerHTML = `
@@ -3909,29 +3920,46 @@ function renderAIModelsRanking(){
     </div>
   `).join('');
 
-  // 智能体排行
+  // 更新 Tab 样式
+  document.querySelectorAll('.agent-tab-btn').forEach((btn, i) => {
+    if(i === currentTab){
+      btn.classList.add('active');
+      btn.style.borderBottomColor = '#1e3c72';
+      btn.style.color = '#1e3c72';
+      btn.style.borderBottomWidth = '3px';
+    } else {
+      btn.classList.remove('active');
+      btn.style.borderBottomColor = 'transparent';
+      btn.style.color = '#999';
+      btn.style.borderBottomWidth = '2px';
+    }
+  });
+
+  // 智能体排行（按当前 Tab 分类显示）
+  const sortedAgents = data.aiAgents.agents
+    .map((agent, idx) => ({ ...agent, idx, score: agent.votes[currentTab] }))
+    .sort((a, b) => b.score - a.score);
+
   agentsContainer.innerHTML = `
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;">
-      ${data.aiAgents.agents.map((agent, idx) => `
-        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:15px;text-align:center;">
+      ${sortedAgents.map((agent, rank) => `
+        <div style="background:white;border:1px solid #d4e1f4;border-radius:8px;padding:15px;text-align:center;position:relative;">
+          ${rank === 0 ? '<div style="position:absolute;top:0;right:0;background:#ffc107;color:#333;padding:4px 8px;border-radius:0 8px;font-size:10px;font-weight:700;">第一🏆</div>' : ''}
           <div style="font-size:13px;color:#1e3c72;font-weight:700;margin-bottom:12px;">${agent.name}</div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;">
-            ${agent.votes.map((v, vi) => `
-              <div style="background:#f8faff;padding:8px;border-radius:6px;">
-                <div style="font-size:18px;font-weight:900;color:#1e3c72;">${v}</div>
-                <div style="font-size:10px;color:#666;margin-top:4px;font-weight:600;">${data.aiAgents.levels[vi]}</div>
-              </div>
-            `).join('')}
+          <div style="background:#e8f0fe;padding:12px;border-radius:6px;margin-bottom:12px;">
+            <div style="font-size:28px;font-weight:900;color:#1e3c72;margin-bottom:4px;">${agent.score}</div>
+            <div style="font-size:11px;color:#666;font-weight:600;">${data.aiAgents.levels[currentTab]} 评分</div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
-            ${data.aiAgents.levels.map((level, li) => `
-              <button onclick="voteAgent(${idx},${li})" style="padding:6px 10px;background:#1e3c72;color:white;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;">投${level}</button>
-            `).join('')}
-          </div>
+          <button onclick="voteAgent(${agent.idx},${currentTab})" style="width:100%;padding:8px;background:#1e3c72;color:white;border:none;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;">投${data.aiAgents.levels[currentTab]}</button>
         </div>
       `).join('')}
     </div>
   `;
+}
+
+function switchAgentTab(tabIdx){
+  window.currentAgentTab = tabIdx;
+  renderAIModelsRanking();
 }
 
 function voteAgent(agentIdx, levelIdx){
