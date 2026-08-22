@@ -1591,6 +1591,15 @@ a { color:inherit; }
       <div class="nr-card-sub">选题趋势分析</div>
     </div>
 
+    <!-- 赛区获奖率 -->
+    <div class="nr-card" onclick="openRegionAwardsModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z" fill="currentColor" stroke="none"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+      </div>
+      <div class="nr-card-title">赛区获奖率</div>
+      <div class="nr-card-sub">各省份获奖统计</div>
+    </div>
+
     <!-- 国奖名额查询 -->
     <div class="nr-card" onclick="openAwardQueryModal()">
       <div class="badge-icon">
@@ -1844,6 +1853,49 @@ a { color:inherit; }
         </p>
       </div>
       <a href="https://pan.baidu.com/s/1HZtQeB28r7l7tjpqJ5QVPQ" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;border:none;">打开网盘链接</a>
+    </div>
+  </div>
+</div>
+
+<!-- 赛区获奖率模态框 -->
+<div id="region-awards-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:1000px;width:95%;margin:20px auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">赛区获奖率统计</h2>
+      <button onclick="closeRegionAwardsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <div style="background:#f8faff;padding:15px;border-radius:8px;margin-bottom:20px;font-size:12px;color:#666;line-height:1.8;">
+      <strong>注释：</strong>各省份竞赛举办网络收集；赛区获奖率计算方式各不相同，部分赛区分母为有效参赛队（剔除无效、查重不过等），部分为完整参赛队数；通常省奖获奖率约 40%，但高达 70-80% 或低至 23% 均属正常。
+    </div>
+
+    <!-- 搜索框 -->
+    <div style="margin-bottom:15px;display:flex;gap:8px;">
+      <input id="region-search" type="text" placeholder="搜索赛区名称..." onkeyup="searchRegions()" style="flex:1;padding:10px;border:1px solid #d4e1f4;border-radius:6px;font-size:13px;">
+      <button onclick="clearRegionSearch()" style="padding:10px 16px;background:#e8f0fe;color:#1e3c72;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:12px;">清除</button>
+    </div>
+
+    <!-- 表格 -->
+    <div style="overflow-x:auto;max-height:600px;overflow-y:auto;border:1px solid #d4e1f4;border-radius:8px;">
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead style="background:#f8faff;position:sticky;top:0;z-index:10;">
+          <tr>
+            <th style="padding:10px;text-align:left;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">赛区</th>
+            <th style="padding:10px;text-align:center;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">参赛总队</th>
+            <th style="padding:10px;text-align:center;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">推送国奖队数</th>
+            <th style="padding:10px;text-align:center;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">省一</th>
+            <th style="padding:10px;text-align:center;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">省二</th>
+            <th style="padding:10px;text-align:center;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">省三</th>
+            <th style="padding:10px;text-align:center;border-bottom:1.5px solid #d4e1f4;font-weight:700;color:#1e3c72;">总获奖率</th>
+          </tr>
+        </thead>
+        <tbody id="region-table-body">
+        </tbody>
+      </table>
+    </div>
+
+    <div style="text-align:center;margin-top:15px;font-size:11px;color:#999;">
+      BZD 数模社收集整理 | 具体资料见官网 <a href="http://bzdshumo.com/" target="_blank" style="color:#1e3c72;text-decoration:none;font-weight:600;">bzdshumo.com</a>
     </div>
   </div>
 </div>
@@ -4005,10 +4057,66 @@ function voteAgent(agentIdx, levelIdx){
 
   renderAIModelsRanking();
 }
+
+// 赛区获奖率
+function openRegionAwardsModal(){
+  document.getElementById('region-awards-modal').style.display = 'flex';
+  renderRegionAwardsTable();
+}
+
+function closeRegionAwardsModal(){
+  document.getElementById('region-awards-modal').style.display = 'none';
+}
+
+document.getElementById('region-awards-modal')?.addEventListener('click', e => {
+  if(e.target.id === 'region-awards-modal') closeRegionAwardsModal();
+});
+
+function renderRegionAwardsTable(){
+  if(!window.REGION_AWARDS) return;
+  const tbody = document.getElementById('region-table-body');
+  tbody.innerHTML = window.REGION_AWARDS.map(r => `
+    <tr style="border-bottom:1px solid #e8ecf1;">
+      <td style="padding:10px;text-align:left;font-weight:600;color:#1e3c72;">${r.region}</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.total}</td>
+      <td style="padding:10px;text-align:center;font-weight:700;color:#2a5298;">${r.national}</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.one.toFixed(2)}%</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.two.toFixed(2)}%</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.three.toFixed(2)}%</td>
+      <td style="padding:10px;text-align:center;font-weight:700;color:#1e3c72;background:${r.sum > 50 ? '#e8f5e9' : r.sum < 35 ? '#fff3e0' : '#f5f5f5'};">${r.sum.toFixed(2)}%</td>
+    </tr>
+  `).join('');
+}
+
+function searchRegions(){
+  const query = document.getElementById('region-search').value.toLowerCase();
+  if(!window.REGION_AWARDS) return;
+
+  const tbody = document.getElementById('region-table-body');
+  tbody.innerHTML = window.REGION_AWARDS
+    .filter(r => r.region.toLowerCase().includes(query))
+    .map(r => `
+    <tr style="border-bottom:1px solid #e8ecf1;">
+      <td style="padding:10px;text-align:left;font-weight:600;color:#1e3c72;">${r.region}</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.total}</td>
+      <td style="padding:10px;text-align:center;font-weight:700;color:#2a5298;">${r.national}</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.one.toFixed(2)}%</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.two.toFixed(2)}%</td>
+      <td style="padding:10px;text-align:center;color:#333;">${r.three.toFixed(2)}%</td>
+      <td style="padding:10px;text-align:center;font-weight:700;color:#1e3c72;background:${r.sum > 50 ? '#e8f5e9' : r.sum < 35 ? '#fff3e0' : '#f5f5f5'};">${r.sum.toFixed(2)}%</td>
+    </tr>
+  `).join('');
+}
+
+function clearRegionSearch(){
+  document.getElementById('region-search').value = '';
+  renderRegionAwardsTable();
+}
 </script>
 
 <script src="data/national-awards.js"></script>
 <script src="data/prompts.js"></script>
 <script src="data/ai-models-ranking.js?v=2"></script>
+<script src="data/region-awards.js"></script>
 </body>
 </html>
