@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高教社杯数学建模竞赛 - 奋斗30天，拿国奖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+            background-color: #FFFFFF;
+            color: #3A424E;
+            line-height: 1.8;
+        }
+
+        /* 封面区域 */
+        .cover {
+            background: linear-gradient(180deg, #F0F6FC 0%, #E1ECF9 100%);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #4A73A8;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: 40px;
+            right: 30px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(253, 230, 225, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .countdown-badge {
+            display: inline-block;
+            background-color: #F28C78;
+            color: #FFFFFF;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .cover h1 {
+            font-size: 48px;
+            color: #4A73A8;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .cover .subtitle {
+            font-size: 24px;
+            color: #F28C78;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .cover p {
+            font-size: 18px;
+            color: #3A424E;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* 分割线 */
+        .divider {
+            height: 2px;
+            background-color: #D8E1EB;
+            margin: 60px 0;
+        }
+
+        /* 章节标题 */
+        .section-title {
+            font-size: 32px;
+            color: #4A73A8;
+            margin-bottom: 10px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #4A73A8;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: #86909C;
+            margin-bottom: 40px;
+            margin-top: 5px;
+        }
+
+        /* 卡片 */
+        .card {
+            background-color: #F0F6FC;
+            border-left: 4px solid #4A73A8;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .card h3 {
+            color: #4A73A8;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-content {
+            color: #3A424E;
+            line-height: 1.8;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-content li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .card-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #F28C78;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* 重点标注 */
+        .highlight {
+            color: #F28C78;
+            font-weight: 600;
+            background-color: rgba(242, 140, 120, 0.08);
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+
+        /* 两列布局 */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .column-item h4 {
+            color: #4A73A8;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .column-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .column-item li {
+            margin-bottom: 10px;
+            padding-left: 24px;
+            position: relative;
+            color: #3A424E;
+            font-size: 15px;
+        }
+
+        .column-item li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #F28C78;
+            font-weight: bold;
+        }
+
+        /* 时间表 */
+        .timeline {
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #D8E1EB;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #F28C78;
+            border-radius: 50%;
+            margin-top: 6px;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h5 {
+            color: #4A73A8;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: #86909C;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+            font-size: 14px;
+            color: #3A424E;
+        }
+
+        .timeline-content li {
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .timeline-content li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            color: #F28C78;
+        }
+
+        /* 信息框 */
+        .info-box {
+            background-color: #F0F6FC;
+            border: 1px solid #D8E1EB;
+            padding: 25px;
+            border-radius: 4px;
+            margin: 30px 0;
+        }
+
+        .info-box strong {
+            color: #F28C78;
+        }
+
+        /* 按钮 */
+        .btn {
+            display: inline-block;
+            background-color: #F28C78;
+            color: #FFFFFF;
+            padding: 14px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #E67A5E;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: #F0F6FC;
+            padding: 40px;
+            text-align: center;
+            color: #86909C;
+            font-size: 14px;
+            margin-top: 60px;
+            border-top: 1px solid #D8E1EB;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 32px;
+            }
+
+            .cover .subtitle {
+                font-size: 18px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 封面 -->
+    <div class="cover">
+        <div class="cover-content">
+            <div class="countdown-badge">⏱ 倒计时 第30天</div>
+            <h1>高教社杯数学建模竞赛</h1>
+            <p class="subtitle">奋斗30天，拿国奖！！！！！</p>
+            <p>AI时代下的数模竞赛新思路<br>30天蜕变计划·完整教学大纲</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 核心理念 -->
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="color: #4A73A8; font-size: 24px; margin-bottom: 20px;">核心理念</h2>
+            <p style="font-size: 18px; color: #3A424E; max-width: 800px; margin: 0 auto; line-height: 2;">
+                AI工具能快速完成<span class="highlight">80%的工作量</span>，<br>
+                最后<span class="highlight">20%的工作</span>需要人为修正补充。<br>
+                因此30天授课分为两大板块：
+            </p>
+        </div>
+
+        <!-- 板块一：AI使用教学 -->
+        <div style="margin-bottom: 60px;">
+            <div class="section-title">板块一：AI在数模竞赛中的使用教学</div>
+            <div class="section-subtitle">掌握AI工具，高效完成80%工作量</div>
+
+            <div class="two-column">
+                <div class="column-item">
+                    <h4>基础认知</h4>
+                    <ul>
+                        <li>AI+数模概况</li>
+                        <li>正确合理合规使用AI</li>
+                        <li>国赛AI使用规范</li>
+                        <li>AI伦理与学术诚实</li>
+                    </ul>
+                </div>
+                <div class="column-item">
+                    <h4>工具与资源</h4>
+                    <ul>
+                        <li>竞赛专用AI提示词库</li>
+                        <li>适配数模的AI大模型排行榜</li>
+                        <li>分场景AI工具推荐</li>
+                        <li>数模竞赛好用的Skills分享</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>专题深度课程</h3>
+                <div class="card-content">
+                    <ul>
+                        <li><span class="highlight">论文评价Skills</span> - 制作分享与实操</li>
+                        <li><span class="highlight">全流程自动解题Skills</span> - 从题目到论文的自动化</li>
+                        <li><span class="highlight">绘图Skills</span> - 高质量可视化生成</li>
+                        <li><span class="highlight">写作Skills</span> - 学术文章自动生成与优化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 板块二：竞赛基础内容 -->
+        <div style="margin-bottom: 60px;">
+            <div class="section-title">板块二：数模竞赛基础内容</div>
+            <div class="section-subtitle">打牢基础，理解评分逻辑，掌握制胜技巧</div>
+
+            <div class="two-column">
+                <div class="column-item">
+                    <h4>竞赛规则与评审</h4>
+                    <ul>
+                        <li>竞赛完整概况</li>
+                        <li>论文模板详解</li>
+                        <li>竞赛完整评审流程</li>
+                        <li>官方评分细则</li>
+                        <li>国赛高分得分技巧</li>
+                    </ul>
+                </div>
+                <div class="column-item">
+                    <h4>资料与实战</h4>
+                    <ul>
+                        <li>往届国赛优秀范文</li>
+                        <li>必备工具全套教程</li>
+                        <li>实用技巧干货合集</li>
+                        <li>近四年国赛赛题复盘</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>复盘内容（近四年国赛）</h3>
+                <div class="card-content">
+                    <ul>
+                        <li>论文写作思路分析</li>
+                        <li>模型求解方案详解</li>
+                        <li>完整可运行代码示例</li>
+                        <li>高分方案对比学习</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 30天学习规划 -->
+        <div style="margin-bottom: 60px;">
+            <div class="section-title">30天完整学习规划</div>
+            <div class="section-subtitle">每天一个主题，循序渐进掌握竞赛秘籍</div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h5>第1-5天：基础认知阶段</h5>
+                        <p>打好基础，了解竞赛全貌与AI时代的新机遇</p>
+                        <ul>
+                            <li>数学建模竞赛概况与赛制</li>
+                            <li>AI在建模中的角色与规范</li>
+                            <li>国赛评分体系深度解读</li>
+                            <li>论文结构与评审流程</li>
+                            <li>学习工具与资源介绍</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h5>第6-12天：AI工具训练阶段</h5>
+                        <p>掌握AI工具的正确使用方式，学会写有效的提示词</p>
+                        <ul>
+                            <li>主流AI大模型对比与选择</li>
+                            <li>竞赛专用提示词库构建</li>
+                            <li>AI解题能力评估与优化</li>
+                            <li>绘图与数据可视化自动化</li>
+                            <li>论文初稿生成与改进技巧</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h5>第13-20天：竞赛技巧精训阶段</h5>
+                        <p>学习高分论文的共同特征，掌握竞赛制胜技巧</p>
+                        <ul>
+                            <li>国赛高分范文深度分析</li>
+                            <li>论文写作的关键要素</li>
+                            <li>建模思路与模型选择</li>
+                            <li>数据分析与结果展示</li>
+                            <li>常见易错点与规避方法</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h5>第21-28天：实战案例复盘阶段</h5>
+                        <p>深入分析往届国赛题目，学习各类问题的完整解决方案</p>
+                        <ul>
+                            <li>近4年全部国赛赛题复盘</li>
+                            <li>模型求解方案与代码实现</li>
+                            <li>论文框架与内容组织</li>
+                            <li>自动化Skills在实战中的应用</li>
+                            <li>不同题型的通用策略</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h5>第29-30天：冲刺与答疑阶段</h5>
+                        <p>查漏补缺，最后的精细化打磨与答疑解惑</p>
+                        <ul>
+                            <li>前期内容回顾与强化</li>
+                            <li>常见问题集中答疑</li>
+                            <li>团队协作与时间管理</li>
+                            <li>竞赛前最后准备清单</li>
+                            <li>心理建设与临场应对</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 课程亮点 -->
+        <div style="margin-bottom: 60px;">
+            <div class="section-title">课程核心亮点</div>
+            <div class="section-subtitle">为什么这个30天计划值得加入</div>
+
+            <div class="two-column">
+                <div class="card">
+                    <h3>🎯 高效赋能</h3>
+                    <div class="card-content">
+                        <p>深度融合AI工具与竞赛实战，让AI为你的解题赋能，而不是替代思考。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>📚 系统完整</h3>
+                    <div class="card-content">
+                        <p>从基础认知到实战案例，覆盖竞赛全流程，包含往届国赛完整复盘。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>💡 前沿方法论</h3>
+                    <div class="card-content">
+                        <p>基于最新AI能力，构建适应数模竞赛的工具体系与提示词库。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🏆 国赛导向</h3>
+                    <div class="card-content">
+                        <p>深度解读国赛评分规则，直指高分论文的核心特征与制胜策略。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 学习成果 -->
+        <div style="margin-bottom: 60px;">
+            <div class="section-title">你将获得</div>
+            <div class="section-subtitle">完成30天课程后的核心收获</div>
+
+            <div class="card">
+                <div class="card-content">
+                    <ul>
+                        <li>深入理解国赛评分体系与评审逻辑</li>
+                        <li>掌握规范合理地使用AI工具的方法</li>
+                        <li>拥有竞赛专用的AI提示词库与工具矩阵</li>
+                        <li>学会高分论文的核心写作技巧与论文框架</li>
+                        <li>获得近4年国赛赛题的完整解决方案与代码实现</li>
+                        <li>建立自己的建模思路库与常见问题解决方案库</li>
+                        <li>具备在AI时代下竞争的关键优势</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 信息提示 -->
+        <div class="info-box">
+            <p><strong>💬 师资保障：</strong> 课程由BZD官方团队与国赛获奖选手联合设计授课，理论与实战完美结合。</p>
+        </div>
+
+        <div class="info-box">
+            <p><strong>⏰ 时间安排：</strong> 每天1-2小时的学习时间，轻松融入日常学习计划，最后10天可根据个人进度灵活调整。</p>
+        </div>
+
+        <div class="info-box">
+            <p><strong>🎓 适用人群：</strong> 所有参加2026年高教社杯数学建模竞赛的队伍，特别是追求国家奖的团队。</p>
+        </div>
+
+        <div style="text-align: center; margin: 60px 0;">
+            <p style="font-size: 20px; color: #4A73A8; margin-bottom: 30px; font-weight: 600;">准备好迎接挑战了吗？</p>
+            <button class="btn">现在加入 · 开启30天蜕变</button>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>© 2026 BZD 数学建模社区 | 高教社杯数学建模竞赛 30天倒计时计划</p>
+        <p style="margin-top: 10px; opacity: 0.7;">致力于在AI时代赋能数学建模竞赛选手 | 30天蜕变，国奖在握</p>
+    </div>
+</body>
+</html>
