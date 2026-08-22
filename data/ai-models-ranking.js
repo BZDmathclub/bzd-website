@@ -14,7 +14,8 @@ window.AI_MODELS_RANKING = {
       },
       {
         name: '思路构建',
-        models: ['GPT-4', 'Claude', 'Gemini', 'DeepSeek', '豆包', 'Grok']
+        models: ['GPT-4', 'Claude', 'Gemini', 'DeepSeek', '豆包', 'Grok'],
+        warning: '⚠️ 建议：思路构建不推荐使用单一AI模型，建议多模型混合进行头脑风暴，以便得出最优、完整、可适配赛题的求解思路'
       }
     ]
   },
