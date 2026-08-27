@@ -1649,108 +1649,129 @@ a { color:inherit; }
 
 <!-- 论文点评skills模态框 -->
 <div id="paper-review-skills-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
-  <div style="background:white;border-radius:12px;padding:30px;max-width:1000px;width:95%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:1100px;width:95%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
       <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">Skills 分享</h2>
       <button onclick="closePaperReviewSkillsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
 
-    <!-- Tab 切换 -->
-    <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid #e0e8f0;padding-bottom:0;">
-      <button onclick="switchSkillsTab(0)" class="skills-tab-btn active" style="padding:12px 20px;background:none;border:none;border-bottom:3px solid #1e3c72;color:#1e3c72;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.3s;">🚀 自研 Skills</button>
-      <button onclick="switchSkillsTab(1)" class="skills-tab-btn" style="padding:12px 20px;background:none;border:none;border-bottom:2px solid transparent;color:#999;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.3s;">📚 其他 Skills</button>
+    <div style="background:#e8f0fe;padding:12px;border-radius:8px;margin-bottom:25px;font-size:12px;color:#1e3c72;font-weight:600;">
+      仓库地址：<a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="color:#1e3c72;text-decoration:underline;">https://github.com/BZDmathclub/bzd-math-modeling-skills.git</a>
     </div>
 
-    <!-- 自研 Skills -->
-    <div id="bzd-skills-container" style="display:block;">
-      <div style="background:#e8f0fe;padding:12px;border-radius:8px;margin-bottom:20px;font-size:12px;color:#1e3c72;font-weight:600;">
-        仓库地址：<a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="color:#1e3c72;text-decoration:underline;">https://github.com/BZDmathclub/bzd-math-modeling-skills.git</a>
+    <!-- ① 综合评审与自我定位类 -->
+    <div style="margin-bottom:30px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">① 综合评审与自我定位类</h3>
+
+      <div style="margin-left:0;margin-bottom:20px;">
+        <p style="font-size:12px;color:#666;margin:0 0 12px 0;font-weight:600;">当前 Skills</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;">
+          <!-- bzd-review-paper -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-review-paper</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">根据赛题制定细则并评审论文</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>竞赛类型、完整赛题、完整论文</p>
+              <p style="margin:0;"><strong>输出：</strong>百分制得分、预估位次、HTML评审报告</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+
+          <!-- bzd-cumcm-school-awards -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-cumcm-school-awards</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">学校国奖画像与备赛定位</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>学校名称、赛区及个人竞赛经历</p>
+              <p style="margin:0;"><strong>输出：</strong>高校国奖画像、2026预测及备赛建议</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+        </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;">
-        <!-- bzd-problem-translator -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-problem-translator</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">逐句解释赛题，识别隐含条件和跨问关系</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整赛题及附件说明</p>
-            <p style="margin:0;"><strong>输出：</strong>题意翻译报告、跨问题联动链</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
-
-        <!-- bzd-modeling-ideas -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-modeling-ideas</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">生成贯穿全文的建模主线并比较可行模型</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>赛题、附件、可选题意报告</p>
-            <p style="margin:0;"><strong>输出：</strong>多模型比较、选型理由、创新与验证方案</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
-
-        <!-- bzd-review-paper -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-review-paper</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">根据赛题制定细则并评审论文</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>竞赛类型、完整赛题、完整论文</p>
-            <p style="margin:0;"><strong>输出：</strong>百分制得分、预估位次、HTML评审报告</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
-
-        <!-- bzd-cumcm-school-awards -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-cumcm-school-awards</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">查询高校五年国奖数据并评估个人备赛差距</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>学校名称、赛区及个人竞赛经历</p>
-            <p style="margin:0;"><strong>输出：</strong>高校国奖画像、2026预测及备赛建议</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
-
-        <!-- bzd-abstract-checker -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-abstract-checker</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">仅输入摘要，检查独立阅读性及具体写作问题</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>数学建模论文摘要，可选题目与关键词</p>
-            <p style="margin:0;"><strong>输出：</strong>严重问题警告、逐项观察、问题清单及优先修改建议</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
-
-        <!-- bzd-problem-restatement -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-problem-restatement</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">根据赛题生成问题重述，或对照原题检查已有重述</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整赛题；自查时另提供问题重述</p>
-            <p style="margin:0;"><strong>输出：</strong>研究背景、问题回顾、研究综述，或分级问题清单</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
-
-        <!-- bzd-problem-analysis-checker -->
-        <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
-          <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-problem-analysis-checker</h4>
-          <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">对照赛题检查问题分析的建模逻辑与章节边界</p>
-          <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
-            <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整赛题、附件说明、已有问题分析</p>
-            <p style="margin:0;"><strong>输出：</strong>任务映射、联动核对、问题清单及修改优先级</p>
-          </div>
-          <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
-        </div>
+      <div style="margin-left:0;margin-bottom:0;">
+        <p style="font-size:12px;color:#10b981;margin:0 0 12px 0;font-weight:600;">国赛前预计更新</p>
+        <p style="font-size:12px;color:#666;line-height:1.8;">加入赛区难度、学校实力与竞争环境，联动论文质量、赛区和学校情况优化预测</p>
       </div>
     </div>
 
-    <!-- 其他 Skills -->
-    <div id="other-skills-container" style="display:none;">
-      <div style="background:#f8faff;padding:20px;border-radius:8px;text-align:center;">
-        <p style="font-size:14px;color:#666;margin:0;">敬请期待更多 Skills 分享...</p>
+    <!-- ② 生成类 -->
+    <div style="margin-bottom:30px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">② 生成类</h3>
+
+      <div style="margin-left:0;margin-bottom:20px;">
+        <p style="font-size:12px;color:#666;margin:0 0 12px 0;font-weight:600;">当前 Skills</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;">
+          <!-- bzd-problem-translator -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-problem-translator</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">逐句解释赛题，识别隐含条件和跨问关系</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整赛题及附件说明</p>
+              <p style="margin:0;"><strong>输出：</strong>题意翻译报告、跨问题联动链</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+
+          <!-- bzd-modeling-ideas -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-modeling-ideas</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">评委视角的求解多模型建议集</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>赛题、附件、可选题意报告</p>
+              <p style="margin:0;"><strong>输出：</strong>多模型比较、选型理由、创新与验证方案</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+
+          <!-- bzd-problem-restatement -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-problem-restatement</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">生成问题重述</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整赛题；自查时另提供问题重述</p>
+              <p style="margin:0;"><strong>输出：</strong>研究背景、问题回顾、研究综述</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+
+          <!-- bzd-ai-usage-disclosure -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-ai-usage-disclosure</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">生成AI使用声明</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>论文内容及AI工具使用情况</p>
+              <p style="margin:0;"><strong>输出：</strong>AI使用声明与支撑材料</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-left:0;margin-bottom:0;">
+        <p style="font-size:12px;color:#10b981;margin:0 0 12px 0;font-weight:600;">国赛前预计更新</p>
+        <p style="font-size:12px;color:#666;line-height:1.8;">增加论文各板块生成 Skills，增加绘图推荐、方案选择与绘图代码生成，增加数模字典及同类模型推荐</p>
+      </div>
+    </div>
+
+    <!-- ③ 论文自查类 -->
+    <div style="margin-bottom:0;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">③ 论文自查类</h3>
+
+      <div style="margin-left:0;margin-bottom:20px;">
+        <p style="font-size:12px;color:#666;margin:0 0 12px 0;font-weight:600;">当前 Skills</p>
+        <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.8;">
+          <strong>摘要：</strong> bzd-abstract-checker<br>
+          <strong>问题重述：</strong> bzd-problem-restatement<br>
+          <strong>问题分析：</strong> bzd-problem-analysis-checker<br>
+          <strong>模型假设、符号说明、模型建立与求解、参考文献与附录、AI使用披露及完整论文综合自查</strong>：建设中
+        </p>
+      </div>
+
+      <div style="margin-left:0;margin-bottom:0;">
+        <p style="font-size:12px;color:#10b981;margin:0 0 12px 0;font-weight:600;">国赛前预计更新</p>
+        <p style="font-size:12px;color:#666;line-height:1.8;">增加 Agent 直出论文内容检查，合并专项规则形成数模论文全文自查，强化论文—代码—数据—结果一致性核验</p>
       </div>
     </div>
   </div>
@@ -3494,32 +3515,6 @@ function openPaperReviewSkillsModal(){
 function closePaperReviewSkillsModal(){
   document.getElementById('paper-review-skills-modal').style.display = 'none';
   document.body.style.overflow = '';
-}
-
-function switchSkillsTab(tabIdx){
-  const bzdContainer = document.getElementById('bzd-skills-container');
-  const otherContainer = document.getElementById('other-skills-container');
-  const tabs = document.querySelectorAll('.skills-tab-btn');
-
-  if(tabIdx === 0){
-    bzdContainer.style.display = 'block';
-    otherContainer.style.display = 'none';
-    tabs[0].style.borderBottomColor = '#1e3c72';
-    tabs[0].style.color = '#1e3c72';
-    tabs[0].style.borderBottomWidth = '3px';
-    tabs[1].style.borderBottomColor = 'transparent';
-    tabs[1].style.color = '#999';
-    tabs[1].style.borderBottomWidth = '2px';
-  } else {
-    bzdContainer.style.display = 'none';
-    otherContainer.style.display = 'block';
-    tabs[0].style.borderBottomColor = 'transparent';
-    tabs[0].style.color = '#999';
-    tabs[0].style.borderBottomWidth = '2px';
-    tabs[1].style.borderBottomColor = '#1e3c72';
-    tabs[1].style.color = '#1e3c72';
-    tabs[1].style.borderBottomWidth = '3px';
-  }
 }
 
 function showSvcTab(type){
