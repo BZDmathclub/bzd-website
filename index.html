@@ -1854,24 +1854,93 @@ a { color:inherit; }
 
 <!-- 论文模板模态框 -->
 <div id="paper-template-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
-  <div style="background:white;border-radius:12px;padding:30px;max-width:500px;width:90%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:90%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
-      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
-        <svg viewBox="0 0 24 24" style="width:21px;height:21px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        论文模板</h2>
+      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;">论文模板</h2>
       <button onclick="closePaperTemplateModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
-    <div style="background:#f8faff;padding:20px;border-radius:10px;border:1px solid #d4e1f4;">
-      <p style="font-size:13px;color:#666;margin-bottom:15px;line-height:1.8;">
-        通过网盘分享的文件：<strong>论文模板</strong>
-      </p>
-      <div style="background:white;padding:15px;border-radius:8px;border-left:3px solid #1e3c72;margin-bottom:15px;">
-        <p style="font-size:12px;color:#333;margin:0 0 8px 0;"><strong>链接：</strong></p>
-        <p style="font-size:12px;color:#1e3c72;word-break:break-all;margin:0 0 12px 0;font-family:monospace;">https://pan.baidu.com/s/1YKFSbfcXyCc5kGgUGqVtpw</p>
-        <p style="font-size:12px;color:#333;margin:0 0 4px 0;"><strong>提取码：</strong></p>
-        <p style="font-size:12px;color:#1e3c72;margin:0;font-family:monospace;font-weight:600;">x1bc</p>
+
+    <!-- 安全提示 -->
+    <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px;margin-bottom:20px;font-size:12px;color:#5a4000;line-height:1.7;">
+      <strong>⚠️ 安全声明：</strong> PDF已经设置密码 以及 时间戳 支持自用，如进行商用，BZD数模社 势必追究到底！
+    </div>
+
+    <!-- 合并模板 -->
+    <div style="margin-bottom:25px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">完整模板（推荐）</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
+        <!-- Word 合并版 -->
+        <a href="论文模板/2026年数学建模竞赛模板-简洁版.docx" download style="display:block;background:#f0f7ff;border:1px solid #b3d9ff;border-radius:8px;padding:15px;text-decoration:none;transition:all 0.3s;cursor:pointer;">
+          <div style="font-size:13px;color:#1e3c72;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#1e3c72;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M4 20v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/><path d="M4 11h16"/></svg>
+            Word 版本
+          </div>
+          <p style="font-size:11px;color:#666;margin:0;">2026年数学建模竞赛模板-简洁版.docx</p>
+        </a>
+
+        <!-- PDF 合并版 -->
+        <a href="论文模板/2026年数学建模竞赛模板-BZD数模社(证书签名).pdf" download style="display:block;background:#f0f7ff;border:1px solid #b3d9ff;border-radius:8px;padding:15px;text-decoration:none;transition:all 0.3s;cursor:pointer;">
+          <div style="font-size:13px;color:#1e3c72;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#1e3c72;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 13v6M9 16h6"/></svg>
+            PDF 版本
+          </div>
+          <p style="font-size:11px;color:#666;margin:0;">2026年数学建模竞赛模板-BZD数模社(证书签名).pdf</p>
+        </a>
       </div>
-      <a href="https://pan.baidu.com/s/1YKFSbfcXyCc5kGgUGqVtpw" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;border:none;">打开网盘链接</a>
+    </div>
+
+    <!-- LaTeX 模板 -->
+    <div style="margin-bottom:25px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">LaTeX 模板</h3>
+      <a href="论文模板/数学建模竞赛论文latex模板-BZD数模社 (1).zip" download style="display:block;background:#f0f7ff;border:1px solid #b3d9ff;border-radius:8px;padding:15px;text-decoration:none;transition:all 0.3s;cursor:pointer;">
+        <div style="font-size:13px;color:#1e3c72;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#1e3c72;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M22 19a2 2 0 0 1-2.41 1.97l-5.66-1.88a2 2 0 0 0-2.12.4l-.82.82a2 2 0 0 1-2.82 0l-5.83-5.82a2 2 0 0 1 0-2.82l.82-.82a2 2 0 0 0 .4-2.12l-1.88-5.66A2 2 0 0 1 5 3h14a2 2 0 0 1 2 2z"/></svg>
+          压缩包下载
+        </div>
+        <p style="font-size:11px;color:#666;margin:0;">数学建模竞赛论文latex模板-BZD数模社.zip (30MB)</p>
+      </a>
+    </div>
+
+    <!-- 模板说明文档 -->
+    <div>
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">模板说明文档</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;font-size:11px;">
+        <!-- 摘要 -->
+        <a href="论文模板/论文摘要简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 论文摘要简洁版</a>
+        <a href="论文模板/论文摘要详细说明文档.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 论文摘要详细说明</a>
+
+        <!-- 问题重述 -->
+        <a href="论文模板/第一章问题重述简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 问题重述简洁版</a>
+        <a href="论文模板/第一章问题重述详细说明文档.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 问题重述详细说明</a>
+
+        <!-- 问题分析 -->
+        <a href="论文模板/第二章问题分析简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 问题分析简洁版</a>
+        <a href="论文模板/第二章问题分析详细说明文档.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 问题分析详细说明</a>
+
+        <!-- 模型假设 -->
+        <a href="论文模板/第三章模型假设简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 模型假设简洁版</a>
+        <a href="论文模板/第三章模型假设详细说明文档.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 模型假设详细说明</a>
+
+        <!-- 符号说明 -->
+        <a href="论文模板/第四章符号说明简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 符号说明简洁版</a>
+        <a href="论文模板/第四章符号详细说明文档.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 符号说明详细说明</a>
+
+        <!-- 模型与求解 -->
+        <a href="论文模板/第五章模型与求解简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 模型与求解简洁版</a>
+        <a href="论文模板/第五章模型与求解详细文档说明.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 模型与求解详细说明</a>
+
+        <!-- 模型总结 -->
+        <a href="论文模板/第六章模型总结简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 模型总结简洁版</a>
+        <a href="论文模板/第六章模型总结详细说明文档.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 模型总结详细说明</a>
+
+        <!-- 参考文献与附录 -->
+        <a href="论文模板/参考文献+附录简洁版.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 参考文献+附录</a>
+        <a href="论文模板/参考文献+附录详细说明.pdf" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📋 参考文献+附录说明</a>
+
+        <!-- AI工具声明 -->
+        <a href="论文模板/论文正文-AI工具使用声明.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 AI工具使用声明</a>
+        <a href="论文模板/支撑材料-AI工具使用详情.docx" download style="display:block;background:#fafbff;border:1px solid #e0e8f0;border-radius:6px;padding:10px;text-decoration:none;text-align:center;color:#666;transition:all 0.2s;">📄 AI工具使用详情</a>
+      </div>
     </div>
   </div>
 </div>
