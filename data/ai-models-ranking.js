@@ -5,16 +5,16 @@ window.AI_MODELS_RANKING = {
     categories: [
       {
         name: '论文写作',
-        models: ['GPT-4', 'Gemini', 'Claude', 'Grok', '豆包', 'DeepSeek'],
+        models: ['GPT', 'Gemini', 'Claude', 'Grok', '豆包', 'DeepSeek'],
         warning: '⚠️ 警告：国内AI模型很难通过知网AIGC检测，非常建议使用非国产AI进行论文写作'
       },
       {
         name: '模型求解',
-        models: ['Claude', 'GPT-4', 'Gemini', 'Grok', 'DeepSeek', '豆包']
+        models: ['Claude', 'GPT', 'Gemini', 'Grok', 'DeepSeek', '豆包']
       },
       {
         name: '思路构建',
-        models: ['GPT-4', 'Claude', 'Gemini', 'DeepSeek', '豆包', 'Grok'],
+        models: ['GPT', 'Claude', 'Gemini', 'DeepSeek', '豆包', 'Grok'],
         warning: '⚠️ 建议：思路构建不推荐使用单一AI模型，建议多模型混合进行头脑风暴，以便得出最优、完整、可适配赛题的求解思路'
       }
     ]
