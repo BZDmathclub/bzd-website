@@ -2097,7 +2097,7 @@ a { color:inherit; }
 
     <!-- 搜索框 -->
     <div style="display:flex;gap:10px;margin-bottom:25px;">
-      <input type="text" id="model-search-input" placeholder="输入模型名称、关键词或场景..." style="flex:1;padding:12px 16px;border:1px solid #d4e1f4;border-radius:8px;font-size:14px;outline:none;">
+      <input type="text" id="model-search-input" placeholder="输入模型名称、关键词或场景..." style="flex:1;padding:12px 16px;border:1px solid #d4e1f4;border-radius:8px;font-size:14px;outline:none;" onkeypress="if(event.key==='Enter') searchModels();">
       <button onclick="searchModels()" style="padding:12px 24px;background:#1e3c72;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;">搜索</button>
       <button onclick="clearModelSearch()" style="padding:12px 24px;background:#f0f7ff;color:#1e3c72;border:1px solid #d4e1f4;border-radius:8px;font-weight:600;cursor:pointer;">清空</button>
     </div>
