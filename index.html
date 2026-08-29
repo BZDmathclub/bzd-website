@@ -1576,6 +1576,15 @@ a { color:inherit; }
       <div class="nr-card-sub">实用技巧</div>
     </div>
 
+    <!-- 数模字典 -->
+    <div class="nr-card" onclick="openModelDictionaryModal()">
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="10" y1="6" x2="14" y2="6"/><line x1="10" y1="10" x2="14" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <div class="nr-card-title">数模字典</div>
+      <div class="nr-card-sub">5700+模型库</div>
+    </div>
+
     <!-- 国赛赛题复盘 -->
     <div class="nr-card" onclick="showPreparingAlert()">
       <div class="badge-icon">
@@ -2077,6 +2086,123 @@ a { color:inherit; }
         </div>
       </div>
     </div>
+
+<!-- 数模字典模态框 -->
+<div id="model-dictionary-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:1000px;width:95%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;">数模字典</h2>
+      <button onclick="closeModelDictionaryModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <!-- 搜索框 -->
+    <div style="display:flex;gap:10px;margin-bottom:25px;">
+      <input type="text" id="model-search-input" placeholder="输入模型名称、关键词或场景..." style="flex:1;padding:12px 16px;border:1px solid #d4e1f4;border-radius:8px;font-size:14px;outline:none;">
+      <button onclick="searchModels()" style="padding:12px 24px;background:#1e3c72;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;">搜索</button>
+      <button onclick="clearModelSearch()" style="padding:12px 24px;background:#f0f7ff;color:#1e3c72;border:1px solid #d4e1f4;border-radius:8px;font-weight:600;cursor:pointer;">清空</button>
+    </div>
+
+    <!-- 版权声明 -->
+    <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px;margin-bottom:20px;font-size:12px;color:#5a4000;line-height:1.7;">
+      <strong>版权声明：</strong> 本字典由 BZD 数模社制作，包含 5700+ 数学模型。仅供个人学习与竞赛研究使用，禁止商用、倒卖或付费传播。
+    </div>
+
+    <!-- 搜索结果 -->
+    <div id="model-search-results" style="display:none;">
+      <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #e0e8f0;">
+        <p style="font-size:13px;color:#666;margin:0;">找到 <strong id="model-result-count">0</strong> 个模型</p>
+      </div>
+      <div id="model-results-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:15px;"></div>
+    </div>
+
+    <!-- 初始状态（未搜索） -->
+    <div id="model-initial-state">
+      <div style="text-align:center;padding:40px 20px;">
+        <div style="font-size:48px;margin-bottom:16px;">📚</div>
+        <p style="font-size:14px;color:#666;margin:0 0 8px 0;">在搜索框输入模型名称或关键词开始查询</p>
+        <p style="font-size:12px;color:#999;margin:0;">支持搜索：模型名、应用场景、算法类别等</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 数模字典详情模态框 -->
+<div id="model-detail-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1001;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:95%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:25px;">
+      <div style="flex:1;">
+        <h2 id="detail-model-name" style="font-size:24px;color:#1e3c72;margin:0 0 8px 0;font-weight:700;"></h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span id="detail-model-class" style="display:inline-block;background:#e8f0fe;color:#1e3c72;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;"></span>
+          <span id="detail-model-group" style="display:inline-block;background:#f0f7ff;color:#0066cc;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;"></span>
+        </div>
+      </div>
+      <button onclick="closeModelDetailModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <!-- 一键复制提示词 -->
+    <div style="background:#e8f5e9;border:1px solid #81c784;border-radius:8px;padding:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <p style="font-size:12px;color:#2e7d32;margin:0;font-weight:600;">⚠️ 使用提示词时的建议</p>
+        <p style="font-size:11px;color:#558b2f;margin:4px 0 0 0;line-height:1.6;">请在新的对话中使用此提示词，或清除当前AI对话记忆后再输入。这样AI能更准确判定该模型是否适用于你的题目。</p>
+      </div>
+      <button onclick="copyModelPrompt()" style="padding:8px 16px;background:#2e7d32;color:white;border:none;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;margin-left:15px;">复制提示词</button>
+    </div>
+
+    <!-- 模型详情内容 -->
+    <div id="model-detail-content" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <!-- 左列 -->
+      <div>
+        <div style="margin-bottom:20px;">
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;border-bottom:2px solid #e0e8f0;padding-bottom:8px;">适用场景</h4>
+          <p id="detail-scenario" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+        </div>
+        <div style="margin-bottom:20px;">
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;border-bottom:2px solid #e0e8f0;padding-bottom:8px;">数据要求</h4>
+          <p id="detail-data-req" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+        </div>
+        <div>
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;border-bottom:2px solid #e0e8f0;padding-bottom:8px;">关键假设</h4>
+          <p id="detail-assumptions" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+        </div>
+      </div>
+
+      <!-- 右列 -->
+      <div>
+        <div style="margin-bottom:20px;">
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;border-bottom:2px solid #e0e8f0;padding-bottom:8px;">原理讲解</h4>
+          <p id="detail-principle" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+        </div>
+        <div style="margin-bottom:20px;">
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;border-bottom:2px solid #e0e8f0;padding-bottom:8px;">模型输入</h4>
+          <p id="detail-input" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+        </div>
+        <div>
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;border-bottom:2px solid #e0e8f0;padding-bottom:8px;">模型输出</h4>
+          <p id="detail-output" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部信息 -->
+    <div style="margin-top:25px;padding-top:20px;border-top:1px solid #e0e8f0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;">禁忌点</h4>
+          <p id="detail-taboos" style="font-size:12px;color:#c62828;margin:0;line-height:1.7;"></p>
+        </div>
+        <div>
+          <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;">模型缺陷</h4>
+          <p id="detail-defects" style="font-size:12px;color:#f57c00;margin:0;line-height:1.7;"></p>
+        </div>
+      </div>
+      <div style="margin-top:15px;">
+        <h4 style="font-size:12px;color:#1e3c72;font-weight:700;margin:0 0 10px 0;">检验方法</h4>
+        <p id="detail-validation" style="font-size:12px;color:#666;margin:0;line-height:1.7;"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- 辽宁省赛往期 -->
     <div class="comp-card">
@@ -4149,6 +4275,152 @@ function openRegionAwardsModal(){
 function closeRegionAwardsModal(){
   document.getElementById('region-awards-modal').style.display = 'none';
 }
+
+// 数模字典函数
+function openModelDictionaryModal(){
+  document.getElementById('model-dictionary-modal').style.display = 'flex';
+}
+
+function closeModelDictionaryModal(){
+  document.getElementById('model-dictionary-modal').style.display = 'none';
+}
+
+function searchModels(){
+  const query = document.getElementById('model-search-input').value.trim();
+  if(!query){
+    alert('请输入搜索关键词');
+    return;
+  }
+  if(!window.MODEL_DICTIONARY_DATA){
+    alert('字典数据加载中，请稍候...');
+    return;
+  }
+  const results = window.MODEL_DICTIONARY_DATA.filter(m =>
+    m.模型名称.toLowerCase().includes(query.toLowerCase()) ||
+    m.适用场景.includes(query) ||
+    m.模型大类.includes(query) ||
+    m.模型类别.includes(query) ||
+    m.具体分组.includes(query)
+  );
+  displayModelResults(results);
+}
+
+function clearModelSearch(){
+  document.getElementById('model-search-input').value = '';
+  document.getElementById('model-search-results').style.display = 'none';
+  document.getElementById('model-initial-state').style.display = 'block';
+}
+
+function displayModelResults(results){
+  const resultsDiv = document.getElementById('model-search-results');
+  const countSpan = document.getElementById('model-result-count');
+  const container = document.getElementById('model-results-container');
+
+  countSpan.textContent = results.length;
+  container.innerHTML = results.map(m => `
+    <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:15px;cursor:pointer;transition:all 0.3s;" onclick="openModelDetailModal(${m.序号})">
+      <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">${m.模型名称}</h4>
+      <p style="font-size:11px;color:#999;margin:0 0 8px 0;">${m.模型大类} / ${m.具体分组}</p>
+      <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${m.适用场景}</p>
+      <div style="display:flex;gap:6px;">
+        <span style="display:inline-block;background:#e8f0fe;color:#1e3c72;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:600;">${m.模型类别}</span>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('model-initial-state').style.display = 'none';
+  resultsDiv.style.display = 'block';
+}
+
+function openModelDetailModal(序号){
+  if(!window.MODEL_DICTIONARY_DATA) return;
+  const model = window.MODEL_DICTIONARY_DATA.find(m => m.序号 === 序号);
+  if(!model) return;
+
+  // 存储当前模型以便复制提示词
+  window.currentModel = model;
+
+  // 填充详情
+  document.getElementById('detail-model-name').textContent = model.模型名称;
+  document.getElementById('detail-model-class').textContent = model.模型类别;
+  document.getElementById('detail-model-group').textContent = model.模型大类 + ' / ' + model.具体分组;
+  document.getElementById('detail-scenario').innerHTML = model.适用场景.replace(/；/g, '<br/>');
+  document.getElementById('detail-data-req').innerHTML = model.数据要求 || '待补充';
+  document.getElementById('detail-principle').textContent = model.原理讲解 || '待补充';
+  document.getElementById('detail-assumptions').innerHTML = model.关键假设.replace(/；/g, '<br/>');
+  document.getElementById('detail-input').textContent = model.模型输入 || '待补充';
+  document.getElementById('detail-output').textContent = model.模型输出 || '待补充';
+  document.getElementById('detail-taboos').innerHTML = model.禁忌点.replace(/；/g, '<br/>');
+  document.getElementById('detail-defects').textContent = model.模型缺陷 || '待补充';
+  document.getElementById('detail-validation').innerHTML = model.检验方法.replace(/；/g, '<br/>');
+
+  document.getElementById('model-detail-modal').style.display = 'flex';
+}
+
+function closeModelDetailModal(){
+  document.getElementById('model-detail-modal').style.display = 'none';
+  window.currentModel = null;
+}
+
+function copyModelPrompt(){
+  if(!window.currentModel){
+    alert('模型信息加载出错');
+    return;
+  }
+
+  const m = window.currentModel;
+  const prompt = `【数学建模模型判定任务】
+模型名称：${m.模型名称}
+模型分类：${m.模型大类} / ${m.具体分组}
+模型类别：${m.模型类别}
+
+【模型特征】
+适用场景：${m.适用场景}
+核心原理：${m.原理讲解}
+关键假设：${m.关键假设}
+
+【技术要求】
+数据要求：${m.数据要求}
+输入格式：${m.模型输入}
+输出形式：${m.模型输出}
+
+【使用提示】
+禁忌点（避免这些错误）：${m.禁忌点}
+模型缺陷及说明：${m.模型缺陷}
+检验方法：${m.检验方法}
+
+【任务要求】
+请根据以上模型信息，判断该模型是否适合解决我提供的数学建模竞赛题目。
+分析时需考虑：
+1. 题目数据特征与模型数据要求的匹配度
+2. 题目场景是否在该模型的适用范围内
+3. 该模型的假设与题目条件的兼容性
+4. 使用该模型可能遇到的限制与风险
+
+请给出详细的适配性分析。`;
+
+  // 复制到剪贴板
+  navigator.clipboard.writeText(prompt).then(() => {
+    alert('✓ 提示词已复制到剪贴板！\n\n使用建议：\n1. 打开新的AI对话（或清除当前对话记忆）\n2. 粘贴此提示词\n3. 输入你的竞赛题目与数据集\n4. AI 将帮你判定该模型是否合适');
+  }).catch(() => {
+    // 备用方案：创建文本区域
+    const textarea = document.createElement('textarea');
+    textarea.value = prompt;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('✓ 提示词已复制到剪贴板！\n\n使用建议：\n1. 打开新的AI对话（或清除当前对话记忆）\n2. 粘贴此提示词\n3. 输入你的竞赛题目与数据集\n4. AI 将帮你判定该模型是否合适');
+  });
+}
+
+document.getElementById('model-dictionary-modal')?.addEventListener('click', e => {
+  if(e.target.id === 'model-dictionary-modal') closeModelDictionaryModal();
+});
+
+document.getElementById('model-detail-modal')?.addEventListener('click', e => {
+  if(e.target.id === 'model-detail-modal') closeModelDetailModal();
+});
 
 document.getElementById('region-awards-modal')?.addEventListener('click', e => {
   if(e.target.id === 'region-awards-modal') closeRegionAwardsModal();
