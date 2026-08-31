@@ -1330,7 +1330,10 @@ a { color:inherit; }
       </div>
       <div class="comp-card-body">
         <div style="margin-bottom:18px;">
-          <div style="font-weight:700;color:var(--blue-deep);font-size:14px;margin-bottom:10px;">助攻资料体系</div>
+          <div style="font-weight:700;color:var(--blue-deep);font-size:14px;margin-bottom:10px;">
+            助攻资料体系
+            <span style="display:inline-block;background:#ffc107;color:#333;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-left:10px;">赛前 8 折优惠</span>
+          </div>
           <div style="font-size:13px;color:var(--text-main);line-height:1.8;">
             <div style="margin-bottom:10px;">
               <strong style="color:var(--accent);">✅ 免费资料</strong>（七月下旬起持续更新至赛前，全程无收费）
@@ -1490,13 +1493,15 @@ a { color:inherit; }
 
   <div style="max-width:860px;margin:20px auto 0;background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:20px 24px;font-size:13.5px;color:var(--text-main);line-height:1.9;text-align:left;">
     <div style="font-weight:900;color:var(--blue-deep);font-size:15px;margin-bottom:10px;">📦 完整版资料包含内容</div>
-    <div>✅ <strong>1~2 篇示例论文</strong>（仅供理解题目初步参考）</div>
-    <div>✅ <strong>AI 账号</strong>【GPT + Claude + Gemini】24 小时使用权限，自登录起计时</div>
+    <div>✅ <strong>3-5 篇示例论文</strong>（仅供理解题目初步参考）</div>
+    <div>✅ <strong>AI 账号</strong>【GPT + Claude + Gemini 等无需翻墙】24 小时使用权限，自登录起计时</div>
+    <div>✅ <strong>$30 AI 额度</strong>（多种模型API额度）</div>
     <div>✅ <strong>专属定制论文</strong>（内容与示例论文完全不同，质量与实际论文相当）+ 定制思路——基于 100+ 方案选一种，输入指定 AI 工具约 60min 可得 Word 版、公式可编辑、基本排版正确</div>
+    <div>✅ <strong>数模智能体卡密</strong>【扣子平台 4 次 + MathModelAgent 5 次调用积分】凭订单号直接领取</div>
     <div style="margin-top:12px;padding:10px 14px;background:#fff;border-left:3px solid var(--blue-light);border-radius:0 6px 6px 0;color:var(--text-sub);">
       购买后可在付费界面直接看到售后群群号，用订单号申请加群即可（基础版通过网盘链接下载，无售后群）。<br>
       加群后在<strong>群文件</strong>中下载代码压缩包 + 示例论文。<br>
-      定制思路 / 论文 / AI 账号（完整版）可在 <a href="#redeem" style="color:var(--blue-mid);font-weight:700;">领取专属权益 ↓</a> 中获取，申请后 0~2h 自动发货。<br>
+      定制思路 / 论文 / AI额度 / AI 账号（完整版）可在 <a href="#redeem" style="color:var(--blue-mid);font-weight:700;">领取专属权益 ↓</a> 中获取，申请后 0~2h 自动发货。<br>
       定制思路操作见 <a href="#guide" style="color:var(--blue-mid);font-weight:700;">使用指南第 4~5 步 ↓</a>，约 10 分钟可获取定制思路，约 60 分钟可获取定制论文。
     </div>
   </div>
@@ -3138,6 +3143,17 @@ a { color:inherit; }
     </div>
 
     <div class="guide-step">
+      <div class="guide-step-left"><div class="guide-num" style="font-size:16px;">📌</div><div class="guide-line"></div></div>
+      <div class="guide-body">
+        <div class="guide-title">📌 将题目输入智能体平台进行运行</div>
+        <div class="guide-content">
+          <p>📌 将题目输入 <strong>扣子平台</strong> 或 <strong>MathModelAgent</strong> 进行运行，得到初步论文。结合论文答案以及发布的 <strong>手搓思路</strong> 理解题目。</p>
+          <p>建议通过智能体的初步输出来快速了解题目的求解方向和模型框架，加深对题目的理解。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-step">
       <div class="guide-step-left"><div class="guide-num">3</div><div class="guide-line"></div></div>
       <div class="guide-body">
         <div class="guide-title">📦 领取完整资料包 · 加入售后群</div>
@@ -3160,6 +3176,7 @@ a { color:inherit; }
           <p>群文件中提供了 <strong>完整代码 + 配套示例论文</strong>。每道题的每一问均提供 <em>至少 3 种以上算法</em>。</p>
           <p>根据第一天对题目和模型的理解，结合群文件中的 <strong>代码大纲文档</strong>，选择你们队伍针对每一问的使用算法，作为本次竞赛的解题方案。</p>
           <a class="guide-link" href="https://space.bilibili.com/436554327" target="_blank" rel="noopener" style="margin-top:10px;">📺 具体操作流程可见 B站 BZD数模社 本竞赛资料使用说明</a>
+          <p style="margin-top:14px;"><strong>💡 模型选用检验：</strong>同时可以使用 <strong>MMA、Codex、Claude、DeepSeek</strong> 调用 <strong>数模字典、Skills</strong> 判定模型的适用性 (<strong>bzd-model-dictionary</strong>)，根据赛题、数据与求解思路检查模型选用是否合理。</p>
         </div>
       </div>
     </div>
@@ -3167,24 +3184,24 @@ a { color:inherit; }
     <div class="guide-step">
       <div class="guide-step-left"><div class="guide-num">5</div><div class="guide-line"></div></div>
       <div class="guide-body">
-        <div class="guide-title">🤖 用 AI 智能体生成初稿论文</div>
+        <div class="guide-title">🤖 使用数模智能体撰写论文</div>
         <div class="guide-content">
-          <p>完成代码选择后，利用 AI 工具可直接输出一篇 <strong>完成度 80% 的论文</strong>，相当于百米赛跑直接站在 80 米处起跑！</p>
-          <p>提供两种输出方式：</p>
+          <p>完成代码选择和结果获取后，利用 <strong>数模智能体·MathModelAgent</strong> 将赛题与代码以及结果输入，选择指定方案后撰写论文。可直接输出一篇 <strong>完成度 80% 的论文</strong>，相当于百米赛跑直接站在 80 米处起跑！</p>
+          <p>提供多种论文生成方式：</p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
             <div style="background:var(--blue-bg);border:1.5px solid var(--border);border-radius:8px;padding:14px;">
-              <div style="font-weight:900;color:var(--blue-deep);margin-bottom:6px;">📄 PDF 论文 · 沐光Paper</div>
-              <div style="font-size:12.5px;color:var(--text-sub);line-height:1.7;">首次注册免费送一次生成机会</div>
-              <a class="guide-link" href="https://muguang.online/auth?step=register&ch=bzd" target="_blank" rel="noopener" style="margin-top:10px;font-size:12px;padding:6px 12px;">前往注册</a>
+              <div style="font-weight:900;color:var(--blue-deep);margin-bottom:6px;">📝 Word 论文 · 数模智能体</div>
+              <div style="font-size:12.5px;color:var(--text-sub);line-height:1.7;">购买后凭订单号领取 4 次卡密<br>卡密不足可联系客服</div>
+              <a class="guide-link" href="https://www.coze.cn/s/5bybFsAocZo/" target="_blank" rel="noopener" style="margin-top:10px;font-size:12px;padding:6px 12px;">打开扣子平台</a>
             </div>
             <div style="background:var(--blue-bg);border:1.5px solid var(--border);border-radius:8px;padding:14px;">
-              <div style="font-weight:900;color:var(--blue-deep);margin-bottom:6px;">📝 Word 论文 · 数模智能体</div>
-              <div style="font-size:12.5px;color:var(--text-sub);line-height:1.7;">购买后凭订单号领取 6 次卡密<br>卡密不足可联系客服（3元/次）</div>
-              <a class="guide-link" href="https://www.coze.cn/s/5bybFsAocZo/" target="_blank" rel="noopener" style="margin-top:10px;font-size:12px;padding:6px 12px;">打开智能体</a>
+              <div style="font-weight:900;color:var(--blue-deep);margin-bottom:6px;">📝 LaTeX 论文 · MathModelAgent</div>
+              <div style="font-size:12.5px;color:var(--text-sub);line-height:1.7;">购买后凭订单号领取 5 次调用积分<br>卡密不足可联系客服</div>
+              <a class="guide-link" href="https://mathmodel.top/signup?ref=358JL76N" target="_blank" rel="noopener" style="margin-top:10px;font-size:12px;padding:6px 12px;">前往注册</a>
             </div>
           </div>
           <a class="guide-link green" href="https://www.kdocs.cn/l/crMxja9CnmTw" target="_blank" rel="noopener" style="margin-top:12px;">📖 查看智能体使用教程</a>
-          <p style="margin-top:10px;font-size:12.5px;color:var(--text-light);">使用前请先阅读教程，导入题目后运行模型需在网页左下角购买资源点。答疑 QQ 群：<strong>1059114495</strong></p>
+          <p style="margin-top:10px;font-size:12.5px;color:var(--text-light);">使用前请先阅读教程。答疑 QQ 群：<strong>1059114495</strong></p>
         </div>
       </div>
     </div>
@@ -3192,11 +3209,11 @@ a { color:inherit; }
     <div class="guide-step">
       <div class="guide-step-left"><div class="guide-num">6</div><div class="guide-line"></div></div>
       <div class="guide-body">
-        <div class="guide-title">✨ 获取 AI 账号（完整版用户专享）</div>
+        <div class="guide-title">✏️ AI+提示词写作</div>
         <div class="guide-content">
-          <p>购买完整版资料的用户赠送 <strong>24h AI 账号</strong>（Claude / Grok / Gemini 等无需翻墙）。</p>
-          <p>同时赠送 <strong>数模智能体 6 次卡密</strong>，可凭订单号直接领取。</p>
-          <p style="margin-top:10px;font-size:12.5px;color:var(--text-light);">无需翻墙 AI 账号也可在此购买：<a href="https://aiforman.vip/register.php?ref=sxjm12" target="_blank" style="color:var(--blue-mid);">aiforman.vip</a></p>
+          <p>除了智能体自动生成外，还可以手动写作。使用选择的代码和结果，复制 <strong>国赛资料 AI 提示词库</strong> 中 <strong>正文撰写部分的 AI 提示词</strong>，输入你选择的 AI（Claude、DeepSeek、Gemini 等），进行自行写作。</p>
+          <p>这种方式可以获得更具个性化的论文，更易规避重复率问题。</p>
+          <a class="guide-link green" href="#national-resources" style="margin-top:10px;">📖 前往 AI 提示词库</a>
         </div>
       </div>
     </div>
@@ -3259,6 +3276,47 @@ a { color:inherit; }
       </div>
       <button class="submit-btn" id="submit-btn" onclick="submitRedeem()">提交申请 · 等待审核</button>
       <div class="redeem-result" id="redeem-result"></div>
+    </div>
+  </div>
+  </div>
+
+  <div style="margin-top:48px;">
+  <div class="section-head" style="margin-bottom:24px;">
+    <div class="section-tag">AI ACCOUNTS</div>
+    <h2 class="section-title">✨ 获取 AI 账号（完整版用户专享）</h2>
+    <p class="section-sub">无需翻墙 · 24h 天卡 · 含智能体卡密</p>
+  </div>
+  <div style="max-width:760px;margin:0 auto;background:#f8faff;border:1.5px solid var(--border);border-radius:12px;padding:28px;">
+    <div style="font-size:15px;color:var(--text-main);line-height:1.9;">
+      <p><strong>购买完整版资料的用户赠送 24h AI 账号</strong>（Claude / Grok / Gemini 等无需翻墙）。同时赠送 <strong>数模智能体 4 次卡密+MMA五次调用积分兑换码</strong>，可凭订单号直接领取。</p>
+
+      <div style="margin-top:18px;padding:16px;background:white;border:1.5px solid var(--border);border-radius:10px;">
+        <p style="margin:0 0 12px 0;"><strong style="color:var(--blue-deep);">无需翻墙 AI 账号购买地址：</strong></p>
+        <a href="https://aiforman.vip" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--blue-mid);color:white;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:700;transition:all .2s;margin-bottom:12px;">
+          🔗 aiforman.vip
+        </a>
+        <p style="margin:0;font-size:13px;color:var(--text-sub);">新用户注册可享优惠，仅限数模竞赛专用</p>
+      </div>
+
+      <div style="margin-top:18px;padding:16px;background:white;border:1.5px solid var(--border);border-radius:10px;">
+        <p style="margin:0 0 12px 0;"><strong style="color:var(--blue-deep);">扣子智能体数模智能体教程文档：</strong></p>
+        <a href="https://www.kdocs.cn/l/crMxja9CnmTw" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--green);color:white;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:700;transition:all .2s;margin-bottom:12px;">
+          📖 查看教程文档
+        </a>
+        <p style="margin:0;font-size:13px;color:var(--text-sub);">详细的智能体使用教程和注意事项</p>
+      </div>
+
+      <div style="margin-top:18px;padding:16px;background:white;border:1.5px solid var(--border);border-radius:10px;">
+        <p style="margin:0 0 12px 0;"><strong style="color:var(--blue-deep);">MMA 官网和下载地址：</strong></p>
+        <p style="margin:0 0 10px 0;font-size:13.5px;">
+          <strong style="color:var(--blue-mid);">官网：</strong><a href="https://mathmodel.top/home" target="_blank" rel="noopener" style="color:var(--blue-mid);text-decoration:underline;">mathmodel.top/home</a><br>
+          <strong style="color:var(--blue-mid);">最新下载：</strong><a href="https://github.com/jihe520/MathModelAgent/releases" target="_blank" rel="noopener" style="color:var(--blue-mid);text-decoration:underline;">GitHub Release</a>
+        </p>
+      </div>
+
+      <div style="margin-top:16px;padding:12px 14px;background:#fff8e8;border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:12.5px;color:#5a4000;line-height:1.7;">
+        <strong>💡 提示：</strong>完整版用户的 AI 账号和智能体卡密会在订单审核通过后自动发放到您的邮箱，通常在 0~2 小时内完成。凭订单号可以在"领取专属权益"中直接获取相关权益。
+      </div>
     </div>
   </div>
   </div>
