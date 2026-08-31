@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BZD 数模社 · 服务介绍</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @media print {
+      body { background: white; }
+      .page-break { page-break-after: always; }
+      a { text-decoration: none; color: inherit; }
+    }
+
+    body {
+      font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .page {
+      background: white;
+      width: 210mm;
+      height: 297mm;
+      margin: 20px auto;
+      padding: 28px 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+      border-bottom: 3px solid #1c4e96;
+      padding-bottom: 12px;
+    }
+
+    .logo { font-size: 24px; font-weight: 900; color: #0c1d3e; letter-spacing: 2px; }
+    .logo span { color: #3a6ec8; }
+    .subtitle { font-size: 11px; color: #666; margin-top: 4px; }
+
+    h1 {
+      font-size: 18px;
+      color: #0c1d3e;
+      margin: 12px 0 10px 0;
+      border-bottom: 3px solid #1c4e96;
+      padding-bottom: 8px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    h2 {
+      font-size: 15px;
+      color: #1c4e96;
+      margin: 16px 0 12px 0;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .service-tier {
+      background: linear-gradient(135deg, #f8faff 0%, #f0f7ff 100%);
+      border: 2.5px solid #1c4e96;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(28, 78, 150, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .tier-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #1c4e96 0%, #2863bb 100%);
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(28, 78, 150, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .tier-content {
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .tier-content p { margin: 8px 0; }
+    .tier-content strong { color: #1c4e96; font-weight: 600; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(28, 78, 150, 0.08);
+    }
+
+    th {
+      background: linear-gradient(135deg, #1c4e96 0%, #2863bb 100%);
+      color: white;
+      padding: 12px 10px;
+      text-align: left;
+      font-weight: 700;
+      border: none;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 10px;
+      border: 1px solid #e8eef8;
+      vertical-align: top;
+      font-size: 11px;
+    }
+
+    tr:nth-child(even) { background: linear-gradient(90deg, #f8faff 0%, #f0f7ff 100%); }
+    tr:nth-child(odd) { background: white; }
+    tr:hover { background: linear-gradient(90deg, #eef4fc 0%, #e8eef8 100%); }
+
+    .price { color: #e03e1a; font-weight: 700; font-size: 13px; }
+    .highlight { background: #fff8e8; padding: 2px 4px; border-radius: 2px; }
+
+    .note {
+      background: linear-gradient(135deg, #fff8e8 0%, #fffbf0 100%);
+      border-left: 5px solid #d4920a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      font-size: 11px;
+      box-shadow: 0 3px 8px rgba(212, 146, 10, 0.1);
+      border: 1px solid #fde7c5;
+    }
+
+    .footer {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 11px;
+      color: #666;
+      text-align: center;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      font-size: 11px;
+      color: #999;
+    }
+
+    .comparison-table {
+      width: 100%;
+      margin: 16px 0;
+      border-collapse: collapse;
+      font-size: 11px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(28, 78, 150, 0.08);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, #1c4e96 0%, #2863bb 100%);
+      color: white;
+      padding: 10px 8px;
+      text-align: left;
+      font-weight: 700;
+      border: none;
+      letter-spacing: 0.3px;
+    }
+
+    .comparison-table td {
+      padding: 8px;
+      border: 1px solid #e8eef8;
+      font-size: 10px;
+    }
+
+    .comparison-table tr:nth-child(even) { background: linear-gradient(90deg, #f8faff 0%, #f0f7ff 100%); }
+    .comparison-table tr:nth-child(odd) { background: white; }
+
+    .checkmark { color: #16a34a; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- 第一页：一对多服务 -->
+<div class="page">
+  <div class="header">
+    <div class="logo">BZD<span>·数模社</span></div>
+    <div class="subtitle">专业数学建模竞赛服务</div>
+  </div>
+
+  <h1>一对多服务 · 赛中资料</h1>
+  <p style="font-size: 11px; color: #666; margin-bottom: 8px;">标准化、可复现的竞赛资料方案</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+    <div class="service-tier" style="margin-bottom: 0; padding: 12px; font-size: 12px;">
+      <div class="tier-name">基础版</div>
+      <div style="font-size: 22px; color: #e03e1a; font-weight: 700; margin: 6px 0;">¥9.99</div>
+      <div style="font-size: 11px; line-height: 1.6;">
+        <p style="margin: 4px 0;"><strong>✓ 解题提示词/Skills</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ 代码 100+方案</strong> Python+MATLAB</p>
+        <p style="margin: 4px 0;"><strong>✓ 思路文档</strong> 手搓+AI</p>
+        <p style="margin: 4px 0;"><strong>✓ 求解结果</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ PDF 论文</strong> 不可复制</p>
+        <p style="margin-top: 8px; color: #16a34a; font-weight: 700; border-top: 1px solid #ddd; padding-top: 6px; font-size: 10px;">获奖率 65% | 基础</p>
+      </div>
+    </div>
+
+    <div class="service-tier" style="margin-bottom: 0; border: 2px solid #1c4e96; padding: 12px; font-size: 12px;">
+      <div class="tier-name" style="background: #e03e1a;">进阶版</div>
+      <div style="font-size: 22px; color: #e03e1a; font-weight: 700; margin: 6px 0;">¥59.99</div>
+      <div style="font-size: 11px; line-height: 1.6;">
+        <p style="margin: 4px 0;"><strong>✓ 基础版全部</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ 售后群答疑</strong> 20h/天</p>
+        <p style="margin: 4px 0;"><strong>✓ Word 论文</strong> 可复制</p>
+        <p style="margin: 4px 0;"><strong>✓ 降重建议</strong></p>
+        <p style="margin: 4px 0;"></p>
+        <p style="margin-top: 8px; color: #16a34a; font-weight: 700; border-top: 1px solid #ddd; padding-top: 6px; font-size: 10px;">获奖率 72% | 进阶</p>
+      </div>
+    </div>
+
+    <div class="service-tier" style="margin-bottom: 0; padding: 12px; font-size: 12px;">
+      <div class="tier-name" style="background: #d4920a;">完整版</div>
+      <div style="font-size: 22px; color: #e03e1a; font-weight: 700; margin: 6px 0;">¥125</div>
+      <div style="font-size: 11px; line-height: 1.6;">
+        <p style="margin: 4px 0;"><strong>✓ 进阶版全部</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ 小群答疑 20-30人</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ 3篇定制论文</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ AI账号+卡密</strong></p>
+        <p style="margin: 4px 0;"><strong>✓ $30AI额度</strong></p>
+        <p style="margin-top: 8px; color: #16a34a; font-weight: 700; border-top: 1px solid #ddd; padding-top: 6px; font-size: 10px;">获奖率 78% | 完整</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #fff3e0; border: 2px solid #d4920a; border-radius: 8px; padding: 10px; margin-bottom: 10px; font-size: 11px;">
+    <div style="font-weight: 700; color: #d4920a; margin-bottom: 4px;">⭐ 限量版赛中资料</div>
+    <p style="margin: 2px 0;"><strong>每赛题仅售 15 份限量版参考答案</strong></p>
+    <p style="color: #d4920a; font-weight: 700; margin: 3px 0;">先到先得 · 售罄即止 | 获奖率 75%+</p>
+  </div>
+
+  <div class="note" style="padding: 8px; margin-bottom: 10px; font-size: 11px;">
+    <strong>💡 选择建议：</strong>基础版快速上手；进阶版有专业答疑；完整版包含智能体和AI工具。赛前八折优惠，赛中恢复原价。
+  </div>
+
+  <h2 style="margin: 8px 0 6px 0; font-size: 12px; border-bottom: 1px solid #d8e8f8; padding-bottom: 4px;">🤖 完整版配套两大智能体</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 10px;">
+    <div style="background: #e8f5e9; border: 1px solid #16a34a; border-radius: 4px; padding: 8px;">
+      <p style="font-weight: 700; color: #16a34a; margin: 0 0 4px 0; font-size: 11px;">📝 MathModelAgent</p>
+      <p style="line-height: 1.4; margin: 0; font-size: 9px;">• GitHub Star 项目<br>• PDF 论文（LaTeX）<br>• 1-3h 全流程<br>• 获奖率 50%<br><span style="color: #16a34a; font-weight: 700;">自动求解</span></p>
+    </div>
+    <div style="background: #e3f2fd; border: 1px solid #1c4e96; border-radius: 4px; padding: 8px;">
+      <p style="font-weight: 700; color: #1c4e96; margin: 0 0 4px 0; font-size: 11px;">💬 扣子·数模智能体</p>
+      <p style="line-height: 1.4; margin: 0; font-size: 9px;">• 网页端平台<br>• Word 论文<br>• 5 元/次卡密<br>• 获奖率 50%<br><span style="color: #1c4e96; font-weight: 700;">半自动求解</span></p>
+    </div>
+  </div>
+
+  <div class="page-number">第 1 页</div>
+</div>
+
+<!-- 第二页：一对多补充 + 一对一服务 -->
+<div class="page">
+  <div class="header">
+    <div class="logo">BZD<span>·数模社</span></div>
+    <div class="subtitle">一对一定制服务</div>
+  </div>
+
+  <h1>一对一服务 · 专属定制</h1>
+  <p style="font-size: 12px; color: #666; margin-bottom: 12px;">针对性强、个性化的服务方案，根据队伍需求灵活定制</p>
+
+  <div style="background: #e3f2fd; border: 2px solid #1c4e96; border-radius: 8px; padding: 12px; margin-bottom: 12px; font-size: 12px;">
+    <p style="font-weight: 700; color: #1c4e96; margin-bottom: 8px;">📞 微信联系（个性化定制咨询）</p>
+    <p style="margin: 4px 0;"><strong>主号:</strong> bzdsxjm521</p>
+    <p style="margin: 4px 0;"><strong>备用:</strong> bzdsxjm520 / BZD661188</p>
+    <p style="margin-top: 8px; font-size: 11px; color: #666;">所有服务项目均可通过客服咨询定制，赛前预定享折扣优惠</p>
+  </div>
+
+  <table class="comparison-table" style="font-size: 11px; margin-bottom: 12px;">
+    <thead>
+      <tr>
+        <th style="width: 18%;">服务项目</th>
+        <th style="width: 38%;">服务内容 & 特点</th>
+        <th style="width: 18%;">价格</th>
+        <th style="width: 13%;">获奖率</th>
+        <th style="width: 13%;">保障</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>论文检查</strong></td>
+        <td>15min 论文问题诊断讲解（仅诊断不修改）| 摘要、排版、行文、模型框架等</td>
+        <td style="color: #e03e1a; font-weight: 700;">¥199.99</td>
+        <td>+10%</td>
+        <td style="font-size: 10px;">—</td>
+      </tr>
+      <tr>
+        <td><strong>论文润色</strong></td>
+        <td>基于检查结果写手亲自修改 | 不保奖但尽力提升质量</td>
+        <td style="color: #e03e1a; font-weight: 700;">¥499.99</td>
+        <td>+20%</td>
+        <td style="font-size: 10px;">—</td>
+      </tr>
+      <tr>
+        <td><strong>赛中指导</strong></td>
+        <td>指定专属老师 | 思路纠正、模型纠偏、结果查验、论文润色 | 部分可代为实现 | 保奖</td>
+        <td style="color: #e03e1a; font-weight: 700;">¥1000+</td>
+        <td>95%</td>
+        <td style="font-size: 10px; color: #16a34a; font-weight: 700;">保奖</td>
+      </tr>
+      <tr>
+        <td><strong>直出论文</strong></td>
+        <td>一对一定制完整论文 | 不签对赌 | 获奖与否无关</td>
+        <td style="color: #e03e1a; font-weight: 700;">¥666</td>
+        <td>—</td>
+        <td style="font-size: 10px;">—</td>
+      </tr>
+      <tr>
+        <td><strong>对赌论文</strong></td>
+        <td>签订对赌 | 定制完整论文 | 不获奖退款（留150元成本费）</td>
+        <td style="color: #e03e1a; font-weight: 700;">¥1666</td>
+        <td>80%</td>
+        <td style="font-size: 10px; color: #16a34a; font-weight: 700;">退款</td>
+      </tr>
+      <tr style="background: #fff8e8;">
+        <td><strong>🎁 全包服务</strong></td>
+        <td>论文+代码+思路+AI账号+赛中指导+赛后答疑 | 保奖 | 国奖需背调</td>
+        <td style="color: #d4920a; font-weight: 700;">¥2000+</td>
+        <td style="font-weight: 700;">95%</td>
+        <td style="font-size: 10px; color: #d4920a; font-weight: 700;">保奖</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;">
+    <div style="background: #e8f5e9; border: 1px solid #16a34a; border-radius: 6px; padding: 10px; font-size: 10px;">
+      <p style="font-weight: 700; color: #16a34a; margin-bottom: 4px;">✓ 保奖 & 对赌服务</p>
+      <p>赛中指导、对赌论文、全包服务均支持保奖，不获奖可全额/部分退款</p>
+    </div>
+    <div style="background: #fff3e0; border: 1px solid #d4920a; border-radius: 6px; padding: 10px; font-size: 10px;">
+      <p style="font-weight: 700; color: #d4920a; margin-bottom: 4px;">📅 赛前优惠</p>
+      <p>所有服务赛前预定享八折优惠，赛中恢复原价。可咨询微信详询价格</p>
+    </div>
+  </div>
+
+  <div class="page-number">第 2 页</div>
+</div>
+
+<!-- 第三页：常见问题与说明 -->
+<div class="page" style="min-height: 297mm;">
+  <div class="header">
+    <div class="logo">BZD<span>·数模社</span></div>
+    <div class="subtitle">常见问题与服务说明</div>
+  </div>
+
+  <h1>常见问题 FAQ</h1>
+
+  <h2>Q1：一对多和一对一服务有什么区别？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    <strong>一对多服务</strong>是标准化的赛中资料包，包含完整的代码方案、思路文档、示例论文等，适合自主性强、有编程基础的队伍。<br><br>
+    <strong>一对一服务</strong>是个性化的定制方案，根据队伍具体需求提供论文检查、论文润色、赛中指导等，适合需要专业指导的队伍。
+  </p>
+
+  <h2>Q2：获奖率是如何保证的？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    获奖率是基于往届使用我们资料的队伍统计数据。高级一对一服务（赛中指导、全包服务）支持保奖或对赌协议，不获奖可退款。
+  </p>
+
+  <h2>Q3：可以同时购买一对多和一对一服务吗？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    可以的。许多队伍先购买一对多完整版获取代码和思路，再根据进展情况选择一对一的论文检查或赛中指导服务，形成最优组合。
+  </p>
+
+  <h2>Q4：购买后多久能拿到资料？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    一对多服务：赛后第二天早 6 点发布完整资料<br>
+    一对一服务：订单审核通过后立即开始服务（通常 0-2 小时）
+  </p>
+
+  <h2>Q5：可以分享给其他队伍吗？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    一对多资料与个人账号绑定，不可转让。涉及跨队共享会导致作品相似度过高，不利于获奖。我们建议每支队伍独立购买。
+  </p>
+
+  <h2>Q6：不获奖可以退款吗？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    • 一对多资料：无保障，不退款<br>
+    • 一对一高级服务（赛中指导、全包、对赌论文）：可全额或部分退款<br>
+    • 具体退款政策请咨询客服
+  </p>
+
+  <h2>Q7：我们如何看待智能体？智能体输出的论文可以参加竞赛吗？</h2>
+  <p style="font-size: 12px; color: #666; margin-bottom: 8px;">
+    <strong>比喻一：</strong>对于智能体输出的论文参加数模竞赛，您可以理解为是我们高中阶段使用小猿搜题和参加高考这样的关系。它可以快速地让你获得一篇完整的、标准的数模论文。所以无论是模型好坏，他们的精度可能相差的不到 10%。因此我更建议的是用差不多的参数跑一篇或者两篇模型结合对比，会比拉满去跑更有性价比。
+  </p>
+  <p style="font-size: 12px; color: #666; margin-bottom: 16px;">
+    <strong>比喻二：</strong>智能体输出的东西就像是我们在雕刻的时候，从一个石头到一个完美的雕塑的过程。智能体会快速地帮你用一小时的时间，完成从石头到一个大致轮廓和局部细节的雕刻。但更细节的毛发、面部特征、手指特征的雕刻，还是需要您后续的自己，结合我们的赛中资料或您的 AI，进一步完善修改，最后才能实现一篇完整可获奖的论文。
+  </p>
+
+  <div class="note">
+    <strong>⚠️ 重要说明：</strong>所有服务仅为辅助工具，最终成绩取决于队伍的努力程度、题目难度和评委评分。我们致力于通过专业资料和指导最大化获奖概率，但不承诺 100% 获奖。
+  </div>
+
+  <div class="footer">
+    <p>BZD 数模社 · 国内头部数学建模社群</p>
+    <p style="margin-top: 8px; font-size: 10px;">本服务介绍仅供参考，具体服务条款以购买协议为准</p>
+  </div>
+
+  <div class="page-number">第 3 页</div>
+</div>
+
+</body>
+</html>
