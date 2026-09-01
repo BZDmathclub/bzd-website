@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>论文自查表 - BZD 数模社</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px 0;
+      border-bottom: 3px solid #1c4e96;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      color: #1c4e96;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #1c4e96;
+      box-shadow: 0 0 8px rgba(28, 78, 150, 0.1);
+    }
+
+    .filter-section {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 14px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: #1c4e96;
+      color: #1c4e96;
+    }
+
+    .filter-btn.active {
+      background: #1c4e96;
+      color: white;
+      border-color: #1c4e96;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 14px;
+      border-radius: 8px;
+      border-left: 4px solid #1c4e96;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .stat-card-label {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .stat-card-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1c4e96;
+    }
+
+    .checklist-table {
+      width: 100%;
+      background: white;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .checklist-table thead {
+      background: linear-gradient(135deg, #1c4e96 0%, #2863bb 100%);
+      color: white;
+    }
+
+    .checklist-table th {
+      padding: 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    .checklist-table tbody tr {
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.2s;
+    }
+
+    .checklist-table tbody tr:hover {
+      background: #f8faff;
+    }
+
+    .checklist-table td {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+
+    .col-id {
+      width: 80px;
+      font-weight: 600;
+      color: #1c4e96;
+    }
+
+    .col-section {
+      width: 100px;
+      background: #f5f7fa;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .col-checkpoint {
+      flex: 1;
+      color: #555;
+    }
+
+    .col-status {
+      width: 140px;
+      text-align: center;
+    }
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #1c4e96;
+    }
+
+    .checkbox:checked {
+      background: #1c4e96;
+    }
+
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .status-done {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .status-todo {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f0f7ff;
+      border-left: 4px solid #1c4e96;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #1c4e96;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #153570;
+      box-shadow: 0 4px 12px rgba(28, 78, 150, 0.3);
+    }
+
+    .btn-secondary {
+      background: #e8e8e8;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #d0d0d0;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+
+    @media print {
+      .controls, .actions, .header { display: none; }
+      .checklist-table { box-shadow: none; }
+      .checklist-table tbody tr { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>数学建模论文自查表</h1>
+    <p>根据清单逐项检查，确保论文质量</p>
+  </div>
+
+  <div class="controls">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索检查点...">
+    </div>
+    <div class="filter-section" id="filterSection"></div>
+  </div>
+
+  <div class="stats" id="statsContainer"></div>
+
+  <table class="checklist-table" id="checklistTable">
+    <thead>
+      <tr>
+        <th class="col-id">编号</th>
+        <th class="col-section">板块</th>
+        <th class="col-checkpoint">检查点</th>
+        <th class="col-status">是否做到</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <div id="emptyState" class="empty-state" style="display:none;">
+    没有找到匹配的检查点
+  </div>
+
+  <div class="footer-note">
+    <strong>使用说明：</strong>本自查表包含 287 项论文检查点，涵盖摘要、页面结构、问题重述、问题分析、模型与假设、符号与公式、模型建立与求解等多个维度。请根据您的论文逐项检查，勾选"是否做到"来追踪完成进度。
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="markAllDone()">全部标记为完成</button>
+    <button class="btn btn-secondary" onclick="clearAllMarks()">清除所有标记</button>
+    <button class="btn btn-secondary" onclick="window.print()">打印或导出 PDF</button>
+  </div>
+</div>
+
+<script>
+let allData = [];
+let filteredData = [];
+let sections = new Set();
+
+// 加载数据
+async function loadData() {
+  try {
+    const response = await fetch('data/paper-checklist.json');
+    allData = await response.json();
+
+    // 提取所有板块
+    allData.forEach(item => {
+      sections.add(item.section);
+    });
+
+    // 初始化筛选按钮
+    initFilterButtons();
+
+    // 初始显示所有数据
+    filteredData = [...allData];
+    updateStats();
+    renderTable();
+  } catch (e) {
+    console.error('Failed to load checklist data:', e);
+  }
+}
+
+// 初始化筛选按钮
+function initFilterButtons() {
+  const filterSection = document.getElementById('filterSection');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = '全部';
+  allBtn.onclick = () => filterBySection('');
+  filterSection.appendChild(allBtn);
+
+  Array.from(sections).sort().forEach(section => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = section;
+    btn.onclick = () => filterBySection(section);
+    filterSection.appendChild(btn);
+  });
+}
+
+// 筛选板块
+function filterBySection(section) {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+
+  if (section === '') {
+    filteredData = [...allData];
+  } else {
+    filteredData = allData.filter(item => item.section === section);
+  }
+
+  applySearch();
+}
+
+// 搜索功能
+document.getElementById('searchInput').addEventListener('input', applySearch);
+
+function applySearch() {
+  const keyword = document.getElementById('searchInput').value.toLowerCase();
+  const tableBody = document.getElementById('tableBody');
+  const emptyState = document.getElementById('emptyState');
+
+  if (keyword.trim() === '') {
+    renderTable();
+  } else {
+    const results = filteredData.filter(item =>
+      item.id.toLowerCase().includes(keyword) ||
+      item.section.toLowerCase().includes(keyword) ||
+      item.checkpoint.toLowerCase().includes(keyword)
+    );
+
+    if (results.length === 0) {
+      tableBody.innerHTML = '';
+      emptyState.style.display = 'block';
+    } else {
+      emptyState.style.display = 'none';
+      renderTableWithData(results);
+    }
+  }
+}
+
+// 渲染表格
+function renderTable() {
+  document.getElementById('emptyState').style.display = 'none';
+  renderTableWithData(filteredData);
+}
+
+function renderTableWithData(data) {
+  const tableBody = document.getElementById('tableBody');
+  tableBody.innerHTML = '';
+
+  data.forEach(item => {
+    const row = document.createElement('tr');
+    const isChecked = localStorage.getItem(`checklist_${item.id}`) === 'true';
+
+    row.innerHTML = `
+      <td class="col-id">${item.id}</td>
+      <td class="col-section">${item.section}</td>
+      <td class="col-checkpoint">${item.checkpoint}</td>
+      <td class="col-status">
+        <input type="checkbox" class="checkbox" data-id="${item.id}" ${isChecked ? 'checked' : ''}>
+        <span class="status-indicator ${isChecked ? 'status-done' : 'status-todo'}">
+          ${isChecked ? '✓ 已完成' : '待完成'}
+        </span>
+      </td>
+    `;
+
+    row.querySelector('.checkbox').addEventListener('change', function() {
+      const id = this.dataset.id;
+      if (this.checked) {
+        localStorage.setItem(`checklist_${id}`, 'true');
+      } else {
+        localStorage.removeItem(`checklist_${id}`);
+      }
+      updateStats();
+      renderTable();
+    });
+
+    tableBody.appendChild(row);
+  });
+}
+
+// 更新统计信息
+function updateStats() {
+  const total = allData.length;
+  let completed = 0;
+  allData.forEach(item => {
+    if (localStorage.getItem(`checklist_${item.id}`) === 'true') {
+      completed++;
+    }
+  });
+
+  const statsContainer = document.getElementById('statsContainer');
+  statsContainer.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-card-label">总检查点</div>
+      <div class="stat-card-value">${total}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">已完成</div>
+      <div class="stat-card-value" style="color: #2e7d32;">${completed}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">完成度</div>
+      <div class="stat-card-value" style="color: #f57c00;">${total > 0 ? Math.round(completed/total*100) : 0}%</div>
+    </div>
+  `;
+}
+
+// 全部标记为完成
+function markAllDone() {
+  filteredData.forEach(item => {
+    localStorage.setItem(`checklist_${item.id}`, 'true');
+  });
+  updateStats();
+  renderTable();
+}
+
+// 清除所有标记
+function clearAllMarks() {
+  if (confirm('确定要清除所有标记吗？')) {
+    allData.forEach(item => {
+      localStorage.removeItem(`checklist_${item.id}`);
+    });
+    updateStats();
+    renderTable();
+  }
+}
+
+// 页面加载时初始化
+loadData();
+</script>
+
+</body>
+</html>
