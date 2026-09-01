@@ -3276,18 +3276,26 @@ a { color:inherit; }
         </div>
       </div>
       <div class="form-group" style="margin-top:8px;">
-        <label class="form-label">选择领取权益</label>
+        <label class="form-label">选择领取权益（请勾选需要的选项）</label>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
           <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
             <input type="checkbox" id="want-tianka" style="width:16px;height:16px;accent-color:var(--blue-mid);cursor:pointer;">
-            <span>🤖 领取 AI 账号（24h 天卡，Claude / Grok / Gemini 无需翻墙）</span>
+            <span>AI账号【GPT】 - 24h天卡（Claude / Grok / Gemini 无需翻墙）</span>
           </label>
           <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
             <input type="checkbox" id="want-coze" style="width:16px;height:16px;accent-color:var(--blue-mid);cursor:pointer;">
-            <span>📝 领取智能体卡密（数模智能体 6 次使用）</span>
+            <span>扣子平台卡密 - 数模智能体论文直出 & 论文点评</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
+            <input type="checkbox" id="want-quota" style="width:16px;height:16px;accent-color:var(--blue-mid);cursor:pointer;">
+            <span>AI额度【37d】 - 包含 GPT、Claude、Gemini、Grok 等主流模型</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
+            <input type="checkbox" id="want-mma" style="width:16px;height:16px;accent-color:var(--blue-mid);cursor:pointer;">
+            <span>MMA智能体 - 10000积分（自动化全流程论文生成）</span>
           </label>
         </div>
-        <div style="margin-top:6px;font-size:12px;color:var(--text-light);">未勾选的权益默认不发放</div>
+        <div style="margin-top:6px;font-size:12px;color:var(--text-light);">未勾选的权益默认不发放。建议全部勾选以获得最大支持</div>
       </div>
       <button class="submit-btn" id="submit-btn" onclick="submitRedeem()">提交申请 · 等待审核</button>
       <div class="redeem-result" id="redeem-result"></div>
@@ -4117,6 +4125,8 @@ async function submitRedeem() {
 
   const wantTianka = document.getElementById('want-tianka').checked;
   const wantCoze   = document.getElementById('want-coze').checked;
+  const wantQuota  = document.getElementById('want-quota').checked;
+  const wantMma    = document.getElementById('want-mma').checked;
 
   const fd = new FormData();
   fd.append('email', email);
@@ -4124,6 +4134,8 @@ async function submitRedeem() {
   fd.append('screenshot', file);
   fd.append('want_tianka', wantTianka ? '1' : '0');
   fd.append('want_coze',   wantCoze   ? '1' : '0');
+  fd.append('want_quota',  wantQuota  ? '1' : '0');
+  fd.append('want_mma',    wantMma    ? '1' : '0');
 
   try {
     const res = await fetch('https://api.bzdshumo.com/api/apply', {
