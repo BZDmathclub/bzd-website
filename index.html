@@ -1538,22 +1538,13 @@ a { color:inherit; }
       <div class="nr-card-sub">287项检查清单</div>
     </div>
 
-    <!-- 高分得分技巧 -->
-    <div class="nr-card" onclick="showPreparingAlert()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      </div>
-      <div class="nr-card-title">高分得分技巧</div>
-      <div class="nr-card-sub">评审要点</div>
-    </div>
-
     <!-- 必备工具 -->
-    <div class="nr-card" onclick="showPreparingAlert()">
+    <div class="nr-card" onclick="openEssentialToolsModal()">
       <div class="badge-icon">
         <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
       </div>
       <div class="nr-card-title">必备工具</div>
-      <div class="nr-card-sub">好用数模工具集合</div>
+      <div class="nr-card-sub">四款数模必备工具</div>
     </div>
 
     <!-- AI模型排行榜 -->
@@ -1583,13 +1574,13 @@ a { color:inherit; }
       <div class="nr-card-sub">5700+模型库</div>
     </div>
 
-    <!-- 国赛赛题复盘 -->
-    <div class="nr-card" onclick="showPreparingAlert()">
+    <!-- 国赛信息差 -->
+    <div class="nr-card" onclick="openInfoGapModal()">
       <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       </div>
-      <div class="nr-card-title">国赛赛题复盘</div>
-      <div class="nr-card-sub">4年深度解析</div>
+      <div class="nr-card-title">国赛信息差</div>
+      <div class="nr-card-sub">参赛必看 · 9.8更新</div>
     </div>
 
     <!-- 选题分析 -->
@@ -1662,13 +1653,21 @@ a { color:inherit; }
       <button onclick="closePaperReviewSkillsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
     </div>
 
+    <div style="background:#f8faff;border:1.5px solid #d4e1f4;padding:14px 16px;border-radius:10px;margin-bottom:14px;font-size:12.5px;color:#3a5080;line-height:1.9;">
+      本页分两个板块：<strong>BZD 数模社自研 Skills</strong>（按用途分三类）与<strong>其他好用的开源 Skills</strong>。全部可在 Claude Code 中直接调用。
+    </div>
+
+    <!-- ===== 板块一：自研 Skills ===== -->
+    <h3 style="font-size:16px;color:#1e3c72;margin:26px 0 12px 0;font-weight:700;padding-bottom:10px;border-bottom:2px solid #1e3c72;">板块一 · BZD 数模社自研 Skills</h3>
+
     <div style="background:#e8f0fe;padding:12px;border-radius:8px;margin-bottom:25px;font-size:12px;color:#1e3c72;font-weight:600;">
       仓库地址：<a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="color:#1e3c72;text-decoration:underline;">https://github.com/BZDmathclub/bzd-math-modeling-skills.git</a>
     </div>
 
     <!-- ① 综合评审与自我定位类 -->
     <div style="margin-bottom:30px;">
-      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">① 综合评审与自我定位类</h3>
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">① 综合评审与自我定位类</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 15px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">站在评委和赛区两个视角，回答"我这篇论文大概什么水平""我们学校这个成绩能拿什么奖"。</p>
 
       <div style="margin-left:0;margin-bottom:20px;">
         <p style="font-size:12px;color:#666;margin:0 0 12px 0;font-weight:600;">当前 Skills</p>
@@ -1705,7 +1704,8 @@ a { color:inherit; }
 
     <!-- ② 生成类 -->
     <div style="margin-bottom:30px;">
-      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">② 生成类</h3>
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">② 生成类</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 15px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">从赛题到成稿的写作辅助：读懂题、定模型、成段落。用于赛中提速，不替代你自己的建模判断。</p>
 
       <div style="margin-left:0;margin-bottom:20px;">
         <p style="font-size:12px;color:#666;margin:0 0 12px 0;font-weight:600;">当前 Skills</p>
@@ -1764,10 +1764,25 @@ a { color:inherit; }
 
     <!-- ③ 论文自查类 -->
     <div style="margin-bottom:0;">
-      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 15px 0;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">③ 论文自查类</h3>
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">③ 论文自查类</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 15px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">按论文板块逐项过一遍，找出会被评委扣分的地方。提交前跑一次，比赛后复盘更有用。</p>
 
       <div style="margin-left:0;margin-bottom:20px;">
         <p style="font-size:12px;color:#666;margin:0 0 12px 0;font-weight:600;">当前 Skills</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;margin-bottom:15px;">
+          <!-- bzd-paper-aigc-auditor -->
+          <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+            <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">bzd-paper-aigc-auditor</h4>
+            <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">AI 痕迹自查（两层审计）</p>
+            <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+              <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整论文</p>
+              <p style="margin:0;"><strong>输出：</strong>AI 风险评分、问题标红、分层 HTML 报告</p>
+            </div>
+            <a href="https://github.com/BZDmathclub/bzd-math-modeling-skills.git" target="_blank" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">查看详情 →</a>
+          </div>
+        </div>
+
         <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.8;">
           <strong>摘要：</strong> bzd-abstract-checker<br>
           <strong>问题重述：</strong> bzd-problem-restatement<br>
@@ -1780,6 +1795,169 @@ a { color:inherit; }
         <p style="font-size:12px;color:#10b981;margin:0 0 12px 0;font-weight:600;">国赛前预计更新</p>
         <p style="font-size:12px;color:#666;line-height:1.8;">增加 Agent 直出论文内容检查，合并专项规则形成数模论文全文自查，强化论文—代码—数据—结果一致性核验</p>
       </div>
+    </div>
+
+    <!-- ===== 板块二：开源 Skills ===== -->
+    <h3 style="font-size:16px;color:#1e3c72;margin:34px 0 12px 0;font-weight:700;padding-bottom:10px;border-bottom:2px solid #1e3c72;">板块二 · 其他好用的开源 Skills</h3>
+
+    <p style="font-size:12px;color:#666;margin:0 0 16px 0;line-height:1.7;">社区开源项目，非本社出品，按需自取。</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;">
+      <!-- MathModelAgent -->
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+        <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">MathModelAgent</h4>
+        <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">自动化全流程解题，GitHub 上 Star 最多的数模开源项目</p>
+        <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+          <p style="margin:0 0 6px 0;"><strong>输入：</strong>完整赛题及附件</p>
+          <p style="margin:0;"><strong>输出：</strong>建模、求解、绘图到 PDF 论文全流程</p>
+        </div>
+        <a href="https://github.com/jihe520/MathModelAgent.git" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">GitHub 仓库 →</a>
+      </div>
+
+      <!-- Humanizer-zh -->
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:16px;overflow:hidden;">
+        <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:13px;">Humanizer-zh</h4>
+        <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.6;">AI 写作去痕工具（中文版）</p>
+        <div style="background:white;padding:10px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:12px;">
+          <p style="margin:0 0 6px 0;"><strong>输入：</strong>需要改写的中文段落</p>
+          <p style="margin:0;"><strong>输出：</strong>降低模板化痕迹的改写文本</p>
+        </div>
+        <a href="https://github.com/op7418/Humanizer-zh.git" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:11px;font-weight:600;">GitHub 仓库 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 必备工具模态框 -->
+<div id="essential-tools-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:900px;width:92%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        必备工具</h2>
+      <button onclick="closeEssentialToolsModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <p style="font-size:12.5px;color:#3a5080;line-height:1.9;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;padding:14px 16px;margin:0 0 20px 0;">
+      以下四款工具覆盖<strong>写代码、跑全流程、出论文</strong>三个环节，是我们社群赛中实际在用的组合。
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;">
+
+      <!-- Claude Code -->
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:18px;">
+        <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:14px;">Claude Code</h4>
+        <p style="font-size:12px;color:#666;margin:0 0 14px 0;line-height:1.7;">命令行 AI 编程工具，本站全部 Skills 的运行环境。建模、写代码、跑数据、生成图表都在这里完成。</p>
+        <a href="https://www.daheiai.com/cc-install.html" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:8px 14px;border-radius:5px;text-decoration:none;font-size:11.5px;font-weight:600;">安装教程 →</a>
+      </div>
+
+      <!-- Codex -->
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:18px;">
+        <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:14px;">Codex</h4>
+        <p style="font-size:12px;color:#666;margin:0 0 14px 0;line-height:1.7;">OpenAI 的命令行编程工具，与 Claude Code 同类。两者可互为备用，避免赛中单一工具限流影响进度。</p>
+        <a href="https://www.daheiai.com/codex.html" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:8px 14px;border-radius:5px;text-decoration:none;font-size:11.5px;font-weight:600;">安装教程 →</a>
+      </div>
+
+      <!-- MathModelAgent -->
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:18px;">
+        <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:14px;">MathModelAgent</h4>
+        <p style="font-size:12px;color:#666;margin:0 0 10px 0;line-height:1.7;">自动化全流程解题，GitHub 上 Star 最多的数模项目。输入赛题即可跑通建模到出 PDF 论文的完整链路，1-3 小时出稿。</p>
+        <div style="background:white;padding:9px 11px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:14px;">
+          完整版权益内含 10000 积分兑换码，注册后可直接领取
+        </div>
+        <a href="https://mathmodel.top/signup?ref=358JL76N" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:8px 14px;border-radius:5px;text-decoration:none;font-size:11.5px;font-weight:600;">官网注册 →</a>
+      </div>
+
+      <!-- 扣子平台 -->
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:18px;">
+        <h4 style="color:#1e3c72;margin:0 0 8px 0;font-weight:700;font-size:14px;">扣子平台 · 数学建模 Agent</h4>
+        <p style="font-size:12px;color:#666;margin:0 0 10px 0;line-height:1.7;">全网最便宜的数模智能体，直接输出 Word 文档。适合论文直出与论文点评，无需配置环境，浏览器打开即用。</p>
+        <div style="background:white;padding:9px 11px;border-radius:6px;font-size:11px;color:#555;line-height:1.6;margin-bottom:14px;">
+          完整版权益内含卡密，也可单独购买（5 元/次）
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="https://www.coze.cn/store/project/7548130644564688906?from=project_card&bid=6l6mqn0h06g0j" target="_blank" rel="noopener" style="display:inline-block;background:#1e3c72;color:white;padding:8px 14px;border-radius:5px;text-decoration:none;font-size:11.5px;font-weight:600;">立即使用 →</a>
+          <a href="https://weidian.com/item.html?itemID=7842857907&wfr=c&sfr=app&source=goods_home" target="_blank" rel="noopener" style="display:inline-block;background:white;color:#1e3c72;border:1.5px solid #1e3c72;padding:8px 14px;border-radius:5px;text-decoration:none;font-size:11.5px;font-weight:600;">购买卡密 →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 国赛信息差模态框 -->
+<div id="info-gap-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:760px;width:92%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h2 style="font-size:24px;color:#1e3c72;margin:0;font-weight:700;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;flex-shrink:0;fill:none;stroke:#1c4e96;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        国赛信息差 · 参赛必看</h2>
+      <button onclick="closeInfoGapModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+
+    <div style="background:#e8f0fe;padding:12px 14px;border-radius:8px;margin-bottom:22px;font-size:12px;color:#1e3c72;font-weight:600;">
+      最后更新：9 月 8 日
+    </div>
+
+    <p style="font-size:12.5px;color:#3a5080;line-height:1.9;background:#f8faff;border:1.5px solid #d4e1f4;border-radius:10px;padding:14px 16px;margin:0 0 24px 0;">
+      国赛拉开差距的往往不是建模能力，而是<strong>知不知道规则</strong>。以下几条是每年最容易踩、且踩了就很难补救的坑。
+    </p>
+
+    <!-- ① 查重与 AIGC -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">① 查重与 AIGC 是两道独立的线</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">很多队只查了重复率，完全没查 AIGC，交上去才发现出问题。</p>
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:14px 16px;font-size:12px;color:#555;line-height:1.9;">
+        <p style="margin:0 0 8px 0;">两项<strong>必须同时达标</strong>，单项合格不算通过。我们社群内部执行的标准是：</p>
+        <p style="margin:0 0 4px 0;">• 查重率 <strong style="color:#c55a11;">≤ 15%</strong>（比期刊库 20% 阈值更严）</p>
+        <p style="margin:0 0 8px 0;">• AIGC 率 <strong style="color:#c55a11;">≤ 20%</strong></p>
+        <p style="margin:0;color:#5a4000;background:#fff8e8;border-left:3px solid #f5a623;padding:8px 10px;border-radius:0 4px 4px 0;">以<strong>知网</strong>为唯一参考（竞赛官方指定）。维普、万方结果和知网差 2-5%，不要拿来当准。检测请留出提交前 <strong>3-5 天</strong>，改完还要复查。</p>
+      </div>
+    </div>
+
+    <!-- ② AI 选模型的坑 -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">② AI 给的思路，最大问题是"华而不实"</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">这是我们审了大量论文后最确定的一条判断。</p>
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:14px 16px;font-size:12px;color:#555;line-height:1.9;">
+        <p style="margin:0 0 8px 0;">AI 倾向于推荐深度学习、强化学习、遗传/蚁群算法这类<strong>听起来高级但评委未必认可</strong>的模型。数学建模的本质要求恰恰相反：</p>
+        <p style="margin:0 0 8px 0;padding:8px 12px;background:white;border-radius:6px;color:#1e3c72;font-weight:600;">能用基础的就不用复杂的，能用简单的就不用高级的。</p>
+        <p style="margin:0;">用一个复杂模型换来的"创新分"，远不及把基础模型讲清楚、验证扎实来得稳。提交前建议用 <strong>bzd-paper-aigc-auditor</strong> 跑一次（Skills 分享 → 论文自查类），它会同时查语言痕迹和<strong>模型合理性</strong>。</p>
+      </div>
+    </div>
+
+    <!-- ③ 国奖与学校 -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">③ 国奖名额和学校强相关</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">先搞清自己的起点，再定目标，比闷头写更重要。</p>
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:14px 16px;font-size:12px;color:#555;line-height:1.9;">
+        <p style="margin:0 0 8px 0;">根据我们对过去五年数据的统计：每年 <strong style="color:#c55a11;">60%+ 的国奖名额集中在不到 10% 的高校</strong>，接近 <strong>80% 的高校一个国奖也没有</strong>。大家实际争取的是剩下不足 40% 的名额。</p>
+        <p style="margin:0;">先查一下自己学校历年的情况，把目标定在合理区间：见<strong>国奖名额查询</strong>与<strong>赛区获奖率</strong>两个板块。</p>
+      </div>
+    </div>
+
+    <!-- ④ 工具与提速 -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">④ 工具要在赛前装好、跑通一遍</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">赛中现装环境、现踩报错，是最亏的时间损耗。</p>
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:14px 16px;font-size:12px;color:#555;line-height:1.9;">
+        <p style="margin:0 0 8px 0;">四款工具见<strong>必备工具</strong>板块：Claude Code、Codex、MathModelAgent、扣子平台数模 Agent。</p>
+        <p style="margin:0;">两点建议：<strong>Claude Code 和 Codex 都装上</strong>，赛中任一个限流不至于停工；<strong>赛前拿往届题跑通一次完整流程</strong>，确认工具链没问题。</p>
+      </div>
+    </div>
+
+    <!-- ⑤ 权益领取 -->
+    <div style="margin-bottom:0;">
+      <h3 style="font-size:14px;color:#1e3c72;margin:0 0 6px 0;font-weight:700;">⑤ 已购完整版记得领权益</h3>
+      <p style="font-size:12px;color:#666;margin:0 0 12px 0;line-height:1.7;padding-bottom:8px;border-bottom:2px solid #e0e8f0;">每年都有同学买完忘了领，赛后才发现。</p>
+      <div style="background:#f8faff;border:1px solid #d4e1f4;border-radius:10px;padding:14px 16px;font-size:12px;color:#555;line-height:1.9;">
+        <p style="margin:0 0 8px 0;">完整版含四项权益：<strong>AI 账号天卡、扣子平台卡密、AI 额度（美元）、MMA 智能体兑换码（10000 积分）</strong>。</p>
+        <p style="margin:0;">在<a href="#redeem" onclick="closeInfoGapModal()" style="color:#1e3c72;font-weight:700;">领取专属权益</a>提交邮箱和支付截图，审核后发到邮箱，通常 0~2 小时内处理。</p>
+      </div>
+    </div>
+
+    <div style="background:#fff8e8;border-left:4px solid #f5a623;padding:14px 16px;border-radius:0 6px 6px 0;font-size:12.5px;color:#5a4000;line-height:1.9;margin-top:24px;">
+      本页赛前持续更新。有具体问题可加答疑群 <strong>1059114495</strong> 或微信 <strong>bzdsxjm521</strong>。
     </div>
   </div>
 </div>
@@ -3739,6 +3917,26 @@ function openPaperReviewSkillsModal(){
 
 function closePaperReviewSkillsModal(){
   document.getElementById('paper-review-skills-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function openEssentialToolsModal(){
+  document.getElementById('essential-tools-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEssentialToolsModal(){
+  document.getElementById('essential-tools-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function openInfoGapModal(){
+  document.getElementById('info-gap-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeInfoGapModal(){
+  document.getElementById('info-gap-modal').style.display = 'none';
   document.body.style.overflow = '';
 }
 

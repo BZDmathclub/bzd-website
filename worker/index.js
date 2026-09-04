@@ -1,19 +1,7 @@
-// BZD 数模社 — 卡密审核系统 Cloudflare Worker
-// 环境变量（在 Cloudflare 后台配置）：
-//   RESEND_API_KEY   — Resend API Key
-//   ADMIN_EMAIL      — 管理员接收审核邮件的地址 bzdsxjm@163.com
-//   ADMIN_SECRET     — 管理员一键审核的私密token（自定义一串字符）
-//   COZE_TOKEN       — 扣子平台 API Token
-//   COZE_BOT_ID      — 扣子机器人 ID
+// BZD 数模社 — 四种账号发放系统 Cloudflare Worker
+// 支持四种权益：AI天卡、扣子卡密、AI额度、MMA兑换码
 
-const COZE_API = 'https://api.coze.cn/v3/chat';
-const CHATSHARE_URL = 'https://chatshare.biz/';
-const AI_PURCHASE_URL = 'https://aiforman.vip/register.php?ref=sxjm12';
-const COZE_TRIGGER = 'nhasmj_6ddj6123ioergweffnf23sadg6wsdsggqw，8';
-
-// KV 存储 key 前缀
 const PENDING_PREFIX = 'pending:';
-const TIANKA_KEY = 'tianka_index'; // 当前天卡发放到第几个
 
 export default {
   async fetch(request, env) {
@@ -21,7 +9,6 @@ export default {
     const path = url.pathname;
     const method = request.method;
 
-    // CORS
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -32,15 +19,12 @@ export default {
     }
 
     try {
-      // ① 用户提交申请（含截图）
       if (path === '/api/apply' && method === 'POST') {
         return await handleApply(request, env, corsHeaders);
       }
-      // ② 管理员审核（一键通过/拒绝）
       if (path === '/api/review' && (method === 'GET' || method === 'POST')) {
         return await handleReview(request, env, corsHeaders);
       }
-      // ③ 管理员查看待审核列表
       if (path === '/api/pending' && method === 'GET') {
         return await handlePending(request, env, corsHeaders);
       }
@@ -67,10 +51,8 @@ async function handleApply(request, env, corsHeaders) {
     return json({ error: '请填写邮箱并上传截图' }, 400, corsHeaders);
   }
 
-  // 生成唯一申请 ID
   const applyId = `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
-  // 把图片转为 base64 存入 KV
   const imageBytes = await imageFile.arrayBuffer();
   const imageUint8 = new Uint8Array(imageBytes);
   let imageBinary = '';
@@ -80,8 +62,11 @@ async function handleApply(request, env, corsHeaders) {
   const imageBase64 = btoa(imageBinary);
   const imageType = imageFile.type || 'image/png';
 
+  // 四种权益选择
   const wantTianka = formData.get('want_tianka') === '1';
-  const wantCoze   = formData.get('want_coze')   === '1';
+  const wantCoze   = formData.get('want_coze') === '1';
+  const wantQuota  = formData.get('want_quota') === '1';
+  const wantMma    = formData.get('want_mma') === '1';
 
   const record = {
     applyId,
@@ -91,19 +76,17 @@ async function handleApply(request, env, corsHeaders) {
     imageType,
     wantTianka,
     wantCoze,
+    wantQuota,
+    wantMma,
     status: 'pending',
     createdAt: new Date().toISOString(),
   };
+
   await env.BZD_KV.put(
     `${PENDING_PREFIX}${applyId}`,
     JSON.stringify(record),
-    { expirationTtl: 60 * 60 * 72 } // 72小时过期
+    { expirationTtl: 60 * 60 * 72 }
   );
-
-  // 发审核邮件给管理员
-  const reviewUrl = `https://bzd-admin.pages.dev/review?id=${applyId}&secret=${env.ADMIN_SECRET}`;
-  const approveUrl = `https://api.bzdshumo.com/api/review?id=${applyId}&action=approve&secret=${env.ADMIN_SECRET}`;
-  const rejectUrl  = `https://api.bzdshumo.com/api/review?id=${applyId}&action=reject&secret=${env.ADMIN_SECRET}`;
 
   const emailHtml = `
 <div style="font-family:'Microsoft YaHei',sans-serif;max-width:600px;margin:0 auto;">
@@ -115,17 +98,24 @@ async function handleApply(request, env, corsHeaders) {
     <p><strong>用户邮箱：</strong>${userEmail}</p>
     <p><strong>订单备注：</strong>${orderNote || '（未填写）'}</p>
     <p><strong>申请时间：</strong>${record.createdAt}</p>
+    <p><strong>选择权益：</strong></p>
+    <ul style="margin:6px 0;">
+      <li>${wantTianka ? '✅' : '⭕'} AI账号天卡</li>
+      <li>${wantCoze ? '✅' : '⭕'} 扣子平台卡密</li>
+      <li>${wantQuota ? '✅' : '⭕'} AI额度</li>
+      <li>${wantMma ? '✅' : '⭕'} MMA兑换码</li>
+    </ul>
     <p><strong>支付截图：</strong></p>
     <img src="data:${imageType};base64,${imageBase64}"
          style="max-width:100%;border:1px solid #ccc;border-radius:4px;" />
   </div>
   <div style="padding:20px;text-align:center;background:white;border:1px solid #c0d4ef;border-top:none;border-radius:0 0 8px 8px;">
     <p style="color:#666;font-size:13px;">请核实截图后点击按钮：</p>
-    <a href="${approveUrl}"
+    <a href="https://api.bzdshumo.com/api/review?id=${applyId}&action=approve&secret=${env.ADMIN_SECRET}"
        style="display:inline-block;background:#1a8a50;color:white;padding:12px 36px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:15px;margin-right:16px;">
-      ✅ 通过 · 发卡密
+      ✅ 通过 · 发权益
     </a>
-    <a href="${rejectUrl}"
+    <a href="https://api.bzdshumo.com/api/review?id=${applyId}&action=reject&secret=${env.ADMIN_SECRET}"
        style="display:inline-block;background:#c55a11;color:white;padding:12px 36px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:15px;">
       ❌ 拒绝
     </a>
@@ -134,21 +124,20 @@ async function handleApply(request, env, corsHeaders) {
 
   await sendEmail(env, {
     to: env.ADMIN_EMAIL,
-    subject: `【BZD卡密申请】${userEmail} · ${new Date().toLocaleString('zh-CN')}`,
+    subject: `【BZD四种权益申请】${userEmail} · ${new Date().toLocaleString('zh-CN')}`,
     html: emailHtml,
   });
 
-  return json({ success: true, message: '申请已提交，请等待审核，通常在30分钟内处理' }, 200, corsHeaders);
+  return json({ success: true, message: '申请已提交，请等待审核' }, 200, corsHeaders);
 }
 
 // ============================================================
-// ② 管理员审核
+// ② 管理员审核 - 发放四种权益
 // ============================================================
 async function handleReview(request, env, corsHeaders) {
-  // 支持 GET 参数（邮件中的链接）
   const url = new URL(request.url);
   const applyId = url.searchParams.get('id');
-  const action  = url.searchParams.get('action'); // approve | reject
+  const action  = url.searchParams.get('action');
   const secret  = url.searchParams.get('secret');
 
   if (secret !== env.ADMIN_SECRET) {
@@ -163,14 +152,22 @@ async function handleReview(request, env, corsHeaders) {
     return htmlPage('❌ 申请不存在或已过期');
   }
   const record = JSON.parse(raw);
-  if (record.status !== 'pending') {
-    return htmlPage(`ℹ️ 该申请已处理（状态：${record.status}）`);
+
+  // 已审核通过的申请 — 无论 view 还是重复点 approve，都直接展示已发放的权益
+  if (record.status === 'approved') {
+    return viewBenefitsPage(record);
+  }
+  if (record.status === 'rejected') {
+    return htmlPage('ℹ️ 该申请已被拒绝');
+  }
+  // 此处 status 必为 pending
+  if (action === 'view') {
+    return htmlPage('ℹ️ 申请审核中，请等待管理员处理');
   }
 
   if (action === 'reject') {
     record.status = 'rejected';
     await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 3600 });
-    // 发拒绝邮件
     await sendEmail(env, {
       to: record.userEmail,
       subject: '【BZD数模社】您的资料申请结果',
@@ -179,72 +176,76 @@ async function handleReview(request, env, corsHeaders) {
     return htmlPage('✅ 已拒绝，通知邮件已发送给用户');
   }
 
-  // 审核通过 — 按需获取天卡账号 + 扣子卡密
-  const tianka = record.wantTianka ? await getNextTianka(env) : null;
-  const cozeMi = record.wantCoze   ? await getCozeKami(env)   : null;
+  // 批准 - 获取四种权益
+  const tianka = record.wantTianka ? await getNextItem(env, 'TIANKA_LIST') : null;
+  const cozeMi = record.wantCoze   ? await getNextItem(env, 'COZE_LIST')   : null;
+  const quota  = record.wantQuota  ? await getNextItem(env, 'QUOTA_LIST')  : null;
+  const mma    = record.wantMma    ? await getNextItem(env, 'MMA_LIST')    : null;
 
-  // 更新状态
   record.status = 'approved';
   record.tianka = tianka;
   record.cozeMi = cozeMi;
+  record.quota = quota;
+  record.mma = mma;
   await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 3600 });
 
-  // 发通过邮件给用户
+  // 发四种权益邮件
+  console.log(`发送邮件 - tianka: ${!!tianka}, cozeMi: ${!!cozeMi}, quota: ${!!quota}, mma: ${!!mma}`);
   await sendEmail(env, {
     to: record.userEmail,
     subject: '【BZD数模社】✅ 您的完整版权益已发放',
-    html: approveEmailHtml(record.userEmail, tianka, cozeMi),
+    html: approveEmailHtml(record.userEmail, tianka, cozeMi, quota, mma),
   });
 
   return htmlPage(`
     ✅ 审核通过！已发送以下内容至 ${record.userEmail}<br><br>
-    ${tianka ? `<strong>天卡账号：</strong>${tianka.account}<br><strong>天卡密码：</strong>${tianka.password}<br>` : ''}
-    ${cozeMi ? `<strong>智能体卡密：</strong>${cozeMi}` : ''}
-    ${!tianka && !cozeMi ? '（用户未勾选任何权益）' : ''}
+    ${tianka ? `<strong>天卡兑换码：</strong>${tianka}<br>` : ''}
+    ${cozeMi ? `<strong>扣子卡密：</strong>${cozeMi}<br>` : ''}
+    ${quota ? `<strong>AI额度：</strong>${quota}<br>` : `<strong style="color:red;">AI额度：未获取</strong><br>`}
+    ${mma ? `<strong>MMA兑换码：</strong>${mma}<br>` : `<strong style="color:red;">MMA兑换码：未获取</strong><br>`}
+    ${!tianka && !cozeMi && !quota && !mma ? '（用户未勾选任何权益）' : ''}
   `);
 }
 
 // ============================================================
-// ③ 获取下一个天卡账号（轮流发放）
+// 获取下一个账号/权益 - 从 KV 按顺序分配
 // ============================================================
-async function getNextTianka(env) {
-  // 从 KV 读取天卡列表（首次需要初始化）
-  const listRaw = await env.BZD_KV.get('tianka_list');
-  if (!listRaw) throw new Error('天卡列表未初始化，请联系开发者');
-  const list = JSON.parse(listRaw);
-
-  let idx = parseInt(await env.BZD_KV.get(TIANKA_KEY) || '0');
-  if (idx >= list.length) idx = 0; // 循环使用
-
-  const item = list[idx];
-  await env.BZD_KV.put(TIANKA_KEY, String(idx + 1));
-  return item; // { account, password }
-}
-
-// ============================================================
-// ④ 从 KV 顺序取扣子卡密
-// ============================================================
-async function getCozeKami(env) {
+async function getNextItem(env, varName) {
   try {
-    const listRaw = await env.BZD_KV.get('coze_list');
-    if (!listRaw) return '卡密列表未初始化，请联系客服 bzdsxjm521';
-    const list = JSON.parse(listRaw);
+    // 从 KV 读取列表
+    const listStr = await env.BZD_KV.get(varName);
+    if (!listStr) {
+      return `权益列表(${varName})未配置，请联系客服 bzdsxjm521`;
+    }
 
-    let idx = parseInt(await env.BZD_KV.get('coze_index') || '0');
-    if (idx >= list.length) idx = 0;
+    const list = listStr.split('\n').map(x => x.trim()).filter(x => x);
+    if (list.length === 0) {
+      return '权益列表为空，请联系客服 bzdsxjm521';
+    }
 
-    const kami = list[idx];
-    await env.BZD_KV.put('coze_index', String(idx + 1));
-    return kami;
+    // 获取当前索引（从 KV 读取）
+    const indexKey = `${varName}_INDEX`;
+    let idx = parseInt(await env.BZD_KV.get(indexKey) || '0');
+
+    // 如果索引超出范围，回到开始
+    if (idx >= list.length) {
+      idx = 0;
+    }
+
+    const item = list[idx];
+    // 使用后自动更新索引
+    await env.BZD_KV.put(indexKey, String(idx + 1));
+
+    return item;
   } catch (e) {
     return `获取失败(${e.message})，请联系客服 bzdsxjm521`;
   }
 }
 
 // ============================================================
-// 邮件模板
+// 邮件模板 - 四种权益
 // ============================================================
-function approveEmailHtml(email, tianka, cozeMi) {
+function approveEmailHtml(email, tianka, cozeMi, quota, mma) {
   return `
 <div style="font-family:'Microsoft YaHei',sans-serif;max-width:600px;margin:0 auto;">
   <div style="background:linear-gradient(135deg,#0a2d6e,#1a4fa8);color:white;padding:28px;border-radius:10px 10px 0 0;text-align:center;">
@@ -258,28 +259,48 @@ function approveEmailHtml(email, tianka, cozeMi) {
     ${tianka ? `
     <div style="background:white;border:1.5px solid #c0d4ef;border-radius:8px;padding:20px;margin:16px 0;">
       <h3 style="color:#0a2d6e;margin:0 0 12px;border-bottom:2px solid #3b7dd8;padding-bottom:8px;">
-        🤖 AI 账号（24小时有效）
+        🤖 AI账号【GPT】（24小时有效）
       </h3>
-      <p style="margin:6px 0;"><strong>登录网址：</strong><a href="https://chatshare.biz/" style="color:#1a4fa8;">https://chatshare.biz/</a></p>
-      <p style="margin:6px 0;"><strong>账号：</strong><code style="background:#f0f6ff;padding:2px 8px;border-radius:4px;font-size:15px;color:#c55a11;">${tianka.account}</code></p>
-      <p style="margin:6px 0;"><strong>密码：</strong><code style="background:#f0f6ff;padding:2px 8px;border-radius:4px;font-size:15px;color:#c55a11;">${tianka.password}</code></p>
-      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">账号仅限当天使用，续购请访问：<a href="https://aiforman.vip/register.php?ref=sxjm12" style="color:#1a4fa8;">aiforman.vip</a></p>
+      <p style="margin:6px 0;"><strong>登录网址：</strong><a href="https://claude.aiforman.vip/user-new#/register?i=7TUZG" style="color:#1a4fa8;">https://claude.aiforman.vip</a></p>
+      <p style="margin:6px 0;"><strong>兑换码：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:15px;color:#c55a11;font-weight:bold;">${tianka}</code></p>
+      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">注册后填写兑换码登录，24小时使用权限。如时间不够可自行在网站补充。</p>
     </div>` : ''}
 
     ${cozeMi ? `
     <div style="background:white;border:1.5px solid #c0d4ef;border-radius:8px;padding:20px;margin:16px 0;">
       <h3 style="color:#0a2d6e;margin:0 0 12px;border-bottom:2px solid #3b7dd8;padding-bottom:8px;">
-        📝 数模智能体卡密（8次使用）
+        📝 扣子平台卡密（论文直出 & 论文点评）
       </h3>
-      <p style="margin:6px 0;"><strong>智能体地址：</strong><a href="https://www.coze.cn/s/5bybFsAocZo/" style="color:#1a4fa8;">点击访问</a></p>
+      <p style="margin:6px 0;"><strong>智能体地址：</strong><a href="https://www.coze.cn/store/project/7548130644564688906" style="color:#1a4fa8;">数学建模Agent</a></p>
       <p style="margin:6px 0;"><strong>卡密：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:16px;color:#1a8a50;font-weight:bold;">${cozeMi}</code></p>
-      <p style="margin:6px 0;"><strong>使用教程：</strong><a href="https://www.kdocs.cn/l/crMxja9CnmTw" style="color:#1a4fa8;">点击查看</a></p>
-      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">使用前请先阅读教程，导入题目后需购买资源点才可调用。卡密不足可加微信 bzdsxjm521 购买（3元/次）</p>
+      <p style="margin:6px 0;"><strong>教程文档：</strong><a href="https://www.kdocs.cn/l/crMxja9CnmTw" style="color:#1a4fa8;">点击查看</a></p>
+      <p style="margin:6px 0;"><strong>论文点评Agent：</strong><a href="https://kk6mg46g36.coze.site/" style="color:#1a4fa8;">点击打开</a></p>
+      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">使用前请先阅读教程。卡密不足可加微信 bzdsxjm521 购买（5元/次）</p>
+    </div>` : ''}
+
+    ${quota ? `
+    <div style="background:white;border:1.5px solid #c0d4ef;border-radius:8px;padding:20px;margin:16px 0;">
+      <h3 style="color:#0a2d6e;margin:0 0 12px;border-bottom:2px solid #3b7dd8;padding-bottom:8px;">
+        💳 AI额度【美元】（包含 GPT、Claude、Gemini、Grok 等）
+      </h3>
+      <p style="margin:6px 0;"><strong>兑换链接：</strong><a href="https://kapibala.asia/sign-up?aff=bzdsxjm" style="color:#1a4fa8;">https://kapibala.asia/sign-up?aff=bzdsxjm</a></p>
+      <p style="margin:6px 0;"><strong>兑换码：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:15px;color:#c55a11;font-weight:bold;">${quota}</code></p>
+      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">注册后填写兑换码，即可获得美元额度。</p>
+    </div>` : ''}
+
+    ${mma ? `
+    <div style="background:white;border:1.5px solid #c0d4ef;border-radius:8px;padding:20px;margin:16px 0;">
+      <h3 style="color:#0a2d6e;margin:0 0 12px;border-bottom:2px solid #3b7dd8;padding-bottom:8px;">
+        🚀 MMA智能体（10000积分）
+      </h3>
+      <p style="margin:6px 0;"><strong>官网注册：</strong><a href="https://mathmodel.top/signup?ref=358JL76N" style="color:#1a4fa8;">https://mathmodel.top/signup?ref=358JL76N</a></p>
+      <p style="margin:6px 0;"><strong>兑换码：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:15px;color:#c55a11;font-weight:bold;">${mma}</code></p>
+      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">GitHub最多Star项目，自动化全流程1-3h生成PDF论文。注册后使用兑换码免费领取一万积分。</p>
     </div>` : ''}
 
     <div style="background:#fff8e8;border-left:4px solid #f5a623;padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0;">
       <p style="margin:0;font-size:13px;color:#5a4000;">
-        💡 <strong>温馨提示：</strong>AI账号为共享账号请勿修改密码，智能体卡密仅供本人使用，请勿转发他人。如遇问题请加答疑群 <strong>1059114495</strong>
+        💡 <strong>温馨提示：</strong>AI账号为共享账号请勿修改密码，卡密和兑换码仅供本人使用，请勿转发他人。如遇问题请加答疑群 <strong>1059114495</strong>
       </p>
     </div>
   </div>
@@ -306,9 +327,44 @@ function rejectEmailHtml(email) {
 </div>`;
 }
 
-// ============================================================
-// 工具函数
-// ============================================================
+function viewBenefitsPage(record) {
+  const benefits = [];
+  if (record.tianka) benefits.push(`🤖 <strong>AI天卡兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.tianka}</code>`);
+  if (record.cozeMi) benefits.push(`📝 <strong>扣子卡密：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#1a8a50;font-weight:bold;">${record.cozeMi}</code>`);
+  if (record.quota) benefits.push(`💳 <strong>AI额度兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.quota}</code>`);
+  if (record.mma) benefits.push(`🚀 <strong>MMA兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.mma}</code>`);
+
+  return new Response(`
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>权益发放确认</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;background:#eef4fc;display:flex;
+  align-items:center;justify-content:center;min-height:100vh;margin:0;padding:20px;}
+.box{background:white;border-radius:12px;padding:40px;max-width:600px;
+  box-shadow:0 8px 24px rgba(10,45,110,.12);text-align:center;}
+h2{margin-top:0;color:#0a2d6e;font-size:24px;}
+.success{color:#16a34a;font-size:18px;margin:20px 0;}
+.benefit-item{margin:16px 0;padding:12px;background:#f9fafb;border-left:3px solid #2c5aa0;
+  border-radius:4px;text-align:left;font-size:14px;}
+code{display:block;margin-top:4px;word-break:break-all;}
+.tips{color:#666;font-size:12px;margin-top:20px;padding:12px;background:#fff8e8;
+  border-radius:6px;border-left:3px solid #f5a623;}
+</style></head><body>
+<div class="box">
+<h2>✅ 权益已发放</h2>
+<div class="success">感谢您的购买！以下是您的专属权益</div>
+${benefits.map(b => `<div class="benefit-item">${b}</div>`).join('')}
+<div class="tips">
+💡 <strong>温馨提示：</strong><br>
+• AI账号为共享账号，请勿修改密码<br>
+• 卡密和兑换码仅供本人使用，请勿转发<br>
+• 如遇问题请加微信 <strong>bzdsxjm521</strong> 或加群 <strong>1059114495</strong>
+</div>
+</div>
+</body></html>`, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
+}
+
 async function sendEmail(env, { to, subject, html }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -328,6 +384,23 @@ async function sendEmail(env, { to, subject, html }) {
     throw new Error(`Resend 发送失败: ${err}`);
   }
   return res.json();
+}
+
+async function handlePending(request, env, corsHeaders) {
+  const url = new URL(request.url);
+  if (url.searchParams.get('secret') !== env.ADMIN_SECRET) {
+    return new Response('Forbidden', { status: 403 });
+  }
+  const list = await env.BZD_KV.list({ prefix: PENDING_PREFIX });
+  const items = [];
+  for (const key of list.keys) {
+    const raw = await env.BZD_KV.get(key.name);
+    if (raw) {
+      const r = JSON.parse(raw);
+      items.push({ applyId: r.applyId, userEmail: r.userEmail, status: r.status, createdAt: r.createdAt });
+    }
+  }
+  return json(items, 200, corsHeaders);
 }
 
 function json(data, status = 200, headers = {}) {
@@ -353,26 +426,4 @@ h2{margin-top:0;}
 </body></html>`, {
     headers: { 'Content-Type': 'text/html;charset=UTF-8' },
   });
-}
-
-async function handlePending(request, env, corsHeaders) {
-  const url = new URL(request.url);
-  if (url.searchParams.get('secret') !== env.ADMIN_SECRET) {
-    return new Response('Forbidden', { status: 403 });
-  }
-  // 列出所有 pending 记录（简化版）
-  const list = await env.BZD_KV.list({ prefix: PENDING_PREFIX });
-  const items = [];
-  for (const key of list.keys) {
-    const raw = await env.BZD_KV.get(key.name);
-    if (raw) {
-      const r = JSON.parse(raw);
-      items.push({ applyId: r.applyId, userEmail: r.userEmail, status: r.status, createdAt: r.createdAt });
-    }
-  }
-  return json(items, 200, corsHeaders);
-}
-
-function sleep(ms) {
-  return new Promise(r => setTimeout(r, ms));
 }
