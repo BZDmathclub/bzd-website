@@ -1658,6 +1658,318 @@ a { color:inherit; }
       带 <span style="display:inline-block;background:linear-gradient(90deg,#d4920a,#fbbf24);color:#0c1d3e;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px;vertical-align:1px;">推荐</span> 标记的三个是使用率最高、赛中最值得先跑的。
     </div>
 
+    <!-- ===== 赛程流程图小板块 ===== -->
+    <style>
+      .sfl-wrap{background:linear-gradient(160deg,#fbfdff 0%,#f2f7fd 100%);border:1.5px solid #d4e1f4;border-radius:12px;padding:16px 18px 18px;margin-bottom:22px;}
+      .sfl-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+      .sfl-head h4{font-size:14px;font-weight:700;color:#1e3c72;margin:0;letter-spacing:.5px;}
+      .sfl-head span{font-size:11.5px;color:#7a8ba8;}
+      .sfl-rail{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:4px;}
+      .sfl-node{flex:1 1 0;min-width:132px;background:#fff;border:1.5px solid #d9e5f5;border-radius:10px;padding:12px 10px 11px;cursor:pointer;text-align:center;position:relative;transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s ease,border-color .22s ease;}
+      .sfl-node:hover{transform:translateY(-3px);border-color:#1c4e96;box-shadow:0 8px 20px rgba(28,78,150,.16);}
+      .sfl-num{width:24px;height:24px;margin:0 auto 7px;border-radius:8px;background:linear-gradient(145deg,#0c1d3e,#1c4e96);color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+      .sfl-t{font-size:12.5px;font-weight:700;color:#12305e;line-height:1.35;margin-bottom:5px;}
+      .sfl-d{font-size:10.5px;color:#7a8ba8;line-height:1.55;margin-bottom:8px;min-height:32px;}
+      .sfl-n{display:inline-block;font-size:9.5px;font-weight:700;color:#1c4e96;background:#eaf2fc;border:1px solid #cfe0f5;border-radius:9px;padding:1px 8px;}
+      .sfl-node[data-tone="chk"] .sfl-num{background:linear-gradient(145deg,#0f5c37,#16a34a);}
+      .sfl-node[data-tone="chk"] .sfl-n{color:#0f7a45;background:#e6f7ef;border-color:#b8e6cf;}
+      .sfl-node[data-tone="chk"]:hover{border-color:#16a34a;box-shadow:0 8px 20px rgba(22,163,74,.16);}
+      .sfl-node[data-tone="score"] .sfl-num{background:linear-gradient(145deg,#8a5c00,#d4920a);}
+      .sfl-node[data-tone="score"] .sfl-n{color:#8a5c00;background:#fff8e8;border-color:#f0d6a8;}
+      .sfl-node[data-tone="score"]:hover{border-color:#d4920a;box-shadow:0 8px 20px rgba(212,146,10,.18);}
+      .sfl-arrow{flex:0 0 20px;display:flex;align-items:center;justify-content:center;color:#9fb8d8;}
+      .sfl-arrow svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+      .sfl-tip{margin-top:11px;font-size:11px;color:#7a8ba8;text-align:center;line-height:1.7;}
+      .sfl-tip b{color:#1c4e96;}
+      /* 详情弹层 */
+      .sfl-pop{display:none;position:fixed;inset:0;background:rgba(6,16,34,.62);z-index:1300;align-items:center;justify-content:center;padding:20px;}
+      .sfl-pop.on{display:flex;}
+      .sfl-card{background:#fff;border-radius:12px;width:100%;max-width:660px;max-height:86vh;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,.4);}
+      .sfl-cap{position:sticky;top:0;background:linear-gradient(135deg,#0c1d3e 0%,#1c4e96 100%);color:#fff;padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+      .sfl-cap-k{font-size:10px;letter-spacing:2px;color:#9fc0ee;font-weight:700;}
+      .sfl-cap h5{font-size:17px;font-weight:800;margin:2px 0 0;letter-spacing:1px;}
+      .sfl-x{background:none;border:none;color:#cfe0ff;font-size:24px;line-height:1;cursor:pointer;padding:0 2px;}
+      .sfl-x:hover{color:#fff;}
+      .sfl-body{padding:16px 20px 20px;}
+      .sfl-lead{font-size:12.5px;color:#3a5080;line-height:1.85;background:#f8faff;border-left:3px solid #3a6ec8;border-radius:0 7px 7px 0;padding:10px 13px;margin-bottom:14px;}
+      .sfl-sk{border:1px solid #dfe8f5;border-radius:9px;padding:12px 13px;margin-bottom:9px;background:#fff;}
+      .sfl-sk.hi{border-color:#d4920a;background:linear-gradient(160deg,#fffdf6,#f9fbff);}
+      .sfl-sk-h{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:6px;}
+      .sfl-sk-h code{font-family:Consolas,'SFMono-Regular',monospace;font-size:12.5px;font-weight:700;color:#0c1d3e;}
+      .sfl-part{font-size:9.5px;font-weight:700;color:#1c4e96;background:#eaf2fc;border:1px solid #cfe0f5;border-radius:8px;padding:1px 7px;}
+      .sfl-rec{font-size:9.5px;font-weight:700;color:#0c1d3e;background:linear-gradient(90deg,#d4920a,#fbbf24);border-radius:4px;padding:2px 7px;letter-spacing:.5px;}
+      .sfl-f{font-size:12px;color:#555;line-height:1.7;margin:0 0 7px;}
+      .sfl-io{font-size:11px;color:#78889f;line-height:1.75;}
+      .sfl-io b{color:#1e3c72;font-weight:600;}
+      .sfl-plain{font-size:11.5px;color:#78889f;line-height:1.8;border:1px dashed #d9e5f5;border-radius:9px;padding:10px 13px;margin-bottom:9px;}
+      .sfl-plain b{color:#1e3c72;}
+      .sfl-sub{font-size:11px;font-weight:700;color:#1c4e96;letter-spacing:1.5px;margin:16px 0 9px;padding-bottom:6px;border-bottom:1px solid #e2eaf6;}
+      .sfl-tool{border:1px solid #dfe8f5;border-radius:9px;padding:12px 13px;margin-bottom:9px;background:#fff;}
+      .sfl-tool-h{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:7px;}
+      .sfl-tool-n{font-size:12.5px;font-weight:700;color:#0c1d3e;}
+      .sfl-mode{font-size:9.5px;font-weight:700;color:#1c4e96;background:#eaf2fc;border:1px solid #cfe0f5;border-radius:8px;padding:1px 7px;}
+      .sfl-price{font-size:9.5px;font-weight:700;color:#c55a11;background:#fff4e8;border:1px solid #f5d9b8;border-radius:8px;padding:1px 7px;}
+      .sfl-spec{font-size:11.5px;color:#555;line-height:1.9;margin:0 0 9px;padding-left:2px;}
+      .sfl-spec li{margin:0 0 2px;list-style:none;position:relative;padding-left:12px;}
+      .sfl-spec li::before{content:'·';position:absolute;left:2px;color:#3a6ec8;font-weight:700;}
+      .sfl-tool-a{display:inline-block;background:#1e3c72;color:#fff;text-decoration:none;font-size:11px;font-weight:600;padding:6px 12px;border-radius:5px;transition:background .2s;}
+      .sfl-tool-a:hover{background:#3a6ec8;}
+      .sfl-tool-a.alt{background:#fff;color:#1e3c72;border:1.5px solid #1e3c72;}
+      .sfl-tool-a.alt:hover{background:#f0f6ff;}
+      .sfl-ext{border:1px solid #dfe8f5;border-radius:9px;padding:11px 13px;margin-bottom:9px;background:#fbfcfe;}
+      .sfl-ext-h{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:5px;}
+      .sfl-ext-n{font-family:Consolas,'SFMono-Regular',monospace;font-size:12px;font-weight:700;color:#0c1d3e;}
+      .sfl-ext-src{font-size:9.5px;font-weight:600;color:#78889f;background:#eef2f8;border-radius:7px;padding:1px 7px;}
+      .sfl-ext p{font-size:11.5px;color:#666;line-height:1.7;margin:0 0 7px;}
+      .sfl-note{margin-top:12px;background:#fff8e8;border-left:4px solid #d4920a;border-radius:0 7px 7px 0;padding:10px 13px;font-size:11.5px;color:#5a4000;line-height:1.85;}
+      .sfl-note b{color:#0c1d3e;}
+      @media (max-width:640px){
+        .sfl-rail{flex-direction:column;}
+        .sfl-node{min-width:0;width:100%;text-align:left;display:flex;align-items:center;gap:11px;padding:11px 13px;}
+        .sfl-num{margin:0;flex:0 0 24px;}
+        .sfl-d{display:none;}
+        .sfl-t{margin:0;flex:1;}
+        .sfl-arrow{flex:0 0 16px;height:16px;transform:rotate(90deg);margin:0 auto;}
+      }
+    </style>
+
+    <div class="sfl-wrap">
+      <div class="sfl-head">
+        <h4>赛程流程 · Skills 调用顺序</h4>
+        <span>点击任一环节，查看该环节要跑的 Skills 及其输入输出</span>
+      </div>
+      <div class="sfl-rail" id="sflRail"></div>
+      <p class="sfl-tip">全流程跑完，等于把一次完整的评阅<b>提前搬到自己桌上</b>；时间紧张时至少跑 <b>①②</b> 与 <b>⑤⑥</b>。</p>
+    </div>
+
+    <!-- 流程详情弹层 -->
+    <div class="sfl-pop" id="sflPop">
+      <div class="sfl-card">
+        <div class="sfl-cap">
+          <div>
+            <div class="sfl-cap-k" id="sflPopKey">STAGE</div>
+            <h5 id="sflPopTitle"></h5>
+          </div>
+          <button class="sfl-x" onclick="sflClose()">&times;</button>
+        </div>
+        <div class="sfl-body" id="sflPopBody"></div>
+      </div>
+    </div>
+
+    <script>
+    (function(){
+      var SFL = [
+        {
+          k:'STAGE 01 · READ', t:'题目', d:'逐字逐句读懂，先别建模', tone:'gen',
+          lead:'拿到题目后的第一件事：把每一句话读成建模语言，把隐藏条件和数据口径全部摊开。这一步偷懒，后面每一章都要还。',
+          skills:[{
+            n:'bzd-problem-translator', rec:true,
+            f:'逐句翻译赛题，识别隐藏条件、信息边界、数据口径和跨问题联系；已加入 A—E 题近五年命题规律。',
+            i:'完整赛题、附件说明',
+            o:'Markdown 题意翻译报告、逐句解释表、输入—任务—输出表、Mermaid 跨问题联动图'
+          }],
+          note:'建议与阶段②同时开跑。<b>论文手可在此时并行</b>运行 bzd-problem-restatement（生成模式）产出论文第一章初稿，不必空等建模手读题。'
+        },
+        {
+          k:'STAGE 02 · IDEAS', t:'解题思路构建', d:'定全局主线，再校验选型', tone:'gen',
+          lead:'先定贯穿全文的建模主线，而不是逐问各自为战；选定模型后，在写代码之前先校验它配不配得上这道题和这份数据。',
+          skills:[{
+            n:'bzd-modeling-ideas', rec:true,
+            f:'从全题角度生成贯穿全文的建模主线，并比较每一问的多个可行模型；已加入 A—E 题型建模模式。',
+            i:'完整赛题、附件数据，可选题意翻译报告',
+            o:'整体建模路线、分问题分析、多模型比较表、推荐模型、创新方向、验证设计、跨问题联动图'
+          },{
+            n:'bzd-model-dictionary', rec:true,
+            f:'从数模模型字典中查询所选模型，回答三个问题：模型本身是否用对、是否适合本题目、是否适合本数据集。',
+            i:'模型名称、赛题、数据结构和拟采用的思路',
+            o:'模型原理、输入输出、数据要求、假设、缺陷、禁忌、检验方法、适用性结论和替代模型'
+          }],
+          note:'选型阶段拦下一个错模型，<b>比正文阶段改三章都便宜</b>。字典判定不适合时会直接给替代模型。'
+        },
+        {
+          k:'STAGE 03 · SOLVE', t:'模型求解<br>+ 论文写作', d:'主体工作期，靠自己', tone:'gen',
+          lead:'把「思路 + 题目 + 数据」一并输入数模智能体，或用 Codex / Claude Code 自行求解并撰写论文。这一阶段主要靠自己，Skills 只负责把第一章写成规范格式。',
+          skills:[{
+            n:'bzd-problem-restatement', part:'生成模式',
+            f:'根据题目生成规范的问题重述，作为论文第一章初稿。',
+            i:'完整赛题',
+            o:'问题背景、任务重述、研究综述'
+          }],
+          plain:'<b>非 Skill 工具</b>：数模智能体 · Codex · Claude Code —— 前两阶段的产出正是这里的输入，翻译报告约束题意，建模主线约束章节结构。',
+          tools:[{
+            n:'数模智能体 · MathModelAgent', mode:'自动求解', price:'月卡 8 折',
+            spec:[
+              'GitHub 最多 Star 项目',
+              '输出 PDF 论文（LaTeX 编译，本地运行）',
+              '自动化全流程 1—3h',
+              '50% 获奖概率（不进行修改）'
+            ],
+            links:[{t:'注册链接 ↗', u:'https://mathmodel.top/signup?ref=358JL76N'}]
+          },{
+            n:'数模智能体 · 扣子平台', mode:'半自动求解', price:'卡密 5 元/次',
+            spec:[
+              '网页端平台，无需配置环境',
+              '输出 Word 论文（方便修改）',
+              '需手动操作：点击运行 → 下载代码 → 本地运行 → 上传结果 → 生成论文',
+              '生成一篇论文需 2—15 次卡密（Gemini 最省 1.5 次 · Claude 最多 15 次）',
+              '50% 获奖概率'
+            ],
+            links:[
+              {t:'进入平台 ↗', u:'https://www.coze.cn/store/project/7548130644564688906?from=project_card&bid=6l6mqn0h06g0j'},
+              {t:'按需购卡 ↗', u:'https://weidian.com/item.html?itemID=7842857907&wfr=c&sfr=app&source=goods_home', alt:true}
+            ]
+          }],
+          extra:[{
+            n:'MathModelAgent', src:'开源',
+            f:'上面那款智能体的开源版本，可自行部署运行，适合想改流程或不想付费的队伍。',
+            u:'https://github.com/jihe520/MathModelAgent.git'
+          },{
+            n:'Humanizer-zh', src:'开源',
+            f:'中文 AI 写作去痕工具。智能体直出的论文往往模板化痕迹明显，可用它改写后再进阶段④自查。',
+            u:'https://github.com/op7418/Humanizer-zh.git'
+          }],
+          note:'这一步没有 Skill 能替你做判断。<b>模型怎么解、结果怎么解释，仍然是你自己的活。</b>两款智能体的「50% 获奖概率」都指<b>直出不改</b>的情况——想往上走，靠的是阶段④⑤的自查和你自己的修改。'
+        },
+        {
+          k:'STAGE 04 · SELF-CHECK', t:'论文内容自查', d:'八大板块逐个过', tone:'chk',
+          lead:'初稿完成后按板块逐个自查。每个 Skill 只盯自己那一块，因此比整篇通检细得多——摘要 → 问题重述 → 问题分析 → 模型假设 → 符号说明 → 模型正文 → 参考文献 → AI 使用报告。',
+          skills:[
+            {n:'bzd-abstract-checker', part:'摘要', f:'检查摘要能否独立说明研究问题、方法、求解过程、结果和结论。', i:'仅摘要即可；可选题目、关键词和正文', o:'严重问题警告、逐项诊断、摘要缺陷、关键词检查、优先修改建议'},
+            {n:'bzd-problem-restatement', part:'问题重述', f:'检查问题重述是否完整、准确，是否照抄题目或提前进入模型求解。', i:'完整赛题、已有问题重述', o:'任务覆盖情况、条件失真、遗漏内容、章节越界和修改建议'},
+            {n:'bzd-problem-analysis-checker', part:'问题分析', f:'检查是否识别数学类型、数据特点、模型依据、跨问联动和验证路线。', i:'完整赛题、附件说明、已有问题分析，可选框架图', o:'任务映射、问题清单、跨问联动诊断、数据与模型依据、章节边界、修改优先级'},
+            {n:'bzd-model-assumption-checker', part:'模型假设', f:'判断假设是否必要、合理、有依据，并与题目及后续模型一致。', i:'完整赛题、模型假设，可选模型正文', o:'逐条诊断、矛盾假设、遗漏假设、过度简化、验证要求和修改优先级'},
+            {n:'bzd-symbol-notation-checker', part:'符号说明', f:'检查符号表与全文符号是否一致、完整、无冲突。', i:'完整论文；或符号说明表与模型正文', o:'符号遗漏、符号过载、含义冲突、单位问题、上下标和首次定义问题'},
+            {n:'bzd-model-solution-checker', part:'模型正文', f:'检查模型建立、算法求解、结果、模型检验、灵敏度和稳健性分析。', i:'完整赛题、论文核心正文；可选数据、代码和结果文件', o:'任务响应映射、建模闭环诊断、模型适用性、复现检查、检验匹配表、灵敏度诊断、修改建议'},
+            {n:'bzd-reference-appendix-checker', part:'参考文献 / 附录', f:'联合检查正文引用、参考文献、附录、程序和支撑材料。', i:'论文、参考文献、附录、代码和支撑文件', o:'P0—P3 风险报告、引用对应检查、文献真实性风险、附录篇幅、代码复现性和匿名性问题'},
+            {n:'bzd-ai-usage-disclosure', part:'AI 使用报告', f:'检查 AI 工具使用声明和独立详情文件是否真实、完整且一致。', i:'论文、真实 AI 使用记录、已有声明和详情 PDF', o:'完整性、一致性、责任边界、匿名信息及文件修改建议'},
+            {n:'bzd-paper-aigc-auditor', part:'AI 痕迹 · 终稿', rec:true, f:'分析论文的 AI 语言痕迹、事实可靠性和模型拼装痕迹。', i:'完整论文；最好同时提供赛题、附件和代码', o:'HTML 审计报告、AI 痕迹风险、分章节定位、模型合理性判断、模板化或伪创新诊断、修改建议'}
+          ],
+          note:'<b>过程中随时</b>可跑 bzd-review-paper，关闭严格格式审查、只做整体论文分析，用来判断这一版的整体水位；<b>时间不够</b>时可用阶段⑤的 bzd-paper-format-checker 一次过完全篇，但各板块 Skills 会更加详细一些。'
+        },
+        {
+          k:'STAGE 05 · FORMAT', t:'格式自查', d:'从严过一遍全篇', tone:'chk',
+          lead:'内容定稿后从严复核格式。格式与匿名性是硬门槛——这一关过不去，前面写得再好也可能直接失去资格。',
+          skills:[{
+            n:'bzd-paper-format-checker',
+            f:'从严检查整篇论文各板块格式、页面结构、篇幅、图表、公式、标题、匿名性和文件卫生。',
+            i:'完整 PDF；推荐同时提供 Word 和当届格式规范',
+            o:'15 分制规范质量分、全部原子检查结果、逐页问题、资格风险、修改建议、自查表'
+          }],
+          note:'它同时是阶段④的<b>快速通道</b>：赛中时间紧张可先用它整篇通检，赛后有时间再逐板块细跑。终稿建议与 <b>bzd-paper-aigc-auditor</b> 一起跑，构成终稿双审。'
+        },
+        {
+          k:'STAGE 06 · SCORE', t:'论文评分', d:'提前拿到自己的成绩', tone:'score',
+          lead:'最后的最后：让 Skill 站在评委视角把论文重打一遍分，并结合赛区与竞赛环境估计位次和奖项竞争力。',
+          skills:[{
+            n:'bzd-review-paper', rec:true,
+            f:'根据赛题独立制定百分制评分细则，对论文逐项评分。每问拆分为模型建立、模型求解、结果与回答；每个独立采分点不满足扣 1～3 分；原始分低于 20 分时可启动从 0 开始加分的保底复评（最高 35 分）。',
+            i:'竞赛名称、赛题、论文；国赛还需题型、组别、赛区、学校、指导老师；另选择是否启用严格格式审查',
+            o:'HTML 评审报告、原始分、格式系数、最终质量分、省奖竞争分、国奖竞争分、位次、详细扣分、修改建议'
+          },{
+            n:'bzd-cumcm-school-awards',
+            f:'查询高校近五年国奖情况、2026 预测、高频指导老师，并评估学生距离省奖和国奖的准备差距。',
+            i:'学校全称、赛区；可补充竞赛经历、获奖经历、模拟次数和目标奖项',
+            o:'学校五年国奖画像、2026 国奖预测、高频指导老师、个人备赛距离和训练建议'
+          }],
+          note:'赛区、学校、组别和指导老师<b>不改变论文质量分</b>，只影响省奖、国奖竞争预测与位次估计。此时开启严格格式审查跑完整版，输出的分数才具备参考价值。'
+        }
+      ];
+
+      var rail = document.getElementById('sflRail');
+      if (!rail) return;
+      var CN = ['①','②','③','④','⑤','⑥'];
+      var arrow = '<div class="sfl-arrow"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></div>';
+      var html = '';
+      SFL.forEach(function(s, i){
+        if (i) html += arrow;
+        var tag = s.skills.length + ' 个 Skill';
+        var side = (s.tools ? s.tools.length : 0) + (s.extra ? s.extra.length : 0);
+        if (side) tag += ' + ' + side + ' 工具';
+        html += '<div class="sfl-node" data-tone="' + s.tone + '" data-i="' + i + '">' +
+                  '<div class="sfl-num">' + (i + 1) + '</div>' +
+                  '<div class="sfl-t">' + s.t + '</div>' +
+                  '<div class="sfl-d">' + s.d + '</div>' +
+                  '<span class="sfl-n">' + tag + '</span>' +
+                '</div>';
+      });
+      rail.innerHTML = html;
+
+      function openStage(i){
+        var s = SFL[i];
+        document.getElementById('sflPopKey').textContent = s.k;
+        document.getElementById('sflPopTitle').innerHTML = CN[i] + ' ' + s.t.replace(/<br>/g, ' ');
+
+        var b = '<div class="sfl-lead">' + s.lead + '</div>';
+        s.skills.forEach(function(k){
+          b += '<div class="sfl-sk' + (k.rec ? ' hi' : '') + '">' +
+                 '<div class="sfl-sk-h"><code>' + k.n + '</code>' +
+                   (k.part ? '<span class="sfl-part">' + k.part + '</span>' : '') +
+                   (k.rec ? '<span class="sfl-rec">推荐</span>' : '') +
+                 '</div>' +
+                 '<p class="sfl-f">' + k.f + '</p>' +
+                 '<div class="sfl-io"><b>输入：</b>' + k.i + '<br><b>输出：</b>' + k.o + '</div>' +
+               '</div>';
+        });
+        if (s.plain) b += '<div class="sfl-plain">' + s.plain + '</div>';
+
+        if (s.tools) {
+          b += '<div class="sfl-sub">数模智能体 · 二选一</div>';
+          s.tools.forEach(function(t){
+            b += '<div class="sfl-tool">' +
+                   '<div class="sfl-tool-h">' +
+                     '<span class="sfl-tool-n">' + t.n + '</span>' +
+                     '<span class="sfl-mode">' + t.mode + '</span>' +
+                     '<span class="sfl-price">' + t.price + '</span>' +
+                   '</div>' +
+                   '<ul class="sfl-spec">' +
+                     t.spec.map(function(x){ return '<li>' + x + '</li>'; }).join('') +
+                   '</ul>' +
+                   t.links.map(function(l){
+                     return '<a class="sfl-tool-a' + (l.alt ? ' alt' : '') + '" href="' + l.u +
+                            '" target="_blank" rel="noopener">' + l.t + '</a>';
+                   }).join(' ') +
+                 '</div>';
+          });
+        }
+
+        if (s.extra) {
+          b += '<div class="sfl-sub">其他 Skills 推荐</div>';
+          s.extra.forEach(function(x){
+            b += '<div class="sfl-ext">' +
+                   '<div class="sfl-ext-h">' +
+                     '<span class="sfl-ext-n">' + x.n + '</span>' +
+                     '<span class="sfl-ext-src">' + x.src + '</span>' +
+                   '</div>' +
+                   '<p>' + x.f + '</p>' +
+                   '<a class="sfl-tool-a alt" href="' + x.u + '" target="_blank" rel="noopener">GitHub 仓库 ↗</a>' +
+                 '</div>';
+          });
+        }
+
+        if (s.note)  b += '<div class="sfl-note">' + s.note + '</div>';
+
+        document.getElementById('sflPopBody').innerHTML = b;
+        document.getElementById('sflPop').classList.add('on');
+        document.querySelector('#sflPop .sfl-card').scrollTop = 0;
+      }
+
+      window.sflClose = function(){
+        document.getElementById('sflPop').classList.remove('on');
+      };
+
+      rail.addEventListener('click', function(e){
+        var node = e.target.closest('.sfl-node');
+        if (node) openStage(+node.dataset.i);
+      });
+      document.getElementById('sflPop').addEventListener('click', function(e){
+        if (e.target === this) window.sflClose();
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && document.getElementById('sflPop').classList.contains('on')) window.sflClose();
+      });
+    })();
+    </script>
+
     <!-- ===== 板块一：自研 Skills ===== -->
     <h3 style="font-size:16px;color:#1e3c72;margin:26px 0 12px 0;font-weight:700;padding-bottom:10px;border-bottom:2px solid #1e3c72;">板块一 · BZD 数模社自研 Skills</h3>
 
