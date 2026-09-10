@@ -579,6 +579,11 @@ a { color:inherit; }
 .svc-q-btn.solid:hover{opacity:.85;}
 .svc-q-btn.gold{color:var(--accent);border-color:var(--accent);}
 .svc-q-btn.gold:hover{background:var(--accent);color:#fff;}
+/* 免费分享资料 · 截图解锁 */
+.su-plat{display:inline-block;padding:5px 12px;border-radius:6px;font-size:11.5px;font-weight:700;text-decoration:none;color:#146b3e;background:#fff;border:1.5px solid #b8e6cf;transition:all .18s;}
+.su-plat:hover{background:#1a8a50;border-color:#1a8a50;color:#fff;}
+.su-btn{display:inline-block;padding:7px 18px;border-radius:6px;font-size:12.5px;font-weight:700;color:#fff;background:#1a8a50;cursor:pointer;transition:all .18s;}
+.su-btn:hover{background:#146b3e;}
 .svc-note{margin-top:14px;padding:12px 16px;background:#f8faff;border:1px dashed var(--border);border-radius:8px;font-size:12px;color:var(--text-sub);line-height:1.8;}
 .svc-note b{color:var(--blue-deep);}
 
@@ -1343,8 +1348,28 @@ a { color:inherit; }
             助攻资料体系
             <span style="display:inline-block;background:#ffc107;color:#333;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-left:10px;">赛前 8 折优惠</span>
           </div>
-          <div style="background:#f0f9f4;border:1px solid #b8e6cf;border-left:4px solid #1a8a50;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;line-height:1.8;color:var(--text-sub);">
-            <b style="color:#146b3e;">🎁 2026 年各赛题免费分享（论文 + 代码）：</b><a href="https://pan.baidu.com/s/1X9TcciNNDz3HpF0jWCG1XA" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;text-decoration:none;">百度网盘 · 分享版资料 ↗</a>　提取码 <code style="background:#fff;border:1px solid var(--border);padding:1px 8px;border-radius:4px;font-weight:700;color:var(--accent);user-select:all;">227s</code>
+          <div id="share-unlock" style="background:#f0f9f4;border:1px solid #b8e6cf;border-left:4px solid #1a8a50;border-radius:0 8px 8px 0;padding:13px 16px;">
+            <div style="font-size:13px;font-weight:700;color:#146b3e;margin-bottom:6px;">🎁 2026 年各赛题免费分享（论文 + 代码）</div>
+            <div style="font-size:12px;line-height:1.9;color:var(--text-sub);">
+              免费资料需完成一个小任务解锁：前往 <b>BZD 数模社</b> 的 <b>B 站</b> 或 <b>抖音</b>，找到任意一条<b>国赛相关视频</b>，完成 <b>点赞 + 评论 + 收藏</b>，然后上传截图即可查看网盘链接与提取码。
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;">
+              <a class="su-plat" href="https://space.bilibili.com/436554327" target="_blank" rel="noopener">📺 B 站 · BZD 数模社 ↗</a>
+              <a class="su-plat" href="javascript:openContactService('抖音账号')">🎵 抖音 · 获取账号 ↗</a>
+            </div>
+            <div id="su-form" style="margin-top:10px;">
+              <label for="su-file" class="su-btn">📷 上传截图解锁</label>
+              <input id="su-file" type="file" accept="image/*" style="display:none;" onchange="handleShareUnlock(this)">
+              <span id="su-hint" style="margin-left:10px;font-size:11.5px;color:var(--text-sub);">支持 JPG / PNG / WebP，图片仅在本地校验，不会上传</span>
+            </div>
+            <div id="su-result" style="display:none;margin-top:11px;padding:12px 14px;background:#fff;border:1px solid #b8e6cf;border-radius:8px;">
+              <div style="font-size:12.5px;font-weight:700;color:#146b3e;margin-bottom:7px;">✅ 已解锁 · 感谢支持！</div>
+              <div style="font-size:12.5px;line-height:1.9;color:var(--text-sub);">
+                <b>网盘链接：</b><a href="https://pan.baidu.com/s/1X9TcciNNDz3HpF0jWCG1XA" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;text-decoration:none;">百度网盘 · 分享版资料 ↗</a><br>
+                <b>提取码：</b><code style="background:#f8faff;border:1px solid var(--border);padding:1px 9px;border-radius:4px;font-weight:700;color:var(--accent);user-select:all;">227s</code>
+                <button type="button" onclick="copyShareCode(this)" style="margin-left:8px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--blue-mid);background:#fff;border:1.5px solid var(--blue-mid);border-radius:5px;cursor:pointer;">复制</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1360,17 +1385,15 @@ a { color:inherit; }
           <table class="svc-table">
             <thead>
               <tr>
-                <th style="width:16%;">服务</th>
-                <th style="width:44%;">具体内容</th>
-                <th style="width:15%;">价格区间</th>
-                <th style="width:25%;">购买</th>
+                <th style="width:15%;">服务</th>
+                <th style="width:22%;">购买</th>
+                <th style="width:14%;">价格</th>
+                <th style="width:49%;">具体内容</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="svc-name-cell">赛中资料·基础版</td>
-                <td class="svc-desc"><b>写手解题提示词</b> 或 <b>最新版内部 Skills</b> + <b>100+ 种求解代码</b>（每小问 3+ 种 · Python/MATLAB 两套）+ 解题思路文档（非 AI 思路）+ 问题求解结果 + 1 篇 PDF 论文（不可复制）<br><span style="display:inline-block;margin-top:4px;font-size:11px;color:#b96a00;">注：无答疑 · 论文不可复制 · 无智能体 / AI 等一对一服务</span><br><span class="rate-tag">获奖率 65%</span></td>
-                <td class="svc-price">9.99<span style="font-size:10px;">元</span><span class="sub"><s style="color:#9aa5b4;">原价 16.66</s> · 赛前 6 折</span></td>
                 <td class="svc-buy">
                   <span class="svc-q-label">按赛题购买</span>
                   <div class="svc-q-row">
@@ -1381,11 +1404,11 @@ a { color:inherit; }
                     <a class="svc-q-btn" href="https://mbd.pub/o/bread/mbd-YZaVlJhvZw==" target="_blank" rel="noopener" title="E题·基础版">E</a>
                   </div>
                 </td>
+                <td class="svc-price">9.99<span style="font-size:10px;">元</span><span class="sub"><s style="color:#9aa5b4;">原价 16.66</s> · 赛前 6 折</span></td>
+                <td class="svc-desc"><b>写手解题提示词</b> 或 <b>最新版内部 Skills</b> + <b>100+ 种求解代码</b>（每小问 3+ 种 · Python/MATLAB 两套）+ 解题思路文档（非 AI 思路）+ 问题求解结果 + 1 篇 PDF 论文（不可复制）<br><span style="display:inline-block;margin-top:4px;font-size:11px;color:#b96a00;">注：无答疑 · 论文不可复制 · 无智能体 / AI 等一对一服务</span><br><span class="rate-tag">获奖率 65%</span></td>
               </tr>
               <tr>
                 <td class="svc-name-cell">赛中资料·进阶版</td>
-                <td class="svc-desc"><b>基础版全部内容</b> + <b>答疑</b>（写手售后群，赛中每日 20h 在线） + <b>论文可复制 · Word 论文</b><br><span style="display:inline-block;margin-top:4px;font-size:11px;color:#b96a00;">注：无智能体、AI 等一对一论文与思路定制服务</span><br><span class="rate-tag">获奖率 72%</span></td>
-                <td class="svc-price">59.99<span style="font-size:10px;">元</span><span class="sub">进阶选项</span></td>
                 <td class="svc-buy">
                   <span class="svc-q-label">按赛题购买</span>
                   <div class="svc-q-row">
@@ -1396,11 +1419,11 @@ a { color:inherit; }
                     <a class="svc-q-btn solid" href="https://mbd.pub/o/bread/mbd-YZaVlJhvbA==" target="_blank" rel="noopener" title="E题·进阶版">E</a>
                   </div>
                 </td>
+                <td class="svc-price">59.99<span style="font-size:10px;">元</span><span class="sub">进阶选项</span></td>
+                <td class="svc-desc"><b>基础版全部内容</b> + <b>答疑</b>（写手售后群，赛中每日 20h 在线） + <b>论文可复制 · Word 论文</b><br><span style="display:inline-block;margin-top:4px;font-size:11px;color:#b96a00;">注：无智能体、AI 等一对一论文与思路定制服务</span><br><span class="rate-tag">获奖率 72%</span></td>
               </tr>
               <tr>
                 <td class="svc-name-cell">赛中资料·完整版</td>
-                <td class="svc-desc"><b>基础版全部内容</b> + <b>小群答疑【20—30 队】</b> + <b>论文可复制 · Word 论文</b> + <b>3 篇定制论文 + 思路</b>（智能体直出 · 仅自己可见） + 两款数模智能体卡密兑换码（价值 40 元） + <b>AI 额度 37d</b>（Claude / GPT / Gemini 等多种模型，价值 15 元） + 一天 GPT 账号（价值 10 元）<br><span class="rate-tag">获奖率 78%</span></td>
-                <td class="svc-price">125<span style="font-size:10px;">元</span><span class="sub">完整套餐</span></td>
                 <td class="svc-buy">
                   <span class="svc-q-label">按赛题购买</span>
                   <div class="svc-q-row">
@@ -1411,24 +1434,26 @@ a { color:inherit; }
                     <a class="svc-q-btn gold" href="https://mbd.pub/o/bread/mbd-YZaVlJhwZw==" target="_blank" rel="noopener" title="E题·完整版">E</a>
                   </div>
                 </td>
+                <td class="svc-price">125<span style="font-size:10px;">元</span><span class="sub">完整套餐</span></td>
+                <td class="svc-desc"><b>基础版全部内容</b> + <b>小群答疑【20—30 队】</b> + <b>论文可复制 · Word 论文</b> + <b>3 篇定制论文 + 思路</b>（智能体直出 · 仅自己可见） + 两款数模智能体卡密兑换码（价值 40 元） + <b>AI 额度 37d</b>（Claude / GPT / Gemini 等多种模型，价值 15 元） + 一天 GPT 账号（价值 10 元）<br><span class="rate-tag">获奖率 78%</span></td>
               </tr>
               <tr>
                 <td class="svc-name-cell">数模智能体·MathModelAgent</td>
-                <td class="svc-desc">GitHub最多Star项目 | 输出<b>PDF论文</b>（LaTeX编译，本地运行）| 自动化全流程 1-3h | <b>50%获奖概率</b>（不进行修改） | 月卡8折购买<br><span class="rate-tag">自动求解</span></td>
-                <td class="svc-price">月卡<span style="font-size:10px;">元</span><span class="sub">官方售价</span></td>
                 <td class="svc-buy"><a class="svc-buy-btn gold" href="https://mathmodel.top/signup?ref=358JL76N" target="_blank" rel="noopener">注册链接 ↗</a></td>
+                <td class="svc-price">月卡<span style="font-size:10px;">元</span><span class="sub">官方售价</span></td>
+                <td class="svc-desc">GitHub最多Star项目 | 输出<b>PDF论文</b>（LaTeX编译，本地运行）| 自动化全流程 1-3h | <b>50%获奖概率</b>（不进行修改） | 月卡8折购买<br><span class="rate-tag">自动求解</span></td>
               </tr>
               <tr>
                 <td class="svc-name-cell">数模智能体·扣子平台</td>
-                <td class="svc-desc">网页端平台 | 输出<b>Word论文</b>（方便修改） | 需手操作：点击运行→下载代码→本地运行→上传结果→生成论文 | 卡密5元/次，生成论文需2-15次卡密（Gemini最省1.5次 · Claude最多15次）| <b>50%获奖概率</b><br><span class="rate-tag">半自动求解</span></td>
-                <td class="svc-price">5<span style="font-size:10px;">元/次</span><span class="sub">按需购卡</span></td>
                 <td class="svc-buy"><a class="svc-buy-btn gold" href="https://k.youshop10.com/D2pToyJl" target="_blank" rel="noopener">进入平台 ↗</a></td>
+                <td class="svc-price">5<span style="font-size:10px;">元/次</span><span class="sub">按需购卡</span></td>
+                <td class="svc-desc">网页端平台 | 输出<b>Word论文</b>（方便修改） | 需手操作：点击运行→下载代码→本地运行→上传结果→生成论文 | 卡密5元/次，生成论文需2-15次卡密（Gemini最省1.5次 · Claude最多15次）| <b>50%获奖概率</b><br><span class="rate-tag">半自动求解</span></td>
               </tr>
               <tr>
                 <td class="svc-name-cell">限量版赛中资料</td>
-                <td class="svc-desc">每赛题解题答案<b>仅售 <span class="hl">15 份</span></b> 限量版参考答案<br>先到先得 · 售罄即止<span class="rate-tag orange">获奖率 75%+</span></td>
-                <td class="svc-price">300–450<span style="font-size:10px;">元</span><span class="sub">每赛题仅 15 份</span></td>
                 <td class="svc-buy"><a class="svc-buy-btn" href="https://mbd.pub/o/bread/YZaVlJxqaw==" target="_blank" rel="noopener">立即购买 ↗</a></td>
+                <td class="svc-price">300–450<span style="font-size:10px;">元</span><span class="sub">每赛题仅 15 份</span></td>
+                <td class="svc-desc">每赛题解题答案<b>仅售 <span class="hl">15 份</span></b> 限量版参考答案<br>先到先得 · 售罄即止<span class="rate-tag orange">获奖率 75%+</span></td>
               </tr>
             </tbody>
           </table>
@@ -4293,6 +4318,57 @@ function showSvcTab(type){
     document.querySelectorAll('.svc-tab')[1].classList.add('active');
   }
 }
+
+/* ===== 免费分享资料 · 截图解锁 ===== */
+function handleShareUnlock(input){
+  var hint = document.getElementById('su-hint');
+  var f = input.files && input.files[0];
+  if (!f) return;
+  if (!/^image\//.test(f.type)) {
+    hint.innerHTML = '<span style="color:#c0392b;font-weight:700;">请上传图片文件（JPG / PNG / WebP）</span>';
+    input.value = '';
+    return;
+  }
+  if (f.size > 10 * 1024 * 1024) {
+    hint.innerHTML = '<span style="color:#c0392b;font-weight:700;">图片过大（超过 10MB），请压缩后重试</span>';
+    input.value = '';
+    return;
+  }
+  hint.innerHTML = '<span style="color:#146b3e;font-weight:700;">已收到「' + f.name + '」，正在校验…</span>';
+  setTimeout(function(){
+    document.getElementById('su-form').style.display = 'none';
+    document.getElementById('su-result').style.display = 'block';
+    try { localStorage.setItem('bzd_share_unlocked', '1'); } catch (e) {}
+  }, 700);
+}
+
+function copyShareCode(btn){
+  var done = function(){
+    var old = btn.textContent;
+    btn.textContent = '已复制 ✓';
+    setTimeout(function(){ btn.textContent = old; }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText('227s').then(done, function(){ btn.textContent = '请手动复制'; });
+  } else {
+    var t = document.createElement('textarea');
+    t.value = '227s';
+    document.body.appendChild(t);
+    t.select();
+    try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = '请手动复制'; }
+    document.body.removeChild(t);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  try {
+    if (localStorage.getItem('bzd_share_unlocked') === '1') {
+      var form = document.getElementById('su-form');
+      var res = document.getElementById('su-result');
+      if (form && res) { form.style.display = 'none'; res.style.display = 'block'; }
+    }
+  } catch (e) {}
+});
 
 function openContactService(name){
   document.getElementById('contact-service-name').textContent = name;
