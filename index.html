@@ -1353,9 +1353,11 @@ a { color:inherit; }
             <div style="font-size:12px;line-height:1.9;color:var(--text-sub);">
               免费资料需完成一个小任务解锁：前往 <b>BZD 数模社</b> 的 <b>B 站</b> 或 <b>抖音</b>，找到任意一条<b>国赛相关视频</b>，完成 <b>点赞 + 评论 + 收藏</b>，然后上传截图即可查看网盘链接与提取码。
             </div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;">
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;align-items:center;">
               <a class="su-plat" href="https://space.bilibili.com/436554327" target="_blank" rel="noopener">📺 B 站 · BZD 数模社 ↗</a>
-              <a class="su-plat" href="javascript:openContactService('抖音账号')">🎵 抖音 · 获取账号 ↗</a>
+              <span class="su-plat" style="cursor:default;">🎵 抖音 · <b>BZD数模社</b>　抖音号 <code id="su-dy" style="background:#f8faff;border:1px solid var(--border);padding:1px 7px;border-radius:4px;font-weight:700;color:var(--accent);user-select:all;">dyekk3m2cklk</code>
+                <button type="button" onclick="copyText('dyekk3m2cklk',this)" style="margin-left:6px;padding:1px 8px;font-size:10.5px;font-weight:700;color:#146b3e;background:#fff;border:1.5px solid #b8e6cf;border-radius:4px;cursor:pointer;">复制</button>
+              </span>
             </div>
             <div id="su-form" style="margin-top:10px;">
               <label for="su-file" class="su-btn">📷 上传截图解锁</label>
@@ -1367,8 +1369,16 @@ a { color:inherit; }
               <div style="font-size:12.5px;line-height:1.9;color:var(--text-sub);">
                 <b>网盘链接：</b><a href="https://pan.baidu.com/s/1X9TcciNNDz3HpF0jWCG1XA" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;text-decoration:none;">百度网盘 · 分享版资料 ↗</a><br>
                 <b>提取码：</b><code style="background:#f8faff;border:1px solid var(--border);padding:1px 9px;border-radius:4px;font-weight:700;color:var(--accent);user-select:all;">227s</code>
-                <button type="button" onclick="copyShareCode(this)" style="margin-left:8px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--blue-mid);background:#fff;border:1.5px solid var(--blue-mid);border-radius:5px;cursor:pointer;">复制</button>
+                <button type="button" onclick="copyText('227s',this)" style="margin-left:8px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--blue-mid);background:#fff;border:1.5px solid var(--blue-mid);border-radius:5px;cursor:pointer;">复制</button>
               </div>
+            </div>
+            <div style="margin-top:11px;padding:11px 14px;background:#fffdf6;border:1px solid #f0d6a8;border-left:4px solid var(--gold,#d4920a);border-radius:0 8px 8px 0;">
+              <div style="font-size:12.5px;font-weight:700;color:#8a5a00;margin-bottom:5px;">🔥 进阶福利 · 点赞 9 条视频领 AI 权益</div>
+              <div style="font-size:12px;line-height:1.9;color:var(--text-sub);">
+                在 B 站或抖音为 <b>BZD 数模社</b> 的国赛视频完成 <b>9 条点赞</b>，即可任选一项权益：<b>AI 账号天卡</b> / <b>AI 额度</b> / <b>扣子卡密</b> / <b>MMA 兑换码</b>。<br>
+                在下方「领取专属权益」中提交<b>点赞截图</b>（备注填「点赞福利」），审核通过后发放到邮箱，通常 0~2 小时内处理。
+              </div>
+              <a href="#redeem" style="display:inline-block;margin-top:8px;padding:6px 15px;border-radius:6px;font-size:11.5px;font-weight:700;text-decoration:none;color:#fff;background:var(--gold,#d4920a);">🎁 前往提交点赞截图 ↓</a>
             </div>
           </div>
         </div>
@@ -3784,7 +3794,7 @@ a { color:inherit; }
   <div class="section-head" style="margin-bottom:24px;">
     <div class="section-tag">EXCLUSIVE BENEFITS</div>
     <h2 class="section-title">完整版用户 · 领取专属权益</h2>
-    <p class="section-sub">上传支付截图 → 我们审核 → 自动发放 AI 账号 + 智能体卡密到你的邮箱</p>
+    <p class="section-sub">上传支付截图 → 我们审核 → 自动发放 AI 账号 + 智能体卡密到你的邮箱<br><span style="font-size:12.5px;color:#8a5a00;">点赞 9 条视频的用户也可在此提交点赞截图，任选一项权益</span></p>
   </div>
   <div class="redeem-wrap">
     <div class="redeem-head">
@@ -3792,6 +3802,9 @@ a { color:inherit; }
       <p>完整版资料用户专享 · 赠送 24h AI账号 + 6 次智能体卡密 · 审核通常在 30 分钟内完成</p>
     </div>
     <div class="redeem-body">
+      <div style="margin-bottom:18px;padding:12px 15px;background:#fffdf6;border:1px solid #f0d6a8;border-left:4px solid var(--gold,#d4920a);border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.9;color:var(--text-sub);">
+        <b style="color:#8a5a00;">🔥 点赞福利用户也可在此提交：</b>在 B 站或抖音为 <b>BZD 数模社</b> 的国赛视频完成 <b>9 条点赞</b>，上传<b>点赞截图</b>（代替支付截图）、订单备注填写 <b>「点赞福利」</b>，并勾选<b>任选一项</b>权益即可，审核通过后发放到邮箱。
+      </div>
       <div class="form-group">
         <label class="form-label">你的邮箱 <span>*</span></label>
         <input class="form-input" type="email" id="redeem-email" placeholder="用于接收账号和卡密，请填写常用邮箱">
@@ -3805,10 +3818,10 @@ a { color:inherit; }
         <div class="form-upload" id="upload-area" onclick="document.getElementById('file-input').click()">
           <input type="file" id="file-input" accept="image/*" onchange="handleFileChange(this)">
           <div class="form-upload-icon">📸</div>
-          <div class="form-upload-text">点击上传支付截图（支持 JPG / PNG）<br>请确保截图清晰可见订单金额</div>
+          <div class="form-upload-text">点击上传支付截图（支持 JPG / PNG）<br>请确保截图清晰可见订单金额<br><span style="font-size:11.5px;color:#8a5a00;">点赞福利用户请上传 9 条点赞的截图</span></div>
           <div class="form-upload-name" id="file-name"></div>
         </div>
-        <div class="form-tip">⚠️ 请上传面包多/微信/支付宝的支付成功截图（仅限完整版用户，进阶版资料无相关赠送服务）<br>截图须清晰露出：<strong>支付金额、商户全称、支付时间、交易单号、商户单号</strong>，其他信息可自行打码</div>
+        <div class="form-tip">⚠️ 请上传面包多/微信/支付宝的支付成功截图（仅限完整版用户，进阶版资料无相关赠送服务）<br>截图须清晰露出：<strong>支付金额、商户全称、支付时间、交易单号、商户单号</strong>，其他信息可自行打码<br><strong style="color:#8a5a00;">点赞福利：</strong>上传能看清 <strong>9 条视频已点赞</strong> 的截图即可（B 站/抖音个人主页的点赞列表或逐条截图均可）</div>
         <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;align-items:flex-start;">
           <div style="text-align:center;font-size:12px;color:var(--text-sub);">
             <img src="images/微信支付记录示例.png" alt="微信支付记录示例" style="height:130px;border-radius:6px;border:1px solid var(--border);cursor:pointer;display:block;" onclick="openLightbox('images/微信支付记录示例.png')">
@@ -3840,7 +3853,7 @@ a { color:inherit; }
             <span>MMA智能体 - 10000积分（自动化全流程论文生成）</span>
           </label>
         </div>
-        <div style="margin-top:6px;font-size:12px;color:var(--text-light);">未勾选的权益默认不发放。建议全部勾选以获得最大支持</div>
+        <div style="margin-top:6px;font-size:12px;color:var(--text-light);">未勾选的权益默认不发放。完整版用户建议全部勾选以获得最大支持；<b style="color:#8a5a00;">点赞福利用户请只勾选一项</b></div>
       </div>
       <button class="submit-btn" id="submit-btn" onclick="submitRedeem()">提交申请 · 等待审核</button>
       <div class="redeem-result" id="redeem-result"></div>
@@ -4342,17 +4355,17 @@ function handleShareUnlock(input){
   }, 700);
 }
 
-function copyShareCode(btn){
+function copyText(txt, btn){
   var done = function(){
     var old = btn.textContent;
     btn.textContent = '已复制 ✓';
     setTimeout(function(){ btn.textContent = old; }, 1600);
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText('227s').then(done, function(){ btn.textContent = '请手动复制'; });
+    navigator.clipboard.writeText(txt).then(done, function(){ btn.textContent = '请手动复制'; });
   } else {
     var t = document.createElement('textarea');
-    t.value = '227s';
+    t.value = txt;
     document.body.appendChild(t);
     t.select();
     try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = '请手动复制'; }
