@@ -122,11 +122,20 @@ async function handleApply(request, env, corsHeaders) {
   </div>
 </div>`;
 
-  await sendEmail(env, {
-    to: env.ADMIN_EMAIL,
-    subject: `【BZD四种权益申请】${userEmail} · ${new Date().toLocaleString('zh-CN')}`,
-    html: emailHtml,
-  });
+  // 申请已存入 KV，管理员通知邮件失败不应让用户以为提交失败
+  try {
+    await sendEmail(env, {
+      to: env.ADMIN_EMAIL,
+      subject: `【BZD四种权益申请】${userEmail} · ${new Date().toLocaleString('zh-CN')}`,
+      html: emailHtml,
+    });
+  } catch (e) {
+    console.log(`管理员通知邮件失败（申请已保存 ${applyId}）: ${e.message}`);
+    return json({
+      success: true,
+      message: '申请已提交。通知邮件发送受限，如超过 2 小时未收到权益，请加微信 bzdsxjm521 并提供邮箱',
+    }, 200, corsHeaders);
+  }
 
   return json({ success: true, message: '申请已提交，请等待审核' }, 200, corsHeaders);
 }
@@ -167,12 +176,16 @@ async function handleReview(request, env, corsHeaders) {
 
   if (action === 'reject') {
     record.status = 'rejected';
-    await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 3600 });
-    await sendEmail(env, {
-      to: record.userEmail,
-      subject: '【BZD数模社】您的资料申请结果',
-      html: rejectEmailHtml(record.userEmail),
-    });
+    await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 60 * 60 * 72 });
+    try {
+      await sendEmail(env, {
+        to: record.userEmail,
+        subject: '【BZD数模社】您的资料申请结果',
+        html: rejectEmailHtml(record.userEmail),
+      });
+    } catch (e) {
+      return htmlPage(`⚠️ 已标记为拒绝，但通知邮件发送失败：${e.message}<br><br>请手动告知用户 ${record.userEmail}`);
+    }
     return htmlPage('✅ 已拒绝，通知邮件已发送给用户');
   }
 
@@ -187,24 +200,27 @@ async function handleReview(request, env, corsHeaders) {
   record.cozeMi = cozeMi;
   record.quota = quota;
   record.mma = mma;
-  await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 3600 });
 
-  // 发四种权益邮件
-  console.log(`发送邮件 - tianka: ${!!tianka}, cozeMi: ${!!cozeMi}, quota: ${!!quota}, mma: ${!!mma}`);
-  await sendEmail(env, {
-    to: record.userEmail,
-    subject: '【BZD数模社】✅ 您的完整版权益已发放',
-    html: approveEmailHtml(record.userEmail, tianka, cozeMi, quota, mma),
-  });
+  // 先落库再发邮件：卡密已从列表取出并推进索引，必须保证可回查，
+  // 否则邮件失败会连带把卡密吞掉（管理员看不到、用户收不到）
+  await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 60 * 60 * 72 });
 
-  return htmlPage(`
-    ✅ 审核通过！已发送以下内容至 ${record.userEmail}<br><br>
-    ${tianka ? `<strong>天卡兑换码：</strong>${tianka}<br>` : ''}
-    ${cozeMi ? `<strong>扣子卡密：</strong>${cozeMi}<br>` : ''}
-    ${quota ? `<strong>AI额度：</strong>${quota}<br>` : `<strong style="color:red;">AI额度：未获取</strong><br>`}
-    ${mma ? `<strong>MMA兑换码：</strong>${mma}<br>` : `<strong style="color:red;">MMA兑换码：未获取</strong><br>`}
-    ${!tianka && !cozeMi && !quota && !mma ? '（用户未勾选任何权益）' : ''}
-  `);
+  // 邮件失败不能影响卡密交付 —— 记录失败原因，仍把卡密展示给管理员手动补发
+  let mailError = null;
+  try {
+    await sendEmail(env, {
+      to: record.userEmail,
+      subject: '【BZD数模社】✅ 您的完整版权益已发放',
+      html: approveEmailHtml(record.userEmail, tianka, cozeMi, quota, mma),
+    });
+  } catch (e) {
+    mailError = e.message;
+    console.log(`邮件发送失败（卡密已保留，可在审核页查看）: ${e.message}`);
+    record.mailError = mailError;
+    await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 60 * 60 * 72 });
+  }
+
+  return viewBenefitsPage(record, mailError);
 }
 
 // ============================================================
@@ -327,12 +343,24 @@ function rejectEmailHtml(email) {
 </div>`;
 }
 
-function viewBenefitsPage(record) {
+function viewBenefitsPage(record, mailError) {
   const benefits = [];
   if (record.tianka) benefits.push(`🤖 <strong>AI天卡兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.tianka}</code>`);
   if (record.cozeMi) benefits.push(`📝 <strong>扣子卡密：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#1a8a50;font-weight:bold;">${record.cozeMi}</code>`);
   if (record.quota) benefits.push(`💳 <strong>AI额度兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.quota}</code>`);
   if (record.mma) benefits.push(`🚀 <strong>MMA兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.mma}</code>`);
+
+  // 本次或此前发送失败 → 提示管理员手动转发，避免卡密被静默吞掉
+  const failMsg = mailError || record.mailError;
+  const isQuota = failMsg && /quota|429/i.test(failMsg);
+  const warnBlock = failMsg ? `
+<div class="mailfail">
+  <strong>⚠️ 邮件未能自动发送${isQuota ? '（Resend 今日额度已用满）' : ''}</strong><br>
+  卡密已<strong>正常分配并保存</strong>，请手动复制上方内容发送给：<br>
+  <code style="display:block;margin:6px 0;user-select:all;">${record.userEmail}</code>
+  ${isQuota ? '额度将于次日 UTC 00:00 重置，届时新申请可自动发送。' : ''}
+  <div style="margin-top:8px;font-size:11px;color:#8a5a00;">失败原因：${failMsg}</div>
+</div>` : '';
 
   return new Response(`
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
@@ -348,13 +376,16 @@ h2{margin-top:0;color:#0a2d6e;font-size:24px;}
 .benefit-item{margin:16px 0;padding:12px;background:#f9fafb;border-left:3px solid #2c5aa0;
   border-radius:4px;text-align:left;font-size:14px;}
 code{display:block;margin-top:4px;word-break:break-all;}
+.mailfail{margin:16px 0;padding:14px 16px;background:#fff8e8;border-left:4px solid #f5a623;
+  border-radius:0 6px 6px 0;text-align:left;font-size:13px;color:#5a4000;line-height:1.8;}
 .tips{color:#666;font-size:12px;margin-top:20px;padding:12px;background:#fff8e8;
   border-radius:6px;border-left:3px solid #f5a623;}
 </style></head><body>
 <div class="box">
-<h2>✅ 权益已发放</h2>
-<div class="success">感谢您的购买！以下是您的专属权益</div>
+<h2>${failMsg ? '⚠️ 权益已分配 · 邮件待手动发送' : '✅ 权益已发放'}</h2>
+<div class="success">${failMsg ? '以下卡密已保留，请手动转发' : '感谢您的购买！以下是您的专属权益'}</div>
 ${benefits.map(b => `<div class="benefit-item">${b}</div>`).join('')}
+${warnBlock}
 <div class="tips">
 💡 <strong>温馨提示：</strong><br>
 • AI账号为共享账号，请勿修改密码<br>
