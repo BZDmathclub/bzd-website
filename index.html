@@ -166,6 +166,7 @@ a { color:inherit; }
   border:1.5px solid var(--border);
   border-radius:10px; overflow:hidden;
   transition:all .3s;
+  min-width:0; /* grid item 默认 min-width:auto，会被内部宽表格撑开，导致内层 overflow-x 失效、手机上无法横向滑动 */
 }
 .comp-card:hover {
   transform:translateY(-3px);
@@ -549,7 +550,8 @@ a { color:inherit; }
 .svc-tab.active{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;box-shadow:0 4px 12px rgba(30,60,114,.25);}
 .svc-panel{display:none;}
 .svc-panel.active{display:block;}
-.svc-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.svc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.svc-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:660px;}
 .svc-table thead tr{background:var(--blue-deep);color:#fff;}
 .svc-table thead th{padding:9px 10px;text-align:center;font-size:12.5px;font-weight:700;border-right:1px solid rgba(255,255,255,.15);}
 .svc-table thead th:last-child{border-right:none;}
@@ -1231,6 +1233,16 @@ a { color:inherit; }
   .pass-price-block { width:100%; text-align:left; display:flex; align-items:center; gap:12px; }
   .pass-price { font-size:22px; }
   .comp-grid { grid-template-columns:1fr; }
+  /* 服务表格：手机上左右滑动查看，缩小字号以便一屏看到更多列 */
+  .comp-card.open .comp-card-body { padding:16px 12px; }
+  .svc-table { font-size:11.5px; min-width:600px; }
+  .svc-table thead th { padding:8px 6px; font-size:11.5px; }
+  .svc-table tbody td { padding:8px 7px; }
+  .svc-name-cell { font-size:12px; }
+  .svc-desc { font-size:11px; }
+  .svc-price { font-size:13px; }
+  .svc-tabs { gap:8px; }
+  .svc-tab { padding:7px 16px; font-size:12.5px; }
   .schedule-head-bar .sh-title { font-size:15px; letter-spacing:1px; }
   .sch-foot { padding:12px 16px; }
 }
@@ -1391,7 +1403,7 @@ a { color:inherit; }
 
         <!-- ═══════ 一对多服务 ═══════ -->
         <div class="svc-panel active" id="svc-group-ys">
-          <div style="overflow-x:auto;">
+          <div class="svc-scroll">
           <table class="svc-table">
             <thead>
               <tr>
@@ -1453,7 +1465,7 @@ a { color:inherit; }
 
         <!-- ═══════ 一对一服务 ═══════ -->
         <div class="svc-panel" id="svc-one-ys">
-          <div style="overflow-x:auto;">
+          <div class="svc-scroll">
           <table class="svc-table">
             <thead>
               <tr>
@@ -2609,7 +2621,7 @@ a { color:inherit; }
 
         <!-- ═══════ 一对多服务 ═══════ -->
         <div class="svc-panel active" id="svc-group-gs">
-          <div style="overflow-x:auto;">
+          <div class="svc-scroll">
           <table class="svc-table">
             <thead>
               <tr>
@@ -2699,7 +2711,7 @@ a { color:inherit; }
 
         <!-- ═══════ 一对一服务 ═══════ -->
         <div class="svc-panel" id="svc-one-gs">
-          <div style="overflow-x:auto;">
+          <div class="svc-scroll">
           <table class="svc-table">
             <thead>
               <tr>
