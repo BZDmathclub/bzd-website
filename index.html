@@ -212,6 +212,8 @@ a { color:inherit; }
   max-height:1400px; padding:22px 24px;
   border-top-color:var(--border);
 }
+/* 当前竞赛卡片内容较长（截图解锁区 + 服务表格），不设高度上限，否则超出部分会被 overflow:hidden 裁掉 */
+#competitions .comp-card.open .comp-card-body { max-height:none; }
 .comp-card-head { cursor:pointer; user-select:none; }
 .comp-card-head::after { content:"▾"; float:right; font-size:18px; color:rgba(255,255,255,.55); transition:transform .25s; }
 .comp-card.open .comp-card-head::after { transform:rotate(180deg); }
@@ -4918,7 +4920,32 @@ function clearPromptsSearch(){
 // 往期助攻卡片可折叠，当前竞赛卡片默认展开不折叠
 document.querySelectorAll('#archive .comp-card-head').forEach(head => {
   head.addEventListener('click', () => {
-    head.closest('.comp-card').classList.toggle('open');
+    const card = head.closest('.comp-card');
+    const body = card.querySelector('.comp-card-body');
+    if (!body) { card.classList.toggle('open'); return; }
+
+    if (card.classList.contains('open')) {
+      // 折叠：先固定当前高度并强制重排，再交给 CSS 平滑过渡到 0
+      body.style.maxHeight = body.scrollHeight + 'px';
+      void body.offsetHeight;
+      card.classList.remove('open');
+      body.style.maxHeight = '';
+      return;
+    }
+
+    // 展开：按实际内容高度展开，过渡结束后解除上限 ——
+    // 否则长内容会被 CSS 里的 max-height 上限裁掉（手机上尤其明显）
+    card.classList.add('open');
+    body.style.maxHeight = (body.scrollHeight + 120) + 'px';
+    const release = () => {
+      if (card.classList.contains('open')) body.style.maxHeight = 'none';
+    };
+    body.addEventListener('transitionend', function done(e){
+      if (e.propertyName !== 'max-height') return;
+      body.removeEventListener('transitionend', done);
+      release();
+    });
+    setTimeout(release, 700); // 过渡未触发时兜底
   });
 });
 // 当前竞赛卡片默认全部展开
