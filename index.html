@@ -392,6 +392,15 @@ a { color:inherit; }
 .agent-list li::before { content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
 .agent-how { background:#fff; border:1.5px solid var(--gold); border-radius:12px; padding:18px 22px; font-size:14px; color:var(--text-main); line-height:1.8; }
 .agent-how strong { color:var(--blue-deep); }
+.teach-block{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:16px;}
+.teach-h{font-weight:800;color:var(--blue-deep);font-size:15px;margin-bottom:9px;}
+.teach-block p{margin:0;font-size:14px;color:var(--text-main);line-height:1.9;}
+.teach-block ul{margin:0;padding-left:20px;font-size:14px;color:var(--text-main);line-height:2;}
+.teach-block li{margin-bottom:5px;}
+.teach-block li:last-child{margin-bottom:0;}
+.teach-block b{color:var(--blue-deep);}
+.teach-block .money{color:var(--accent);font-weight:800;}
+@media(max-width:640px){ .teach-block{padding:15px 16px;} .teach-block ul{line-height:1.9;} }
 .paper-preview-title {
   font-size:14px; font-weight:900;
   color:var(--blue-deep);
@@ -1272,7 +1281,7 @@ a { color:inherit; }
       <li><a href="#national-resources">竞赛资料</a></li>
       <li><a href="#guide">使用指南</a></li>
       <li><a href="#archive">往期资料</a></li>
-      <li><a href="#agent">代理合作</a></li>
+      <li><a href="#agent">教师招募</a></li>
       <li><a href="#contact">联系我们</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="菜单" aria-expanded="false">
@@ -4339,55 +4348,39 @@ a { color:inherit; }
 </section>
 </div>
 
-<!-- AGENT 代理合作 -->
+<!-- AGENT 教师招募 -->
 <div class="section-bg-wrap agent-section">
 <section class="section" id="agent">
   <div class="section-head">
     <div class="section-tag">JOIN US</div>
-    <h2 class="section-title">加入我们｜BZD 数模社 代理合作计划</h2>
-    <p class="section-sub">无需囤货 · 无需押金 · 无需售后 · 轻松获得稳定收益</p>
+    <h2 class="section-title">🔥 线下数学建模课题教师招募 · 兼职</h2>
   </div>
   <div class="agent-wrap">
-    <p class="agent-intro">无需囤货 · 无需押金 · 无需售后，官方全程资料支持，你只需引流推广即可获得稳定收益。</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px;">
-      <div class="nr-card">
-        <div class="badge-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        </div>
-        <div class="nr-card-title">官方授权</div>
-        <div class="nr-card-sub">正规推广资格</div>
-      </div>
-      <div class="nr-card">
-        <div class="badge-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-        </div>
-        <div class="nr-card-title">零成本启动</div>
-        <div class="nr-card-sub">无需囤货押金</div>
-      </div>
-      <div class="nr-card">
-        <div class="badge-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-        </div>
-        <div class="nr-card-title">官方全程支持</div>
-        <div class="nr-card-sub">资料·答疑·AI工具</div>
-      </div>
-      <div class="nr-card">
-        <div class="badge-icon">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <div class="nr-card-title">稳定收益</div>
-        <div class="nr-card-sub">线上引流即可</div>
-      </div>
-      <div class="nr-card">
-        <div class="badge-icon">
-          <svg viewBox="0 0 24 24"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8C.305 8 .305 16 5.44 16c5.605 0 7.643-8 12.739-8z"/></svg>
-        </div>
-        <div class="nr-card-title">终身卡权益</div>
-        <div class="nr-card-sub">资料·论文·论文检查</div>
-      </div>
+
+    <div class="teach-block">
+      <div class="teach-h">✅ 应聘要求</div>
+      <p>拥有 <b>国赛 / 美赛 / 华为杯</b> 等数模竞赛获奖经历，熟悉建模思路、代码实现与论文撰写。</p>
     </div>
+
+    <div class="teach-block">
+      <div class="teach-h">📌 工作内容</div>
+      <p>线下备赛辅导、模型思路指导、论文润色修改，时间灵活，工作地点：<b>上海闵行区</b>。</p>
+    </div>
+
+    <div class="teach-block">
+      <div class="teach-h">💰 薪酬福利</div>
+      <ul>
+        <li><b>日常授课：</b><span class="money">200 元 / 小时</span></li>
+        <li><b>带队参赛奖金</b>（带队参加正式竞赛）：未获奖 <span class="money">3000</span>｜三等奖 <span class="money">6000</span>｜二等奖 <span class="money">9000</span>｜一等奖 <span class="money">12000</span></li>
+        <li><b>课题项目奖金</b>（完成数模课题，无需参赛）：<span class="money">3000 元 / 每位学生</span> —— 1 人组 3000｜2 人组 6000｜3 人组 9000</li>
+        <li><b>内推介绍费：</b>推荐符合条件同学入职，拿内推介绍费！</li>
+      </ul>
+    </div>
+
     <div class="agent-how">
-      <strong>加入方式：</strong>购买终身卡后联系客服，即可开通代理资格并同步享有终身卡全部权益。
+      <strong>有意可 ＋V：</strong><code style="background:#f8faff;border:1px solid var(--border);padding:2px 10px;border-radius:5px;font-weight:700;color:var(--accent);user-select:all;">bzdsxjm520</code>
+      <button type="button" onclick="copyText('bzdsxjm520',this)" style="margin-left:8px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--blue-mid);background:#fff;border:1.5px solid var(--blue-mid);border-radius:5px;cursor:pointer;">复制</button>
+      —— 请简述参赛经历 + 获奖项
     </div>
   </div>
 </section>
