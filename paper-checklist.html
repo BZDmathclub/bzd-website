@@ -303,7 +303,7 @@
   </div>
 
   <div class="footer-note">
-    <strong>使用说明：</strong>本自查表包含 281 项论文检查点，涵盖摘要、页面结构、问题重述、问题分析、模型与假设、符号与公式、模型建立与求解等多个维度。请根据您的论文逐项检查，勾选"是否做到"来追踪完成进度。
+    <strong>使用说明：</strong>本自查表包含 287 项论文检查点，涵盖摘要、页面结构、问题重述、问题分析、模型与假设、符号与公式、模型建立与求解等多个维度。请根据您的论文逐项检查，勾选"是否做到"来追踪完成进度。
   </div>
 
   <div class="actions">
@@ -314,6 +314,18 @@
 </div>
 
 <script>
+// 研赛版入口：paper-checklist.html?ys=1
+const IS_YS = new URLSearchParams(location.search).has('ys');
+const DATA_FILE = IS_YS ? 'data/paper-checklist-ys.json' : 'data/paper-checklist.json';
+// 两版数据 id 大量重叠，勾选进度分开存，避免互相污染
+const LS_KEY = IS_YS ? 'checklist_ys_' : 'checklist_';
+
+if (IS_YS) {
+  document.title = '数学建模论文自查表 · 研赛版 - BZD 数模社';
+  document.querySelector('.header h1').textContent = '数学建模论文自查表 · 研赛版';
+  document.querySelector('.header p').textContent = '依据华为杯研赛评审规则与 2026 AI 新规，逐项检查';
+}
+
 let allData = [];
 let filteredData = [];
 let sections = new Set();
@@ -321,8 +333,9 @@ let sections = new Set();
 // 加载数据
 async function loadData() {
   try {
-    const response = await fetch('data/paper-checklist.json');
+    const response = await fetch(DATA_FILE);
     allData = await response.json();
+    updateNote();
 
     // 提取所有板块
     allData.forEach(item => {
@@ -339,6 +352,16 @@ async function loadData() {
   } catch (e) {
     console.error('Failed to load checklist data:', e);
   }
+}
+
+// 底部说明按实际数据条数生成
+function updateNote() {
+  const note = document.querySelector('.footer-note');
+  if (!note) return;
+  const n = allData.length;
+  note.innerHTML = IS_YS
+    ? `<strong>使用说明：</strong>本自查表为 <b>研赛版</b>，共 ${n} 项检查点。已按 2026 研赛 AI 新规调整：移除国赛式的「AI 使用支撑材料」检查项，改为检查 AI 工具在参考文献中的引用格式。请根据您的论文逐项检查，勾选"是否做到"来追踪完成进度。`
+    : `<strong>使用说明：</strong>本自查表包含 ${n} 项论文检查点，涵盖摘要、页面结构、问题重述、问题分析、模型与假设、符号与公式、模型建立与求解等多个维度。请根据您的论文逐项检查，勾选"是否做到"来追踪完成进度。`;
 }
 
 // 初始化筛选按钮
@@ -414,7 +437,7 @@ function renderTableWithData(data) {
 
   data.forEach(item => {
     const row = document.createElement('tr');
-    const isChecked = localStorage.getItem(`checklist_${item.id}`) === 'true';
+    const isChecked = localStorage.getItem((LS_KEY + item.id)) === 'true';
 
     row.innerHTML = `
       <td class="col-id">${item.id}</td>
@@ -431,9 +454,9 @@ function renderTableWithData(data) {
     row.querySelector('.checkbox').addEventListener('change', function() {
       const id = this.dataset.id;
       if (this.checked) {
-        localStorage.setItem(`checklist_${id}`, 'true');
+        localStorage.setItem((LS_KEY + id), 'true');
       } else {
-        localStorage.removeItem(`checklist_${id}`);
+        localStorage.removeItem((LS_KEY + id));
       }
       updateStats();
       renderTable();
@@ -448,7 +471,7 @@ function updateStats() {
   const total = allData.length;
   let completed = 0;
   allData.forEach(item => {
-    if (localStorage.getItem(`checklist_${item.id}`) === 'true') {
+    if (localStorage.getItem((LS_KEY + item.id)) === 'true') {
       completed++;
     }
   });
@@ -473,7 +496,7 @@ function updateStats() {
 // 全部标记为完成
 function markAllDone() {
   filteredData.forEach(item => {
-    localStorage.setItem(`checklist_${item.id}`, 'true');
+    localStorage.setItem((LS_KEY + item.id), 'true');
   });
   updateStats();
   renderTable();
@@ -483,7 +506,7 @@ function markAllDone() {
 function clearAllMarks() {
   if (confirm('确定要清除所有标记吗？')) {
     allData.forEach(item => {
-      localStorage.removeItem(`checklist_${item.id}`);
+      localStorage.removeItem((LS_KEY + item.id));
     });
     updateStats();
     renderTable();
