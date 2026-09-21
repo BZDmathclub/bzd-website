@@ -1577,13 +1577,13 @@ a { color:inherit; }
   </div>
   <div class="nr-grid">
 
-      <!-- 论文自查表 -->
-      <div class="nr-card" onclick="window.location.href='paper-checklist.html'">
+      <!-- 新规 -->
+      <div class="nr-card" onclick="openYsAiRulesModal()">
         <div class="badge-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M20 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
-        <div class="nr-card-title">论文自查表</div>
-        <div class="nr-card-sub">287项检查清单</div>
+        <div class="nr-card-title">新规</div>
+        <div class="nr-card-sub">2026 研赛 AI 新规</div>
       </div>
 
       <!-- 必备工具 -->
@@ -1620,6 +1620,15 @@ a { color:inherit; }
         </div>
         <div class="nr-card-title">数模字典</div>
         <div class="nr-card-sub">5700+模型库</div>
+      </div>
+
+      <!-- 研赛十大信息差 -->
+      <div class="nr-card" onclick="window.location.href='ys-info-gap.html'">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </div>
+        <div class="nr-card-title">研赛十大信息差</div>
+        <div class="nr-card-sub">避坑 · 获奖规则 · AI新规</div>
       </div>
 
       <!-- 优秀论文+赛题 -->
@@ -1708,7 +1717,7 @@ a { color:inherit; }
           <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M20 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/></svg>
         </div>
         <div class="nr-card-title">论文自查表</div>
-        <div class="nr-card-sub">287项检查清单</div>
+        <div class="nr-card-sub">281项检查清单</div>
       </div>
 
       <!-- 必备工具 -->
@@ -2643,6 +2652,33 @@ a { color:inherit; }
       <p style="font-size:12px;color:#888;margin:14px 0 0 0;line-height:1.7;background:#fff;border-left:3px solid #c0d4ef;padding:10px 14px;border-radius:0 6px 6px 0;">
         其他解压码见共享文件中的 readme.txt
       </p>
+    </div>
+  </div>
+</div>
+
+<!-- 研赛新规模态框 -->
+<div id="ys-ai-rules-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;padding:30px;max-width:600px;width:90%;margin:20px auto;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+      <h2 style="font-size:22px;color:#1e3c72;margin:0;font-weight:700;">新规</h2>
+      <button onclick="closeYsAiRulesModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">&times;</button>
+    </div>
+    <div style="background:#f8faff;padding:20px;border-radius:10px;border:1px solid #d4e1f4;">
+      <p style="font-size:14px;color:#1e3c72;margin:0 0 12px 0;font-weight:700;">AI 新规</p>
+      <p style="font-size:13px;color:#333;margin:0 0 12px 0;line-height:1.9;">
+        9 月 16 号组委会发布的最新 AI 新规，使用的 AI 规范是 <strong>2025 年的高教社杯规范</strong>，与 2026 年最新的数模 AI 新规不同。因此，<strong>切勿与市面、网络上的各种 AI 新规混淆</strong>。本年度的 AI 新规使用规范是在参考文献中进行 AI 的引用，具体格式为在参考文献中对应地列出所用的人工智能工具名称，版本/型号，开发机构/公司，版本发布日期。
+      </p>
+      <p style="font-size:13px;color:#333;margin:0 0 15px 0;line-height:1.9;">
+        这种格式撰写<strong>尽量不要直接询问 AI</strong>，而是按填空题填写，因为 AI 在这种提示下输出的结果与正常的规范要求不符。
+      </p>
+      <p style="font-size:12px;color:#333;margin:0 0 8px 0;"><strong>正确规范为</strong></p>
+      <div style="background:white;padding:14px;border-radius:8px;border-left:3px solid #1e3c72;">
+        <p style="font-size:12px;color:#1e3c72;margin:0 0 8px 0;font-family:monospace;word-break:break-all;line-height:1.8;">[1] DeepSeek, DeepSeek-R1-0528, 深度求索(DeepSeek), 2025-08-05</p>
+        <p style="font-size:12px;color:#1e3c72;margin:0;font-family:monospace;word-break:break-all;line-height:1.8;">[2] ChatGPT, GPT-4o, OpenAI, 2025-08-05</p>
+      </div>
+      <div style="margin-top:15px;">
+        <button onclick="copyText('[1] DeepSeek, DeepSeek-R1-0528, 深度求索(DeepSeek), 2025-08-05\n[2] ChatGPT, GPT-4o, OpenAI, 2025-08-05',this)" style="padding:10px 20px;background:#1e3c72;color:white;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">复制格式模板</button>
+      </div>
     </div>
   </div>
 </div>
@@ -4981,6 +5017,20 @@ function closeYsExcellentModal(){
   document.getElementById('ys-excellent-modal').style.display = 'none';
   document.body.style.overflow = '';
 }
+
+function openYsAiRulesModal(){
+  document.getElementById('ys-ai-rules-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeYsAiRulesModal(){
+  document.getElementById('ys-ai-rules-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('ys-ai-rules-modal').addEventListener('click', e => {
+  if(e.target.id === 'ys-ai-rules-modal') closeYsAiRulesModal();
+});
 
 function openYsPaperTemplateModal(){
   document.getElementById('ys-paper-template-modal').style.display = 'flex';

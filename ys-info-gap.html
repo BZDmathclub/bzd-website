@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3F6F8">
+<title>2026 华为杯研赛独家信息差 - BZD 数模社</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C4E96'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900'%3E数%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --blue:#1c4e96; --blue-mid:#2863bb; --blue-soft:#e8f0fe;
+    --ink:#2c3e50; --gray:#5a6c7d; --muted:#7d8b99;
+    --line:#d4e1f4; --bg:#f5f7fa; --warn:#c0392b; --warn-bg:#fdf0ee;
+    --gold:#b8860b; --gold-bg:#fdf8e8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Noto Sans SC','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;-webkit-text-size-adjust:100%}
+
+  .hero{background:linear-gradient(140deg,#1c4e96 0%,#2863bb 60%,#3f7ad0 100%);color:#fff;padding:52px 20px 46px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;border:70px solid rgba(255,255,255,.07);right:-170px;top:-190px}
+  .hero-in{max-width:1040px;margin:0 auto;position:relative;z-index:1}
+  .hero-tag{display:inline-block;padding:5px 14px;border:1px solid rgba(255,255,255,.45);border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.12em;margin-bottom:18px}
+  .hero h1{font-size:clamp(25px,3.5vw,40px);font-weight:900;line-height:1.25;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:#ffd98a}
+  .hero p{margin-top:14px;font-size:clamp(13px,1.4vw,15px);color:rgba(255,255,255,.86);max-width:760px}
+  .hero .kw{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .hero .kw span{padding:4px 12px;background:rgba(255,255,255,.14);border-radius:6px;font-size:12px;font-weight:600}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 70px}
+  .layout{display:grid;grid-template-columns:212px minmax(0,1fr);gap:26px;align-items:start;margin-top:-26px}
+
+  .toc{position:sticky;top:20px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 14px;box-shadow:0 8px 26px rgba(28,78,150,.08)}
+  .toc h2{font-size:12px;color:var(--muted);letter-spacing:.14em;font-weight:800;margin-bottom:10px;padding-left:4px}
+  .toc a{display:block;padding:7px 10px;border-radius:7px;font-size:13px;color:var(--gray);text-decoration:none;line-height:1.5;transition:all .18s}
+  .toc a:hover{background:var(--blue-soft);color:var(--blue)}
+  .toc a.on{background:var(--blue-soft);color:var(--blue);font-weight:700}
+  .toc .n{display:inline-block;min-width:17px;font-weight:800;color:var(--blue);font-size:12px}
+
+  .content{min-width:0}
+  section.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 28px;margin-bottom:16px;box-shadow:0 8px 26px rgba(28,78,150,.06);scroll-margin-top:16px}
+  section.card>h2{font-size:19px;color:var(--blue);font-weight:900;display:flex;align-items:center;gap:10px;margin-bottom:14px;line-height:1.4}
+  section.card>h2 .idx{flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900}
+  section.card h3{font-size:14.5px;color:var(--blue);font-weight:800;margin:18px 0 8px}
+  section.card h3:first-child{margin-top:0}
+  section.card p{font-size:13.5px;color:#3d4a57;margin-bottom:10px}
+  section.card p:last-child{margin-bottom:0}
+  section.card ul,section.card ol{padding-left:22px;margin:8px 0 12px}
+  section.card li{font-size:13.5px;color:#3d4a57;margin-bottom:6px}
+  section.card li:last-child{margin-bottom:0}
+  strong{color:#1c4e96}
+  b{color:#1c4e96}
+
+  .code{background:#f8faff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 16px;margin:10px 0 14px;font-family:Consolas,Monaco,monospace;font-size:12.5px;color:#1c4e96;word-break:break-all;line-height:1.9}
+  .note{background:var(--blue-soft);border-radius:8px;padding:12px 15px;font-size:13px;color:#31517d;margin:12px 0}
+  .warn{background:var(--warn-bg);border:1px solid #f3c9c3;border-radius:8px;padding:13px 16px;margin:12px 0}
+  .warn .t{font-size:13px;font-weight:800;color:var(--warn);margin-bottom:8px}
+  .warn ol,.warn ul{margin:0;padding-left:20px}
+  .warn li{font-size:13px;color:#4a3a38}
+  .gold{background:var(--gold-bg);border:1px solid #eddfb5;border-radius:8px;padding:13px 16px;margin:12px 0;font-size:13.5px;color:#5c4a1e}
+
+  .steps{counter-reset:s;list-style:none;padding:0;margin:10px 0 0}
+  .steps li{counter-increment:s;position:relative;padding:0 0 14px 38px;font-size:13.5px;color:#3d4a57}
+  .steps li:last-child{padding-bottom:0}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-weight:900;font-size:12px;display:grid;place-items:center}
+  .steps li::after{content:"";position:absolute;left:11.5px;top:27px;bottom:2px;width:1.5px;background:var(--line)}
+  .steps li:last-child::after{display:none}
+
+  .flow{display:grid;gap:10px;margin-top:8px}
+  .flow .row{background:#f8faff;border:1px solid var(--line);border-radius:9px;padding:13px 16px}
+  .flow .row .h{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:5px}
+  .flow .row .b{font-size:13px;color:#3d4a57}
+
+  .end{background:linear-gradient(140deg,#1c4e96 0%,#2863bb 100%);color:#fff;border-radius:12px;padding:28px 30px;margin-top:4px}
+  .end .t{font-size:16px;font-weight:900;margin-bottom:10px;color:#ffd98a}
+  .end p{font-size:13.5px;color:rgba(255,255,255,.92);margin:0}
+  .end .slogan{font-size:17px;font-weight:900;margin-bottom:10px;letter-spacing:.02em}
+
+  footer{text-align:center;padding:28px 20px 40px;color:var(--muted);font-size:12px}
+  footer a{color:var(--blue);text-decoration:none;font-weight:700}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:16px;margin-top:-20px}
+    .toc{position:static;max-height:none}
+    .toc a{display:inline-block;margin:2px 3px 2px 0;border:1px solid var(--line);font-size:12.5px;padding:6px 11px}
+    .toc .n{display:none}
+    section.card{padding:20px 18px}
+    .hero{padding:38px 18px 34px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-tag">2026 华为杯研赛 · 独家信息差</div>
+    <h1>避坑、获奖规则、<em>AI 新规</em>、竞赛焚诀</h1>
+    <p>AI 时代的数模比赛，淘汰的从来不是普通人，而是只会依赖工具、放弃独立思考的人。你不用比 AI 厉害，只需比其他使用 AI 的对手更懂判断、更懂深度、更懂评审规则。</p>
+    <div class="kw">
+      <span>AI 新规</span><span>AI 使用情况</span><span>查重问题</span><span>选题建议</span>
+      <span>获奖关键</span><span>评分细则</span><span>评阅流程</span><span>竞赛焚诀</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <h2>目录</h2>
+    <a href="#s1"><span class="n">1</span>AI 新规</a>
+    <a href="#s2"><span class="n">2</span>AI 使用情况</a>
+    <a href="#s3"><span class="n">3</span>查重问题</a>
+    <a href="#s4"><span class="n">4</span>选题建议</a>
+    <a href="#s5"><span class="n">5</span>获奖关键</a>
+    <a href="#s6"><span class="n">6</span>论文常见格式规范错误</a>
+    <a href="#s7"><span class="n">7</span>评分细则</a>
+    <a href="#s8"><span class="n">8</span>评阅流程</a>
+    <a href="#s9"><span class="n">9</span>全新团队分工模式</a>
+    <a href="#s10"><span class="n">10</span>竞赛焚诀 · 实战打法</a>
+    <a href="#s11"><span class="n">11</span>结语</a>
+  </nav>
+
+  <main class="content">
+
+    <section class="card" id="s1">
+      <h2><span class="idx">1</span>AI 新规</h2>
+      <p>9 月 16 号组委会发布的最新 AI 新规，使用的 AI 规范是 <strong>2025 年的高教社杯规范</strong>，与 2026 年最新的数模 AI 新规不同。因此，<strong>切勿与市面、网络上的各种 AI 新规混淆</strong>。本年度的 AI 新规使用规范是在参考文献中进行 AI 的引用，具体格式为在参考文献中对应地列出所用的人工智能工具名称，版本/型号，开发机构/公司，版本发布日期。</p>
+      <p>这种格式撰写<strong>尽量不要直接询问 AI</strong>，而是按填空题填写，因为 AI 在这种提示下输出的结果与正常的规范要求不符。</p>
+      <h3>正确规范为</h3>
+      <div class="code">[1] DeepSeek, DeepSeek-R1-0528, 深度求索(DeepSeek), 2025-08-05<br>[2] ChatGPT, GPT-4o, OpenAI, 2025-08-05</div>
+      <div class="note">按「工具名称，版本/型号，开发机构/公司，版本发布日期」四段填空，不要交给 AI 自由生成。</div>
+    </section>
+
+    <section class="card" id="s2">
+      <h2><span class="idx">2</span>AI 使用情况</h2>
+      <ol>
+        <li>据 2026 年 6 月官方问卷统计：本届 <strong>40% 参赛队伍仍仅使用传统国内模型</strong>，不会、不愿使用 GPT、Claude 等主流 AI 工具，选对优质模型、善用 AI 工具，本身就是天然竞争优势；</li>
+        <li>后台数据显示：本届<strong>仅 30%–40% 的参赛队伍会使用专业数模智能体</strong>。</li>
+      </ol>
+    </section>
+
+    <section class="card" id="s3">
+      <h2><span class="idx">3</span>查重问题</h2>
+      <p>自检库检测 —— 参赛论文会与同赛期本届其他队伍参赛论文进行相似度比对。</p>
+      <ul>
+        <li>论文相似度<strong>小于 0.3</strong>：正常评审。</li>
+        <li>论文相似度<strong>介于 0.3–0.35</strong>：雷同部分扣分，其他部分正常给分。</li>
+      </ul>
+      <h3>论文相似度大于等于 0.35</h3>
+      <ol>
+        <li>与相似论文几乎完全相同，确认为雷同，建议通报批评，<strong>给 0 分</strong>；</li>
+        <li>与相似论文整体内容有大面积相同，确认为雷同，建议通报批评，<strong>给 0 分</strong>；</li>
+        <li>与相似论文整体内容有大面积相同，确认为雷同，建议不发成功参赛奖，<strong>给 1 分</strong>；</li>
+        <li>与相似论文在某些小问存在雷同，且性质较为严重，建议不发成功参赛奖，<strong>给 1 分</strong>；</li>
+        <li>与相似论文在某些小问存在一些雷同，性质不太严重，雷同部分扣分，<strong>最低 20 分</strong>；</li>
+        <li>相似率超标或很高，但无实质性内容，或问题重述粘贴、全文字、近似空白卷、非本次竞赛论文或文章等，不通报批评，<strong>给 5 分</strong>；</li>
+        <li>与相似论文对比未见有雷同部分，正常评审。</li>
+      </ol>
+      <div class="note">程序部分<strong>不得分、不扣分</strong>。高相似度是由于附录程序、代码引起的部分，可忽略；其它部分按标准正常评审。</div>
+    </section>
+
+    <section class="card" id="s4">
+      <h2><span class="idx">4</span>选题建议</h2>
+      <div class="gold"><strong>不看获奖率，看竞争强度。</strong></div>
+      <p>获奖难易不能只看表面获奖率，核心看同赛道对手实力。各题目二三等奖获奖率一致【13%、20%】。选题人数多的题目、小白多。相对而言竞争不大，相对而言更容易获奖。</p>
+    </section>
+
+    <section class="card" id="s5">
+      <h2><span class="idx">5</span>获奖关键</h2>
+      <div class="gold" style="font-size:15px;font-weight:800;text-align:center;letter-spacing:.06em">格式规范 + 论文工作量</div>
+    </section>
+
+    <section class="card" id="s6">
+      <h2><span class="idx">6</span>论文常见格式规范错误</h2>
+
+      <h3>（一）附录代码规范</h3>
+      <p>附录<strong>无需粘贴完整冗余代码</strong>！数据导入、数据库连接、数据可视化、环境配置等非核心代码均可省略，仅需附上每道问题对应的<strong>核心求解代码</strong>，既能规避查重风险，又符合评审规范。</p>
+
+      <h3>（二）图表格式禁忌</h3>
+      <p>绘图时<strong>禁止给图表添加自带 title 标题</strong>，避免出现「图表自带标题 + 正文下方图表标题」重复冗余的问题，属于高频格式扣分项。</p>
+
+      <h3>（三）摘要高频扣分点</h3>
+      <p><strong>96% 的队伍都会出现摘要写作错误</strong>：未在摘要中简要概述每道问题的核心题意，该问题为<strong>必扣分项</strong>，撰写摘要必须补齐各问题简述。</p>
+
+      <h3>（四）直接判负、不予评分的致命错误</h3>
+      <div class="warn">
+        <div class="t">以下两类问题直接判负</div>
+        <ol>
+          <li>华为杯<strong>需要设置目录</strong>，不要随意使用国赛模板；</li>
+          <li>论文正文、附件、支撑材料中出现任何参赛个人、队伍、学校相关隐私信息。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card" id="s7">
+      <h2><span class="idx">7</span>评分细则</h2>
+      <p><strong>百分制评分</strong></p>
+      <ul>
+        <li><strong>10 分格式规范分</strong>：论文摘要包含建模思路、方法、模型、主要结果结论、创新点等；论文撰写总体规范、清晰、严谨，可读性强；论文的参考文献、引用文献、引用软件等格式及标注规范。</li>
+        <li><strong>正文 90 分</strong>：通常分值分布问题三分值最多【25–30 分】，问题四五分值较小【往年】。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="s8">
+      <h2><span class="idx">8</span>评阅流程</h2>
+      <p><strong>两轮独立评阅 + 分歧复议</strong></p>
+      <div class="flow">
+        <div class="row"><div class="h">第一阶段（初评）</div><div class="b">每篇作品由 <strong>5 位评委</strong>独立打分，求均值排序，筛选出排名靠前的作品进入第二阶段。</div></div>
+        <div class="row"><div class="h">第二阶段（复评）</div><div class="b">每篇作品由 <strong>3 位评委</strong>重新评分，入围作品换一组评委重新打分，再次标准化，得到第二阶段标准分。</div></div>
+        <div class="row"><div class="h">大极差作品复议</div><div class="b">额外 <strong>3 位评委</strong>。若某篇论文两次评分的最高分与最低分之差（极差）<strong>超过 20</strong>，判定为「大极差作品」。</div></div>
+        <div class="row"><div class="h">最终成绩</div><div class="b">一阶段 5 人评分的标准分均值 + 二阶段 3 人评分的标准分合并，按总分排名确定获奖等级。</div></div>
+      </div>
+    </section>
+
+    <section class="card" id="s9">
+      <h2><span class="idx">9</span>全新团队分工模式（AI 时代最优方案）</h2>
+      <p>摒弃传统「三人各司其职、固定分工」的老旧模式。AI 竞赛时代，最优分工为：<strong>三人同步参与建模、算法求解、论文写作全流程</strong>，每个环节固定 1 人为主负责人，另外 2 人辅助校对、优化、查漏。</p>
+    </section>
+
+    <section class="card" id="s10">
+      <h2><span class="idx">10</span>竞赛焚诀 · 高效邪修实战打法</h2>
+      <ol class="steps">
+        <li>拿到赛题后，接入 DeepSeek 智能体，同时批量跑 A/B/C/D/E/F 多道题目初稿，<strong>1 小时内</strong>获取多题目初步论文与结果；</li>
+        <li>结合自身专业适配度、初稿完成质量、题目难度，精准确定最终选题；</li>
+        <li>调用赛题翻译工具，逐字逐句拆解赛题，梳理题干、背景、各问题之间的联动逻辑，结合 AI 打磨专属初步解题思路；</li>
+        <li>将 AI 生成的思路、题目解析、数据集导入数模字典核验，确定模型与求解方案；</li>
+        <li>依托定型模型，用 AI 生成核心代码、完成数据可视化，通过智能体输出完整初稿论文；</li>
+        <li>全方位自查：逐段校对摘要、模型假设、AI 使用说明、格式规范，重点排查 AIGC 痕迹与查重风险；</li>
+        <li>完成全部优化后定稿提交，尽人事、听天命。</li>
+      </ol>
+    </section>
+
+    <section class="end" id="s11">
+      <div class="t">结语</div>
+      <div class="slogan">模需慢慢建，心急则模散。</div>
+      <p>AI 只是辅助工具，独立的思考、精准的判断、贴合评审规则的落地输出，才是获奖的核心关键。</p>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  BZD 数模社 · 华为杯研赛备赛资料 | 官网 <a href="http://bzdshumo.com/" target="_blank" rel="noopener">bzdshumo.com</a>
+</footer>
+
+<script>
+(function(){
+  var links = [].slice.call(document.querySelectorAll('#toc a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  function sync(){
+    var y = window.scrollY + 130, best = 0;
+    targets.forEach(function(el, i){ if(el && el.offsetTop <= y) best = i; });
+    links.forEach(function(a, i){ a.classList.toggle('on', i === best); });
+  }
+  window.addEventListener('scroll', sync, {passive:true});
+  sync();
+
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      var el = document.querySelector(a.getAttribute('href'));
+      if(!el) return;
+      e.preventDefault();
+      window.scrollTo({ top: el.offsetTop - 12, behavior: 'smooth' });
+      history.replaceState(null, '', a.getAttribute('href'));
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

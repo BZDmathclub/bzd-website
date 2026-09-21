@@ -1314,42 +1314,6 @@
     "status": ""
   },
   {
-    "id": "L01",
-    "section": "AI 使用支撑材料",
-    "checkpoint": "正文中没有不必要的 AI 工具使用声明",
-    "status": ""
-  },
-  {
-    "id": "L02",
-    "section": "AI 使用支撑材料",
-    "checkpoint": "当届要求披露时，声明与详情置于独立支撑材料",
-    "status": ""
-  },
-  {
-    "id": "L03",
-    "section": "AI 使用支撑材料",
-    "checkpoint": "支撑材料与真实使用一致且匿名",
-    "status": ""
-  },
-  {
-    "id": "L04",
-    "section": "AI 使用支撑材料",
-    "checkpoint": "当届规则要求正文声明时，声明位于规定位置（如参考文献之前）",
-    "status": ""
-  },
-  {
-    "id": "L05",
-    "section": "AI 使用支撑材料",
-    "checkpoint": "AI 工具没有被误列为普通参考文献条目",
-    "status": ""
-  },
-  {
-    "id": "L06",
-    "section": "AI 使用支撑材料",
-    "checkpoint": "论文声明与《AI工具使用详情》内容一致",
-    "status": ""
-  },
-  {
     "id": "RA01",
     "section": "参考文献与附录",
     "checkpoint": "每条参考文献真实存在且可核验",
