@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#F3F6F8">
+<title>华为杯研赛近五年选题与获奖率分析</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232E5F8A'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900'%3E数%3C/text%3E%3C/svg%3E">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+:root{--ink:#2C3E50;--gray:#5A6C7D;--muted:#7D8B99;--blue:#2E5F8A;--cyan:#1B9CCE;--green:#27AE60;--orange:#E67E22;--red:#C0392B;--purple:#8E44AD;--line:#D4DDE5;--paper:#fff;--base:#F3F6F8;--bluebg:#EDF4F9;--cyanbg:#ECF8FC;--greenbg:#EEF8F2;--orangebg:#FCF3EB;--shadow:0 16px 42px rgba(44,62,80,.11)}
+*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%}body{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);background:#EDF1F4;line-height:1.62;overflow:hidden}button{font:inherit}
+.app{height:100%;display:grid;grid-template-rows:58px minmax(0,1fr) 68px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,64px);background:rgba(255,255,255,.96);border-top:4px solid var(--blue);border-bottom:1px solid var(--line);z-index:10}
+.brand{font-weight:900;color:var(--blue);letter-spacing:.08em}.brand span{color:var(--cyan);margin-left:9px}
+.meta{font-size:13px;color:var(--muted);letter-spacing:.05em}
+.stage{min-height:0;padding:clamp(12px,2vw,28px) clamp(16px,3.6vw,56px);overflow:hidden}
+.deck{height:100%;position:relative}
+.page{position:absolute;inset:0;display:none;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.page.active{display:block;animation:enter .35s ease both}
+@keyframes enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.inner{height:100%;padding:clamp(22px,3.4vw,52px);display:flex;flex-direction:column;min-height:0;overflow-y:auto}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:.15em;margin-bottom:10px}
+.eyebrow:before{content:"";width:30px;height:3px;background:var(--cyan);border-radius:3px}
+.title{font-size:clamp(26px,2.8vw,44px);font-weight:950;line-height:1.18;letter-spacing:-.025em}
+.title span{color:var(--blue)}
+.lead{font-size:clamp(13px,1.15vw,16px);color:var(--gray);margin-top:10px;max-width:1100px}
+/* cover */
+.cover{background:linear-gradient(145deg,#F8FAFB 0%,#EDF4F9 60%,#E5EDF4 100%);isolation:isolate}
+.cover:before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;right:-190px;top:-250px;border:76px solid rgba(27,156,206,.08);z-index:-1}
+.cover:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;left:-150px;bottom:-180px;border:48px solid rgba(46,95,138,.07);z-index:-1}
+.cover-grid{display:grid;grid-template-columns:1.5fr .5fr;gap:clamp(24px,4vw,60px);align-items:center;flex:1}
+.badge{display:inline-flex;gap:10px;align-items:center;width:max-content;padding:8px 15px;background:#fff;border:1px solid var(--line);border-radius:999px;color:var(--blue);font-size:13px;font-weight:900}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px rgba(27,156,206,.13)}
+.cover h1{font-size:clamp(38px,5vw,72px);line-height:1.08;font-weight:950;margin:24px 0 17px}
+.cover h1 span{color:var(--blue)}
+.cover .slogan{font-size:clamp(18px,2.2vw,30px);font-weight:900;color:var(--orange)}
+.cover p{font-size:clamp(14px,1.2vw,18px);color:var(--gray);margin-top:22px}
+.issue{aspect-ratio:1;width:min(26vw,320px);border-radius:50%;display:grid;place-items:center;text-align:center;background:rgba(255,255,255,.82);border:28px solid rgba(27,156,206,.1);outline:1px solid var(--line);box-shadow:var(--shadow)}
+.issue strong{display:block;font-size:clamp(56px,7vw,100px);line-height:.8;color:var(--blue);letter-spacing:-.08em}
+.issue span{display:block;margin-top:18px;font-weight:900;color:var(--cyan);letter-spacing:.14em}
+/* KPI */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:clamp(20px,2.6vw,36px)}
+.stat{padding:clamp(16px,2vw,24px);border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:14px;background:#F8FAFB}
+.stat:nth-child(2){border-top-color:var(--cyan)}.stat:nth-child(3){border-top-color:var(--green)}.stat:nth-child(4){border-top-color:var(--orange)}
+.stat strong{font-size:clamp(26px,2.6vw,40px);line-height:1;color:var(--blue);display:block}
+.stat p{margin-top:8px;font-size:13px;color:var(--gray)}
+/* chart */
+.chart-box{flex:1;min-height:0;margin-top:clamp(16px,2.2vw,28px);border:1px solid var(--line);border-radius:14px;background:#F8FAFB;padding:clamp(14px,1.6vw,22px)}
+.chart{width:100%;height:100%;min-height:320px}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;min-height:0;margin-top:clamp(16px,2.2vw,28px)}
+/* table */
+.tbl-wrap{margin-top:clamp(16px,2.2vw,28px);border:1px solid var(--line);border-radius:14px;overflow:auto;background:#F8FAFB;flex:1;min-height:0}
+table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+th,td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--line)}
+th{background:var(--bluebg);color:var(--blue);font-weight:900;position:sticky;top:0;z-index:1}
+tr:hover td{background:#fff}
+td.lbl{font-weight:900;color:var(--blue);background:#fff}
+.year-group td{background:var(--cyanbg);font-weight:900;color:var(--cyan);text-align:left;padding-left:18px}
+/* findings */
+.findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:clamp(18px,2.4vw,30px)}
+.finding{padding:clamp(18px,2vw,26px);border:1px solid var(--line);border-radius:14px;background:#F8FAFB;border-left:5px solid var(--blue)}
+.finding:nth-child(2){border-left-color:var(--cyan)}.finding:nth-child(3){border-left-color:var(--green)}.finding:nth-child(4){border-left-color:var(--orange)}
+.finding h3{font-size:clamp(15px,1.3vw,19px);color:var(--blue);margin-bottom:8px}
+.finding p{font-size:13px;color:var(--gray)}
+.finding .num{font-size:clamp(24px,2.2vw,34px);font-weight:950;color:var(--cyan);line-height:1.1;display:block;margin-bottom:6px}
+/* bottom nav */
+.bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 clamp(20px,4vw,64px);background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+.progress{width:min(24vw,280px);height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar{height:100%;width:11.11%;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .3s}
+.nav{display:flex;gap:10px}
+.nav button{min-width:108px;padding:9px 18px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--blue);font-weight:900;cursor:pointer}
+.nav .primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.nav button:disabled{opacity:.35;cursor:not-allowed}
+.count{justify-self:end;color:var(--muted);font-size:13px}.count strong{color:var(--blue);font-size:18px}
+/* legend chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;color:#fff}
+@media(max-width:900px){
+.app{grid-template-rows:52px minmax(0,1fr) 62px}.meta{display:none}
+.stage{padding:10px}.page{overflow-y:auto;border-radius:13px}
+.inner{height:auto;min-height:100%;padding:24px 20px}
+.cover-grid,.chart-row,.findings{grid-template-columns:1fr}
+.issue{width:220px;justify-self:center}
+.stats{grid-template-columns:1fr 1fr}
+.progress,.count{display:none}.bottom{display:flex;justify-content:center}
+.chart{min-height:280px}
+}
+@media(max-width:560px){.stats{grid-template-columns:1fr}.tbl-wrap{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="top"><div class="brand">BZD <span>数模社</span></div><div class="meta">华为杯研赛 · 近五年数据分析</div></header>
+<section class="stage"><div class="deck">
+
+<!-- 1. 封面 -->
+<article class="page cover active"><div class="inner"><div class="cover-grid">
+<div>
+<div class="badge"><i></i>2026 数模备赛 · 数据分析专题</div>
+<h1>华为杯研赛<br><span>近五年选题与获奖率</span></h1>
+<div class="slogan">用数据看清赛题选择的代价与回报</div>
+<p>覆盖 2021–2025 共五届（第十八至第二十二届）中国研究生数学建模竞赛<br>A–F 六道赛题的选题人数、各等级获奖率与总获奖率全景对比</p>
+</div>
+<div class="issue"><div><strong>05</strong><span>YEARS</span></div></div>
+</div></div></article>
+
+<!-- 2. 五年总览 -->
+<article class="page"><div class="inner">
+<div class="eyebrow">01 · Overview</div>
+<h2 class="title">五年参赛规模<span>稳步攀升</span></h2>
+<p class="lead">五届累计参赛队伍近 10 万队，E 题（工程类）常年为最热门选题；2025 年总参赛数创五年新高。</p>
+<div class="stats">
+<div class="stat"><strong>99,180</strong><p>五年累计参赛队伍（队）</p></div>
+<div class="stat"><strong>24,005</strong><p>2025 年单届参赛队伍（队）</p></div>
+<div class="stat"><strong>≈34%</strong><p>各赛题总获奖率均值</p></div>
+<div class="stat"><strong>≈1.5%</strong><p>各赛题一等奖率均值</p></div>
+</div>
+<div class="chart-box"><div id="ch-total" class="chart"></div></div>
+</div></article>
+
+<!-- 3. 选题人数趋势 -->
+<article class="page"><div class="inner">
+<div class="eyebrow">02 · Topic Popularity</div>
+<h2 class="title">六道赛题<span>选题人数变迁</span></h2>
+<p class="lead">E 题（工程技术类）始终是选题大户，2025 年突破 1.4 万队；A、B 题波动剧烈，2024 年 C 题异常爆发后 2025 年回落。</p>
+<div class="chart-box"><div id="ch-count" class="chart"></div></div>
+</div></article>
+
+<!-- 4. 一等奖率 -->
+<article class="page"><div class="inner">
+<div class="eyebrow">03 · First-Prize Rate</div>
+<h2 class="title">一等奖率<span>小选题的红利</span></h2>
+<p class="lead">选题人数越少的赛题，一等奖率往往越高：2021 年 A 题仅 257 队、一等奖率高达 7.00%；热门 E 题一等奖率常年低于 1.3%。</p>
+<div class="chart-box"><div id="ch-first" class="chart"></div></div>
+</div></article>
+
+<!-- 5. 总获奖率 -->
+<article class="page"><div class="inner">
+<div class="eyebrow">04 · Overall Win Rate</div>
+<h2 class="title">总获奖率<span>相对平稳的基准线</span></h2>
+<p class="lead">扣除个别极端年份（2021 A 题 43.19%），各赛题总获奖率集中在 33%–36% 区间，说明获奖名额按比例分配，选题不影响中奖面。</p>
+<div class="chart-box"><div id="ch-totalrate" class="chart"></div></div>
+</div></article>
+
+<!-- 6. 详细数据表 -->
+<article class="page"><div class="inner">
+<div class="eyebrow">05 · Raw Data</div>
+<h2 class="title">完整数据<span>一览</span></h2>
+<p class="lead">按年份 × 赛题列出选题数与各等级获奖率。数据来源：华为杯研赛官方公布。</p>
+<div class="tbl-wrap" id="tbl"></div>
+</div></article>
+
+<!-- 7. 关键发现 -->
+<article class="page"><div class="inner">
+<div class="eyebrow">06 · Key Findings</div>
+<h2 class="title">备赛选题<span>四条核心结论</span></h2>
+<div class="findings">
+<section class="finding"><span class="num">7.00% vs 0.66%</span><h3>小选题一等奖率可达大选题的 10 倍</h3><p>2021 A 题（257 队）一等奖率 7.00%，2025 E 题（14,789 队）仅 0.66%。冷门小赛道在一等奖竞争上有显著结构性红利。</p></section>
+<section class="finding"><span class="num">≈34%</span><h3>总获奖率与选题无关</h3><p>无论选题人数多少，总获奖率长期稳定在 33%–36%。二等奖、三等奖按比例分配，选题只影响一等奖概率，不影响"能不能拿奖"。</p></section>
+<section class="finding"><span class="num">E 题 14,789 队</span><h3>E 题是绝对热门，但内卷最严重</h3><p>E 题（工程技术类）连续五年选题人数第一，2025 年占总参赛数 61.6%。题目易上手、门槛低是主因，但一等奖率最低。</p></section>
+<section class="finding"><span class="num">波动剧烈</span><h3>A、B 题冷热交替，需关注当年公告</h3><p>A 题 2024 年 1,221 队 → 2025 年 669 队；B 题 2024 年 536 队 → 2025 年 1,139 队。赛题方向决定选题热度，不能凭往年数据硬套。</p></section>
+</div>
+</div></article>
+
+<!-- 8. 选题建议 -->
+<article class="page cover"><div class="inner"><div class="cover-grid">
+<div>
+<div class="badge"><i></i>备赛行动建议</div>
+<h1>如何用数据<span>做选题决策</span></h1>
+<div class="slogan">冲一等奖看冷门 · 保获奖看实力</div>
+<p>1. 目标一等奖：优先考虑当年选题人数偏少的 A / B / C / F 题，一等奖率可能高出 3–10 倍<br>
+2. 目标保奖：总获奖率均约 34%，按团队擅长方向选题即可，不必盲目追热门<br>
+3. E 题虽热但内卷重，适合工程类背景、编程能力强的队伍<br>
+4. 赛题发布后第一时间评估题目方向与团队匹配度，不要只看往年选题人数</p>
+</div>
+<div class="issue"><div><strong>选</strong><span>题策</span></div></div>
+</div></div></article>
+
+</div></section>
+<footer class="bottom"><div class="progress"><div class="bar" id="bar"></div></div>
+<nav class="nav"><button id="prev" type="button">← 上一页</button><button class="primary" id="next" type="button">下一页 →</button></nav>
+<div class="count"><strong id="current">01</strong> / <span id="total">09</span></div></footer>
+</main>
+<script>
+/* ===== 数据 ===== */
+const YEARS=['2021','2022','2023','2024','2025'];
+const TOPICS=['A','B','C','D','E','F'];
+const DATA={
+'2021':{A:{n:257,  f:7.00, s:14.01,t:22.18,total:43.19},B:{n:4664,f:0.94, s:12.41,t:20.71,total:34.07},C:{n:417, f:4.80, s:12.23,t:20.86,total:37.89},D:{n:8400,f:0.80, s:12.31,t:19.62,total:32.73},E:{n:2704,f:1.22, s:12.43,t:19.86,total:33.51},F:{n:1137,f:2.11, s:12.14,t:19.70,total:33.95}},
+'2022':{A:{n:1094,f:1.92, s:13.25,t:18.56,total:33.73},B:{n:1704,f:1.58, s:13.20,t:18.66,total:33.45},C:{n:1134,f:2.03, s:13.93,t:18.96,total:34.92},D:{n:563, f:3.37, s:13.68,t:19.54,total:36.59},E:{n:9263,f:0.73, s:13.47,t:18.56,total:32.76},F:{n:4021,f:0.97, s:13.60,t:19.22,total:33.80}},
+'2023':{A:{n:619, f:2.58, s:12.28,t:20.52,total:35.38},B:{n:558, f:2.51, s:12.01,t:20.61,total:35.13},C:{n:3377,f:1.07, s:13.33,t:19.78,total:34.17},D:{n:5144,f:0.89, s:13.98,t:20.92,total:35.79},E:{n:8202,f:0.82, s:14.01,t:20.57,total:35.39},F:{n:1535,f:1.37, s:12.90,t:20.13,total:34.40}},
+'2024':{A:{n:1221,f:2.05, s:13.60,t:19.16,total:34.81},B:{n:536, f:4.10, s:13.81,t:17.16,total:35.07},C:{n:8947,f:0.87, s:13.58,t:19.37,total:33.82},D:{n:3544,f:1.19, s:13.85,t:20.23,total:35.27},E:{n:4923,f:1.04, s:13.71,t:20.07,total:34.82},F:{n:871, f:2.64, s:13.78,t:18.71,total:35.13}},
+'2025':{A:{n:669,  f:3.44, s:10.61,t:20.63,total:34.68},B:{n:1139,f:2.28, s:11.41,t:20.02,total:33.71},C:{n:3086,f:1.17, s:12.70,t:20.16,total:34.02},D:{n:2498,f:1.28, s:12.41,t:20.06,total:33.75},E:{n:14789,f:0.66,s:13.20,t:20.06,total:33.92},F:{n:1824,f:1.54, s:12.23,t:20.39,total:34.16}}
+};
+const COLORS={A:'#2E5F8A',B:'#1B9CCE',C:'#27AE60',D:'#E67E22',E:'#C0392B',F:'#8E44AD'};
+const charts={};
+function mk(id){const el=document.getElementById(id);if(!el)return null;const c=echarts.init(el);charts[id]=c;return c}
+window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
+
+/* 总队伍数柱状图 */
+(function(){
+const totals=YEARS.map(y=>TOPICS.reduce((s,t)=>s+DATA[y][t].n,0));
+const c=mk('ch-total');if(!c)return;
+c.setOption({
+tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+grid:{left:60,right:30,top:40,bottom:40},
+xAxis:{type:'category',data:YEARS.map(y=>y+'年'),axisLine:{lineStyle:{color:'#D4DDE5'}},axisLabel:{color:'#5A6C7D',fontWeight:700}},
+yAxis:{type:'value',name:'参赛队伍（队）',splitLine:{lineStyle:{color:'#E8EEF3'}},axisLabel:{color:'#7D8B99'}},
+series:[{type:'bar',data:totals,barWidth:'45%',itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#2E5F8A'},{offset:1,color:'#1B9CCE'}]),borderRadius:[8,8,0,0]},label:{show:true,position:'top',fontWeight:900,color:'#2E5F8A',formatter:v=>v.value.toLocaleString()}}]
+});
+})();
+
+/* 选题人数分组柱状图 */
+(function(){
+const series=TOPICS.map(t=>({
+name:t+'题',type:'bar',
+data:YEARS.map(y=>DATA[y][t].n),
+itemStyle:{color:COLORS[t],borderRadius:[4,4,0,0]}
+}));
+const c=mk('ch-count');if(!c)return;
+c.setOption({
+tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+legend:{top:0,textStyle:{color:'#5A6C7D'}},
+grid:{left:60,right:30,top:50,bottom:40},
+xAxis:{type:'category',data:YEARS.map(y=>y+'年'),axisLine:{lineStyle:{color:'#D4DDE5'}},axisLabel:{color:'#5A6C7D',fontWeight:700}},
+yAxis:{type:'value',name:'选题人数（队）',splitLine:{lineStyle:{color:'#E8EEF3'}},axisLabel:{color:'#7D8B99'}},
+series
+});
+})();
+
+/* 一等奖率折线 */
+(function(){
+const series=TOPICS.map(t=>({
+name:t+'题',type:'line',smooth:true,symbol:'circle',symbolSize:8,
+data:YEARS.map(y=>DATA[y][t].f),
+lineStyle:{width:3,color:COLORS[t]},itemStyle:{color:COLORS[t]}
+}));
+const c=mk('ch-first');if(!c)return;
+c.setOption({
+tooltip:{trigger:'axis',valueFormatter:v=>v+'%'},
+legend:{top:0,textStyle:{color:'#5A6C7D'}},
+grid:{left:60,right:30,top:50,bottom:40},
+xAxis:{type:'category',data:YEARS.map(y=>y+'年'),boundaryGap:false,axisLine:{lineStyle:{color:'#D4DDE5'}},axisLabel:{color:'#5A6C7D',fontWeight:700}},
+yAxis:{type:'value',name:'一等奖率（%）',splitLine:{lineStyle:{color:'#E8EEF3'}},axisLabel:{color:'#7D8B99',formatter:'{value}%'}},
+series
+});
+})();
+
+/* 总获奖率折线 */
+(function(){
+const series=TOPICS.map(t=>({
+name:t+'题',type:'line',smooth:true,symbol:'circle',symbolSize:8,
+data:YEARS.map(y=>DATA[y][t].total),
+lineStyle:{width:3,color:COLORS[t]},itemStyle:{color:COLORS[t]}
+}));
+const c=mk('ch-totalrate');if(!c)return;
+c.setOption({
+tooltip:{trigger:'axis',valueFormatter:v=>v+'%'},
+legend:{top:0,textStyle:{color:'#5A6C7D'}},
+grid:{left:60,right:30,top:50,bottom:40},
+xAxis:{type:'category',data:YEARS.map(y=>y+'年'),boundaryGap:false,axisLine:{lineStyle:{color:'#D4DDE5'}},axisLabel:{color:'#5A6C7D',fontWeight:700}},
+yAxis:{type:'value',name:'总获奖率（%）',min:30,max:45,splitLine:{lineStyle:{color:'#E8EEF3'}},axisLabel:{color:'#7D8B99',formatter:'{value}%'}},
+series
+});
+})();
+
+/* 表格 */
+(function(){
+const el=document.getElementById('tbl');
+let html='<table><colgroup><col style="width:10%"><col style="width:11.5%"><col style="width:15.75%"><col style="width:15.75%"><col style="width:15.75%"><col style="width:15.75%"><col style="width:15.5%"></colgroup>';
+html+='<thead><tr><th>年份</th><th>赛题</th><th>选题数</th><th>一等奖率</th><th>二等奖率</th><th>三等奖率</th><th>总获奖率</th></tr></thead><tbody>';
+YEARS.forEach(y=>{
+html+=`<tr class="year-group"><td colspan="7">${y} 年（第${{2021:'十八',2022:'十九',2023:'二十',2024:'二十一',2025:'二十二'}}届）</td></tr>`;
+TOPICS.forEach(t=>{
+const d=DATA[y][t];
+html+=`<tr><td class="lbl">${t}</td><td>${t} 题</td><td>${d.n.toLocaleString()}</td><td>${d.f.toFixed(2)}%</td><td>${d.s.toFixed(2)}%</td><td>${d.t.toFixed(2)}%</td><td><b style="color:#C0392B">${d.total.toFixed(2)}%</b></td></tr>`;
+});
+});
+html+='</tbody></table>';
+el.innerHTML=html;
+})();
+
+/* ===== 翻页 ===== */
+(function(){
+const pages=[...document.querySelectorAll('.page')],prev=document.getElementById('prev'),next=document.getElementById('next'),
+current=document.getElementById('current'),total=document.getElementById('total'),bar=document.getElementById('bar');
+let index=0;total.textContent=String(pages.length).padStart(2,'0');
+function render(v){
+index=Math.max(0,Math.min(v,pages.length-1));
+pages.forEach((p,i)=>{p.classList.toggle('active',i===index);p.setAttribute('aria-hidden',i===index?'false':'true')});
+current.textContent=String(index+1).padStart(2,'0');
+bar.style.width=((index+1)/pages.length*100)+'%';
+prev.disabled=index===0;next.disabled=index===pages.length-1;
+setTimeout(()=>Object.values(charts).forEach(c=>c.resize()),50);
+}
+prev.addEventListener('click',()=>render(index-1));
+next.addEventListener('click',()=>render(index+1));
+document.addEventListener('keydown',e=>{
+if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();render(index+1)}
+if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();render(index-1)}
+if(e.key==='Home')render(0);if(e.key==='End')render(pages.length-1)
+});
+render(0);
+})();
+</script>
+</body></html>
