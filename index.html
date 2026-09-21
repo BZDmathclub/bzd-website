@@ -380,6 +380,11 @@ a { color:inherit; }
   padding-top:18px;
 }
 /* ---------- AGENT (教师招募) ---------- */
+.nr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:20px;}
+.res-sub-head{display:flex;align-items:center;gap:11px;margin:26px 0 0;padding:0 4px;}
+.res-sub-head::before{content:"";flex:0 0 4px;height:21px;border-radius:2px;background:var(--gold);}
+.res-sub-title{font-size:19px;font-weight:900;color:var(--blue-deep);letter-spacing:1px;margin:0;}
+@media(max-width:640px){ .res-sub-title{font-size:17px;} .nr-grid{padding:14px 4px;gap:12px;} }
 .agent-section { background:var(--blue-bg); }
 .agent-wrap { max-width:860px; margin:0 auto; }
 .agent-intro { font-size:15px; color:var(--text-main); line-height:1.9; margin-bottom:28px; }
@@ -1566,126 +1571,184 @@ a { color:inherit; }
     <h2 class="section-title">竞赛资料</h2>
     <p class="section-sub">完整的国赛备赛资料库，持续更新至赛前</p>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:20px;">
+  <!-- 研赛资料 -->
+  <div class="res-sub-head">
+    <h3 class="res-sub-title">研赛资料</h3>
+  </div>
+  <div class="nr-grid">
 
-    <!-- 近年题目速览 -->
-    <div class="nr-card" onclick="toggleExamQuestions()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>
+      <!-- 论文自查表 -->
+      <div class="nr-card" onclick="window.location.href='paper-checklist.html'">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M20 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/></svg>
+        </div>
+        <div class="nr-card-title">论文自查表</div>
+        <div class="nr-card-sub">287项检查清单</div>
       </div>
-      <div class="nr-card-title">近年题目速览</div>
-      <div class="nr-card-sub">往届赛题汇总</div>
-    </div>
 
-    <!-- AI提示词库 -->
-    <div class="nr-card" onclick="openAIPromptsModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
+      <!-- 必备工具 -->
+      <div class="nr-card" onclick="openEssentialToolsModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="nr-card-title">必备工具</div>
+        <div class="nr-card-sub">四款数模必备工具</div>
       </div>
-      <div class="nr-card-title">AI提示词库</div>
-      <div class="nr-card-sub">数模竞赛专用</div>
-    </div>
 
-    <!-- 论文模板 -->
-    <div class="nr-card" onclick="openPaperTemplateModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>
+      <!-- AI模型排行榜 -->
+      <div class="nr-card" onclick="openAIModelsRankingModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        </div>
+        <div class="nr-card-title">AI模型排行榜</div>
+        <div class="nr-card-sub">仅限数模领域</div>
       </div>
-      <div class="nr-card-title">论文模板</div>
-      <div class="nr-card-sub">标准格式</div>
-    </div>
 
-    <!-- 优秀论文 -->
-    <div class="nr-card" onclick="openExcellentPaperModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+      <!-- skills分享 -->
+      <div class="nr-card" onclick="openPaperReviewSkillsModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="nr-card-title">skills分享</div>
+        <div class="nr-card-sub">实用技巧</div>
       </div>
-      <div class="nr-card-title">优秀论文</div>
-      <div class="nr-card-sub">往届获奖论文</div>
-    </div>
 
-    <!-- 论文自查表 -->
-    <div class="nr-card" onclick="window.location.href='paper-checklist.html'">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M20 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/></svg>
+      <!-- 数模字典 -->
+      <div class="nr-card" onclick="openModelDictionaryModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="10" y1="6" x2="14" y2="6"/><line x1="10" y1="10" x2="14" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div class="nr-card-title">数模字典</div>
+        <div class="nr-card-sub">5700+模型库</div>
       </div>
-      <div class="nr-card-title">论文自查表</div>
-      <div class="nr-card-sub">287项检查清单</div>
-    </div>
-
-    <!-- 必备工具 -->
-    <div class="nr-card" onclick="openEssentialToolsModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      </div>
-      <div class="nr-card-title">必备工具</div>
-      <div class="nr-card-sub">四款数模必备工具</div>
-    </div>
-
-    <!-- AI模型排行榜 -->
-    <div class="nr-card" onclick="openAIModelsRankingModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-      </div>
-      <div class="nr-card-title">AI模型排行榜</div>
-      <div class="nr-card-sub">仅限数模领域</div>
-    </div>
-
-    <!-- skills分享 -->
-    <div class="nr-card" onclick="openPaperReviewSkillsModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      </div>
-      <div class="nr-card-title">skills分享</div>
-      <div class="nr-card-sub">实用技巧</div>
-    </div>
-
-    <!-- 数模字典 -->
-    <div class="nr-card" onclick="openModelDictionaryModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="10" y1="6" x2="14" y2="6"/><line x1="10" y1="10" x2="14" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-      </div>
-      <div class="nr-card-title">数模字典</div>
-      <div class="nr-card-sub">5700+模型库</div>
-    </div>
-
-    <!-- 国赛信息差 -->
-    <div class="nr-card" onclick="openInfoGapModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-      </div>
-      <div class="nr-card-title">国赛信息差</div>
-      <div class="nr-card-sub">参赛必看 · 9.8更新</div>
-    </div>
-
-    <!-- 选题分析 -->
-    <div class="nr-card" onclick="openChoiceAnalysis()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      </div>
-      <div class="nr-card-title">选题分析</div>
-      <div class="nr-card-sub">选题趋势分析</div>
-    </div>
-
-    <!-- 赛区获奖率 -->
-    <div class="nr-card" onclick="openRegionAwardsModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z" fill="currentColor" stroke="none"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-      </div>
-      <div class="nr-card-title">赛区获奖率</div>
-      <div class="nr-card-sub">各省份获奖统计</div>
-    </div>
-
-    <!-- 国奖名额查询 -->
-    <div class="nr-card" onclick="openAwardQueryModal()">
-      <div class="badge-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-      </div>
-      <div class="nr-card-title">国奖名额查询</div>
-      <div class="nr-card-sub">高校历年国奖</div>
-    </div>
 
   </div>
+
+  <!-- 国赛资料 -->
+  <div class="res-sub-head">
+    <h3 class="res-sub-title">国赛资料</h3>
+  </div>
+  <div class="nr-grid">
+
+      <!-- 近年题目速览 -->
+      <div class="nr-card" onclick="toggleExamQuestions()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>
+        </div>
+        <div class="nr-card-title">近年题目速览</div>
+        <div class="nr-card-sub">往届赛题汇总</div>
+      </div>
+
+      <!-- AI提示词库 -->
+      <div class="nr-card" onclick="openAIPromptsModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
+        </div>
+        <div class="nr-card-title">AI提示词库</div>
+        <div class="nr-card-sub">数模竞赛专用</div>
+      </div>
+
+      <!-- 论文模板 -->
+      <div class="nr-card" onclick="openPaperTemplateModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="10" y2="9"/></svg>
+        </div>
+        <div class="nr-card-title">论文模板</div>
+        <div class="nr-card-sub">标准格式</div>
+      </div>
+
+      <!-- 优秀论文 -->
+      <div class="nr-card" onclick="openExcellentPaperModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </div>
+        <div class="nr-card-title">优秀论文</div>
+        <div class="nr-card-sub">往届获奖论文</div>
+      </div>
+
+      <!-- 论文自查表 -->
+      <div class="nr-card" onclick="window.location.href='paper-checklist.html'">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M20 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/></svg>
+        </div>
+        <div class="nr-card-title">论文自查表</div>
+        <div class="nr-card-sub">287项检查清单</div>
+      </div>
+
+      <!-- 必备工具 -->
+      <div class="nr-card" onclick="openEssentialToolsModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="nr-card-title">必备工具</div>
+        <div class="nr-card-sub">四款数模必备工具</div>
+      </div>
+
+      <!-- AI模型排行榜 -->
+      <div class="nr-card" onclick="openAIModelsRankingModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        </div>
+        <div class="nr-card-title">AI模型排行榜</div>
+        <div class="nr-card-sub">仅限数模领域</div>
+      </div>
+
+      <!-- skills分享 -->
+      <div class="nr-card" onclick="openPaperReviewSkillsModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="nr-card-title">skills分享</div>
+        <div class="nr-card-sub">实用技巧</div>
+      </div>
+
+      <!-- 数模字典 -->
+      <div class="nr-card" onclick="openModelDictionaryModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="10" y1="6" x2="14" y2="6"/><line x1="10" y1="10" x2="14" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div class="nr-card-title">数模字典</div>
+        <div class="nr-card-sub">5700+模型库</div>
+      </div>
+
+      <!-- 国赛信息差 -->
+      <div class="nr-card" onclick="openInfoGapModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </div>
+        <div class="nr-card-title">国赛信息差</div>
+        <div class="nr-card-sub">参赛必看 · 9.8更新</div>
+      </div>
+
+      <!-- 选题分析 -->
+      <div class="nr-card" onclick="openChoiceAnalysis()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="nr-card-title">选题分析</div>
+        <div class="nr-card-sub">选题趋势分析</div>
+      </div>
+
+      <!-- 赛区获奖率 -->
+      <div class="nr-card" onclick="openRegionAwardsModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z" fill="currentColor" stroke="none"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        </div>
+        <div class="nr-card-title">赛区获奖率</div>
+        <div class="nr-card-sub">各省份获奖统计</div>
+      </div>
+
+      <!-- 国奖名额查询 -->
+      <div class="nr-card" onclick="openAwardQueryModal()">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        </div>
+        <div class="nr-card-title">国奖名额查询</div>
+        <div class="nr-card-sub">高校历年国奖</div>
+      </div>
+
+  </div>
+
 
   <!-- 题目展示区域 -->
   <div id="exam-questions-container" style="display:none;margin-top:30px;padding:20px;background:#f8faff;border-radius:10px;">
