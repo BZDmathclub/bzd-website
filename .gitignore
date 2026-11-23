@@ -1,0 +1,28 @@
+# ===== 敏感文件：严禁提交到 git =====
+AI账号天卡.txt
+AI额度.txt
+mma兑换码.txt
+卡密8.7.txt
+卡密9.2.txt
+wrangler.toml
+worker/
+generate-wrangler.js
+data/tianka-list.json
+
+# ===== 密钥/环境 =====
+.env
+.env.*
+*.pem
+*.key
+
+# ===== 依赖/构建 =====
+node_modules/
+.wrangler/
+.netlify/
+__pycache__/
+*.pyc
+
+# ===== 临时/系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
