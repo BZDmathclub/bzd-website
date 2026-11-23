@@ -1022,6 +1022,75 @@ a { color:inherit; }
 .faq-body strong { color:var(--blue-mid); }
 .faq-body em { font-style:normal; color:var(--accent); font-weight:700; }
 
+/* ---------- MEMBERS 会员资料中心 ---------- */
+.kb-wrap { background:linear-gradient(180deg,#f6f9fe 0%,#fff 60%); }
+.kb-hero { max-width:900px; margin:-16px auto 36px; text-align:center; }
+.kb-intro { color:var(--text-sub); font-size:15px; line-height:1.9; margin-bottom:22px; }
+.kb-hero-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.kb-btn { display:inline-block; padding:12px 26px; border-radius:8px; font-weight:800; font-size:14.5px; text-decoration:none; transition:all .2s; }
+.kb-btn-main { background:var(--blue-mid); color:#fff; box-shadow:0 6px 18px rgba(28,78,150,.25); }
+.kb-btn-main:hover { background:var(--blue-deep); transform:translateY(-1px); }
+.kb-btn-line { background:#fff; color:var(--blue-mid); border:1.5px solid var(--blue-mid); }
+.kb-btn-line:hover { background:var(--blue-bg); }
+.kb-live { margin-top:16px; }
+.kb-live a { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:#fff4e5; color:#9a3412; font-weight:700; font-size:13.5px; text-decoration:none; border:1px solid #fed7aa; }
+.kb-live-dot { width:8px; height:8px; border-radius:50%; background:#dc2626; flex-shrink:0; }
+.kb-live.is-live .kb-live-dot { animation:kbPulse 1.4s ease-in-out infinite; }
+@keyframes kbPulse { 0%,100%{ box-shadow:0 0 0 0 rgba(220,38,38,.45); } 50%{ box-shadow:0 0 0 6px rgba(220,38,38,0); } }
+
+.kb-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:28px; }
+.kb-card { display:flex; flex-direction:column; background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:20px 18px; transition:border-color .2s, box-shadow .2s, transform .2s; }
+.kb-card:hover { border-color:var(--blue-light); box-shadow:0 10px 26px rgba(12,29,62,.08); transform:translateY(-2px); }
+.kb-card-featured { border:2px solid var(--blue-mid); background:linear-gradient(180deg,#f2f7ff,#fff 45%); }
+.kb-card-head { padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid var(--border); }
+.kb-badge { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.5px; padding:2px 9px; border-radius:20px; background:var(--blue-bg); color:var(--blue-mid); font-family:Consolas,'Courier New',monospace; }
+.kb-badge-free { background:#e8f7ee; color:#146b3e; font-family:inherit; }
+.kb-badge-gold { background:#fff5dd; color:#8a5a00; }
+.kb-card-name { margin-top:9px; font-size:18px; font-weight:900; color:var(--blue-deep); letter-spacing:1px; }
+.kb-card-meta { margin-top:3px; font-size:12px; color:var(--text-light); }
+.kb-list { list-style:none; flex:1; margin-bottom:16px; }
+.kb-list li { position:relative; padding-left:16px; margin-bottom:8px; font-size:13px; line-height:1.7; color:var(--text-sub); }
+.kb-list li::before { content:''; position:absolute; left:2px; top:9px; width:6px; height:6px; border-radius:50%; background:var(--blue-light); }
+.kb-list b { color:var(--blue-mid); }
+.kb-soon, .kb-on { display:inline-block; margin-left:6px; font-size:10.5px; font-weight:700; padding:0 7px; border-radius:10px; vertical-align:1px; white-space:nowrap; }
+.kb-soon { background:#fff4e5; color:#b45309; }
+.kb-on { background:#e8f7ee; color:#146b3e; }
+.kb-card-btn { display:block; text-align:center; padding:10px 12px; border-radius:7px; font-size:13.5px; font-weight:800; text-decoration:none; color:#fff; background:var(--blue-mid); transition:opacity .2s; }
+.kb-card-btn:hover { opacity:.88; }
+.kb-card-btn-gold { background:var(--accent); }
+.kb-card-btn-line { background:#fff; color:var(--blue-mid); border:1.5px solid var(--blue-mid); }
+
+.kb-panels { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:36px; }
+.kb-panel { min-width:0; background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:22px 22px 20px; }
+.kb-panel-title { font-size:16px; font-weight:900; color:var(--blue-deep); margin-bottom:14px; }
+.kb-scroll { overflow-x:auto; }
+.kb-table { width:100%; border-collapse:collapse; font-size:13px; min-width:460px; }
+.kb-table th { background:var(--blue-bg); color:var(--blue-deep); font-weight:800; text-align:left; padding:9px 10px; border-bottom:1.5px solid var(--blue-pale); white-space:nowrap; }
+.kb-table td { padding:9px 10px; border-bottom:1px solid var(--border); color:var(--text-sub); vertical-align:top; }
+.kb-table td:first-child { font-weight:800; color:var(--blue-mid); white-space:nowrap; }
+.kb-table code { font-family:Consolas,'Courier New',monospace; font-size:12px; background:#f4f7fc; padding:1px 6px; border-radius:4px; color:var(--blue-deep); }
+.kb-rules { list-style:none; margin-top:14px; }
+.kb-rules li { position:relative; padding-left:16px; margin-bottom:7px; font-size:12.5px; line-height:1.75; color:var(--text-sub); }
+.kb-rules li::before { content:'·'; position:absolute; left:4px; color:var(--blue-light); font-weight:900; }
+.kb-rules b { color:var(--blue-mid); }
+.kb-tools { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.kb-tool { background:#f8fafe; border:1px solid var(--border); border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.6; color:var(--text-sub); }
+.kb-tool b { display:block; font-size:13.5px; color:var(--blue-deep); margin-bottom:2px; }
+.kb-note { margin-top:10px; font-size:11.5px; color:var(--text-light); line-height:1.7; }
+.kb-text { font-size:13px; line-height:1.85; color:var(--text-sub); margin-bottom:12px; }
+.kb-ai-ways { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+.kb-ai-ways div { background:#f8fafe; border:1px solid var(--border); border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.6; color:var(--text-sub); }
+.kb-ai-ways b { display:block; font-size:13.5px; color:var(--blue-deep); margin-bottom:2px; }
+.kb-faq { margin-top:4px; }
+
+@media (max-width:1024px) { .kb-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:860px) { .kb-panels { grid-template-columns:1fr; } }
+@media (max-width:560px) {
+  .kb-grid { grid-template-columns:1fr; }
+  .kb-tools, .kb-ai-ways { grid-template-columns:1fr; }
+  .kb-panel { padding:18px 16px; }
+}
+
 /* ---------- CONTACT ---------- */
 .contact-section {
   background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
@@ -1285,6 +1354,7 @@ a { color:inherit; }
     <ul class="nav-links">
       <li><a href="#competitions">竞赛助攻资料</a></li>
       <li><a href="#national-resources">竞赛资料</a></li>
+      <li><a href="#members">会员资料中心</a></li>
       <li><a href="#guide">使用指南</a></li>
       <li><a href="#archive">往期资料</a></li>
       <li><a href="#agent">教师招募</a></li>
@@ -1347,6 +1417,7 @@ a { color:inherit; }
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
       <a class="hero-cta" href="#competitions">查看国赛资料</a>
       <a href="#national-resources" class="hero-cta-sec">竞赛资料</a>
+      <a href="#members" class="hero-cta-sec">会员登录</a>
       <a href="#guide" class="hero-cta-sec">使用指南</a>
     </div>
   </div>
@@ -2797,6 +2868,165 @@ a { color:inherit; }
       <svg viewBox="0 0 24 24" style="width:14px;height:14px;flex-shrink:0;fill:none;stroke:#999;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
       点击"复制"按钮一键复制提示词到剪贴板</p>
   </div>
+</div>
+
+<!-- MEMBERS 会员资料中心（独立站 kb.bzdshumo.com 的入口与介绍） -->
+<div class="section-bg-wrap kb-wrap">
+<section class="section" id="members">
+  <div class="section-head">
+    <div class="section-tag">MEMBER CENTER</div>
+    <h2 class="section-title">BZD 会员资料中心</h2>
+    <p class="section-sub">凭卡密登录 kb.bzdshumo.com · 原创资料在线浏览下载 · 可接入你自己的 AI</p>
+  </div>
+
+  <div class="kb-hero">
+    <p class="kb-intro">BZD 会员资料中心汇集 BZD 原创讲义、特色模型方案、评阅资料与竞赛赛中资料。凭卡密登录，资料可在线浏览、下载，支持接入你自己的 AI；智库会员另享 AI 问答与 6 项论文写作诊断工具。</p>
+    <div class="kb-hero-actions">
+      <a class="kb-btn kb-btn-main" href="https://kb.bzdshumo.com/" target="_blank" rel="noopener">进入会员资料中心 ↗</a>
+      <a class="kb-btn kb-btn-line" href="#kb-faq">卡密怎么用？</a>
+    </div>
+    <div id="kb-live" class="kb-live" hidden>
+      <a href="https://kb.bzdshumo.com/?entry=comp" target="_blank" rel="noopener">
+        <span class="kb-live-dot"></span><span id="kb-live-text"></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="kb-grid">
+    <div class="kb-card">
+      <div class="kb-card-head">
+        <span class="kb-badge kb-badge-free">免费</span>
+        <div class="kb-card-name">BZD 公开资料库</div>
+        <div class="kb-card-meta">无需卡密</div>
+      </div>
+      <ul class="kb-list">
+        <li>近年题目速览、往届赛题汇总、优秀论文</li>
+        <li>AI 提示词库、论文模板、论文自查表</li>
+        <li>数模字典、竞赛信息差、选题趋势</li>
+        <li>获奖率、国奖名额查询、竞赛日历</li>
+      </ul>
+      <a class="kb-card-btn kb-card-btn-line" href="#national-resources">在本页查看 ↓</a>
+    </div>
+
+    <div class="kb-card">
+      <div class="kb-card-head">
+        <span class="kb-badge">BZDWK-</span>
+        <div class="kb-card-name">BZD 文库会员</div>
+        <div class="kb-card-meta">首次登录起 400 天有效</div>
+      </div>
+      <ul class="kb-list">
+        <li>全部 BZD 原创资料：讲义课件、焚诀秘籍、特色模型方案、评阅文件与命题人点评、扣分红线等<span class="kb-soon">整理上架中</span></li>
+        <li>可下载阅读，每天 30 份</li>
+        <li>接入你自己的 AI（资料包导出 + MCP 接口）</li>
+        <li>赠竞赛资料兑换券：<b>基础版 1 张 + 进阶版 1 张</b></li>
+      </ul>
+      <a class="kb-card-btn" href="https://kb.bzdshumo.com/?entry=wenku" target="_blank" rel="noopener">文库会员登录 ↗</a>
+    </div>
+
+    <div class="kb-card kb-card-featured">
+      <div class="kb-card-head">
+        <span class="kb-badge kb-badge-gold">BZDZK-</span>
+        <div class="kb-card-name">BZD 智库会员</div>
+        <div class="kb-card-meta">首次登录起 400 天有效</div>
+      </div>
+      <ul class="kb-list">
+        <li>文库全部内容<span class="kb-soon">整理上架中</span></li>
+        <li>站内 AI 问答：基于全部会员资料作答，附原文出处<span class="kb-soon">资料上架后开放</span></li>
+        <li><b>6 项 AI 写作诊断工具</b><span class="kb-on">已上线</span></li>
+        <li>接入你自己的 AI；每天下载 60 份、AI 问答 50 次、AI 工具 20 次</li>
+        <li>赠竞赛资料兑换券：<b>完整版 2 张</b></li>
+      </ul>
+      <a class="kb-card-btn kb-card-btn-gold" href="https://kb.bzdshumo.com/?entry=zhiku" target="_blank" rel="noopener">智库会员登录 ↗</a>
+    </div>
+
+    <div class="kb-card">
+      <div class="kb-card-head">
+        <span class="kb-badge">BZDSJ / SA / SF</span>
+        <div class="kb-card-name">数模竞赛资料</div>
+        <div class="kb-card-meta">绑定一场竞赛，比赛结束失效</div>
+      </div>
+      <ul class="kb-list">
+        <li>免费分享版：三题共用，比赛期间开放，无需卡密</li>
+        <li>每道题分基础版、进阶版、完整版，逐级包含</li>
+        <li>完整版含售后小群</li>
+        <li>比赛期间资料持续更新，刷新页面即可看到</li>
+      </ul>
+      <a class="kb-card-btn" href="https://kb.bzdshumo.com/?entry=comp" target="_blank" rel="noopener">竞赛资料 · 含免费分享版 ↗</a>
+    </div>
+  </div>
+
+  <div class="kb-panels">
+    <div class="kb-panel">
+      <h3 class="kb-panel-title">竞赛资料版本对比</h3>
+      <div class="kb-scroll">
+      <table class="kb-table">
+        <thead><tr><th>版本</th><th>卡密开头</th><th>能看到的内容</th><th>获取方式</th></tr></thead>
+        <tbody>
+          <tr><td>分享版</td><td>——</td><td>A / B / C 三题共用资料</td><td>免费，比赛期间开放</td></tr>
+          <tr><td>基础版</td><td><code>BZDSJ-</code></td><td>分享版 + 所选题·基础版</td><td>卡密，或文库兑换券</td></tr>
+          <tr><td>进阶版</td><td><code>BZDSA-</code></td><td>分享版 + 所选题·基础版 + 进阶版</td><td>卡密，或文库兑换券</td></tr>
+          <tr><td>完整版</td><td><code>BZDSF-</code></td><td>分享版 + 所选题·基础版 + 进阶版 + 完整版 + 售后小群</td><td>卡密，或智库兑换券</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="kb-rules">
+        <li>一张卡密 / 一张兑换券<b>只能兑换一道题</b>，开赛后在会员站选题，<b>选定不可更改</b>。</li>
+        <li>竞赛卡可在开赛前 7 天内提前登录，开赛后才能选题、看资料；<b>比赛结束自动失效</b>。</li>
+        <li>下载的 PDF 带有卡密标识水印，仅限本人使用。</li>
+        <li>兑换券随会员卡发放，在 400 天有效期内总共可用；文库会员可先用基础券、再用进阶券在同一道题上升级。</li>
+      </ul>
+    </div>
+
+    <div class="kb-panel">
+      <h3 class="kb-panel-title">智库 · 6 项 AI 写作诊断工具 <span class="kb-on">已上线</span></h3>
+      <div class="kb-tools">
+        <div class="kb-tool"><b>摘要合规检测</b><span>检查摘要能否独立阅读，问题、方法、结果是否清楚</span></div>
+        <div class="kb-tool"><b>AI 味诊断</b><span>诊断连接词、排比、空泛表述等 AI 写作痕迹，给出修改方向</span></div>
+        <div class="kb-tool"><b>模型合理性检测</b><span>检查赛题—模型—求解—结果—检验是否闭环</span></div>
+        <div class="kb-tool"><b>参考文献检查与格式化</b><span>检查格式、编号、正文对应关系</span></div>
+        <div class="kb-tool"><b>选题分析与建模思路</b><span>输出各问任务分析、候选模型对比和推荐路线</span></div>
+        <div class="kb-tool"><b>格式规范检测</b><span>检查标题层级、图表题、公式编号、篇幅分配</span></div>
+      </div>
+      <p class="kb-note">工具只能看到你粘贴的文字，看不到 PDF 版面和图片。结果是写作诊断参考，不是查重率或官方检测结论。</p>
+
+      <h3 class="kb-panel-title" style="margin-top:22px;">接入你自己的 AI（文库 / 智库）</h3>
+      <p class="kb-text">把会员资料接到腾讯 ima、Kimi、豆包、ChatGPT、Claude、扣子，或 Cherry Studio、Cursor 等工具里，提问时 AI 会先查 BZD 资料再回答，并告诉你出处。</p>
+      <div class="kb-ai-ways">
+        <div><b>AI 资料包</b>下载一个文件上传到你的 AI，每天 3 次</div>
+        <div><b>MCP 接口</b>填一次配置，资料自动同步，每天 300 次</div>
+      </div>
+      <a class="kb-card-btn kb-card-btn-line" href="ai-guide.html" target="_blank" rel="noopener">查看接入教程 ↗</a>
+      <p class="kb-note">卡密就是接入密钥，请勿分享给他人。</p>
+    </div>
+  </div>
+
+  <div class="faq-list kb-faq" id="kb-faq">
+    <details class="faq-item">
+      <summary>卡密在哪里用？</summary>
+      <div class="faq-body"><p>打开 <strong>kb.bzdshumo.com</strong>，选择与卡密对应的入口输入卡密。卡密开头 <strong>BZDWK</strong> 是文库会员，<strong>BZDZK</strong> 是智库会员，<strong>BZDSJ / BZDSA / BZDSF</strong> 是竞赛资料的基础版 / 进阶版 / 完整版。输错入口时会员站会提示「这张卡密不属于当前入口」，每张卡密最多 2 台设备同时登录。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>一张竞赛卡能换几道题？</summary>
+      <div class="faq-body"><p>一道。开赛后在会员站选题，<strong>选定后不能更改</strong>。竞赛卡在哪场竞赛期间（或开赛前 7 天内）首次登录，就绑定哪一场，比赛结束自动失效。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>会员送的兑换券怎么用？</summary>
+      <div class="faq-body"><p>竞赛开始后，在会员站「竞赛兑换」页选题、选版本，消耗一张券。一场竞赛只能选一道题；兑换券在 400 天有效期内总共可用，不是每场都送。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>下载很慢怎么办？</summary>
+      <div class="faq-body"><p>会员站目前位于香港服务器，内地下载可能较慢（一个 PDF 约 5–15 秒）。页面有进度条，请耐心等待，不要刷新。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>能把资料接入自己的 AI 吗？</summary>
+      <div class="faq-body"><p>文库、智库会员可以，方法见 <a href="ai-guide.html" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;">接入我的 AI 教程</a>。竞赛资料卡不支持接入 AI。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>AI 工具的结果是查重率吗？</summary>
+      <div class="faq-body"><p>不是。6 项 AI 工具是<strong>写作诊断参考</strong>，不代表查重率或任何官方检测结论。</p></div>
+    </details>
+  </div>
+</section>
 </div>
 
 <!-- SERVICES -->
@@ -5712,6 +5942,33 @@ if (hamburger && navLinks) {
     });
   });
 }
+
+/* ---- 会员资料中心：读取 kb.bzdshumo.com 公开接口，显示竞赛实时状态 ---- */
+(function () {
+  var box = document.getElementById('kb-live');
+  var text = document.getElementById('kb-live-text');
+  if (!box || !text || !window.fetch) return;
+  var fmt = function (s) {
+    var d = new Date(s);
+    return (d.getMonth() + 1) + '月' + d.getDate() + '日 ' +
+      String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  };
+  fetch('https://kb.bzdshumo.com/api/public/events')
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (list) {
+      if (!Array.isArray(list) || !list.length) return;
+      var ev = list.filter(function (e) { return e.state === 'live'; })[0] || list[0];
+      if (!ev || !ev.name) return;
+      if (ev.state === 'live') {
+        text.textContent = ev.name + ' 进行中 · 免费分享版已开放 · 点击进入';
+        box.classList.add('is-live');
+      } else {
+        text.textContent = ev.name + ' 将于 ' + fmt(ev.starts_at) + ' 开赛 · 赛中资料开赛后开放';
+      }
+      box.hidden = false;
+    })
+    .catch(function () {});
+})();
 
 /* ---- Scroll reveal ---- */
 const revealObs = new IntersectionObserver((entries) => {

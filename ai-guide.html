@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>把 BZD 会员资料接入你自己的 AI - BZD 数模社</title>
+<meta name="description" content="BZD 文库会员、智库会员把会员资料接入腾讯 ima、Kimi、豆包、ChatGPT、Claude、Cherry Studio、Cursor 等 AI 的教程。">
+<style>
+:root{--blue-deep:#0c1d3e;--blue-mid:#1c4e96;--blue-light:#3a6ec8;--blue-pale:#d8e8f8;--blue-bg:#eef4fc;--accent:#e03e1a;--text-main:#0f172a;--text-sub:#334d80;--text-light:#64748b;--border:#e2eaf6;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif;background:#f5f8fd;color:var(--text-main);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.top{background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));color:#fff;padding:36px 20px 30px;text-align:center;}
+.top .back{display:inline-block;margin-bottom:14px;color:#cfe0ff;font-size:13px;text-decoration:none;}
+.top .back:hover{color:#fff;}
+.top h1{font-size:26px;font-weight:900;letter-spacing:1px;}
+.top p{margin-top:8px;color:#cfe0ff;font-size:14px;}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 60px;}
+.card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:20px;}
+h2{font-size:20px;font-weight:900;color:var(--blue-deep);margin-bottom:14px;padding-left:12px;border-left:4px solid var(--blue-mid);}
+h3{font-size:16px;font-weight:800;color:var(--blue-mid);margin:20px 0 8px;}
+p{color:var(--text-sub);font-size:14px;margin-bottom:10px;}
+ol,ul{padding-left:22px;color:var(--text-sub);font-size:14px;margin-bottom:10px;}
+li{margin-bottom:5px;}
+b,strong{color:var(--blue-deep);}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 12px;}
+th{background:var(--blue-bg);color:var(--blue-deep);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--blue-pale);}
+td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text-sub);vertical-align:top;}
+code{font-family:Consolas,'Courier New',monospace;font-size:12.5px;background:#f1f5fb;border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--blue-deep);overflow-wrap:anywhere;}
+pre{background:#0f1b33;color:#dbe7ff;border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.6;margin:8px 0 12px;}
+pre code{background:none;border:none;padding:0;color:inherit;}
+.tip{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:12px 16px;font-size:13.5px;color:#78350f;margin:12px 0;}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;padding:12px 16px;font-size:13.5px;color:#7f1d1d;margin:12px 0;}
+.cta{display:inline-block;margin-top:6px;padding:11px 24px;border-radius:8px;background:var(--blue-mid);color:#fff;font-weight:800;text-decoration:none;font-size:14px;}
+.cta:hover{background:var(--blue-deep);}
+.scroll{overflow-x:auto;}
+.qa b{display:block;margin-top:12px;}
+@media(max-width:600px){.card{padding:18px 16px;}.top h1{font-size:21px;}}
+</style>
+</head>
+<body>
+<div class="top">
+  <a class="back" href="index.html#members">← 返回 BZD 会员资料中心</a>
+  <h1>把 BZD 会员资料接入你自己的 AI</h1>
+  <p>适用于 BZD 文库会员、BZD 智库会员（卡密以 BZDWK- 或 BZDZK- 开头）</p>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <p>接入后，你可以在自己常用的 AI 里直接问："根据 BZD 资料，熵权法有哪些坑？""美赛 O 奖论文的灵敏度分析一般怎么写？"，AI 会去查 BZD 的资料再回答，并告诉你出处。</p>
+    <div class="warn">竞赛资料卡（BZDSJ / BZDSA / BZDSF）不支持接入 AI。</div>
+    <p>有两种方式，<b>任选一种</b>：</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th></th><th>方式一：AI 资料包</th><th>方式二：MCP 接口</th></tr></thead>
+      <tbody>
+        <tr><td><b>适合谁</b></td><td>所有人，什么 AI 都能用</td><td>会用 Cherry Studio / Cursor / Claude 等工具的同学</td></tr>
+        <tr><td><b>难度</b></td><td>最简单，上传一个文件</td><td>填一次配置</td></tr>
+        <tr><td><b>资料更新</b></td><td>需要重新下载</td><td>自动同步，永远是最新</td></tr>
+        <tr><td><b>次数</b></td><td>每天可导出 3 次</td><td>每天 300 次调用</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>方式一：下载 AI 资料包（推荐新手）</h2>
+    <h3>第 1 步：下载</h3>
+    <ol>
+      <li>打开 <a href="https://kb.bzdshumo.com" target="_blank" rel="noopener">https://kb.bzdshumo.com</a>，点「BZD 文库会员」或「BZD 智库会员」，输入你的卡密登录。</li>
+      <li>点顶部的 <b>「接入我的 AI」</b>。</li>
+      <li>在「方式一」下面点 <b>「导出 xxx」</b>，下载一个 <code>.md</code> 文件。</li>
+    </ol>
+    <h3>第 2 步：上传到你的 AI</h3>
+    <p><b>腾讯 ima</b></p>
+    <ol>
+      <li>打开 ima → 左侧「知识库」→ 新建知识库，起名"BZD 资料"。</li>
+      <li>点「上传文件」，选择刚下载的 <code>.md</code> 文件。</li>
+      <li>之后在 ima 对话时选择这个知识库提问即可。</li>
+    </ol>
+    <p><b>Kimi / 豆包 / 通义千问</b></p>
+    <ol>
+      <li>在对话框点 📎（上传文件），选择 <code>.md</code> 文件。</li>
+      <li>直接提问，例如："根据这份资料，层次分析法的一致性检验怎么做？"（这类 AI 每次新对话需要重新上传文件。）</li>
+    </ol>
+    <p><b>ChatGPT</b></p>
+    <ol>
+      <li>左侧「项目 Projects」→ 新建项目 → 「添加文件」，上传 <code>.md</code>。</li>
+      <li>在这个项目里新建对话提问，AI 会自动参考文件。</li>
+    </ol>
+    <p><b>Claude</b></p>
+    <ol>
+      <li>左侧「Projects」→ 新建 → 「Add content / 添加内容」→ 上传 <code>.md</code>。</li>
+      <li>在项目里提问。</li>
+    </ol>
+    <p><b>扣子 Coze</b></p>
+    <ol>
+      <li>「资源库」→ 新建「知识库」→ 选「文本格式」→ 上传 <code>.md</code>。</li>
+      <li>在你的智能体里「知识」→ 添加这个知识库。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>方式二：MCP 接口（AI 实时查资料）</h2>
+    <p>MCP 是一种让 AI 直接"调用"外部资料库的方式。配好之后，你的 AI 每次回答前会自己去 BZD 资料库检索原文，资料更新了也不用重新下载。</p>
+    <p><b>需要填写的三项：</b></p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>项目</th><th>填写</th></tr></thead>
+      <tbody>
+        <tr><td>类型</td><td><code>Streamable HTTP</code>（有的软件叫「可流式传输的 HTTP」）</td></tr>
+        <tr><td>地址</td><td><code>https://kb.bzdshumo.com/mcp</code></td></tr>
+        <tr><td>请求头</td><td><code>Authorization: Bearer 你的卡密</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>把"你的卡密"换成你自己的完整卡密，例如 <code>Bearer BZDZK-ABCD-EFGH-JKLM</code>，注意 <code>Bearer</code> 和卡密之间有一个空格。</p>
+
+    <h3>Cherry Studio（推荐，免费、支持国产模型）</h3>
+    <ol>
+      <li>打开 Cherry Studio → 左下角「设置」→ <b>「MCP 服务器」</b> → 「添加服务器」。</li>
+      <li>名称填 <code>BZD资料库</code>，类型选 <b>「可流式传输的 HTTP（streamableHttp）」</b>。</li>
+      <li>URL 填 <code>https://kb.bzdshumo.com/mcp</code>。</li>
+      <li>请求头填：<code>Authorization=Bearer 你的卡密</code>。</li>
+      <li>保存，确认状态显示为已连接（绿色）。</li>
+      <li>回到对话，在输入框下方的工具图标里<b>勾选 BZD资料库</b>，然后提问。</li>
+    </ol>
+
+    <h3>Cursor</h3>
+    <ol>
+      <li>Settings → <b>MCP</b> → 「Add new MCP Server」。</li>
+      <li>粘贴下面的配置（把"你的卡密"换掉），保存：</li>
+    </ol>
+<pre><code>{
+  "mcpServers": {
+    "bzd-shumo": {
+      "type": "streamableHttp",
+      "url": "https://kb.bzdshumo.com/mcp",
+      "headers": { "Authorization": "Bearer 你的卡密" }
+    }
+  }
+}</code></pre>
+
+    <h3>Claude Code（命令行）</h3>
+<pre><code>claude mcp add --transport http bzd-shumo https://kb.bzdshumo.com/mcp --header "Authorization: Bearer 你的卡密"</code></pre>
+
+    <h3>接入后 AI 能做的事</h3>
+    <p>你的 AI 会自动用这 4 个工具，不需要你手动调用：</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>工具</th><th>作用</th></tr></thead>
+      <tbody>
+        <tr><td><code>list_libraries</code></td><td>看你能访问哪些资料库</td></tr>
+        <tr><td><code>search</code></td><td>按问题检索原文片段，返回出处和页码</td></tr>
+        <tr><td><code>list_documents</code></td><td>列出某个资料库里的文档</td></tr>
+        <tr><td><code>read_document</code></td><td>读取某篇文档的全文</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="tip"><b>提问小技巧</b>：在问题里加一句"请先在 BZD 资料库里检索"，AI 会更积极地查资料。</div>
+  </div>
+
+  <div class="card qa">
+    <h2>常见问题</h2>
+    <b>Q：提示「缺少卡密」或「卡密不存在」？</b>
+    <p>检查请求头是否写成 <code>Authorization: Bearer 你的卡密</code>，<code>Bearer</code> 后面有空格，卡密前后不要有多余空格。</p>
+    <b>Q：提示「竞赛资料卡不支持接入 AI」？</b>
+    <p>只有文库会员、智库会员卡可以接入。竞赛资料请在网站上查看和下载。</p>
+    <b>Q：提示「资料库正在整理上架中」？</b>
+    <p>会员资料还在上架，上架后即可检索。</p>
+    <b>Q：每天的次数用完了？</b>
+    <p>第二天零点自动恢复。AI 资料包每天 3 次，MCP 每天 300 次调用。</p>
+    <b>Q：可以把卡密给同学用吗？</b>
+    <p>不可以。卡密就是你的接入密钥，资料包和检索结果里都带有你的会员标识，仅限本人学习使用。发现外泄的卡密会被停用。</p>
+    <b>Q：这会消耗我的 AI 额度吗？</b>
+    <p>会。资料由 BZD 提供，但"读资料、组织回答"用的是你自己 AI 的模型和额度。</p>
+    <p style="margin-top:16px;">遇到其他问题，请联系 BZD 客服（微信 <code>bzdsxjm521</code>），并提供卡密尾号（最后 4 位）。</p>
+    <a class="cta" href="https://kb.bzdshumo.com/" target="_blank" rel="noopener">打开会员资料中心 ↗</a>
+  </div>
+</div>
+</body>
+</html>
