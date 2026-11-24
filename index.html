@@ -327,6 +327,18 @@ a { color:inherit; }
 .redeem-head h3 { margin:0 0 6px; font-size:20px; letter-spacing:2px; }
 .redeem-head p { margin:0; color:#cfe0ff; font-size:13px; }
 .redeem-body { padding:28px; }
+.redeem-type { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); background:#f6f9fe; }
+.redeem-type-btn { padding:14px 10px; border:none; background:transparent; cursor:pointer; font-family:inherit; font-size:15px; font-weight:800; color:var(--text-sub); border-bottom:3px solid transparent; transition:all .2s; }
+.redeem-type-btn small { display:block; margin-top:2px; font-size:11.5px; font-weight:500; color:var(--text-light); }
+.redeem-type-btn:hover { background:#eef4fc; }
+.redeem-type-btn.active { color:var(--blue-mid); background:#fff; border-bottom-color:var(--blue-mid); }
+.kb-pick { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6px; }
+.kb-pick label { display:flex; align-items:flex-start; gap:9px; padding:10px 12px; border:1.5px solid var(--border); border-radius:8px; cursor:pointer; font-size:12px; color:var(--text-light); line-height:1.5; transition:border-color .2s, background .2s; }
+.kb-pick label:hover { border-color:var(--blue-light); }
+.kb-pick label:has(input:checked) { border-color:var(--blue-mid); background:#f2f7ff; }
+.kb-pick input { margin-top:3px; accent-color:var(--blue-mid); }
+.kb-pick b { display:block; font-size:13.5px; color:var(--blue-deep); }
+@media (max-width:560px) { .kb-pick { grid-template-columns:1fr; } }
 .form-group { margin-bottom:20px; }
 .form-label {
   display:block; font-size:14px; font-weight:700;
@@ -383,6 +395,15 @@ a { color:inherit; }
 .nr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:20px;}
 .res-sub-head{display:flex;align-items:center;gap:11px;margin:26px 0 0;padding:0 4px;}
 .res-sub-head::before{content:"";flex:0 0 4px;height:21px;border-radius:2px;background:var(--gold);}
+.res-sub-title { white-space:nowrap; }
+.res-sub-note { font-size:12px; color:var(--text-light); }
+@media(max-width:640px){ .res-sub-head:has(.res-sub-note){ flex-wrap:wrap; } .res-sub-note{ flex-basis:100%; padding-left:15px; } }
+.nr-card-in .nr-card-sub { color:#b45309; }
+.nr-card-buy { border-color:#f3c9b8 !important; background:#fff7f3 !important; }
+.nr-card-buy .nr-card-sub { color:var(--accent); font-weight:800; }
+.kb-lib-desc { margin:10px 0 0; font-size:13.5px; line-height:1.8; color:var(--text-sub); }
+.kb-lib-buy { text-align:center; font-size:12.5px; font-weight:700; color:var(--accent); text-decoration:none; padding:4px; }
+.kb-lib-buy:hover { text-decoration:underline; }
 .res-sub-title{font-size:19px;font-weight:900;color:var(--blue-deep);letter-spacing:1px;margin:0;}
 @media(max-width:640px){ .res-sub-title{font-size:17px;} .nr-grid{padding:14px 4px;gap:12px;} }
 .agent-section { background:var(--blue-bg); }
@@ -1022,7 +1043,7 @@ a { color:inherit; }
 .faq-body strong { color:var(--blue-mid); }
 .faq-body em { font-style:normal; color:var(--accent); font-weight:700; }
 
-/* ---------- MEMBERS 会员资料中心 ---------- */
+/* ---------- MEMBERS 数模知识库 ---------- */
 .kb-wrap { background:linear-gradient(180deg,#f6f9fe 0%,#fff 60%); }
 .kb-hero { max-width:900px; margin:-16px auto 36px; text-align:center; }
 .kb-intro { color:var(--text-sub); font-size:15px; line-height:1.9; margin-bottom:22px; }
@@ -1083,6 +1104,34 @@ a { color:inherit; }
 .kb-ai-ways b { display:block; font-size:13.5px; color:var(--blue-deep); margin-bottom:2px; }
 .kb-faq { margin-top:4px; }
 
+.kb-price { margin-top:8px; display:flex; align-items:baseline; flex-wrap:wrap; gap:6px; color:var(--accent); font-size:13px; font-weight:700; }
+.kb-price b { font-size:24px; font-weight:900; line-height:1; }
+.kb-price s { color:var(--text-light); font-weight:500; font-size:12px; }
+.kb-price span { background:#fff1ec; color:var(--accent); font-size:11px; font-weight:800; padding:1px 8px; border-radius:10px; }
+.kb-price-lg b { font-size:32px; }
+.kb-card-actions { display:flex; flex-direction:column; gap:8px; }
+.kb-card-btn-buy { background:var(--blue-mid); }
+.kb-libs { display:grid; grid-template-columns:3fr 2fr; gap:18px; margin-bottom:18px; }
+.kb-lib { min-width:0; background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:18px 20px; }
+.kb-lib-in { background:linear-gradient(180deg,#fffaf0,#fff 60%); border-color:#f3dfb6; }
+.kb-lib-head { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; margin-bottom:12px; }
+.kb-lib-head b { font-size:16px; font-weight:900; color:var(--blue-deep); }
+.kb-lib-head span { font-size:12px; color:var(--text-light); }
+.kb-lib-items { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; }
+.kb-lib-items span { background:#f8fafe; border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:13px; font-weight:800; color:var(--blue-deep); }
+.kb-lib-items small { display:block; margin-top:2px; font-size:11.5px; font-weight:400; color:var(--text-light); line-height:1.5; }
+.kb-modal { position:fixed; inset:0; z-index:1100; background:rgba(8,20,45,.55); display:flex; align-items:center; justify-content:center; padding:20px; }
+.kb-modal[hidden] { display:none; }
+.kb-modal-box { position:relative; width:100%; max-width:440px; max-height:90vh; overflow-y:auto; background:#fff; border-radius:14px; padding:28px 26px 24px; box-shadow:0 24px 60px rgba(0,0,0,.3); }
+.kb-modal-x { position:absolute; top:10px; right:14px; border:none; background:none; font-size:26px; color:var(--text-light); cursor:pointer; line-height:1; }
+.kb-modal-tag { display:inline-block; font-size:11px; font-weight:800; padding:2px 10px; border-radius:20px; background:var(--blue-bg); color:var(--blue-mid); font-family:Consolas,'Courier New',monospace; }
+.kb-modal-box h3 { margin:10px 0 4px; font-size:21px; font-weight:900; color:var(--blue-deep); }
+.kb-modal-box .kb-list { margin:14px 0; }
+.kb-steps { margin:0 0 18px 18px; font-size:12.5px; line-height:1.85; color:var(--text-sub); }
+.kb-steps a { color:var(--blue-mid); font-weight:700; }
+.kb-modal-actions { display:flex; flex-direction:column; gap:8px; }
+.kb-modal-actions .kb-btn { text-align:center; }
+@media (max-width:860px) { .kb-libs { grid-template-columns:1fr; } }
 @media (max-width:1024px) { .kb-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:860px) { .kb-panels { grid-template-columns:1fr; } }
 @media (max-width:560px) {
@@ -1354,7 +1403,7 @@ a { color:inherit; }
     <ul class="nav-links">
       <li><a href="#competitions">竞赛助攻资料</a></li>
       <li><a href="#national-resources">竞赛资料</a></li>
-      <li><a href="#members">会员资料中心</a></li>
+      <li><a href="#members">数模知识库</a></li>
       <li><a href="#guide">使用指南</a></li>
       <li><a href="#archive">往期资料</a></li>
       <li><a href="#agent">教师招募</a></li>
@@ -1628,7 +1677,7 @@ a { color:inherit; }
   <div class="section-head">
     <div class="section-tag">NATIONAL EXAM RESOURCES</div>
     <h2 class="section-title">竞赛资料</h2>
-    <p class="section-sub">完整的国赛备赛资料库，持续更新至赛前</p>
+    <p class="section-sub">完整的备赛资料库，持续更新至赛前</p>
   </div>
   <!-- 研赛资料 -->
   <div class="res-sub-head">
@@ -1733,6 +1782,87 @@ a { color:inherit; }
         </div>
         <div class="nr-card-title">AI提示词库</div>
         <div class="nr-card-sub">数模竞赛专用</div>
+      </div>
+
+  </div>
+
+  <!-- 美赛资料（数模知识库） -->
+  <div class="res-sub-head">
+    <h3 class="res-sub-title">美赛资料</h3>
+    <span class="res-sub-note">来自 BZD 数模知识库 · 公开资料凭文库 / 智库卡密查看</span>
+  </div>
+  <div class="nr-grid">
+
+      <div class="nr-card" onclick="kbLib('paper')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </div>
+        <div class="nr-card-title">优秀论文</div>
+        <div class="nr-card-sub">MCM/ICM 2019–2026</div>
+      </div>
+
+      <div class="nr-card" onclick="kbLib('dict')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="nr-card-title">数模字典</div>
+        <div class="nr-card-sub">5700+ 模型条目</div>
+      </div>
+
+      <div class="nr-card" onclick="kbLib('skills')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="nr-card-title">实用 Skills</div>
+        <div class="nr-card-sub">读题·建模·自查</div>
+      </div>
+
+      <div class="nr-card" onclick="kbLib('aitrace')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <div class="nr-card-title">AI 痕迹检测</div>
+        <div class="nr-card-sub">审计工具与指南</div>
+      </div>
+
+      <div class="nr-card" onclick="kbLib('tpl')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <div class="nr-card-title">竞赛+论文模板</div>
+        <div class="nr-card-sub">2026 竞赛模板</div>
+      </div>
+
+      <div class="nr-card" onclick="kbLib('prompt')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
+        </div>
+        <div class="nr-card-title">基础 AI 提示词</div>
+        <div class="nr-card-sub">数模专用</div>
+      </div>
+
+      <div class="nr-card nr-card-in" onclick="kbLib('review')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </div>
+        <div class="nr-card-title">官方点评</div>
+        <div class="nr-card-sub">COMAP 评委点评</div>
+      </div>
+
+      <div class="nr-card nr-card-buy" onclick="openKbBuy('wenku')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="nr-card-title">文库会员</div>
+        <div class="nr-card-sub">早鸟 99 元</div>
+      </div>
+
+      <div class="nr-card nr-card-buy" onclick="openKbBuy('zhiku')">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-4 12.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26A7 7 0 0 0 12 2z"/><line x1="9" y1="21" x2="15" y2="21"/></svg>
+        </div>
+        <div class="nr-card-title">智库会员</div>
+        <div class="nr-card-sub">早鸟 199 元</div>
       </div>
 
   </div>
@@ -1868,6 +1998,23 @@ a { color:inherit; }
     <iframe id="exam-questions-iframe" src="" style="width:100%;height:800px;border:none;border-radius:8px;"></iframe>
   </div>
 </section>
+
+<!-- 数模知识库资料项弹窗（美赛方块） -->
+<div id="kb-lib-modal" class="kb-modal" hidden onclick="if(event.target===this)closeKbLib()">
+  <div class="kb-modal-box" role="dialog" aria-modal="true" aria-labelledby="kb-lib-title">
+    <button type="button" class="kb-modal-x" onclick="closeKbLib()" aria-label="关闭">&times;</button>
+    <div class="kb-modal-tag" id="kb-lib-tag"></div>
+    <h3 id="kb-lib-title"></h3>
+    <p class="kb-lib-desc" id="kb-lib-desc"></p>
+    <ul class="kb-list" id="kb-lib-list"></ul>
+    <p class="kb-note" id="kb-lib-rule"></p>
+    <div class="kb-modal-actions">
+      <a class="kb-btn kb-btn-main" href="https://kb.bzdshumo.com/?entry=wenku" target="_blank" rel="noopener">文库会员登录查看 ↗</a>
+      <a class="kb-btn kb-btn-line" href="https://kb.bzdshumo.com/?entry=zhiku" target="_blank" rel="noopener">智库会员登录查看 ↗</a>
+      <a class="kb-lib-buy" href="javascript:closeKbLib();openKbBuy('wenku')">还没有卡密？文库会员早鸟 99 元 →</a>
+    </div>
+  </div>
+</div>
 
 <!-- 联系客服模态框 -->
 <div id="contact-service-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;overflow-y:auto;">
@@ -2870,19 +3017,19 @@ a { color:inherit; }
   </div>
 </div>
 
-<!-- MEMBERS 会员资料中心（独立站 kb.bzdshumo.com 的入口与介绍） -->
+<!-- MEMBERS 数模知识库（独立站 kb.bzdshumo.com 的入口与介绍） -->
 <div class="section-bg-wrap kb-wrap">
 <section class="section" id="members">
   <div class="section-head">
-    <div class="section-tag">MEMBER CENTER</div>
-    <h2 class="section-title">BZD 会员资料中心</h2>
+    <div class="section-tag">KNOWLEDGE BASE</div>
+    <h2 class="section-title">BZD 数模知识库</h2>
     <p class="section-sub">凭卡密登录 kb.bzdshumo.com · 原创资料在线浏览下载 · 可接入你自己的 AI</p>
   </div>
 
   <div class="kb-hero">
-    <p class="kb-intro">BZD 会员资料中心汇集 BZD 原创讲义、特色模型方案、评阅资料与竞赛赛中资料。凭卡密登录，资料可在线浏览、下载，支持接入你自己的 AI；智库会员另享 AI 问答与 6 项论文写作诊断工具。</p>
+    <p class="kb-intro">BZD 数模知识库汇集公开资料、BZD 内部资料与竞赛赛中资料。凭卡密登录，资料可在线查看、下载，支持接入你自己的 AI；智库会员另享 AI 问答与 6 项论文写作诊断工具。</p>
     <div class="kb-hero-actions">
-      <a class="kb-btn kb-btn-main" href="https://kb.bzdshumo.com/" target="_blank" rel="noopener">进入会员资料中心 ↗</a>
+      <a class="kb-btn kb-btn-main" href="https://kb.bzdshumo.com/" target="_blank" rel="noopener">进入数模知识库 ↗</a>
       <a class="kb-btn kb-btn-line" href="#kb-faq">卡密怎么用？</a>
     </div>
     <div id="kb-live" class="kb-live" hidden>
@@ -2905,7 +3052,7 @@ a { color:inherit; }
         <li>数模字典、竞赛信息差、选题趋势</li>
         <li>获奖率、国奖名额查询、竞赛日历</li>
       </ul>
-      <a class="kb-card-btn kb-card-btn-line" href="#national-resources">在本页查看 ↓</a>
+      <a class="kb-card-btn kb-card-btn-line" href="#national-resources">在本页「竞赛资料」查看 ↓</a>
     </div>
 
     <div class="kb-card">
@@ -2913,14 +3060,18 @@ a { color:inherit; }
         <span class="kb-badge">BZDWK-</span>
         <div class="kb-card-name">BZD 文库会员</div>
         <div class="kb-card-meta">首次登录起 400 天有效</div>
+        <div class="kb-price"><b>99</b> 元<s>原价 199</s><span>早鸟 5 折</span></div>
       </div>
       <ul class="kb-list">
-        <li>全部 BZD 原创资料：讲义课件、焚诀秘籍、特色模型方案、评阅文件与命题人点评、扣分红线等<span class="kb-soon">整理上架中</span></li>
-        <li>可下载阅读，每天 30 份</li>
-        <li>接入你自己的 AI（资料包导出 + MCP 接口）</li>
+        <li><b>公开资料</b> 6 项：优秀论文、数模字典、实用 Skills、AI 痕迹检测、模板、提示词，一键下载整项，不限次</li>
+        <li><b>内部资料</b>：美赛官方点评与教学参考，在线查看不限次，下载每天 30 个</li>
+        <li>接入你自己的 AI，阅读资料不限次</li>
         <li>赠竞赛资料兑换券：<b>基础版 1 张 + 进阶版 1 张</b></li>
       </ul>
-      <a class="kb-card-btn" href="https://kb.bzdshumo.com/?entry=wenku" target="_blank" rel="noopener">文库会员登录 ↗</a>
+      <div class="kb-card-actions">
+        <a class="kb-card-btn kb-card-btn-buy" href="javascript:openKbBuy('wenku')">购买文库会员</a>
+        <a class="kb-card-btn kb-card-btn-line" href="https://kb.bzdshumo.com/?entry=wenku" target="_blank" rel="noopener">已有卡密 · 登录 ↗</a>
+      </div>
     </div>
 
     <div class="kb-card kb-card-featured">
@@ -2928,15 +3079,19 @@ a { color:inherit; }
         <span class="kb-badge kb-badge-gold">BZDZK-</span>
         <div class="kb-card-name">BZD 智库会员</div>
         <div class="kb-card-meta">首次登录起 400 天有效</div>
+        <div class="kb-price"><b>199</b> 元<s>原价 399</s><span>早鸟 5 折</span></div>
       </div>
       <ul class="kb-list">
-        <li>文库全部内容<span class="kb-soon">整理上架中</span></li>
-        <li>站内 AI 问答：基于全部会员资料作答，附原文出处<span class="kb-soon">资料上架后开放</span></li>
+        <li>文库全部内容：公开资料 + 内部资料</li>
         <li><b>6 项 AI 写作诊断工具</b><span class="kb-on">已上线</span></li>
-        <li>接入你自己的 AI；每天下载 60 份、AI 问答 50 次、AI 工具 20 次</li>
-        <li>赠竞赛资料兑换券：<b>完整版 2 张</b></li>
+        <li>站内 AI 问答：基于会员资料作答，附原文出处<span class="kb-soon">即将开放</span></li>
+        <li>接入你自己的 AI，阅读资料不限次</li>
+        <li>赠竞赛资料兑换券：<b>基础版 1 张 + 完整版 2 张</b></li>
       </ul>
-      <a class="kb-card-btn kb-card-btn-gold" href="https://kb.bzdshumo.com/?entry=zhiku" target="_blank" rel="noopener">智库会员登录 ↗</a>
+      <div class="kb-card-actions">
+        <a class="kb-card-btn kb-card-btn-gold" href="javascript:openKbBuy('zhiku')">购买智库会员</a>
+        <a class="kb-card-btn kb-card-btn-line" href="https://kb.bzdshumo.com/?entry=zhiku" target="_blank" rel="noopener">已有卡密 · 登录 ↗</a>
+      </div>
     </div>
 
     <div class="kb-card">
@@ -2952,6 +3107,28 @@ a { color:inherit; }
         <li>比赛期间资料持续更新，刷新页面即可看到</li>
       </ul>
       <a class="kb-card-btn" href="https://kb.bzdshumo.com/?entry=comp" target="_blank" rel="noopener">竞赛资料 · 含免费分享版 ↗</a>
+    </div>
+  </div>
+
+  <div class="kb-libs">
+    <div class="kb-lib">
+      <div class="kb-lib-head"><b>公开资料</b><span>6 项 · 查看、下载均不限次 · 可一键下载整项</span></div>
+      <div class="kb-lib-items">
+        <span>优秀论文<small>MCM / ICM / HiMCM / IMMC 2019–2026</small></span>
+        <span>数模字典<small>5700+ 个模型条目</small></span>
+        <span>实用 Skills<small>读题、建模、自查、评审等</small></span>
+        <span>AI 痕迹检测<small>审计工具与自查指南</small></span>
+        <span>竞赛模板 + 论文模板<small>2026 竞赛模板与说明</small></span>
+        <span>基础 AI 提示词<small>数模专用</small></span>
+      </div>
+      <p class="kb-note">需文库或智库卡密登录。</p>
+    </div>
+    <div class="kb-lib kb-lib-in">
+      <div class="kb-lib-head"><b>内部资料</b><span>在线查看不限次 · 下载每天 30 个</span></div>
+      <div class="kb-lib-items">
+        <span>美赛官方点评与教学参考<small>COMAP 评委、专家、作者点评与教师备注（MCM / ICM / MidMCM）</small></span>
+      </div>
+      <p class="kb-note">内部资料为 BZD 核心资料，会员可无限次在线查看；为保护资料，下载每天限 30 个文件（网站与 AI 接入合计），不提供整项打包下载。</p>
     </div>
   </div>
 
@@ -2973,7 +3150,7 @@ a { color:inherit; }
         <li>一张卡密 / 一张兑换券<b>只能兑换一道题</b>，开赛后在会员站选题，<b>选定不可更改</b>。</li>
         <li>竞赛卡可在开赛前 7 天内提前登录，开赛后才能选题、看资料；<b>比赛结束自动失效</b>。</li>
         <li>下载的 PDF 带有卡密标识水印，仅限本人使用。</li>
-        <li>兑换券随会员卡发放，在 400 天有效期内总共可用；文库会员可先用基础券、再用进阶券在同一道题上升级。</li>
+        <li>兑换券随会员卡发放，在 400 天有效期内总共可用：文库 <b>基础×1 + 进阶×1</b>，智库 <b>基础×1 + 完整×2</b>；文库会员可先用基础券、再用进阶券在同一道题上升级。</li>
       </ul>
     </div>
 
@@ -2990,10 +3167,10 @@ a { color:inherit; }
       <p class="kb-note">工具只能看到你粘贴的文字，看不到 PDF 版面和图片。结果是写作诊断参考，不是查重率或官方检测结论。</p>
 
       <h3 class="kb-panel-title" style="margin-top:22px;">接入你自己的 AI（文库 / 智库）</h3>
-      <p class="kb-text">把会员资料接到腾讯 ima、Kimi、豆包、ChatGPT、Claude、扣子，或 Cherry Studio、Cursor 等工具里，提问时 AI 会先查 BZD 资料再回答，并告诉你出处。</p>
+      <p class="kb-text">把会员资料接到腾讯 ima、Kimi、豆包、ChatGPT、Claude、扣子，或 Cherry Studio、Cursor 等工具里，提问时 AI 会先查 BZD 资料再回答，并告诉你出处。接入后<b>阅读资料不限次数</b>；内部资料下载每天 30 个（与网站下载合计）。</p>
       <div class="kb-ai-ways">
-        <div><b>AI 资料包</b>下载一个文件上传到你的 AI，每天 3 次</div>
-        <div><b>MCP 接口</b>填一次配置，资料自动同步，每天 300 次</div>
+        <div><b>下载后上传</b>公开资料一键下载整项，内部资料逐个下载，再上传到你的 AI</div>
+        <div><b>MCP 接口</b>填一次配置，AI 实时读取资料，资料自动同步</div>
       </div>
       <a class="kb-card-btn kb-card-btn-line" href="ai-guide.html" target="_blank" rel="noopener">查看接入教程 ↗</a>
       <p class="kb-note">卡密就是接入密钥，请勿分享给他人。</p>
@@ -3027,6 +3204,27 @@ a { color:inherit; }
     </details>
   </div>
 </section>
+</div>
+
+
+<!-- 数模知识库购买弹窗 -->
+<div id="kb-buy-modal" class="kb-modal" hidden onclick="if(event.target===this)closeKbBuy()">
+  <div class="kb-modal-box" role="dialog" aria-modal="true" aria-labelledby="kb-buy-title">
+    <button type="button" class="kb-modal-x" onclick="closeKbBuy()" aria-label="关闭">&times;</button>
+    <div class="kb-modal-tag" id="kb-buy-tag"></div>
+    <h3 id="kb-buy-title"></h3>
+    <div class="kb-price kb-price-lg" id="kb-buy-price"></div>
+    <ul class="kb-list" id="kb-buy-list"></ul>
+    <ol class="kb-steps">
+      <li>联系客服购买，付款后保存购买记录截图</li>
+      <li>在本页「<a href="#redeem" onclick="closeKbBuy()">领取专属权益 → 卡密兑换</a>」上传截图，卡密发到邮箱</li>
+      <li>打开 kb.bzdshumo.com 输入卡密登录</li>
+    </ol>
+    <div class="kb-modal-actions">
+      <a class="kb-btn kb-btn-main" id="kb-buy-btn" href="#">联系客服购买</a>
+      <a class="kb-btn kb-btn-line" id="kb-buy-login" href="#" target="_blank" rel="noopener">已有卡密 · 登录 ↗</a>
+    </div>
+  </div>
 </div>
 
 <!-- SERVICES -->
@@ -3284,35 +3482,55 @@ a { color:inherit; }
   <div id="redeem" style="margin-top:48px;">
   <div class="section-head" style="margin-bottom:24px;">
     <div class="section-tag">EXCLUSIVE BENEFITS</div>
-    <h2 class="section-title">完整版用户 · 领取专属权益</h2>
-    <p class="section-sub">上传支付截图 → 我们审核 → 自动发放 AI 账号 + 智能体卡密到你的邮箱<br><span style="font-size:12.5px;color:#8a5a00;">点赞 9 条视频的用户也可在此提交点赞截图，任选一项权益</span></p>
+    <h2 class="section-title">领取专属权益</h2>
+    <p class="section-sub">上传购买记录截图 → 我们审核 → 发放到你的邮箱 · 分「AI 服务领取」和「卡密兑换」两类<br><span style="font-size:12.5px;color:#8a5a00;">点赞 9 条视频的用户也可在此提交点赞截图，任选一项权益</span></p>
   </div>
   <div class="redeem-wrap">
     <div class="redeem-head">
       <h3>🎁 权益领取申请</h3>
-      <p>完整版资料用户专享 · 赠送 24h AI账号 + 6 次智能体卡密 · 审核通常在 30 分钟内完成</p>
+      <p>任何平台购买均可 · 提交购买记录截图 · 人工审核后发到邮箱，通常 0~2 小时内处理</p>
+    </div>
+    <div class="redeem-type" role="tablist">
+      <button type="button" class="redeem-type-btn active" data-type="ai" onclick="setRedeemType('ai')">🤖 AI 服务领取<small>AI 天卡 · 扣子 · AI 额度 · MMA</small></button>
+      <button type="button" class="redeem-type-btn" data-type="card" onclick="setRedeemType('card')">🔑 卡密兑换<small>数模知识库 · 赛中资料卡密</small></button>
     </div>
     <div class="redeem-body">
-      <div style="margin-bottom:18px;padding:12px 15px;background:#fffdf6;border:1px solid #f0d6a8;border-left:4px solid var(--gold,#d4920a);border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.9;color:var(--text-sub);">
+      <div class="redeem-ai-only" style="margin-bottom:18px;padding:12px 15px;background:#fffdf6;border:1px solid #f0d6a8;border-left:4px solid var(--gold,#d4920a);border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.9;color:var(--text-sub);">
         <b style="color:#8a5a00;">🔥 点赞福利用户也可在此提交：</b>在 B 站或抖音为 <b>BZD 数模社</b> 的国赛视频完成 <b>9 条点赞</b>，上传<b>点赞截图</b>（代替支付截图）、订单备注填写 <b>「点赞福利」</b>，并勾选<b>任选一项</b>权益即可，审核通过后发放到邮箱。
+      </div>
+      <div class="redeem-card-only" hidden>
+        <div style="margin-bottom:16px;padding:12px 15px;background:#f2f7ff;border:1px solid var(--blue-pale);border-left:4px solid var(--blue-mid);border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.9;color:var(--text-sub);">
+          <b style="color:var(--blue-deep);">🔑 卡密兑换：</b>在淘宝、闲鱼、小红书、面包多等任何平台购买 <b>数模知识库会员</b> 或 <b>赛中资料</b> 后，上传购买记录截图，审核通过后卡密发到邮箱，到 <a href="https://kb.bzdshumo.com/" target="_blank" rel="noopener" style="color:var(--blue-mid);font-weight:700;">kb.bzdshumo.com</a> 输入即可使用。
+        </div>
+        <div class="form-group">
+          <label class="form-label">选择要兑换的卡密 <span>*</span></label>
+          <div class="kb-pick">
+            <label><input type="radio" name="kb-card" value="wenku"><span><b>BZD 文库会员</b>400 天 · BZDWK 开头</span></label>
+            <label><input type="radio" name="kb-card" value="zhiku"><span><b>BZD 智库会员</b>400 天 · BZDZK 开头</span></label>
+            <label><input type="radio" name="kb-card" value="sj"><span><b>赛中资料 · 基础版</b>绑定一场竞赛 · BZDSJ 开头</span></label>
+            <label><input type="radio" name="kb-card" value="sa"><span><b>赛中资料 · 进阶版</b>绑定一场竞赛 · BZDSA 开头</span></label>
+            <label><input type="radio" name="kb-card" value="sf"><span><b>赛中资料 · 完整版</b>绑定一场竞赛 · BZDSF 开头</span></label>
+          </div>
+          <div class="form-tip">每次申请兑换一张，请选择与购买记录一致的类型。</div>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">你的邮箱 <span>*</span></label>
-        <input class="form-input" type="email" id="redeem-email" placeholder="用于接收账号和卡密，请填写常用邮箱">
+        <input class="form-input" type="email" id="redeem-email" placeholder="用于接收卡密，请填写常用邮箱">
       </div>
       <div class="form-group">
         <label class="form-label">订单备注（选填）</label>
-        <input class="form-input" type="text" id="redeem-note" placeholder="例如：五一杯完整版，订单号 xxxxx">
+        <input class="form-input" type="text" id="redeem-note" placeholder="例如：淘宝购买文库会员，订单号 xxxxx">
       </div>
       <div class="form-group">
-        <label class="form-label">上传支付截图 <span>*</span></label>
+        <label class="form-label">上传购买记录截图 <span>*</span></label>
         <div class="form-upload" id="upload-area" onclick="document.getElementById('file-input').click()">
           <input type="file" id="file-input" accept="image/*" onchange="handleFileChange(this)">
           <div class="form-upload-icon">📸</div>
-          <div class="form-upload-text">点击上传支付截图（支持 JPG / PNG）<br>请确保截图清晰可见订单金额<br><span style="font-size:11.5px;color:#8a5a00;">点赞福利用户请上传 9 条点赞的截图</span></div>
+          <div class="form-upload-text">点击上传购买记录截图（支持 JPG / PNG）<br>请确保截图清晰可见订单金额<br><span class="redeem-ai-only" style="font-size:11.5px;color:#8a5a00;">点赞福利用户请上传 9 条点赞的截图</span></div>
           <div class="form-upload-name" id="file-name"></div>
         </div>
-        <div class="form-tip">⚠️ 请上传面包多/微信/支付宝的支付成功截图（仅限完整版用户，进阶版资料无相关赠送服务）<br>截图须清晰露出：<strong>支付金额、商户全称、支付时间、交易单号、商户单号</strong>，其他信息可自行打码<br><strong style="color:#8a5a00;">点赞福利：</strong>上传能看清 <strong>9 条视频已点赞</strong> 的截图即可（B 站/抖音个人主页的点赞列表或逐条截图均可）</div>
+        <div class="form-tip"><span class="redeem-ai-only">⚠️ AI 服务仅限完整版用户（进阶版资料无相关赠送服务）。</span>可上传淘宝、闲鱼、小红书、面包多、微信、支付宝等任意平台的购买记录截图<br>截图须清晰露出：<strong>支付金额、商户全称、支付时间、交易单号、商户单号</strong>，其他信息可自行打码<br><span class="redeem-ai-only"><strong style="color:#8a5a00;">点赞福利：</strong>上传能看清 <strong>9 条视频已点赞</strong> 的截图即可（B 站/抖音个人主页的点赞列表或逐条截图均可）</span></div>
         <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;align-items:flex-start;">
           <div style="text-align:center;font-size:12px;color:var(--text-sub);">
             <img src="images/微信支付记录示例.png" alt="微信支付记录示例" style="height:130px;border-radius:6px;border:1px solid var(--border);cursor:pointer;display:block;" onclick="openLightbox('images/微信支付记录示例.png')">
@@ -3324,7 +3542,7 @@ a { color:inherit; }
           </div>
         </div>
       </div>
-      <div class="form-group" style="margin-top:8px;">
+      <div class="form-group redeem-ai-only" style="margin-top:8px;">
         <label class="form-label">选择领取权益（请勾选需要的选项）</label>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
           <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text-main);">
@@ -5838,6 +6056,15 @@ function handleFileChange(input) {
   document.getElementById('file-name').textContent = name ? '✓ 已选择：' + name : '';
 }
 
+var redeemType = 'ai';
+function setRedeemType(t) {
+  redeemType = t;
+  document.querySelectorAll('.redeem-type-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.type === t); });
+  document.querySelectorAll('.redeem-ai-only').forEach(function (el) { el.hidden = t !== 'ai'; });
+  document.querySelectorAll('.redeem-card-only').forEach(function (el) { el.hidden = t !== 'card'; });
+  var r = document.getElementById('redeem-result'); if (r) r.style.display = 'none';
+}
+
 async function submitRedeem() {
   const email = document.getElementById('redeem-email').value.trim();
   const note = document.getElementById('redeem-note').value.trim();
@@ -5848,7 +6075,14 @@ async function submitRedeem() {
   if (!email || !file) {
     result.className = 'redeem-result error';
     result.style.display = 'block';
-    result.textContent = '请填写邮箱并上传支付截图';
+    result.textContent = '请填写邮箱并上传购买记录截图';
+    return;
+  }
+  const kbPick = document.querySelector('input[name="kb-card"]:checked');
+  if (redeemType === 'card' && !kbPick) {
+    result.className = 'redeem-result error';
+    result.style.display = 'block';
+    result.textContent = '请选择要兑换的卡密类型';
     return;
   }
 
@@ -5865,6 +6099,8 @@ async function submitRedeem() {
   fd.append('email', email);
   fd.append('order_note', note);
   fd.append('screenshot', file);
+  fd.append('apply_type', redeemType);
+  if (redeemType === 'card') fd.append('kb_card', kbPick.value);
   fd.append('want_tianka', wantTianka ? '1' : '0');
   fd.append('want_coze',   wantCoze   ? '1' : '0');
   fd.append('want_quota',  wantQuota  ? '1' : '0');
@@ -5943,7 +6179,7 @@ if (hamburger && navLinks) {
   });
 }
 
-/* ---- 会员资料中心：读取 kb.bzdshumo.com 公开接口，显示竞赛实时状态 ---- */
+/* ---- 数模知识库：读取 kb.bzdshumo.com 公开接口，显示竞赛实时状态 ---- */
 (function () {
   var box = document.getElementById('kb-live');
   var text = document.getElementById('kb-live-text');
@@ -5969,6 +6205,58 @@ if (hamburger && navLinks) {
     })
     .catch(function () {});
 })();
+
+/* ---- 数模知识库：美赛方块资料项弹窗 ---- */
+var KB_LIBS = {
+  paper:   { sec: '公开资料', name: '优秀论文', desc: 'MCM / ICM / HiMCM / IMMC 2019–2026 学生优秀论文，按竞赛、年份、赛题分类。', items: ['约 393 篇，持续上传中', '可一键下载整项，也可逐篇在线查看'] },
+  dict:    { sec: '公开资料', name: '数模字典', desc: '5700+ 个模型条目，每个模型写清适用场景、数据要求、关键假设、禁忌点、模型缺陷和检验方法。', items: ['选模型时快速对照是否适用', '避开常见的误用和扣分点'] },
+  skills:  { sec: '公开资料', name: '多个实用 Skills', desc: '可直接配合 AI 使用的数模技能包，覆盖论文写作全流程。', items: ['读题、建模思路、问题重述', '章节自查、格式检查、参考文献与附录检查、论文评审'] },
+  aitrace: { sec: '公开资料', name: 'AI 痕迹检测', desc: '论文 AI 痕迹审计工具与自查指南，帮助发现 AI 写作痕迹。', items: ['审计工具 + 自查指南', '结果是写作诊断参考，不代表任何官方检测结论'] },
+  tpl:     { sec: '公开资料', name: '竞赛模板 + 论文模板', desc: '2026 竞赛模板（PDF 参考版、简洁版）与论文模板详细说明版。', items: ['按模板排版，节省赛中时间'] },
+  prompt:  { sec: '公开资料', name: '基础 AI 提示词', desc: '数模竞赛专用提示词库，覆盖读题、建模、编程、写作等环节。', items: ['复制即可在常用 AI 中使用'] },
+  review:  { sec: '内部资料', name: '美赛官方点评与教学参考', desc: 'COMAP 官方的评委点评、专家点评、作者点评、实务人士点评与教师备注（MCM / ICM / MidMCM）。', items: ['了解评委真正看重什么', '对照点评反查自己论文的问题'] }
+};
+function kbLib(key) {
+  var d = KB_LIBS[key]; if (!d) return;
+  document.getElementById('kb-lib-tag').textContent = 'BZD 数模知识库 · ' + d.sec;
+  document.getElementById('kb-lib-title').textContent = d.name;
+  document.getElementById('kb-lib-desc').textContent = d.desc;
+  document.getElementById('kb-lib-list').innerHTML = d.items.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+  document.getElementById('kb-lib-rule').textContent = d.sec === '内部资料'
+    ? '内部资料：文库、智库会员可无限次在线查看；下载每天 30 个文件（网站与 AI 接入合计）。'
+    : '公开资料：文库、智库会员登录后查看，查看、下载均不限次，可一键下载整项。';
+  document.getElementById('kb-lib-modal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeKbLib() {
+  document.getElementById('kb-lib-modal').hidden = true;
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !document.getElementById('kb-lib-modal').hidden) closeKbLib(); });
+
+/* ---- 数模知识库：购买弹窗（文库 / 智库）---- */
+var KB_PLANS = {
+  wenku: { tag: 'BZDWK-', name: 'BZD 文库会员', price: 99, orig: 199, entry: 'wenku',
+    items: ['公开资料 6 项：一键下载整项，查看下载不限次', '内部资料：在线查看不限次，下载每天 30 个', '接入你自己的 AI，阅读资料不限次', '赠竞赛资料兑换券：基础版 1 张 + 进阶版 1 张', '首次登录起 400 天有效'] },
+  zhiku: { tag: 'BZDZK-', name: 'BZD 智库会员', price: 199, orig: 399, entry: 'zhiku',
+    items: ['文库全部内容：公开资料 + 内部资料', '6 项 AI 写作诊断工具（已上线）', '站内 AI 问答（即将开放）', '赠竞赛资料兑换券：基础版 1 张 + 完整版 2 张', '首次登录起 400 天有效'] }
+};
+function openKbBuy(key) {
+  var p = KB_PLANS[key]; if (!p) return;
+  document.getElementById('kb-buy-tag').textContent = p.tag;
+  document.getElementById('kb-buy-title').textContent = p.name;
+  document.getElementById('kb-buy-price').innerHTML = '<b>' + p.price + '</b> 元<s>原价 ' + p.orig + '</s><span>早鸟 5 折</span>';
+  document.getElementById('kb-buy-list').innerHTML = p.items.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+  document.getElementById('kb-buy-btn').href = "javascript:closeKbBuy();openContactService('" + p.name + "（早鸟 " + p.price + " 元）')";
+  document.getElementById('kb-buy-login').href = 'https://kb.bzdshumo.com/?entry=' + p.entry;
+  document.getElementById('kb-buy-modal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeKbBuy() {
+  document.getElementById('kb-buy-modal').hidden = true;
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !document.getElementById('kb-buy-modal').hidden) closeKbBuy(); });
 
 /* ---- Scroll reveal ---- */
 const revealObs = new IntersectionObserver((entries) => {

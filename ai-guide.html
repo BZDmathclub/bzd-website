@@ -39,7 +39,7 @@ pre code{background:none;border:none;padding:0;color:inherit;}
 </head>
 <body>
 <div class="top">
-  <a class="back" href="index.html#members">← 返回 BZD 会员资料中心</a>
+  <a class="back" href="index.html#members">← 返回 BZD 数模知识库</a>
   <h1>把 BZD 会员资料接入你自己的 AI</h1>
   <p>适用于 BZD 文库会员、BZD 智库会员（卡密以 BZDWK- 或 BZDZK- 开头）</p>
 </div>
@@ -51,35 +51,37 @@ pre code{background:none;border:none;padding:0;color:inherit;}
     <p>有两种方式，<b>任选一种</b>：</p>
     <div class="scroll">
     <table>
-      <thead><tr><th></th><th>方式一：AI 资料包</th><th>方式二：MCP 接口</th></tr></thead>
+      <thead><tr><th></th><th>方式一：下载资料再上传</th><th>方式二：MCP 接口</th></tr></thead>
       <tbody>
         <tr><td><b>适合谁</b></td><td>所有人，什么 AI 都能用</td><td>会用 Cherry Studio / Cursor / Claude 等工具的同学</td></tr>
-        <tr><td><b>难度</b></td><td>最简单，上传一个文件</td><td>填一次配置</td></tr>
+        <tr><td><b>难度</b></td><td>最简单，下载后上传文件</td><td>填一次配置</td></tr>
         <tr><td><b>资料更新</b></td><td>需要重新下载</td><td>自动同步，永远是最新</td></tr>
-        <tr><td><b>次数</b></td><td>每天可导出 3 次</td><td>每天 300 次调用</td></tr>
+        <tr><td><b>阅读</b></td><td>——</td><td><b>不限次</b></td></tr>
+        <tr><td><b>下载</b></td><td>公开资料不限；内部资料每天 30 个</td><td>同左（与网站下载合计 30 个）</td></tr>
       </tbody>
     </table>
     </div>
   </div>
 
   <div class="card">
-    <h2>方式一：下载 AI 资料包（推荐新手）</h2>
+    <h2>方式一：下载资料，上传到你自己的 AI（推荐新手）</h2>
     <h3>第 1 步：下载</h3>
     <ol>
       <li>打开 <a href="https://kb.bzdshumo.com" target="_blank" rel="noopener">https://kb.bzdshumo.com</a>，点「BZD 文库会员」或「BZD 智库会员」，输入你的卡密登录。</li>
-      <li>点顶部的 <b>「接入我的 AI」</b>。</li>
-      <li>在「方式一」下面点 <b>「导出 xxx」</b>，下载一个 <code>.md</code> 文件。</li>
+      <li><b>公开资料</b>：点顶部「公开资料」，在想要的项目旁点 <b>「一键下载整项」</b>，得到一个 <code>.zip</code> 压缩包，解压即可。不限次数。</li>
+      <li><b>内部资料</b>：点顶部「内部资料」，展开项目后逐个点「下载」。<b>每天最多 30 个</b>；只想看内容的话点「查看」，在线查看不限次。</li>
     </ol>
     <h3>第 2 步：上传到你的 AI</h3>
+    <div class="tip">大部分 AI 支持直接上传 PDF、Word、Markdown 文件。</div>
     <p><b>腾讯 ima</b></p>
     <ol>
       <li>打开 ima → 左侧「知识库」→ 新建知识库，起名"BZD 资料"。</li>
-      <li>点「上传文件」，选择刚下载的 <code>.md</code> 文件。</li>
+      <li>点「上传文件」，选择刚下载的文件（可以多选）。</li>
       <li>之后在 ima 对话时选择这个知识库提问即可。</li>
     </ol>
     <p><b>Kimi / 豆包 / 通义千问</b></p>
     <ol>
-      <li>在对话框点 📎（上传文件），选择 <code>.md</code> 文件。</li>
+      <li>在对话框点 📎（上传文件），选择下载好的文件。</li>
       <li>直接提问，例如："根据这份资料，层次分析法的一致性检验怎么做？"（这类 AI 每次新对话需要重新上传文件。）</li>
     </ol>
     <p><b>ChatGPT</b></p>
@@ -144,19 +146,19 @@ pre code{background:none;border:none;padding:0;color:inherit;}
 <pre><code>claude mcp add --transport http bzd-shumo https://kb.bzdshumo.com/mcp --header "Authorization: Bearer 你的卡密"</code></pre>
 
     <h3>接入后 AI 能做的事</h3>
-    <p>你的 AI 会自动用这 4 个工具，不需要你手动调用：</p>
+    <p>你的 AI 会自动使用这些工具，不需要你手动调用：</p>
     <div class="scroll">
     <table>
-      <thead><tr><th>工具</th><th>作用</th></tr></thead>
+      <thead><tr><th>工具</th><th>作用</th><th>次数</th></tr></thead>
       <tbody>
-        <tr><td><code>list_libraries</code></td><td>看你能访问哪些资料库</td></tr>
-        <tr><td><code>search</code></td><td>按问题检索原文片段，返回出处和页码</td></tr>
-        <tr><td><code>list_documents</code></td><td>列出某个资料库里的文档</td></tr>
-        <tr><td><code>read_document</code></td><td>读取某篇文档的全文</td></tr>
+        <tr><td><code>list_files</code></td><td>浏览公开资料、内部资料的目录和文件</td><td>不限</td></tr>
+        <tr><td><code>read_file</code></td><td>在线阅读某个文件的全文</td><td><b>不限</b></td></tr>
+        <tr><td><code>download_file</code></td><td>获取下载链接（10 分钟内有效，只能用一次）</td><td>内部资料每天 30 个（与网站合计），公开资料不限</td></tr>
+        <tr><td><code>search</code> / <code>read_document</code> 等</td><td>全文检索（检索库上架后可用）</td><td>不限</td></tr>
       </tbody>
     </table>
     </div>
-    <div class="tip"><b>提问小技巧</b>：在问题里加一句"请先在 BZD 资料库里检索"，AI 会更积极地查资料。</div>
+    <div class="tip"><b>提问小技巧</b>：在问题里加一句"请先在 BZD 资料库里查找并阅读相关文件"，AI 会更积极地查资料。只想参考内容时，让 AI"阅读"而不是"下载"，这样不消耗下载次数。</div>
   </div>
 
   <div class="card qa">
@@ -168,13 +170,13 @@ pre code{background:none;border:none;padding:0;color:inherit;}
     <b>Q：提示「资料库正在整理上架中」？</b>
     <p>会员资料还在上架，上架后即可检索。</p>
     <b>Q：每天的次数用完了？</b>
-    <p>第二天零点自动恢复。AI 资料包每天 3 次，MCP 每天 300 次调用。</p>
+    <p>只有<b>内部资料下载</b>有限制：每天 30 个，网站下载和 AI 下载合计，第二天零点恢复。在线查看、AI 阅读都不限次；如果提示"调用太频繁"，等几秒再试即可（每分钟最多 60 次，防止程序刷取）。</p>
     <b>Q：可以把卡密给同学用吗？</b>
-    <p>不可以。卡密就是你的接入密钥，资料包和检索结果里都带有你的会员标识，仅限本人学习使用。发现外泄的卡密会被停用。</p>
+    <p>不可以。卡密就是你的接入密钥，下载和阅读到的内容都带有你的会员标识，仅限本人学习使用。发现外泄的卡密会被停用。</p>
     <b>Q：这会消耗我的 AI 额度吗？</b>
     <p>会。资料由 BZD 提供，但"读资料、组织回答"用的是你自己 AI 的模型和额度。</p>
     <p style="margin-top:16px;">遇到其他问题，请联系 BZD 客服（微信 <code>bzdsxjm521</code>），并提供卡密尾号（最后 4 位）。</p>
-    <a class="cta" href="https://kb.bzdshumo.com/" target="_blank" rel="noopener">打开会员资料中心 ↗</a>
+    <a class="cta" href="https://kb.bzdshumo.com/" target="_blank" rel="noopener">打开数模知识库 ↗</a>
   </div>
 </div>
 </body>
