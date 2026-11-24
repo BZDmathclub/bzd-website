@@ -890,54 +890,6 @@ a { color:inherit; }
   margin-top:4px; line-height:1.7;
 }
 
-/* ---------- SERVICES ---------- */
-.svc-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-.svc-card {
-  border:1.5px solid var(--border);
-  border-radius:10px; overflow:hidden;
-  background:white; transition:all .3s;
-  display:flex; flex-direction:column;
-}
-.svc-card:hover {
-  border-color:var(--blue-light);
-  transform:translateY(-4px);
-  box-shadow:0 14px 32px rgba(10,45,110,.1);
-}
-.svc-card.featured { border-color:var(--blue-mid); border-width:2px; position:relative; }
-.svc-card.featured::after {
-  content:'招牌'; position:absolute;
-  top:12px; right:-30px;
-  background:var(--accent); color:white;
-  font-size:11px; font-weight:700;
-  padding:3px 32px; transform:rotate(45deg);
-  letter-spacing:2px;
-}
-.svc-head { padding:24px 20px 18px; text-align:center; border-bottom:1px solid var(--border); }
-.svc-card.featured .svc-head {
-  background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
-  color:white; border-bottom-color:var(--blue-mid);
-}
-.svc-name { font-size:20px; font-weight:900; letter-spacing:2px; }
-.svc-price { margin-top:8px; font-size:14px; color:var(--accent); font-weight:700; }
-.svc-card.featured .svc-price { color:var(--gold-light); }
-.svc-card.featured .svc-price .sub { color:#b0c8ed; }
-.svc-body { padding:20px; flex:1; }
-.svc-list { list-style:none; }
-.svc-list li {
-  padding-left:22px; position:relative;
-  margin-bottom:9px; font-size:13px;
-  color:var(--text-sub); line-height:1.6;
-}
-.svc-list li::before {
-  content:'✓'; position:absolute; left:0; top:0;
-  color:var(--green); font-weight:900;
-}
-.svc-list li strong { color:var(--blue-mid); }
-
 /* ---------- COVERAGE ---------- */
 .cov-tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
 .cov-tag {
@@ -1132,6 +1084,65 @@ a { color:inherit; }
 .kb-modal-actions { display:flex; flex-direction:column; gap:8px; }
 .kb-modal-actions .kb-btn { text-align:center; }
 @media (max-width:860px) { .kb-libs { grid-template-columns:1fr; } }
+.kb-cmp { margin:0 0 28px; border:1.5px solid var(--border); border-radius:14px; background:#fff; overflow:hidden; transition:border-color .2s, box-shadow .2s; }
+.kb-cmp[open] { border-color:var(--blue-light); box-shadow:0 14px 36px rgba(12,29,62,.08); }
+.kb-cmp > summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:18px 22px; color:#fff; border-left:5px solid var(--gold); background:linear-gradient(118deg,var(--blue-deep) 0%,var(--blue-mid) 70%,var(--blue-light) 100%); user-select:none; }
+.kb-cmp > summary::-webkit-details-marker { display:none; }
+.kb-cmp > summary:focus-visible { outline:3px solid var(--gold-light); outline-offset:-3px; }
+.kb-cmp-txt { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.kb-cmp-t { font-size:17px; font-weight:900; letter-spacing:1px; }
+.kb-cmp-s { font-size:12.5px; color:#cfe0ff; }
+.kb-cmp-toggle { margin-left:auto; flex-shrink:0; font-size:13px; font-weight:800; padding:7px 16px; border-radius:999px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3); }
+.kb-cmp-toggle::after { content:'点击展开 ▾'; }
+.kb-cmp[open] .kb-cmp-toggle::after { content:'收起 ▴'; }
+.kb-cmp > summary:hover .kb-cmp-toggle { background:rgba(255,255,255,.24); }
+.kb-cmp-scroll { overflow-x:auto; }
+.kb-cmp-table { width:100%; min-width:860px; border-collapse:collapse; table-layout:fixed; font-size:13.5px; }
+.kb-cmp-table col.c1 { width:16%; } .kb-cmp-table col.c2 { width:36%; } .kb-cmp-table col.c3 { width:10%; } .kb-cmp-table col.c6 { width:18%; }
+.kb-cmp-table thead th { padding:13px 10px; background:#f2f6fc; color:var(--blue-deep); font-weight:900; text-align:center; border-bottom:2px solid var(--blue-pale); }
+.kb-cmp-table thead th:nth-child(-n+2) { text-align:left; padding-left:18px; }
+.kb-cmp-table thead th small { display:block; margin-top:2px; font-size:11px; font-weight:700; color:var(--accent); }
+.kb-cmp-table thead th.zk { background:linear-gradient(135deg,#fff3d6,#ffe7a8); color:#7a4f00; }
+.kb-cmp-table tbody td { padding:12px 10px; border-bottom:1px solid var(--border); vertical-align:middle; line-height:1.65; color:var(--text-sub); }
+.kb-cmp-table td.c-name { padding-left:18px; font-weight:800; color:var(--blue-deep); }
+.kb-cmp-table td.c-plan, .kb-cmp-table td.c-st { text-align:center; }
+.kb-cmp-table td.c-zk { background:#fffcf3; }
+.kb-cmp-table tbody tr:not(.kb-cmp-group):hover td { background:#f5f9ff; }
+.kb-cmp-table tr.kb-cmp-pro td.c-name { box-shadow:inset 4px 0 0 var(--gold); color:#7a4f00; }
+.kb-cmp-table tr.kb-cmp-group td { padding:8px 18px; background:var(--blue-bg); color:var(--blue-mid); font-size:12.5px; font-weight:900; letter-spacing:1px; }
+.kb-cmp .ok { display:inline-grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--green); color:#fff; font-size:14px; font-weight:900; line-height:1; box-shadow:0 4px 10px rgba(22,163,74,.22); }
+.kb-cmp .no { color:#b6c2d3; font-size:16px; font-weight:900; }
+.kb-cmp .pl { font-size:12.5px; font-weight:800; color:var(--blue-deep); line-height:1.5; }
+.kb-cmp .pl b { color:#9a6500; }
+.kb-cmp .st { display:inline-block; padding:3px 10px; border-radius:999px; border:1px solid; font-size:11.5px; font-weight:700; line-height:1.5; }
+.kb-cmp .st-done { color:#11653f; background:#e8f7ef; border-color:#bce4cd; }
+.kb-cmp .st-prog { color:#8a5a00; background:#fff6dc; border-color:#f0d58b; }
+.kb-cmp .st-plan { color:#2859a0; background:#edf4ff; border-color:#c8dafa; }
+.kb-cmp-foot { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; padding:16px 22px; border-top:1px solid var(--border); background:#fafcff; }
+.kb-cmp-legend { margin-right:auto; font-size:12px; color:var(--text-light); display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
+.kb-cmp-legend .ok { width:18px; height:18px; font-size:11px; box-shadow:none; }
+.kb-cmp-foot .kb-btn { padding:10px 20px; font-size:13.5px; }
+@media (max-width:760px) {
+  .kb-cmp > summary { flex-wrap:wrap; padding:16px; }
+  .kb-cmp-toggle { margin-left:0; }
+  .kb-cmp-table, .kb-cmp-table tbody { display:block; min-width:0; }
+  .kb-cmp-table colgroup, .kb-cmp-table thead { display:none; }
+  .kb-cmp-table tbody { padding:4px 12px 8px; }
+  .kb-cmp-table tr { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .kb-cmp-table tr.kb-cmp-group { display:block; padding:0; margin-top:10px; border:none; }
+  .kb-cmp-table tbody td, .kb-cmp-table tr.kb-cmp-group td { display:block; border:none; padding:0; }
+  .kb-cmp-table tr.kb-cmp-group td { padding:7px 12px; border-radius:6px; }
+  .kb-cmp-table td.c-name, .kb-cmp-table td.c-detail, .kb-cmp-table td.c-st { grid-column:1 / -1; padding-left:0; text-align:left; }
+  .kb-cmp-table td.c-name { font-size:14.5px; }
+  .kb-cmp-table tr.kb-cmp-pro td.c-name { box-shadow:none; }
+  .kb-cmp-table td.c-detail { font-size:12.5px; line-height:1.7; }
+  .kb-cmp-table td.c-plan { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:8px 4px; border-radius:8px; background:#f6f9fe; }
+  .kb-cmp-table td.c-zk { background:#fff8e6; }
+  .kb-cmp-table td.c-plan::before { content:attr(data-label); font-size:11px; font-weight:700; color:var(--text-light); }
+  .kb-cmp-table tbody tr:not(.kb-cmp-group):hover td { background:inherit; }
+  .kb-cmp-foot { padding:14px 16px; }
+  .kb-cmp-foot .kb-btn { flex:1 1 100%; text-align:center; }
+}
 @media (max-width:1024px) { .kb-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:860px) { .kb-panels { grid-template-columns:1fr; } }
 @media (max-width:560px) {
@@ -1313,12 +1324,6 @@ a { color:inherit; }
 }
 .comp-card:hover {
   box-shadow:0 4px 12px rgba(0,0,0,.07), 0 18px 44px rgba(10,45,110,.15) !important;
-}
-.svc-card {
-  box-shadow:0 1px 4px rgba(0,0,0,.03), 0 4px 14px rgba(10,45,110,.05);
-}
-.svc-card:hover {
-  box-shadow:0 6px 20px rgba(0,0,0,.07), 0 18px 42px rgba(10,45,110,.12) !important;
 }
 .about-card {
   box-shadow:0 1px 4px rgba(0,0,0,.03), 0 4px 12px rgba(10,45,110,.04);
@@ -3110,6 +3115,63 @@ a { color:inherit; }
     </div>
   </div>
 
+  <details class="kb-cmp" id="kb-compare">
+    <summary>
+      <span class="kb-cmp-txt"><span class="kb-cmp-t">会员权益版本对比</span><span class="kb-cmp-s">公开知识库 · 文库会员 · 智库会员，26 项权益逐项对比</span></span>
+      <span class="kb-cmp-toggle"></span>
+    </summary>
+    <div class="kb-cmp-scroll">
+      <table class="kb-cmp-table">
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c3"><col class="c3"><col class="c6"></colgroup>
+        <thead><tr>
+          <th>名称</th><th>具体内容</th>
+          <th>公开知识库<small>免费</small></th>
+          <th>文库会员<small>早鸟 99 元</small></th>
+          <th class="zk">智库会员<small>早鸟 199 元</small></th>
+          <th>当前状态</th>
+        </tr></thead>
+        <tbody>
+          <tr class="kb-cmp-group"><td colspan="6">赛中资料兑换</td></tr>
+          <tr><td class="c-name">赛中助攻资料</td><td class="c-detail">数模社赛中对应赛题参考答案，开赛后在知识库选题兑换。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="pl">基础版×1<br><b>进阶版×1</b></span></td><td class="c-plan c-zk" data-label="智库会员"><span class="pl">基础版×1<br><b>完整版×2</b></span></td><td class="c-st"><span class="st st-plan">赛中按赛题开放</span></td></tr>
+          <tr class="kb-cmp-group"><td colspan="6">基础资料</td></tr>
+          <tr><td class="c-name">竞赛模板＋论文模板</td><td class="c-detail">参考优秀论文与竞赛官网发布的论文模板。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">初步完成更新，待优化</span></td></tr>
+          <tr><td class="c-name">基础 AI 提示词—数模专用</td><td class="c-detail">数模竞赛专属、本人自用的提示词，涉及数据说明、选题分析、解题思路、论文正文、模型正文、图表描述、摘要、假设、符号与模型总结各板块。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">初步完成更新，待优化</span></td></tr>
+          <tr><td class="c-name">数模字典</td><td class="c-detail">5700＋个数学模型，涵盖使用场景、数据要求、关键假设、模型缺陷、禁忌点与原理讲解。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">初步完成更新，待优化</span></td></tr>
+          <tr><td class="c-name">多个实用 Skills</td><td class="c-detail">覆盖读题、建模思路、问题重述、章节自查、格式检查、参考文献与附录检查、论文评审等数模工作流。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">初步完成更新，待优化</span></td></tr>
+          <tr><td class="c-name">AI 痕迹检测</td><td class="c-detail">检查论文语言模板化、AI 写作痕迹、模型拼装与伪改进。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">初步完成更新，待优化</span></td></tr>
+          <tr><td class="c-name">优秀论文</td><td class="c-detail">收录 MCM、ICM、HiMCM、IM2C 等竞赛优秀学生论文，按竞赛、年份和赛题分类查阅。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-done">已完成更新</span></td></tr>
+          <tr><td class="c-name">授课课件</td><td class="c-detail">日常讲课与培训使用的数学建模授课课件 PDF。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">即将上线</span></td></tr>
+          <tr><td class="c-name">焚诀／秘籍</td><td class="c-detail">美赛组队、赛中焚诀——真东西，不藏掖；参赛秘籍——必备的多种工具。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">预计 1 月中上旬完成更新</span></td></tr>
+          <tr><td class="c-name">评阅资料</td><td class="c-detail">竞赛评阅文件、评阅概述、命题人点评文章及评委常见扣分红线。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">已更新 50%</span></td></tr>
+          <tr><td class="c-name">竞赛信息差</td><td class="c-detail">获奖必看。</td><td class="c-plan" data-label="公开知识库"><span class="ok">✓</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">预计 1 月中上旬完成更新</span></td></tr>
+          <tr class="kb-cmp-group"><td colspan="6">会员资料</td></tr>
+          <tr><td class="c-name">往届助攻资料</td><td class="c-detail">历届已完成竞赛的全部往届助攻资料，便于备赛、复盘和方案参考。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">本周完成更新</span></td></tr>
+          <tr><td class="c-name">美赛官方点评与教学参考资料</td><td class="c-detail">评委点评、作者点评、专家点评、实务人士点评和教师备注。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-done">已完成更新</span></td></tr>
+          <tr><td class="c-name">美赛专属模型</td><td class="c-detail">BZD 数模社独家原创模型，突出美赛论文创新性；包含 10＋种独特评价模型与 10＋种预测方法，适配美赛建模体系，用于提升方案差异化并助力冲击 F、M 奖。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">持续更新；预计美赛开赛前三天全部完成</span></td></tr>
+          <tr><td class="c-name">美赛与国赛差异点</td><td class="c-detail">系统说明美赛与国赛在竞赛体系、选题逻辑、模型创新、论文表达和评审偏好上的差异，避免直接照搬国赛备赛方法；包含美赛冲击 F 奖必备的独家模型使用思路。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">预计 12 月底完成更新</span></td></tr>
+          <tr class="kb-cmp-group"><td colspan="6">O 奖论文精读</td></tr>
+          <tr><td class="c-name">O 奖论文中文翻译</td><td class="c-detail">提供 O 奖论文中文翻译版本，方便阅读与理解。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">平均两周翻译一年；预计 1 月中旬完成更新</span></td></tr>
+          <tr><td class="c-name">O 奖论文独特创新点</td><td class="c-detail">提炼 O 奖论文中的独特创新点，便于学习选题、建模与论文表达。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">平均两周整理一年；预计 1 月中旬完成更新</span></td></tr>
+          <tr><td class="c-name">O 奖论文可视化</td><td class="c-detail">提取可编辑流程图、绘图 AI 提示词与配色方案。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-prog">平均两周整理一年；预计 1 月中旬完成更新</span></td></tr>
+          <tr class="kb-cmp-group"><td colspan="6">AI 工具与专属服务</td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">资料库溯源问答</td><td class="c-detail">基于讲义、字典、规则和案例作答，并附原文引用与来源定位。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">即将开放</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">论文基础检测</td><td class="c-detail">提供摘要合规检测、AI 味诊断和基础模型合理性检测。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-done">已上线</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">参考文献格式生成</td><td class="c-detail">支持 GB/T 7714 与美赛常用参考文献格式生成。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-done">已上线</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">选题自动分析</td><td class="c-detail">输入组队专业、获奖目标和实际条件，推荐更合适的选题方向。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-done">已上线</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">格式规范全量检测</td><td class="c-detail">检查 LaTeX 公式排版、图表出版级规范、章节篇幅均衡与参考文献格式。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-done">已上线</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">内部论文赏析</td><td class="c-detail">F／M／S 奖、省一、省二及成功参与奖论文赏析，包含网上未公开资料。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="ok">✓</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">即将上线</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">竞赛奖项预估</td><td class="c-detail">共 2 次，提交后 24 小时内出具预估结果。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">即将上线</span></td></tr>
+          <tr class="kb-cmp-pro"><td class="c-name">工单答疑</td><td class="c-detail">专属问题工单答疑，优质问答脱敏后沉淀进知识库。</td><td class="c-plan" data-label="公开知识库"><span class="no">—</span></td><td class="c-plan" data-label="文库会员"><span class="no">—</span></td><td class="c-plan c-zk" data-label="智库会员"><span class="ok">✓</span></td><td class="c-st"><span class="st st-plan">即将上线</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kb-cmp-foot">
+      <span class="kb-cmp-legend"><span class="ok">✓</span> 包含　<span class="no">—</span> 不包含　· 状态为资料当前上架进度，持续更新</span>
+      <a class="kb-btn kb-btn-line" href="javascript:openKbBuy('wenku')">购买文库会员 · 99 元</a>
+      <a class="kb-btn kb-btn-main" href="javascript:openKbBuy('zhiku')">购买智库会员 · 199 元</a>
+    </div>
+  </details>
+
   <div class="kb-libs">
     <div class="kb-lib">
       <div class="kb-lib-head"><b>公开资料</b><span>6 项 · 查看、下载均不限次 · 可一键下载整项</span></div>
@@ -3225,88 +3287,6 @@ a { color:inherit; }
       <a class="kb-btn kb-btn-line" id="kb-buy-login" href="#" target="_blank" rel="noopener">已有卡密 · 登录 ↗</a>
     </div>
   </div>
-</div>
-
-<!-- SERVICES -->
-<div class="section-bg-wrap">
-<section class="section" id="services">
-  <div class="section-head">
-    <div class="section-tag">SERVICES</div>
-    <h2 class="section-title">三档标准化服务体系</h2>
-    <p class="section-sub">从基础资料到一对一定制 · 按需选择</p>
-  </div>
-  <div class="svc-grid">
-    <div class="svc-card">
-      <div class="svc-head">
-        <div class="svc-name">基础版</div>
-        <div class="svc-price">13.99 元<span class="sub">原价 19.99 · 7 折</span></div>
-      </div>
-      <div class="svc-body">
-        <ul class="svc-list">
-          <li><strong>写手解题提示词</strong> 或 <strong>最新版内部 Skills</strong></li>
-          <li>100+ 种求解代码（Python · 每问多种情况实现）</li>
-          <li>解题思路文档（非 AI 思路）</li>
-          <li>问题求解结果</li>
-          <li>四项 AI 服务<b>四选一</b>：扣子平台卡密 / MMA 兑换码 / AI 额度 37d / 一天 GPT 账号</li>
-        </ul>
-        <p style="margin:10px 0 0;font-size:11.5px;color:#b96a00;">注：无论文 · 无答疑</p>
-        <span class="rate-tag">获奖率 65%</span>
-      </div>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-head">
-        <div class="svc-name">进阶版</div>
-        <div class="svc-price">35 元<span class="sub">原价 50 · 7 折</span></div>
-      </div>
-      <div class="svc-body">
-        <ul class="svc-list">
-          <li><strong>基础版全部内容</strong></li>
-          <li>2—5 篇论文（LaTeX 编译 PDF + Word 论文）</li>
-          <li>答疑（大群答疑）</li>
-          <li>四项 AI 服务<b>四选二</b>：扣子平台卡密 / MMA 兑换码（两款数模智能体，价值共 40 元）/ AI 额度 37d（Claude / GPT / Gemini 等，价值 15 元）/ 一天 GPT 账号（价值 10 元）</li>
-        </ul>
-        <p style="margin:10px 0 0;font-size:11.5px;color:#b96a00;">注：答疑为大群 · 无完整版专属论文</p>
-        <span class="rate-tag">获奖率 72%</span>
-      </div>
-    </div>
-
-    <div class="svc-card featured">
-      <div class="svc-head">
-        <div class="svc-name">完整版</div>
-        <div class="svc-price">70 元<span class="sub">原价 100 · 7 折</span></div>
-      </div>
-      <div class="svc-body">
-        <ul class="svc-list">
-          <li><strong>进阶版全部内容</strong></li>
-          <li>小群答疑【20—30 队】</li>
-          <li>完整版专属论文</li>
-          <li>两款数模智能体卡密兑换码（价值 40 元）</li>
-          <li>AI 额度 37d（Claude / GPT / Gemini 等多种模型，价值 15 元）</li>
-          <li>一天 GPT 账号（价值 10 元）</li>
-        </ul>
-        <p style="margin:10px 0 0;font-size:11.5px;color:#146b3e;">四项 AI 服务全部包含，无需选择</p>
-        <span class="rate-tag">获奖率 78%</span>
-      </div>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-head">
-        <div class="svc-name">附加增值</div>
-        <div class="svc-price">面议</div>
-      </div>
-      <div class="svc-body">
-        <ul class="svc-list">
-          <li>赛前：竞赛日历、选题建议、模型储备</li>
-          <li>赛前：论文模板、AI 写作培训</li>
-          <li>赛后：优秀论文合集、复盘解析</li>
-          <li>保研竞赛规划指导</li>
-          <li>整队全程辅导、论文润色、代码调试</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
 </div>
 
 <!-- COVERAGE -->
@@ -6271,7 +6251,7 @@ const revealObs = new IntersectionObserver((entries) => {
 /* Stagger per parent section to avoid cumulative delay across sections */
 const groups = [
   '.section-head', '.comp-card', '.pass-row', '.pb-item',
-  '.pf-card', '.svc-card', '.about-card', '.tl-item',
+  '.pf-card', '.about-card', '.tl-item',
   '.faq-item', '.contact-card', '.agent-box', '.guide-step', '.cov-tag',
 ];
 groups.forEach(sel => {
