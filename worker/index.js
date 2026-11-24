@@ -449,7 +449,7 @@ function approveEmailHtml(email, tianka, cozeMi, quota, mma) {
       <h3 style="color:#0a2d6e;margin:0 0 12px;border-bottom:2px solid #3b7dd8;padding-bottom:8px;">
         🤖 AI账号【GPT】（24小时有效）
       </h3>
-      <p style="margin:6px 0;"><strong>登录网址：</strong><a href="https://claude.aiforman.vip/user-new#/register?i=7TUZG" style="color:#1a4fa8;">https://claude.aiforman.vip</a></p>
+      <p style="margin:6px 0;"><strong>登录网址：</strong><a href="http://aiforman.store" style="color:#1a4fa8;">http://aiforman.store</a></p>
       <p style="margin:6px 0;"><strong>兑换码：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:15px;color:#c55a11;font-weight:bold;">${tianka}</code></p>
       <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">注册后填写兑换码登录，24小时使用权限。如时间不够可自行在网站补充。</p>
     </div>` : ''}
