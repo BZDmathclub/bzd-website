@@ -1,7 +1,17 @@
-// BZD 数模社 — 四种账号发放系统 Cloudflare Worker
-// 支持四种权益：AI天卡、扣子卡密、AI额度、MMA兑换码
+// BZD 数模社 — 权益发放系统 Cloudflare Worker
+// AI 服务：AI天卡、扣子卡密、AI额度、MMA兑换码
+// 卡密兑换：数模知识库（文库 / 智库）与赛中资料（基础 / 进阶 / 完整）卡密
 
 const PENDING_PREFIX = 'pending:';
+
+// 卡密兑换的五种卡；list 为 KV 中的列表键
+const KB_CARDS = {
+  wenku: { list: 'KB_WENKU_LIST', name: 'BZD 文库会员', entry: 'wenku', note: '首次登录起 400 天有效' },
+  zhiku: { list: 'KB_ZHIKU_LIST', name: 'BZD 智库会员', entry: 'zhiku', note: '首次登录起 400 天有效' },
+  sj:    { list: 'KB_SJ_LIST',    name: '赛中资料 · 基础版', entry: 'comp', note: '首次登录时绑定当前竞赛，竞赛结束失效' },
+  sa:    { list: 'KB_SA_LIST',    name: '赛中资料 · 进阶版', entry: 'comp', note: '首次登录时绑定当前竞赛，竞赛结束失效' },
+  sf:    { list: 'KB_SF_LIST',    name: '赛中资料 · 完整版', entry: 'comp', note: '首次登录时绑定当前竞赛，竞赛结束失效' },
+};
 
 export default {
   async fetch(request, env) {
@@ -62,11 +72,17 @@ async function handleApply(request, env, corsHeaders) {
   const imageBase64 = btoa(imageBinary);
   const imageType = imageFile.type || 'image/png';
 
-  // 四种权益选择
-  const wantTianka = formData.get('want_tianka') === '1';
-  const wantCoze   = formData.get('want_coze') === '1';
-  const wantQuota  = formData.get('want_quota') === '1';
-  const wantMma    = formData.get('want_mma') === '1';
+  const applyType = formData.get('apply_type') === 'card' ? 'card' : 'ai';
+  const kbCard = applyType === 'card' ? (formData.get('kb_card') || '') : '';
+  if (applyType === 'card' && !KB_CARDS[kbCard]) {
+    return json({ error: '请选择要兑换的卡密类型' }, 400, corsHeaders);
+  }
+
+  // AI 服务四种权益（卡密兑换时不发）
+  const wantTianka = applyType === 'ai' && formData.get('want_tianka') === '1';
+  const wantCoze   = applyType === 'ai' && formData.get('want_coze') === '1';
+  const wantQuota  = applyType === 'ai' && formData.get('want_quota') === '1';
+  const wantMma    = applyType === 'ai' && formData.get('want_mma') === '1';
 
   const record = {
     applyId,
@@ -74,6 +90,8 @@ async function handleApply(request, env, corsHeaders) {
     orderNote,
     imageBase64,
     imageType,
+    applyType,
+    kbCard,
     wantTianka,
     wantCoze,
     wantQuota,
@@ -98,13 +116,18 @@ async function handleApply(request, env, corsHeaders) {
     <p><strong>用户邮箱：</strong>${userEmail}</p>
     <p><strong>订单备注：</strong>${orderNote || '（未填写）'}</p>
     <p><strong>申请时间：</strong>${record.createdAt}</p>
+    ${applyType === 'card' ? `
+    <p><strong>申请类型：</strong><span style="background:#fff5dd;color:#8a5a00;padding:2px 10px;border-radius:10px;font-weight:bold;">卡密兑换</span></p>
+    <p><strong>兑换：</strong>${KB_CARDS[kbCard].name}</p>
+    <p style="font-size:13px;color:#8a5a00;">请核对截图金额与所选卡密一致后再通过。</p>` : `
+    <p><strong>申请类型：</strong>AI 服务领取</p>
     <p><strong>选择权益：</strong></p>
     <ul style="margin:6px 0;">
       <li>${wantTianka ? '✅' : '⭕'} AI账号天卡</li>
       <li>${wantCoze ? '✅' : '⭕'} 扣子平台卡密</li>
       <li>${wantQuota ? '✅' : '⭕'} AI额度</li>
       <li>${wantMma ? '✅' : '⭕'} MMA兑换码</li>
-    </ul>
+    </ul>`}
     <p><strong>支付截图：</strong></p>
     <img src="data:${imageType};base64,${imageBase64}"
          style="max-width:100%;border:1px solid #ccc;border-radius:4px;" />
@@ -126,7 +149,9 @@ async function handleApply(request, env, corsHeaders) {
   try {
     await sendEmail(env, {
       to: env.ADMIN_EMAIL,
-      subject: `【BZD四种权益申请】${userEmail} · ${new Date().toLocaleString('zh-CN')}`,
+      subject: applyType === 'card'
+        ? `【BZD卡密兑换·${KB_CARDS[kbCard].name}】${userEmail} · ${new Date().toLocaleString('zh-CN')}`
+        : `【BZD AI服务申请】${userEmail} · ${new Date().toLocaleString('zh-CN')}`,
       html: emailHtml,
     });
   } catch (e) {
@@ -189,6 +214,19 @@ async function handleReview(request, env, corsHeaders) {
     return htmlPage('✅ 已拒绝，通知邮件已发送给用户');
   }
 
+  // 批准前检查该邮箱近期是否已有发放记录，避免重复申请被误点通过
+  const confirmed = url.searchParams.get('confirm') === '1';
+  if (!confirmed) {
+    const dupes = await findApprovedByEmail(env, record.userEmail, applyId);
+    if (dupes.length > 0) {
+      return duplicateWarningPage(record, dupes, applyId, env.ADMIN_SECRET);
+    }
+  }
+
+  if (record.applyType === 'card') {
+    return approveCardRedeem(env, record, applyId);
+  }
+
   // 批准 - 获取四种权益
   const tianka = record.wantTianka ? await getNextItem(env, 'TIANKA_LIST') : null;
   const cozeMi = record.wantCoze   ? await getNextItem(env, 'COZE_LIST')   : null;
@@ -221,6 +259,140 @@ async function handleReview(request, env, corsHeaders) {
   }
 
   return viewBenefitsPage(record, mailError);
+}
+
+// ============================================================
+// 卡密兑换 - 审核通过后发一张知识库 / 赛中资料卡密
+// ============================================================
+async function approveCardRedeem(env, record, applyId) {
+  const card = KB_CARDS[record.kbCard];
+  if (!card) {
+    return htmlPage('❌ 申请里的卡密类型无效，请拒绝后让用户重新提交');
+  }
+  const code = await takeNextCard(env, card.list);
+  if (!code) {
+    return htmlPage(`⚠️ <strong>${card.name}</strong> 库存已发完，本次未发放。<br><br>补货后重新点击邮件里的「通过」即可，申请仍保留 72 小时。`);
+  }
+
+  record.status = 'approved';
+  record.kbCode = code;
+  await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 60 * 60 * 72 });
+
+  let mailError = null;
+  try {
+    await sendEmail(env, {
+      to: record.userEmail,
+      subject: `【BZD数模社】✅ 您的${card.name}卡密已发放`,
+      html: cardEmailHtml(card, code),
+    });
+  } catch (e) {
+    mailError = e.message;
+    record.mailError = mailError;
+    await env.BZD_KV.put(`${PENDING_PREFIX}${applyId}`, JSON.stringify(record), { expirationTtl: 60 * 60 * 72 });
+  }
+  return viewBenefitsPage(record, mailError);
+}
+
+// 严格按顺序取号，发完即停，绝不回到第 1 行重发
+async function takeNextCard(env, listKey) {
+  const listStr = await env.BZD_KV.get(listKey);
+  if (!listStr) return null;
+  const list = listStr.split('\n').map(x => x.trim()).filter(x => x);
+  const indexKey = `${listKey}_INDEX`;
+  const idx = parseInt(await env.BZD_KV.get(indexKey) || '0');
+  if (!(idx >= 0) || idx >= list.length) return null;
+  await env.BZD_KV.put(indexKey, String(idx + 1));
+  return list[idx];
+}
+
+function cardEmailHtml(card, code) {
+  return `
+<div style="font-family:'Microsoft YaHei',sans-serif;max-width:600px;margin:0 auto;">
+  <div style="background:linear-gradient(135deg,#0a2d6e,#1a4fa8);color:white;padding:28px;border-radius:10px 10px 0 0;text-align:center;">
+    <h1 style="margin:0;font-size:24px;letter-spacing:3px;">BZD 数模社</h1>
+    <p style="margin:8px 0 0;color:#cfe0ff;font-size:14px;">${card.name} · 卡密已发放</p>
+  </div>
+  <div style="background:#f0f6ff;padding:24px;border:1px solid #c0d4ef;">
+    <p style="color:#0a2d6e;font-size:15px;">亲爱的同学，您好！</p>
+    <p style="color:#3a5080;">您的购买记录审核已通过，以下是您的 <strong>${card.name}</strong> 卡密：</p>
+    <div style="background:white;border:1.5px solid #c0d4ef;border-radius:8px;padding:20px;margin:16px 0;">
+      <p style="margin:6px 0;"><strong>卡密：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:16px;color:#c55a11;font-weight:bold;">${code}</code></p>
+      <p style="margin:6px 0;"><strong>使用地址：</strong><a href="https://kb.bzdshumo.com/?entry=${card.entry}" style="color:#1a4fa8;">https://kb.bzdshumo.com/?entry=${card.entry}</a></p>
+      <p style="margin:6px 0;"><strong>有效期：</strong>${card.note}</p>
+      <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">打开上面的地址，输入卡密即可登录 BZD 数模知识库。</p>
+    </div>
+    <div style="background:#fff8e8;border-left:4px solid #f5a623;padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0;">
+      <p style="margin:0;font-size:13px;color:#5a4000;">
+        💡 <strong>温馨提示：</strong>卡密仅限本人使用，每张最多 2 台设备同时登录，请勿转发他人，外泄的卡密会被停用。如遇问题请加微信 <strong>bzdsxjm521</strong>
+      </p>
+    </div>
+  </div>
+  <div style="background:#0a2d6e;color:#90b8f0;padding:16px;text-align:center;border-radius:0 0 10px 10px;font-size:12px;">
+    BZD 数模社 · 一次建模 终生受益 · bzdshumo.com
+  </div>
+</div>`;
+}
+
+// ============================================================
+// 重复申请检测 - 同一邮箱是否已有审核通过的记录
+// ============================================================
+async function findApprovedByEmail(env, email, excludeApplyId) {
+  const list = await env.BZD_KV.list({ prefix: PENDING_PREFIX });
+  const dupes = [];
+  for (const key of list.keys) {
+    const id = key.name.slice(PENDING_PREFIX.length);
+    if (id === excludeApplyId) continue;
+    const raw = await env.BZD_KV.get(key.name);
+    if (!raw) continue;
+    const r = JSON.parse(raw);
+    if (r.status === 'approved' && r.userEmail === email) {
+      dupes.push(r);
+    }
+  }
+  return dupes;
+}
+
+function duplicateWarningPage(record, dupes, applyId, secret) {
+  const rows = dupes.map(d => `
+    <div class="benefit-item">
+      <strong>申请ID：</strong>${d.applyId}<br>
+      <strong>发放时间：</strong>${d.createdAt}<br>
+      ${d.tianka ? `<strong>AI天卡：</strong><code>${d.tianka}</code><br>` : ''}
+      ${d.cozeMi ? `<strong>扣子卡密：</strong><code>${d.cozeMi}</code><br>` : ''}
+      ${d.quota ? `<strong>AI额度：</strong><code>${d.quota}</code><br>` : ''}
+      ${d.mma ? `<strong>MMA兑换码：</strong><code>${d.mma}</code><br>` : ''}
+      ${d.kbCode ? `<strong>${(KB_CARDS[d.kbCard] || {}).name || '知识库卡密'}：</strong><code>${d.kbCode}</code><br>` : ''}
+    </div>`).join('');
+
+  return new Response(`
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>重复申请提醒</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;background:#eef4fc;display:flex;
+  align-items:center;justify-content:center;min-height:100vh;margin:0;padding:20px;}
+.box{background:white;border-radius:12px;padding:40px;max-width:600px;
+  box-shadow:0 8px 24px rgba(10,45,110,.12);text-align:center;}
+h2{margin-top:0;color:#c55a11;font-size:22px;}
+.benefit-item{margin:16px 0;padding:12px;background:#f9fafb;border-left:3px solid #c55a11;
+  border-radius:4px;text-align:left;font-size:13px;line-height:1.8;}
+code{word-break:break-all;}
+.btnrow{margin-top:24px;}
+a.btn{display:inline-block;padding:12px 32px;border-radius:6px;text-decoration:none;
+  font-weight:bold;font-size:15px;margin:0 8px;}
+a.approve{background:#1a8a50;color:white;}
+a.cancel{background:#eee;color:#666;}
+</style></head><body>
+<div class="box">
+<h2>⚠️ 该邮箱已有发放记录</h2>
+<p style="color:#5a4000;">邮箱 <strong>${record.userEmail}</strong> 此前已被批准过 ${dupes.length} 次，请核实是否为重复申请：</p>
+${rows}
+<div class="btnrow">
+  <a class="btn approve" href="https://api.bzdshumo.com/api/review?id=${applyId}&action=approve&secret=${secret}&confirm=1">仍然发放</a>
+  <a class="btn cancel" href="https://api.bzdshumo.com/api/review?id=${applyId}&action=reject&secret=${secret}">拒绝此次申请</a>
+</div>
+</div>
+</body></html>`, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
 }
 
 // ============================================================
@@ -302,6 +474,7 @@ function approveEmailHtml(email, tianka, cozeMi, quota, mma) {
       <p style="margin:6px 0;"><strong>兑换链接：</strong><a href="https://kapibala.asia/sign-up?aff=bzdsxjm" style="color:#1a4fa8;">https://kapibala.asia/sign-up?aff=bzdsxjm</a></p>
       <p style="margin:6px 0;"><strong>兑换码：</strong><code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;font-size:15px;color:#c55a11;font-weight:bold;">${quota}</code></p>
       <p style="margin:10px 0 0;font-size:12px;color:#6080a8;">注册后填写兑换码，即可获得美元额度。</p>
+      <p style="margin:6px 0 0;font-size:12px;color:#6080a8;"><strong>售后群：</strong>1105624965</p>
     </div>` : ''}
 
     ${mma ? `
@@ -349,6 +522,7 @@ function viewBenefitsPage(record, mailError) {
   if (record.cozeMi) benefits.push(`📝 <strong>扣子卡密：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#1a8a50;font-weight:bold;">${record.cozeMi}</code>`);
   if (record.quota) benefits.push(`💳 <strong>AI额度兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.quota}</code>`);
   if (record.mma) benefits.push(`🚀 <strong>MMA兑换码：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.mma}</code>`);
+  if (record.kbCode) benefits.push(`📚 <strong>${(KB_CARDS[record.kbCard] || {}).name || '知识库卡密'}：</strong> <code style="background:#f0f6ff;padding:4px 12px;border-radius:4px;color:#c55a11;font-weight:bold;">${record.kbCode}</code>`);
 
   // 本次或此前发送失败 → 提示管理员手动转发，避免卡密被静默吞掉
   const failMsg = mailError || record.mailError;
@@ -428,7 +602,7 @@ async function handlePending(request, env, corsHeaders) {
     const raw = await env.BZD_KV.get(key.name);
     if (raw) {
       const r = JSON.parse(raw);
-      items.push({ applyId: r.applyId, userEmail: r.userEmail, status: r.status, createdAt: r.createdAt });
+      items.push({ applyId: r.applyId, userEmail: r.userEmail, applyType: r.applyType || 'ai', kbCard: r.kbCard || '', status: r.status, createdAt: r.createdAt });
     }
   }
   return json(items, 200, corsHeaders);
